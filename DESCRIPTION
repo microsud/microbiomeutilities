@@ -1,0 +1,31 @@
+Package: microbiomeUtilities
+Type: Package
+Title: Utility functions for the microbiome R package (Title Case)
+Version: 0.1.0
+Author: Sudarshan A. Shetty and Leo Lahti
+Maintainer: The package maintainer <sudarshanshetty9@gmail.com>
+Description: This is a supporting tool for extending the functionality of both phyloseq and microbiome R packages
+License: BSD_2_clause + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 3.4.0),
+    phyloseq,
+    ggplot2,
+	microbiome
+Imports:
+    dplyr,
+    reshape2,
+    stats,
+    tidyr,
+    utils,
+	data.table,
+    vegan,
+	plyr,
+	ggpubr
+Suggests:
+    BiocGenerics,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
