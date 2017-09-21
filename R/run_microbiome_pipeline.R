@@ -17,14 +17,14 @@
 #' @param col.palette 'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups you have in VaraibleA
 #'
 #' @author Contact: SUdarshan Shetty \email{sudarshanshetty9@@gmail.com}
-#' @return A \code{\link{ggplot}} plot object
+#' @return Several four folders with ouput for QC, alpha diversity, ordination and others
 #' @export
 #' @examples \dontrun{
 #'   # Example data
-#'     library(microbiome)
-#'     data(DynamicIBD)
-#'     ps0 <- DynamicIBD
-#'     p <- plot_ReadDistribution(ps0, groups='ibd_subtype', plot.type= 'density')
+#' 
+#' run_microbiome_pipeline <- function(biom, mapping, taxonomy, treefilename,
+#'                                   out_dir, VariableA, VariableB, Distmethod, OrdinatMethod,
+#'                                   QC, filterCount, filterPrev, transformation, col.palette, filterpseq)
 #'           }
 #' @keywords utilities
 
@@ -33,8 +33,10 @@ run_microbiome_pipeline <- function(biom, mapping, taxonomy, treefilename,
                                     out_dir, VariableA, VariableB, Distmethod, OrdinatMethod,
                                     QC, filterCount, filterPrev, transformation, col.palette, filterpseq)
 {
-
-  ps0 <- qc_plot <- ps1 <- ps2 <- Variance.plot.a <- Variance.plot.b <- otu_tab_ps2 <- phy_tree_ps2 <- df.pd <- metadf <- metatab <- tab <- alpha_div <- alpha.plot <- ord <- NULL
+# TODO include other file formats possible with read_phyloseq function
+  ps0 <- qc_plot <- ps1 <- ps2 <- Variance.plot.a <- Variance.plot.b <- otu_tab_ps2 <- phy_tree_ps2 <- 
+  df.pd <- metadf <- metatab <- tab <- alpha_div <- alpha.plot <- ord <- NULL
+  
   oripath <- getwd()
   setwd(out_dir)
   dir.create("QC")
