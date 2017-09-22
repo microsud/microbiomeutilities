@@ -9,11 +9,20 @@
 #'          the code from  \pkg{ampvis} \code{\link{phyloseq-class}}. Here, we directly take the
 #'          #' phyloseq object as input and make the necessary formatting.
 #' @param x \code{\link{phyloseq-class}} object
-#' @return  \code{\link{phyloseq-class}} object.
+#' @param ordiObject Output of ordinate from package phyloseq. Only NMDS and Bray supported.
+#' @param coreplot TRUE or FALSE for core heatmap from microbiome package.
+#' @param prevalences Prevalences as supported by microbiome package.
+#' @param detections Detections as supported by microbiome package.
+#' @param color Variable of interest from metadata.
+#' @param shape Variable of interest from metadata..
+#' @return  plot
 #' @export
 #' @examples \dontrun{
 #'   # Example data
-#'     px <- plot_ordiplot_core(ps1a, ordiObject = ordi, coreplot = TRUE, prevalences = prev.thres,
+#'     data(DynamicsIBD)
+#'     ps <- DynamicsIBD
+#'     ps1 <- format_phyloseq(ps)
+#'     px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE, prevalences = prev.thres,
 #'     detections = det.thres, color = "ibd_subtype", shape = NULL)
 #'           }
 #' @keywords utilities
@@ -24,7 +33,7 @@ plot_ordiplot_core <-
            coreplot = c(TRUE, FALSE),
            prevalences,
            detections,
-           color,
+           color.opt,
            shape) {
     ordi <-
       spps <-
@@ -37,8 +46,9 @@ plot_ordiplot_core <-
       NMDS2 <-
       Taxa_level <- tax.unit <- min.det <- list.sp <- tax <- Core <- NULL
 
+
     proja <- plot_ordination(x, ordiObject, justDF = T)
-    p0 <- plot_ordination(x, ordiObject, color = color, shape = NULL)
+    p0 <- plot_ordination(x, ordiObject, color = color.opt, shape = NULL)
 
     p0 <- p0 + ggtitle("Sites")
     spps  <-
@@ -113,11 +123,11 @@ plot_ordiplot_core <-
       geom_point(aes(color = Phylum), alpha = 0.7) + ggtitle("Detection limit set is min " , subtitle = min.det)
 
 
-    if (coreplot) {
+    if (coreplot==TRUE) {
       p3 <- ggarrange(p1, ggarrange(ncol = 2, p0, p2), nrow = 2)
       print(p3)
     } else {
-      p4 <- ggarrange(p1, p2)
+      p4 <- ggarrange(p0, p2)
       print(p4)
     }
   }
