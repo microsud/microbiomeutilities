@@ -15,7 +15,7 @@
 #' @param detections Detections as supported by microbiome package.
 #' @param color Variable of interest from metadata.
 #' @param shape Variable of interest from metadata..
-#' @return  plot
+#' @return plot
 #' @export
 #' @examples \dontrun{
 #'   # Example data
