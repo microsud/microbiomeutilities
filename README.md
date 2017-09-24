@@ -2,7 +2,8 @@
 %% This package is in experimental stage and should be used only for testing/trial purposes %%  
 I will keep improving this with time and feedback.  
 
-[[https://github.com/microsud/microbiomeutilities/blob/Devel/inst/extdata/images/Anonymous-work-in-progress.png|alt=octocat]]  
+![Alt text](https://github.com/microsud/microbiomeutilities/blob/Devel/inst/extdata/images/Anonymous-work-in-progress.png)
+
 [image source clker.com](http://www.clker.com/clipart-work-in-progress.html)
 
 # microbiomeutilities
