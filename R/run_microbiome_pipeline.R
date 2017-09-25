@@ -26,14 +26,34 @@
 #'     library(microbiome)
 #'     data(DynamicIBD)
 #'     ps0 <- DynamicIBD
-#'     p <- plot_ReadDistribution(ps0, groups='ibd_subtype', plot.type= 'density')
-#'           }
+#'     run_microbiome_pipeline(biom = "myBiom.biom",
+#'                       mapping = "myMapping.csv",
+#'                      taxonomy = NULL,
+#'                      treefilename = "myTree.tre",
+#'                      type = "biom",
+#'                      out_dir = "F:/PATH/to/my/output/directory",
+#'                      VariableA = "MY_MainVariable",
+#'                      VariableB = "MY_SecondaryVariable",
+#'                      Distmethod = "bray",
+#'                      OrdinatMethod = "MDS",
+#'                      QC = TRUE,
+#'                      filterCount = 4,
+#'                      filterPrev = 0.01,
+#'                      transformation = FALSE,
+#'                      col.palette = "Set2",
+#'                      filterpseq = TRUE, samsize=0)
 #' @keywords utilities
 
 
-run_microbiome_pipeline <- function(biom, mapping, taxonomy, treefilename,
-                                    type, out_dir, VariableA, VariableB, Distmethod, OrdinatMethod, QC,
-                                    filterCount, filterPrev, transformation, col.palette, filterpseq, samsize) {
+run_microbiome_pipeline <- function(biom, mapping, 
+                                    taxonomy, treefilename,
+                                    type, out_dir, 
+                                    VariableA, VariableB, 
+                                    Distmethod, OrdinatMethod, 
+                                    QC, filterCount, 
+                                    filterPrev, transformation, 
+                                    col.palette, filterpseq, 
+                                    samsize) {
 
   ps0 <- qc_plot <- ps1 <- ps2 <- Variance.plot.a <- Variance.plot.b <- otu_tab_ps2 <- phy_tree_ps2 <- df.pd <- metadf <- metatab <- tab <- alpha_div <- alpha.plot <- ord <- NULL
   oripath <- getwd()
@@ -122,8 +142,8 @@ run_microbiome_pipeline <- function(biom, mapping, taxonomy, treefilename,
     message("Filtering OTUs with less than 10 counts in at least 5 % of the dataset")
     ps2 = filter_taxa(ps1, function(x) sum(x > filterCount) > (filterPrev *
                                                                  length(x)), TRUE)
-    message("Saving the filtered phyobject
-            #Saving the transformed phyloseq object as ps_filtered.rds")
+    message("Saving the filtered phyobject"
+            "Saving the transformed phyloseq object as ps_filtered.rds")
 
     saveRDS(ps2, "./PhyloseqObjects/ps_filtered.rds")
 
@@ -177,19 +197,19 @@ run_microbiome_pipeline <- function(biom, mapping, taxonomy, treefilename,
   message("Analysing beta diversitiy")
 
   if (transformation != FALSE) {
-    message("#Transformation was selected and will transform your phyloseq object
-            #Saving the transformed phyloseq object as ps_transformed.rds")
+    message("#Transformation was selected and will transform your phyloseq object"
+            "#Saving the transformed phyloseq object as ps_transformed.rds")
 
     ps3 <- microbiome::transform(ps2, transform = transformation)
 
     saveRDS(ps3, "./PhyloseqObjects/ps_transformed.rds")
-    message("Below is the content of transfored phyloseqobject (based on transformation = TRUE) stored as ps_transformed.rds")
+    message("Below is the content of transfored phyloseqobject based on transformation = TRUE stored as ps_transformed.rds")
 
     print(ps3)
 
   } else {
     ps3 <- ps2
-    message("Below is the content of non-transfored phyloseqobject (based on transformation = FALSE)")
+    message("Below is the content of non-transfored phyloseqobject based on transformation = FALSE")
 
     print(ps3)
   }
@@ -198,7 +218,7 @@ run_microbiome_pipeline <- function(biom, mapping, taxonomy, treefilename,
 
   ordi_plot <- plot_ordination(ps3, ord, color = VariableA, shape = VariableB)
   ordi_plot <- ordi_plot + scale_color_brewer(palette = col.palette) +
-    theme_bw() + geom_point(size = 2) + ggtitle(paste("./BetaDiversity/",
+    theme_bw() + geom_point(size = 2) + ggtitle(paste("BetaDiversity",
                                                       OrdinatMethod, " based on ", Distmethod))
   print(ordi_plot)
 
