@@ -1,0 +1,70 @@
+
+---
+title: "Microbiome pipeline QC template"
+author: "Your name"
+date: "September 11, 2017"
+output: html_document
+---
+
+# Microbiome QC and prelimanary analysis Pipeline  
+
+In all cases, the first thing that needs to be done is to check the quality of your data. For this, the **microbiomeutilities** package provides a single function called `run_microbiome_pipeline` that puts together `base`, `phyloseq` and `microbiome` R package functions to provide the user with data qc visualisation. In addition, this function saves outputs in following folder:  
+
+1. **QC**  
+2. **AlphaDiversity**  
+3. **Ordinations**  
+4. **Others**  
+5. **PhyloseqObjects**  
+
+load the required libraries
+```{r}
+library(RColorBrewer)
+library(ape)
+library("microbiomeutilities")
+library(data.table)
+
+```
+
+Once you have these then run the following command.  
+```{r, warning=TRUE, message=TRUE}
+
+
+run_microbiome_pipeline(biom = "myBiom.biom",
+                        mapping = "myMapping.csv",
+                        taxonomy = NULL,
+                        treefilename = "myTree.tre",
+                        type = "biom",
+                        out_dir = "F:/PATH/to/my/output/directory",
+                        VariableA = "MY_MainVariable",
+                        VariableB = "MY_SecondaryVariable",
+                        Distmethod = "bray",
+                        OrdinatMethod = "MDS",
+                        QC = TRUE,
+                        filterCount = 4,
+                        filterPrev = 0.01,
+                        transformation = FALSE,
+                        col.palette = "Set2",
+                        filterpseq = TRUE, samsize=0)
+
+```
+
+After filling in all the required parameters in th functions you can click on **kinit** on the top of your R studio console.  
+
+The use of Rmarkdown is that once you knit it to a desired file type, html, pdf, doc etc. you can see all the QC messages.   
+
+After successfully running this you can check the folders for output and then make appropriate choice for in-depth analysis.  
+
+**Credits to developers of**:  
+Phyloseq  
+microbiome  
+data.table  
+ape  
+vegan  
+ggplot2  
+ggpubr  
+
+For issues please comment on the [microbiomeutilities issues page](https://github.com/microsud/microbiomeutilities/issues)  
+
+
+
+
