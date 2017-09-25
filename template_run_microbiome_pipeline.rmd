@@ -1,9 +1,9 @@
 
 ---
-title: "Microbiome pipeline QC template"
-author: "Your name"
-date: "September 11, 2017"
-output: html_document
+title: "Microbiome pipeline QC template"  
+author: "Your name"  
+date: "September 11, 2017"  
+output: html_document  
 ---
 
 # Microbiome QC and prelimanary analysis Pipeline  
