@@ -6,6 +6,8 @@ date: "September 11, 2017"
 output: html_document  
 ---
 
+**Download this file and open in RStudio**
+
 # Microbiome QC and prelimanary analysis Pipeline  
 
 In all cases, the first thing that needs to be done is to check the quality of your data. For this, the **microbiomeutilities** package provides a single function called `run_microbiome_pipeline` that puts together `base`, `phyloseq` and `microbiome` R package functions to provide the user with data qc visualisation. In addition, this function saves outputs in following folder:  
