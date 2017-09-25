@@ -2,7 +2,7 @@
 ---
 title: "Microbiome pipeline QC template"  
 author: "Your name"  
-date: "September 11, 2017"  
+date: "Month date, year"  
 output: html_document  
 ---
 
