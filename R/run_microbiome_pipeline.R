@@ -142,8 +142,8 @@ run_microbiome_pipeline <- function(biom, mapping,
     message("Filtering OTUs with less than 10 counts in at least 5 % of the dataset")
     ps2 = filter_taxa(ps1, function(x) sum(x > filterCount) > (filterPrev *
                                                                  length(x)), TRUE)
-    message("Saving the filtered phyobject"
-            "Saving the transformed phyloseq object as ps_filtered.rds")
+    message("Saving the filtered phyobject")
+    message("Saving the transformed phyloseq object as ps_filtered.rds")
 
     saveRDS(ps2, "./PhyloseqObjects/ps_filtered.rds")
 
