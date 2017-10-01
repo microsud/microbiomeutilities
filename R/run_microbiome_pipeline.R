@@ -197,8 +197,8 @@ run_microbiome_pipeline <- function(biom, mapping,
   message("Analysing beta diversitiy")
 
   if (transformation != FALSE) {
-    message("#Transformation was selected and will transform your phyloseq object"
-            "#Saving the transformed phyloseq object as ps_transformed.rds")
+    message("#Transformation was selected and will transform your phyloseq object")
+    message("#Saving the transformed phyloseq object as ps_transformed.rds")
 
     ps3 <- microbiome::transform(ps2, transform = transformation)
 
