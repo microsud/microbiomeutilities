@@ -234,7 +234,7 @@ run_microbiome_pipeline <- function(biom, mapping,
   guide_italics <- guides(fill = guide_legend(label.theme = element_text(size = 15,
                                                                          face = "italic", colour = "Black", angle = 0)))
 
-  comp.plot <- plot_composition(ps2, taxonomic.level = "Phylum", transform = "compositional")
+  comp.plot <- plot_taxa_composition(ps2, taxonomic.level = "Phylum", transform = "compositional")
 
   comp.plot <- comp.plot + theme_bw() + theme(axis.text.x = element_text(angle = 90)) +
     ggtitle("Relative abundance") + guide_italics  #+
