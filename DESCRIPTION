@@ -1,6 +1,6 @@
 Package: microbiomeutilities
 Type: Package
-Title: microbiomeutilities: An R package for with utility functions for the microbiome R package 
+Title: microbiomeutilities: An R package with utility functions for the microbiome R package 
 Version: 0.1.0
 Author: Sudarshan A. Shetty and Leo Lahti
 Maintainer: The package maintainer <sudarshanshetty9@gmail.com>
