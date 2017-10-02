@@ -59,7 +59,7 @@ microbiome_heatmap <- function(phyobj, subset_otu,
 
   # choose which variables of interest to include in
   # the heatmap
-  select.meta <- meta.tab[, c(VariableA, VariableB)]
+  select.meta <- meta.tab[,VariableA]
 
   rownames(otu.mat) <- as.list(tax.lev$Taxa_level)
 
