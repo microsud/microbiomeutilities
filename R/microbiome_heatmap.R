@@ -55,7 +55,7 @@ microbiome_heatmap <- function(phyobj, subset_otu, transformation,
     phyobj2 <- transform(phyobj1, "Z")
   } else if(transformation == "clr"){
     phyobj2 <- transform(phyobj1, "clr")
-  } else if (is.na(transformation)){
+  } else if (!is.na(transformation)){
     phyobj2 <- phyobj1
   }
 
