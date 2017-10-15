@@ -4,16 +4,17 @@
 \alias{microbiome_heatmap}
 \title{Heatmap using phyloseq and pheatmap}
 \usage{
-microbiome_heatmap(phyobj, subset_otu, VariableA, VariableB, heatcolors, ...)
+microbiome_heatmap(phyobj, subset_otu, transformation, VariableA, heatcolors,
+  ...)
 }
 \arguments{
 \item{phyobj}{\code{\link{phyloseq-class}} object.}
 
 \item{subset_otu}{either NA or number of Top OTUs to use for plotting.}
 
-\item{VariableA}{main variable of Interest.}
+\item{transformation}{either 'log10', 'clr','Z', 'compositional', or NA}
 
-\item{VariableB}{secondary variable of interest.}
+\item{VariableA}{main variable of Interest.}
 
 \item{heatcolors}{is the option for colors in \code{\link{pheatmap}}. Default is to use viridis
 inferno}
@@ -36,7 +37,6 @@ Plot heatmap using \code{\link{phyloseq-class}} object as input.
 
     p <- microbiome_heatmap(ps, subset_otu = 10,
     VariableA = "ibd_subtype",
-    VariableB = "diagnosis_full",
     heatcolors = NA)
           }
 }
