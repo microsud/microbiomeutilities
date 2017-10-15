@@ -1,0 +1,636 @@
+---
+title: "Microbiome analytics template"
+author: "YourName"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Microbiome analytics tool
+
+Reproducibilty is an essential aspect of data analysis. Especially for sequencing data for microbial community profilling. There are lack of standards to analysing and reporting data. This is mostly because there are simply some aspects of the data that we do not control. In such cases it is important to have rational decision making and documenting it. In almost all microbiome profilling data choices regarding filtering parameters (OTU count, OTU prevalences), normalisation, transformation are routine practice. Pre-processing is an essential step and it is crucial that it is documented. There are some common approaches to look at the data.  
+1. How many reads/samples? if there is large difference this may affect the choices you make for alpha diversity, betadiversity and differential abundance testing.
+2. How many reads/OTU ? this is aslo important to see if there are lot of OTUs with small mean & large coefficient of variation (C.V.).  
+
+This tempate for microbiome data analysis, handling and visualisation. This makes it easy to follow some standard procedures for looking at your data and reporting your results. This first-hand look at your data will aid in making different choices for more thorough and in-dept investigation.   
+
+Check this link on [Organize your data and code](http://kbroman.org/steps2rr/pages/organize.html).    
+
+
+## Load libraries  
+
+We have to load libraries click on the code tab on the left hand die of this doc for looking at the libraries that are installed. It is good to install these packages before.  
+ 
+```{r load-libraries, warning=FALSE, message=FALSE}
+
+library(microbiome)
+library(microbiomeutilities)
+# install.packages("picante",repos="http://R-Forge.R-project.org") 
+# library(picante)
+library(picante)
+library(data.table)
+library(DT)
+library(RColorBrewer)
+```
+
+## Set project attributes  
+
+Fill the details accordingly.  
+
+**Project title** : Create a standard workflow for data reporting.  
+**Main author** : Yourname  
+**contributor(s)** : XXXX  
+**Principal Investigator (s)** : XXXX  
+**Co-supervisor(s)** : XXXXX
+
+The next code chunk is where you put all the parameters for analysis. This is the basis for your prelimanry analysis.  
+
+```{r set-seed}
+
+#generate a random number 
+n <- runif(1, 0, 10^8) # keep this number stored as below instead of XXX when re running the codes.
+set.seed(n)
+
+```
+
+seed number(XXX) check this link [for more information](http://kbroman.org/steps2rr/pages/scripts.html)  
+
+```{r set-attributes}
+
+otufile = "myBiom.biom"               # input biom/shared/otutable as *csv file.
+mapping = "myMapping.csv"             # input mapping file in *.csv format.
+taxonomy = NULL                       # taxonomy file in *.csv format.
+treefilename = "myTree.tre"           # tree file as *.tre and not *.tree.
+type = "biom"                         # type of input either biom, mothur ..
+                                      # .. or csv file as *.tre and not *.tree.
+out_dir = "F:/PATH/to/my/output/directory"  # path to the output directory.
+VariableA = "MY_MainVariable"               # main variable of interest.
+VariableB = "MY_SecondaryVariable"          # secondary variable of interest.
+UnConstOrd = TRUE                           # Unconstrained ORDINATION TRUE or FALSE.
+heatmap = TRUE                              # TRUE or FALSE
+filterCount = 4                             # Filter OTUs below this count number.
+filterPrev = 0.01                           # filter parameter for OTUs, prevalence in dataset 0.01 = 1%.
+col.palette = "Paired"                        # choice of color (RColorbrewer)
+filterpseq = TRUE                           # filter phyloseq will be saved
+samsize=NA                                  # rarefying depth
+
+```
+
+Check the code chunk next to this of left side to see folder names where files are stored. 
+
+```{r setup-2, warning=FALSE, message=FALSE}
+oripath <- getwd()
+setwd(out_dir)
+dir.create("QC")
+dir.create("AlphaDiversity")
+dir.create("BetaDiversity")
+dir.create("Others")
+dir.create("PhyloseqObjects")
+```
+
+
+## Initiate
+
+This code chunk reads the input files and creates a phyloseq object. 
+
+```{r initiate}
+
+ps0 <- read_phyloseq(otu.file = otufile, 
+                     metadata.file = mapping,
+                     taxonomy.file = taxonomy, 
+                     type = type)
+
+tree <- read.tree(treefilename)
+
+ps0 <- merge_phyloseq(ps0, tree)
+
+saveRDS(ps0, "./PhyloseqObjects/ps_raw.rds")
+
+message("Raw phyloseq object, confirm the number of samples and variables (as in columns of mapping file)")
+message("Below is the content of raw phyloseqobject stored as ps_raw.rds")
+
+print(ps0)
+
+```
+
+
+## QC {.tabset}
+
+### Distribution of reads  
+
+Check the library sizes for each of the samples within the main variable. Do you think it is okay or there is difference in library sizes and will this affect you downstream statistical analysis?  
+```{r, qc-1}
+
+qc_plot1 <- plot_ReadDistribution(ps0, groups = VariableB, 
+    plot.type = "histogram")
+
+ggsave("./QC/ReadDistribution.pdf")
+
+message("QC plots for ReadDistribution stored in QC folder as ReadDistribution.pdf")
+
+```
+
+### Library sizes (barplot)  
+
+```{r, qc-2}
+message("Investigating library sizes")
+
+barplot(sort(sample_sums(ps0)), horiz = TRUE, las = 2, sub = "Check if there is large differeence in library sizes")
+
+```
+
+### Library sizes (histogram)  
+
+```{r, qc-3}
+
+message("Investigating library sizes")
+
+hist(sort(sample_sums(ps0)), las = 2, sub = "Check if there is large differeence in library sizes")
+
+message("QC plots for library sizes stored in QC folder as LibrarySizePerSample.pdf")
+
+pdf("./QC/LibrarySizePerSample.pdf")
+barplot(sort(sample_sums(ps0)), horiz = TRUE, las = 2, sub = "Check if there is large differeence in library sizes")
+hist(sort(sample_sums(ps0)), las = 2)
+dev.off()
+
+```
+
+
+### OTU counts distribution (barplot)  
+
+```{r qc-4}
+message("Investigating OTU counts distribution")
+
+barplot(sort(taxa_sums(ps0)), horiz = TRUE, las = 2, sub = "Check if there is large differeence in otu counts")
+
+```
+
+### OTU counts distribution (histogram)  
+
+```{r qc-5}
+
+message("Investigating OTU counts distribution")
+
+hist(taxa_sums(ps0), las = 2, main = "raw")
+
+pdf("./QC/Distribution_OTU_Counts.pdf")
+barplot(sort(taxa_sums(ps0)), 
+        horiz = TRUE, las = 2, 
+        sub = "Check if there is large differeence in otu counts")
+hist(taxa_sums(ps0), las = 2, main = "raw")
+dev.off()
+
+message("QC plots for library sizes stored in QC folder as Distribution_OTU_Counts.pdf")
+
+```
+
+
+```{r qc-6}
+# for sanity
+ps1 <- prune_taxa(taxa_sums(ps0) > 0, ps0)
+
+```
+
+
+### Variance (raw)  
+
+This is variance for all OTU counts without filtering for min number of reads/OTU and prevalence.  
+
+```{r qc-7}
+
+Variance.plot.a <- qplot(log10(apply(otu_table(ps1), 1, var)), 
+                         xlab = "log10(variance)", 
+                         main = "Variance in OTUs") + 
+  ggtitle("before filtering") + theme_minimal()
+
+print(Variance.plot.a)
+
+ggsave("./QC/Variance before filtering.pdf")
+
+message("QC plots for OTU variance stored in QC folder as Variance before filtering.pdf")
+
+```
+
+
+### Variance (filtered)  
+
+This is variance for all OTU counts after filtering for min number of reads/OTU and prevalence. 
+
+```{r qc-8}
+
+if (filterpseq == TRUE) {
+message(paste0("Filtering OTUs with less than ", filterCount, " counts"))
+message(paste0("in at least ", filterPrev*100, " % of the samples "))
+
+ps2 = filter_taxa(ps1, function(x) sum(x > filterCount) > (filterPrev * length(x)), TRUE)
+
+message("Saving the transformed phyloseq object as ps_filtered.rds")
+
+saveRDS(ps2, "./PhyloseqObjects/ps_filtered.rds")
+
+message("Below is the content of filtered phyloseqobject (based on filterCount and filterPrev) stored as ps_filtered.rds")
+
+print(ps2) 
+
+Variance.plot.b <- qplot(log10(apply(otu_table(ps2), 1, var)), 
+                         xlab = "log10(variance)", 
+                         main = "Variance in OTUs") + 
+  ggtitle("after filtering") + 
+  theme_minimal()
+
+print(Variance.plot.b)
+ggsave("./QC/Variance After filtering.pdf")
+
+} else 
+  {
+    
+    message("filterpseq was false. Did not filter and hence will not save the filtered phyloseq")
+    
+    ps2 <- ps1
+    
+}
+
+
+```
+
+
+## Measuring the kurtosis  
+
+Kurtosis is essentially a measure of how much weight is at the tails of the distribution relative to the weight around the location.  
+If you have large differences in your library sizes then you may have to normalise your data.
+
+[Kurtosis](http://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm)  
+
+```{r kurtosis}
+  
+message("Using the raw phyloseq to check for kurtosis in library size")
+
+df <- data.table(NumberReads = sample_sums(ps0), SampleID = sample_names(ps0))
+require(moments)
+n <- kurtosis(df$NumberReads) 
+
+if (n > 3) {
+    message("Your library size is heavily tailed, considering normalising them for further analysis")
+  }  else {
+    
+    message("The variation in library sizes is below kurtosis value of 3 may indicate no need for rarefying")
+    
+}
+  
+```
+
+## Alpha diversity {.tabset}  
+
+Alpha diversity measures are standard calculations in microbial ecology. The differences in richness and eveness between groups may have importance to understanding the ecology. There are numerous measures we use the defaults from `microbiome` R package and also the phylogenetic diversity from `picante`R package.  
+
+The caculations can be done on rarefied or non-rarefied data which can be specified by the `samsize` option in "Set project attributes" option above.
+
+
+### Non-phylogenetic diversity measures  
+
+For more on this check [**Microbiome:Diversities**](http://microbiome.github.io/microbiome/Diversity.html)
+
+```{r div-non-phylo}
+
+if (!is.na(samsize)) {
+  
+  ps3 <- rarefy_even_depth(ps2, sample.size = samsize)
+  
+  saveRDS(ps.rare, "./phyloseqObjects/ps_rarefyied.rds")
+} else{
+  ps3 <- ps2
+}
+
+metadf <- meta(ps3)
+alpha_div <- plot_richness(ps3, 
+                           color = VariableA, 
+                           shape = VariableB, 
+                           measures = c("Observed", "Chao1", "Shannon", "InvSimpson"))
+
+alpha_div <- alpha_div + geom_boxplot() + 
+  ggtitle("Non phylogenetic diversity") + 
+  scale_fill_brewer(palette = col.palette)
+
+print(alpha_div)
+
+if (!is.na(samsize)){
+  message("Non-phylogenetic_alpha_diversity on RAREFIED data stored in AlphaDiversity folder as")
+  message("Non-phylogenetic_alpha_diversity.pdf")
+} else{
+  message("Non-phylogenetic_alpha_diversity on NON-RAREFIED data stored  in AlphaDiversity folder as")
+  message("Non-phylogenetic_alpha_diversity.pdf")
+}
+
+ggsave("./AlphaDiversity/Non-phylogenetic_alpha_diversity.pdf", 
+       height = 6, width = 18)
+
+```
+
+
+### Phylogenetic diversity measures  
+
+For more on this check [**Picante**](https://academic.oup.com/bioinformatics/article/26/11/1463/203321/Picante-R-tools-for-integrating-phylogenies-and).   
+
+```{r div-phylo}
+
+if (!is.na(samsize)) {
+  
+  message("Rarefyied phyloseq object will be used to calculate PD")
+  print(ps3)
+  
+  saveRDS(ps.rare, "./phyloseqObjects/ps_rarefyied.rds")
+} else{
+  
+  message("Non-Rarefyied phyloseq object will be used to calcualte PD")
+  print(ps3)
+  
+}
+
+
+otu_table_ps3 <- as.data.frame(ps3@otu_table)
+metadata_table_ps3  <- meta(ps3)
+
+message("include.root in pd is set to FALSE by default")
+
+df.pd <- pd(t(otu_table_ps3), tree,include.root=F) # t(ou_table) transposes the table for use in picante and the tre file comes from the first code chunck we used to read tree file (see making a phyloseq object section).
+
+
+datatable(df.pd)
+# now we need to plot PD
+# check above how to get the metadata file from phyloseq object.
+# We will add the results of PD to this file and then plot.
+select.meta <- metadata_table_ps3[,c(VariableA,VariableB)] #, "Phyogenetic_diversity"]
+select.meta$Phyogenetic_diversity <- df.pd$PD 
+colnames(select.meta) <- c("VariableA", "VariableB", "Phyogenetic_diversity")
+
+plot.pd <- ggplot(select.meta, aes(VariableA, Phyogenetic_diversity)) + geom_boxplot(aes(fill = VariableB)) + geom_point(size = 2) + theme(axis.text.x = element_text(size=14, angle = 90))  + theme_bw() + scale_fill_brewer(palette = col.palette)
+print(plot.pd)
+
+if (!is.na(samsize)) {
+  
+  message("Non-phylogenetic_alpha_diversity.pdf")
+  ggsave("./AlphaDiversity/Phylogenetic_diversityon_Rafrefied_data.pdf", 
+         plot = plot.pd,
+         height = 6, width = 18)
+
+} else{
+  
+  message("Non-phylogenetic_alpha_diversity.pdf")
+  ggsave("./AlphaDiversity/Phylogenetic_diversityon_nonRafrefied_data.pdf", 
+         plot = plot.pd, 
+         height = 6, width = 18)
+
+}
+
+
+```
+
+
+## Barplot composition  {.tabset}   
+
+Having a look at the phyloegnetic composition of you data is useful for many reasons. FOr this purpose we have two Phylum and Family level plots.
+
+### Phylum  
+
+```{r fig.height= 6, fig.width=14}
+
+ps3.com <- ps3 # create a new pseq object
+# We need to set Palette
+taxic <- as.data.frame(ps3.com@tax_table)  # this will help in setting large color options
+
+colourCount = length(unique(taxic$Phylum))  #define number of variable colors based on number of Family (change the level accordingly to phylum/class/order)
+getPalette = colorRampPalette(brewer.pal(12, col.palette))  # change the palette as well as the number of colors will change according to palette.
+
+# now edit the unclassified taxa
+tax_table(ps3.com)[tax_table(ps3.com)[, "Phylum"] == "f__", "Phylum"] <- "f__Unclassified Phylum"
+# We will also remove the 'f__' patterns for cleaner labels
+tax_table(ps3.com)[, colnames(tax_table(ps3.com))] <- gsub(tax_table(ps3.com)[, 
+    colnames(tax_table(ps3.com))], pattern = "[a-z]__", replacement = "")
+
+otu.df <- as.data.frame(otu_table(ps3.com))  # make a dataframe for OTU information.
+# head(otu.df) # check the rows and columns
+
+taxic$OTU <- row.names.data.frame(otu.df)  # Add the OTU ids from OTU table into the taxa table at the end.
+colnames(taxic)  # You can see that we now have extra taxonomy levels.
+
+taxmat <- as.matrix(taxic)  # convert it into a matrix.
+new.tax <- tax_table(taxmat)  # convert into phyloseq compaitble file.
+tax_table(ps3.com) <- new.tax  # incroporate into phyloseq Object
+
+
+# it would be nice to have the Taxonomic names in italics.
+# for that we set this
+guide_italics <- guides(fill = guide_legend(label.theme = element_text(size = 15, 
+    face = "italic", colour = "Black", angle = 0)))
+
+
+## Now we need to plot at family level, We can do it as follows:
+
+# first remove the phy_tree
+
+ps3.com@phy_tree <- NULL
+
+ps3.com.phy <- aggregate_taxa(ps3.com, "Phylum")
+
+ps3.com.phy.rel <- microbiome::transform(ps3.com.phy, "compositional")
+
+plot.composition.relAbun.phy <- plot_composition(ps3.com.phy.rel) + theme(legend.position = "bottom") + 
+    scale_fill_manual(values = getPalette(colourCount)) + theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+  ggtitle("Relative abundance Phylum level") + guide_italics 
+  
+plot.composition.relAbun.phy
+
+if (nrow(metadf) > 30) {
+  ggsave("./Others/compositionbarplot_Phylum.pdf", plot = plot.composition.relAbun.phy, height = 8, width = 28)
+
+} else {
+    ggsave("./Others/compositionbarplot_Phylum.pdf", plot = plot.composition.relAbun.phy, 
+      height = 8, width = 18)
+}
+
+```
+
+
+### Family  
+
+```{r fig.height= 8, fig.width=24}
+
+colourCount = length(unique(taxic$Family))  #define number of variable colors based on number of Family (change the level accordingly to phylum/class/order)
+getPalette = colorRampPalette(brewer.pal(12, col.palette))  # change the palette as well as the number of colors will change according to palette.
+
+
+ps3.com.fam <- aggregate_taxa(ps3.com, "Family")
+
+ps3.com.fam.rel <- microbiome::transform(ps3.com.fam, "compositional")
+
+plot.composition.relAbun.fam <- plot_composition(ps3.com.fam.rel) + theme(legend.position = "bottom") + 
+    scale_fill_manual(values = getPalette(colourCount)) + theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+  ggtitle("Relative abundance Phylum level") + guide_italics 
+  
+plot.composition.relAbun.fam
+
+if (nrow(metadf) > 30) {
+  ggsave("./Others/compositionbarplot_Family.pdf", plot = plot.composition.relAbun.fam, height = 8, width = 28)
+
+} else {
+    ggsave("./Others/compositionbarplot_Family.pdf", plot = plot.composition.relAbun.fam, 
+      height = 8, width = 18)
+}
+
+```
+
+## Beta Diversity (Ordinations) {.tabset}     
+
+
+### Bray-Curtis distance PCoA  
+
+The counts are log10(1+x) tranformed and then used for ordinations.
+
+```{r BC-PCoA, fig.height=4, fig.width=8}
+
+ps3.log <- microbiome::transform(ps3, "log10")
+
+bc.pcoa <- ordinate(ps3.log, method = "PCoA", distance = "bray")
+
+bc.pcoa.plot <- plot_ordination(ps3.log, bc.pcoa, 
+                                type = "split", axes = 1:2,
+                                color = VariableA, shape = VariableB, 
+                                label = NULL, 
+                                title = "Bray-Curtis distance PCoA",
+                                justDF = FALSE)
+bc.pcoa.plot <- bc.pcoa.plot + theme_bw() + geom_point(size = 2)
+print(bc.pcoa.plot)
+
+ggsave("./BetaDiversity/Bray-Curtis distance PCoA.pdf", plot = bc.pcoa.plot, 
+      height = 6, width = 10)
+
+
+# Calculate bray curtis distance matrix
+ps3_bray <- phyloseq::distance(ps3.log, method = "bray")
+
+# use meta data from phylogenetic div code chunk.
+
+# Adonis test
+adonis(ps3_bray ~ VariableA, data = select.meta)
+
+
+# Homogeneity of dispersion test
+beta.bray <- betadisper(ps3_bray, select.meta$VariableA)
+permutest(beta.bray)
+
+```
+
+
+### Weighted Unifrac distance PCoA  
+
+The counts are log10(1+x) tranformed and then used for ordinations.
+
+```{r wunifrac-MDS, fig.height=4, fig.width=8}
+
+wunifrac.pcoa <- ordinate(ps3.log, method = "PCoA", distance = "wunifrac")
+
+wunifrac.pcoa.plot <- plot_ordination(ps3.log, wunifrac.pcoa, 
+                                type = "split", axes = 1:2,
+                                color = VariableA, shape = VariableB, 
+                                label = NULL, 
+                                title = "Weighted Unifrac distance PCoA",
+                                justDF = FALSE)
+wunifrac.pcoa.plot <- wunifrac.pcoa.plot + theme_bw() + geom_point(size = 2)
+print(wunifrac.pcoa.plot)
+
+ggsave("./BetaDiversity/Weighted Unifrac distance PCoA.pdf", plot = wunifrac.pcoa.plot, 
+      height = 6, width = 10)
+
+# Calculate bray curtis distance matrix
+ps3_wunifrac <- phyloseq::distance(ps3.log, method = "wunifrac")
+
+# use meta data from phylogenetic div code chunk.
+
+# Adonis test
+adonis(ps3_wunifrac ~ VariableA, data = select.meta)
+
+
+# Homogeneity of dispersion test
+beta.wunifrac <- betadisper(ps3_wunifrac, select.meta$VariableA)
+permutest(beta.wunifrac)
+
+```
+
+### Unweighted Unifrac distance PCoA  
+
+The counts are log10(1+x) tranformed and then used for ordinations.  
+
+```{r unifrac-MDS, fig.height=4, fig.width=8}
+
+unifrac.pcoa <- ordinate(ps3.log, method = "PCoA", distance = "unifrac")
+
+unifrac.pcoa.plot <- plot_ordination(ps3.log, unifrac.pcoa, 
+                                type = "split", axes = 1:2,
+                                color = VariableA, shape = VariableB, 
+                                label = NULL, 
+                                title = "Unweighted Unifrac distance PCoA",
+                                justDF = FALSE)
+unifrac.pcoa.plot <- unifrac.pcoa.plot + theme_bw() + geom_point(size = 2)
+print(unifrac.pcoa.plot)
+
+ggsave("./BetaDiversity/Unweighted Unifrac distance PCoA.pdf", plot = unifrac.pcoa.plot, 
+      height = 6, width = 10)
+
+message("Unweighted Unifrac distance gives negative values and standard anova and anoism cannot be used")
+
+```
+
+
+
+## Heatmap  
+
+```{r heatmap}
+
+if (heatmap == TRUE) {
+  
+  pseq.fam <- aggregate_taxa(ps3.com, "Family")
+  pseq.famlog10 <- transform(pseq.fam, "log10")
+  ps3.log.heatmap <- plot_composition(pseq.famlog10, 
+                             sample.sort = VariableB, 
+                             otu.sort = NULL, 
+                             x.label = VariableA, 
+                             plot.type = "heatmap", 
+                             verbose = FALSE)
+
+  ps3.log.heatmap <- ps3.log.heatmap + theme(legend.position = "bottom") + 
+    theme_bw() + theme(axis.text.x = element_text(angle = 90)) + 
+    ggtitle("Heatmap Log10(1+x) tranformed") + 
+    theme(axis.text = element_text(face = "italic"))
+  
+  ps3.log.heatmap <- ps3.log.heatmap + 
+    scale_fill_distiller(palette = "YlOrRd", trans = "reverse")
+
+  print(ps3.log.heatmap)
+  
+}
+
+ggsave("./Others/Heatmap Log10(1+x) tranformed Family.pdf", 
+       plot = ps3.log.heatmap,
+       height = 6,
+       width = 10)
+
+```
+
+
+
+
+```{r session-infor}
+
+sessionInfo()
+
+```
+
