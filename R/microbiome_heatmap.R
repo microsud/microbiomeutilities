@@ -2,17 +2,28 @@
 #' @description Plot heatmap using \code{\link{phyloseq-class}} object as input.
 #' @param phyobj \code{\link{phyloseq-class}} object.
 #' @param subset_otu either NA or number of Top OTUs to use for plotting.
+#' @param transformation either 'log10', 'clr','Z', 'compositional', or NA
 #' @param VariableA main variable of Interest.
-#' @param VariableB secondary variable of interest.
 #' @param heatcolors is the option for colors in \code{\link{pheatmap}}. Default is to use viridis
 #'        inferno
 #' @param ... Arguments to be passed (for \code{\link{pheatmap}} pheatmap).
 #' @return A \code{\link{pheatmap}} plot object
 #' @export
 #' @author Sudarshan A. Shetty (sudarshanshetty9@gmail.com)
-
-microbiome_heatmap <- function(phyobj, subset_otu,
-                               VariableA, VariableB, heatcolors, ...)
+#' @examples \dontrun{
+#'   # Example data
+#'     library(microbiome)
+#'     data(DynamicIBD)
+#'     ps0 <- DynamicIBD
+#'     colnames(tax_table(ps)) <- c("Domain", "Phylum", "Order", "Class", "Family", "Rank6" "Rank7")
+#'
+#'     p <- microbiome_heatmap(ps, subset_otu = 10,
+#'     VariableA = "ibd_subtype",
+#'     heatcolors = NA)
+#'           }
+#' @keywords utilities
+microbiome_heatmap <- function(phyobj, subset_otu, transformation,
+                               VariableA, heatcolors, ...)
 {
 
 
@@ -36,7 +47,18 @@ microbiome_heatmap <- function(phyobj, subset_otu,
 
   message("log10, if zeros in data then log10(1+x) will be used")
 
-  phyobj2 <- transform(phyobj1, "log10")
+  if (transformation == "log10"){
+    phyobj2 <- transform(phyobj1, "log10")
+  } else if (transformation == "compositional"){
+    phyobj2 <- transform(phyobj1, "compositional")
+  } else if(transformation == "Z-OTU"){
+    phyobj2 <- transform(phyobj1, "Z")
+  } else if(transformation == "clr"){
+    phyobj2 <- transform(phyobj1, "clr")
+  } else if (is.na(transformation)){
+    phyobj2 <- phyobj1
+  }
+
 
   # format the taxonomy to incluse unique names
   phyobj2 <- format_phyloseq(phyobj2)
@@ -50,8 +72,12 @@ microbiome_heatmap <- function(phyobj, subset_otu,
 
   # We will merege all the column into one except the
   # Doamin as all is bacteria in this case
-  tax.lev <- tidyr::unite(taxDF, Taxa_level, c("Genus",
-                                               "Species"), sep = " ", remove = TRUE)
+  if (ncol(tax_table(phyobj2)) == 6){
+    tax.lev <- tidyr::unite(taxDF, Taxa_level, c("Family", "Genus"), sep = " ", remove = TRUE)
+  } else {
+    tax.lev <- tidyr::unite(taxDF, Taxa_level, c("Genus",
+                                                 "Species"), sep = " ", remove = TRUE)
+  }
 
   tax.lev$Taxa_level <- gsub(pattern = "[a-z]__",
                              replacement = "", tax.lev$Taxa_level)
@@ -59,7 +85,7 @@ microbiome_heatmap <- function(phyobj, subset_otu,
 
   # choose which variables of interest to include in
   # the heatmap
-  select.meta <- meta.tab$VariableA
+  select.meta <- subset(meta.tab, select = c(VariableA))
 
   rownames(otu.mat) <- as.list(tax.lev$Taxa_level)
 
@@ -74,6 +100,6 @@ microbiome_heatmap <- function(phyobj, subset_otu,
 
   }
   heatmap <- pheatmap::pheatmap(otu.mat, annotation_col = select.meta,
-                     main = "log10(x+1)", color = color.heatmap, ...)
+                     main = "Heatmap", color = color.heatmap, ...)
   return(heatmap)
 }
