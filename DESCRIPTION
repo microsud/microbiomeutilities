@@ -22,7 +22,10 @@ Imports:
     data.table,
     vegan,
     plyr,
-    ggpubr
+    ggpubr,
+	RColorBrewer,
+	ape,
+	viridis
 Suggests:
     BiocGenerics,
     knitr,
