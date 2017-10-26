@@ -8,9 +8,6 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Microbiome analytics tool
 
@@ -22,6 +19,8 @@ This tempate for microbiome data analysis, handling and visualisation. This make
 
 Check this link on [Organize your data and code](http://kbroman.org/steps2rr/pages/organize.html).    
 
+You can find the source code at [microbiomeutilities github repo](https://github.com/microsud/microbiomeutilities).  
+A step wise guide can be found at [microbiomeutilities wiki](https://github.com/microsud/microbiomeutilities/wiki).  
 
 ## Load libraries  
 
@@ -54,7 +53,11 @@ The next code chunk is where you put all the parameters for analysis. This is th
 ```{r set-seed}
 
 #generate a random number 
-n <- runif(1, 0, 10^8) # keep this number stored as below instead of XXX when re running the codes.
+n <- runif(1, 0, 10^6) # keep this number stored as below instead of XXX when re running the codes.
+
+message("random number set.seed is below")
+print(n)
+
 set.seed(n)
 
 ```
@@ -84,14 +87,49 @@ samsize=NA                                  # rarefying depth
 
 Check the code chunk next to this of left side to see folder names where files are stored. 
 
-```{r setup-2, warning=FALSE, message=FALSE}
+```{r setup-2, warning=FALSE, message=TRUE, warning=TRUE}
 oripath <- getwd()
+message("Current working directory is ", oripath)
+
 setwd(out_dir)
-dir.create("QC")
-dir.create("AlphaDiversity")
-dir.create("BetaDiversity")
-dir.create("Others")
-dir.create("PhyloseqObjects")
+message("Otuput directory is set to ", out_dir)
+
+if(file.exists("QC")) {
+  message("QC folder already exists, data will be overwritten")
+} else{
+  message("QC folder will be created in ", out_dir)
+  dir.create("QC")
+}
+
+if(file.exists("AlphaDiversity")) {
+  message("AlphaDiversity folder already exists will data will be overwritten")
+} else{
+  message("AlphaDiversity folder will be created in ", out_dir)
+  dir.create("AlphaDiversity")
+}
+
+if(file.exists("BetaDiversity")) {
+  message("BetaDiversity folder already exists will data will be overwritten")
+} else{
+  message("BetaDiversity folder will be created in ", out_dir)
+  dir.create("BetaDiversity")
+}
+
+if(file.exists("Others")) {
+  message("Others folder already exists will data will be overwritten")
+} else{
+  message("Others folder will be created in ", out_dir)
+  dir.create("Others")
+}
+
+if(file.exists("PhyloseqObjects")) {
+  message("PhyloseqObjects folder already exists will data will be overwritten")
+} else{
+  message("PhyloseqObjects folder will be created in ", out_dir)
+  dir.create("PhyloseqObjects")
+}
+
+
 ```
 
 
