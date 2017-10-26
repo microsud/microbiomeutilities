@@ -23,9 +23,9 @@ Imports:
     vegan,
     plyr,
     ggpubr,
-	RColorBrewer,
-	ape,
-	viridis
+    RColorBrewer,
+    ape,
+    viridis
 Suggests:
     BiocGenerics,
     knitr,
