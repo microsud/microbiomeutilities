@@ -31,8 +31,8 @@ This step will check for installed packages and dependencies.
 # List of packages for session
 .packages <- c("data.table", "plyr", "dplyr", "tidyr", "ggplot2",
                "viridis", "phyloseq", "ggrepel", "Matrix",
-               "mvtnorm",  "gridExtra", "RColorBrewer","svglite",
-               "scales","tibble", "xtable", "devtools", "picante")
+               "RColorBrewer",
+               "devtools", "picante")
 
 # Install CRAN packages
 .inst <- .packages %in% installed.packages()
