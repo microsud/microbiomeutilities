@@ -22,6 +22,38 @@ Check this link on [Organize your data and code](http://kbroman.org/steps2rr/pag
 You can find the source code at [microbiomeutilities github repo](https://github.com/microsud/microbiomeutilities).  
 A step wise guide can be found at [microbiomeutilities wiki](https://github.com/microsud/microbiomeutilities/wiki).  
 
+## Install  
+
+This step will check for installed packages and dependencies.   
+
+```{r, install-check, message=FALSE, warning=TRUE}
+
+# List of packages for session
+.packages <- c("data.table", "plyr", "dplyr", "tidyr", "ggplot2",
+               "viridis", "phyloseq", "ggrepel", "Matrix",
+               "mvtnorm",  "gridExtra", "RColorBrewer","svglite",
+               "scales","tibble", "xtable", "devtools", "picante")
+
+# Install CRAN packages
+.inst <- .packages %in% installed.packages()
+if(any(!.inst)) {
+  install.packages(.packages[!.inst], repos = "http://cran.rstudio.com/")
+}
+
+if (!("microbiome"  %in% installed.packages())) {
+devtools::install_github("microbiome/microbiome") # Install the package
+}
+
+# install.packages("picante",repos="http://R-Forge.R-project.org") 
+
+allneededpackages <- c(.packages, "microbiome")
+
+# Load packages into session
+sapply(allneededpackages, require, character.only = TRUE)
+
+```
+
+
 ## Load libraries  
 
 We have to load libraries click on the code tab on the left hand die of this doc for looking at the libraries that are installed. It is good to install these packages before.  
@@ -102,28 +134,28 @@ if(file.exists("QC")) {
 }
 
 if(file.exists("AlphaDiversity")) {
-  message("AlphaDiversity folder already exists will data will be overwritten")
+  message("AlphaDiversity folder already exists, data will be overwritten")
 } else{
   message("AlphaDiversity folder will be created in ", out_dir)
   dir.create("AlphaDiversity")
 }
 
 if(file.exists("BetaDiversity")) {
-  message("BetaDiversity folder already exists will data will be overwritten")
+  message("BetaDiversity folder already exists, data will be overwritten")
 } else{
   message("BetaDiversity folder will be created in ", out_dir)
   dir.create("BetaDiversity")
 }
 
 if(file.exists("Others")) {
-  message("Others folder already exists will data will be overwritten")
+  message("Others folder already exists, data will be overwritten")
 } else{
   message("Others folder will be created in ", out_dir)
   dir.create("Others")
 }
 
 if(file.exists("PhyloseqObjects")) {
-  message("PhyloseqObjects folder already exists will data will be overwritten")
+  message("PhyloseqObjects folder already exists, data will be overwritten")
 } else{
   message("PhyloseqObjects folder will be created in ", out_dir)
   dir.create("PhyloseqObjects")
@@ -158,7 +190,17 @@ print(ps0)
 ```
 
 
-## QC {.tabset}
+## QC {.tabset}  
+
+
+```{r, summary}
+
+print("Below is the summary of the phyloseq object")
+
+summarize_phyloseq(ps0)
+
+```
+
 
 ### Distribution of reads  
 
@@ -197,6 +239,21 @@ pdf("./QC/LibrarySizePerSample.pdf")
 barplot(sort(sample_sums(ps0)), horiz = TRUE, las = 2, sub = "Check if there is large differeence in library sizes")
 hist(sort(sample_sums(ps0)), las = 2)
 dev.off()
+
+```
+
+*If any sample has less than 2000 reads, it will be removed*
+
+```{r, samplesum}
+
+if(min(sample_sums(ps0)) < 2000){
+  print("There are sample(s) less than 2000 reads, these will be removed")
+  ps0 = prune_samples(sample_sums(ps0)>=2000, ps0)
+} else {
+  
+  print("No samples below 2000 reads")
+  print(ps0)
+}
 
 ```
 
@@ -531,15 +588,15 @@ if (nrow(metadf) > 30) {
 
 ### Bray-Curtis distance PCoA  
 
-The counts are log10(1+x) tranformed and then used for ordinations.
+The counts are compositionally tranformed and then used for ordinations.
 
 ```{r BC-PCoA, fig.height=4, fig.width=8}
 
-ps3.log <- microbiome::transform(ps3, "log10")
+ps3.rel <- microbiome::transform(ps3, "compositional")
 
-bc.pcoa <- ordinate(ps3.log, method = "PCoA", distance = "bray")
+bc.pcoa <- ordinate(ps3.rel, method = "PCoA", distance = "bray")
 
-bc.pcoa.plot <- plot_ordination(ps3.log, bc.pcoa, 
+bc.pcoa.plot <- plot_ordination(ps3.rel, bc.pcoa, 
                                 type = "split", axes = 1:2,
                                 color = VariableA, shape = VariableB, 
                                 label = NULL, 
@@ -553,7 +610,7 @@ ggsave("./BetaDiversity/Bray-Curtis distance PCoA.pdf", plot = bc.pcoa.plot,
 
 
 # Calculate bray curtis distance matrix
-ps3_bray <- phyloseq::distance(ps3.log, method = "bray")
+ps3_bray <- phyloseq::distance(ps3.rel, method = "bray")
 
 # use meta data from phylogenetic div code chunk.
 
@@ -570,13 +627,13 @@ permutest(beta.bray)
 
 ### Weighted Unifrac distance PCoA  
 
-The counts are log10(1+x) tranformed and then used for ordinations.
+The counts are converted to relative abundance and then used for ordinations.
 
 ```{r wunifrac-MDS, fig.height=4, fig.width=8}
 
-wunifrac.pcoa <- ordinate(ps3.log, method = "PCoA", distance = "wunifrac")
+wunifrac.pcoa <- ordinate(ps3.rel, method = "PCoA", distance = "wunifrac")
 
-wunifrac.pcoa.plot <- plot_ordination(ps3.log, wunifrac.pcoa, 
+wunifrac.pcoa.plot <- plot_ordination(ps3.rel, wunifrac.pcoa, 
                                 type = "split", axes = 1:2,
                                 color = VariableA, shape = VariableB, 
                                 label = NULL, 
@@ -589,7 +646,7 @@ ggsave("./BetaDiversity/Weighted Unifrac distance PCoA.pdf", plot = wunifrac.pco
       height = 6, width = 10)
 
 # Calculate bray curtis distance matrix
-ps3_wunifrac <- phyloseq::distance(ps3.log, method = "wunifrac")
+ps3_wunifrac <- phyloseq::distance(ps3.rel, method = "wunifrac")
 
 # use meta data from phylogenetic div code chunk.
 
@@ -605,13 +662,13 @@ permutest(beta.wunifrac)
 
 ### Unweighted Unifrac distance PCoA  
 
-The counts are log10(1+x) tranformed and then used for ordinations.  
+The counts are converted to relative abundnces and then used for ordinations.  
 
 ```{r unifrac-MDS, fig.height=4, fig.width=8}
 
-unifrac.pcoa <- ordinate(ps3.log, method = "PCoA", distance = "unifrac")
+unifrac.pcoa <- ordinate(ps3.rel, method = "PCoA", distance = "unifrac")
 
-unifrac.pcoa.plot <- plot_ordination(ps3.log, unifrac.pcoa, 
+unifrac.pcoa.plot <- plot_ordination(ps3.rel, unifrac.pcoa, 
                                 type = "split", axes = 1:2,
                                 color = VariableA, shape = VariableB, 
                                 label = NULL, 
@@ -636,28 +693,28 @@ message("Unweighted Unifrac distance gives negative values and standard anova an
 if (heatmap == TRUE) {
   
   pseq.fam <- aggregate_taxa(ps3.com, "Family")
-  pseq.famlog10 <- transform(pseq.fam, "log10")
-  ps3.log.heatmap <- plot_composition(pseq.famlog10, 
+  pseq.fam.rel <- transform(pseq.fam, "compositional")
+  ps3.rel.heatmap <- plot_composition(pseq.fam.rel, 
                              sample.sort = VariableB, 
                              otu.sort = NULL, 
                              x.label = VariableA, 
                              plot.type = "heatmap", 
                              verbose = FALSE)
 
-  ps3.log.heatmap <- ps3.log.heatmap + theme(legend.position = "bottom") + 
+  ps3.rel.heatmap <- ps3.rel.heatmap + theme(legend.position = "bottom") + 
     theme_bw() + theme(axis.text.x = element_text(angle = 90)) + 
-    ggtitle("Heatmap Log10(1+x) tranformed") + 
+    ggtitle("Heatmap relative abundance") + 
     theme(axis.text = element_text(face = "italic"))
   
-  ps3.log.heatmap <- ps3.log.heatmap + 
+  ps3.rel.heatmap <- ps3.rel.heatmap + 
     scale_fill_distiller(palette = "YlOrRd", trans = "reverse")
 
-  print(ps3.log.heatmap)
+  print(ps3.rel.heatmap)
   
 }
 
-ggsave("./Others/Heatmap Log10(1+x) tranformed Family.pdf", 
-       plot = ps3.log.heatmap,
+ggsave("./Others/Heatmap rel abun tranformed Family.pdf", 
+       plot = ps3.rel.heatmap,
        height = 6,
        width = 10)
 
