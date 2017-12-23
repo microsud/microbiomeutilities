@@ -5,13 +5,25 @@
 \title{Plotting core microibota on ordinations}
 \usage{
 plot_ordiplot_core(x, ordiObject, coreplot = c(TRUE, FALSE), prevalences,
-  detections, color, shape)
+  detections, color.opt, shape)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
+
+\item{ordiObject}{Output of ordinate from package phyloseq. Only NMDS and Bray supported.}
+
+\item{coreplot}{TRUE or FALSE for core heatmap from microbiome package.}
+
+\item{prevalences}{Prevalences as supported by microbiome package.}
+
+\item{detections}{Detections as supported by microbiome package.}
+
+\item{shape}{Variable of interest from metadata..}
+
+\item{color}{Variable of interest from metadata.}
 }
 \value{
-\code{\link{phyloseq-class}} object.
+plot
 }
 \description{
 This function will plot the ordaination alsong with highligthing the core microbes
@@ -29,7 +41,10 @@ Most commonly it is observed that the taxonomy file has classification until a g
 \examples{
 \dontrun{
   # Example data
-    px <- plot_ordiplot_core(ps1a, ordiObject = ordi, coreplot = TRUE, prevalences = prev.thres,
+    data(DynamicsIBD)
+    ps <- DynamicsIBD
+    ps1 <- format_phyloseq(ps)
+    px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE, prevalences = prev.thres,
     detections = det.thres, color = "ibd_subtype", shape = NULL)
           }
 }
