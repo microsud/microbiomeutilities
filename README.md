@@ -7,8 +7,10 @@ I will keep improving this with time and feedback.
 [image source clker.com](http://www.clker.com/clipart-work-in-progress.html)
 
 # microbiomeutilities
-This is mainly a _wrapper tool package_. Apart for some simple scripts, this package has a single function `run_microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables.  
-Check the [repository wiki](https://github.com/microsud/microbiomeutilities/wiki)
+This is mainly a _wrapper tool R package_. Apart for some simple scripts for plotting, this package has a single function `microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a _HTML_ report for convenient investigating of the data.     
+Check the [repository wiki](https://github.com/microsud/microbiomeutilities/wiki)  
+
+Example output of the `microbiome_pipeline`: [Biopsy and stool comparison]().  
 
 **Install microbiomeutilities**   
 
