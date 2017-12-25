@@ -20,6 +20,23 @@
 format_phyloseq <- function(x)
 {
   Domain <- Phylum <- Class <- Order <- Family <- Genus <- Species <- NULL
+  tax_table(x)[,1][is.na(tax_table(x)[,1])] <- paste0(tolower(substring("kingdom", 1, 1)), "__")
+  
+  tax_table(x)[,2][is.na(tax_table(x)[,2])] <- paste0(tolower(substring("Phylum", 1, 1)), "__")
+  
+  tax_table(x)[,3][is.na(tax_table(x)[,3])] <- paste0(tolower(substring("Class", 1, 1)), "__")
+  
+  tax_table(x)[,4][is.na(tax_table(x)[,4])] <- paste0(tolower(substring("Order", 1, 1)), "__")
+  
+  tax_table(x)[,5][is.na(tax_table(x)[,5])] <- paste0(tolower(substring("Family", 1, 1)), "__")
+  
+  tax_table(x)[,6][is.na(tax_table(x)[,6])] <- paste0(tolower(substring("Genus", 1, 1)), "__")
+  
+  if (ncol(tax_table(x)) == 7){
+    tax_table(x)[,7][is.na(tax_table(x)[,7])] <- paste0(tolower(substring("Species", 1, 1)), "__")
+  } 
+  
+  
   if (ncol(tax_table(x)) == 6)
   {
     pobj <- x
