@@ -1,7 +1,7 @@
 Package: microbiomeutilities
 Type: Package
 Title: microbiomeutilities: An R package with utility functions for the microbiome R package 
-Version: 0.2.0
+Version: 0.1.1
 Author: Sudarshan A. Shetty and Leo Lahti
 Maintainer: The package maintainer <sudarshanshetty9@gmail.com>
 Description: This is a supporting tool for extending the functionality of both phyloseq and microbiome R packages.
