@@ -15,7 +15,7 @@ phy_to_ldf(x, transform.counts)
 A data frame in long format with appropriate transfomation if requested.
 }
 \description{
-Faster alternative to psmelt function from \code{\link{phyloseq-class}} object. It is important that the sample name in metadata should have "SampleID" and this should match the sample names in OTU table.
+Faster alternative to psmelt function from \code{\link{phyloseq-class}} object.
 }
 \examples{
 \dontrun{
