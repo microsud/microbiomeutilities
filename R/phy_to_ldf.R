@@ -1,5 +1,5 @@
 #' @title Convert phyloseq object to long data format
-#' @description Faster alternative to psmelt function from \code{\link{phyloseq-class}} object. It is important that the sample name in metadata should have "SampleID" and this should match the sample names in OTU table.
+#' @description Faster alternative to psmelt function from \code{\link{phyloseq-class}} object. 
 #' @param x \code{\link{phyloseq-class}} object
 #' @param transform.counts Data transform to be used in plotting (but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample', 'log10' and 'compositional'. See the \code{\link{transform}} function.
 #' @return A data frame in long format with appropriate transfomation if requested.
