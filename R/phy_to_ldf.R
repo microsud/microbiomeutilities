@@ -17,7 +17,7 @@ phy_to_ldf = function(x, transform.counts)
 {
   
   if (is.null(transform.counts)) {
-    
+    x <- x
   } else if (transform.counts == "log10") {
     x <- transform(x, "log10")
   } else if (transform.counts == "Z-OTU") {
@@ -34,10 +34,10 @@ phy_to_ldf = function(x, transform.counts)
   meta_df = data.frame(sample_data(x))
   meta_df$Sam_rep <- rownames(meta_df)
   tax_df = data.frame(tax_table(x)) %>% 
-    rownames_to_column("OTU")
+    rownames_to_column("OTUID")
   otu_df = data.frame(otu_table(x), 
-                      check.names = FALSE) %>% rownames_to_column("OTU")
+                      check.names = FALSE) %>% rownames_to_column("OTUID")
   suppressWarnings(suppressMessages(otu_df %>% left_join(tax_df) %>% gather_("Sam_rep", 
                                            "Abundance", setdiff(colnames(otu_df), 
-                                                                "OTU")) %>% left_join(meta_df)))
+                                                                "OTUID")) %>% left_join(meta_df)))
 }

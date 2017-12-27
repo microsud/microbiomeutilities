@@ -17,7 +17,7 @@
 #'     pn <- plot_taxa_boxplot(ps1,
 #'     taxonomic.level = "Phylum",
 #'     top.otu = 3, VariableA = "ibd_subtype",
-#'     type = "dotplot",title = "rel plot")
+#'     title = "rel plot", color = "Set2")
 #'     print(pn)
 #'
 #'           }
@@ -51,7 +51,7 @@ plot_taxa_boxplot <- function(x, taxonomic.level, top.otu, VariableA, title, col
   }
 
   x1 <- transform(x, "compositional")
-  x.df0 <- suppressWarnings(suppressMessages(psmelt(x1))) 
+  x.df0 <- suppressWarnings(suppressMessages(phy_to_ldf(x1, transform.counts = NULL))) 
   p <- ggboxplot(x.df0, x = taxonomic.level, y = "Abundance", fill = VariableA, palette = color)
   p <- p + ylab("Relative Abundance") + ggtitle(title) + theme(axis.text.x = element_text(face="italic", angle = 90))
   p <- ggpar(p, legend = "right")
