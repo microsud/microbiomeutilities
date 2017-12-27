@@ -4,7 +4,7 @@
 \alias{plot_taxa_boxplot}
 \title{Taxonomic Composition Plot boxplot}
 \usage{
-plot_taxa_boxplot(x, taxonomic.level, top.otu, VariableA, title)
+plot_taxa_boxplot(x, taxonomic.level, top.otu, VariableA, title, color = NULL)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
@@ -16,6 +16,8 @@ plot_taxa_boxplot(x, taxonomic.level, top.otu, VariableA, title)
 \item{VariableA}{Specify main variable of interest. This should be one of the variables in sample_variables(x).}
 
 \item{title}{title for the plot}
+
+\item{color}{any of the palette supported by ggpubr/RColorBrewer packages or  user specified as c("red", "blue").}
 }
 \value{
 A \code{\link{ggplot}} plot object.
