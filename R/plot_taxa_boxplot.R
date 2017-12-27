@@ -5,6 +5,7 @@
 #' @param top.otu Top number of taxa to plot.
 #' @param VariableA Specify main variable of interest. This should be one of the variables in sample_variables(x).
 #' @param title title for the plot
+#' @param color any of the palette supported by ggpubr/RColorBrewer packages or  user specified as c("red", "blue").
 #' @return A \code{\link{ggplot}} plot object.
 #' @export
 #' @examples \dontrun{
@@ -22,7 +23,7 @@
 #'           }
 #' @keywords utilities
 
-plot_taxa_boxplot <- function(x, taxonomic.level, top.otu, VariableA, title){
+plot_taxa_boxplot <- function(x, taxonomic.level, top.otu, VariableA, title, color = NULL){
 
   if (!is.null(x@phy_tree)){
 
@@ -50,11 +51,10 @@ plot_taxa_boxplot <- function(x, taxonomic.level, top.otu, VariableA, title){
   }
 
   x1 <- transform(x, "compositional")
-  x.df0 <- psmelt(x1)
-  p <- ggboxplot(x.df0, x = taxonomic.level, y = "Abundance", fill = VariableA)
+  x.df0 <- suppressWarnings(suppressMessages(psmelt(x1))) 
+  p <- ggboxplot(x.df0, x = taxonomic.level, y = "Abundance", fill = VariableA, palette = color)
   p <- p + ylab("Relative Abundance") + ggtitle(title) + theme(axis.text.x = element_text(face="italic", angle = 90))
   p <- ggpar(p, legend = "right")
-  print(p)
   return(p)
 }
 
