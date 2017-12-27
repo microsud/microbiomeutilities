@@ -125,9 +125,9 @@ plot_ordiplot_core <-
 
     if (coreplot==TRUE) {
       p3 <- ggarrange(p1, ggarrange(ncol = 2, p0, p2), nrow = 2)
-      print(p3)
+      return(p3)
     } else {
       p4 <- ggarrange(p0, p2)
-      print(p4)
+      return(p4)
     }
   }
