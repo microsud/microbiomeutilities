@@ -1,26 +1,43 @@
 #' @title Convert phyloseq object to long data format
 #' @description Faster alternative to psmelt function from \code{\link{phyloseq-class}} object. It is important that the sample name in metadata should have "SampleID" and this should match the sample names in OTU table.
 #' @param x \code{\link{phyloseq-class}} object
-#
-#' @return A data frame in long format.
+#' @param transform.counts Data transform to be used in plotting (but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample', 'log10' and 'compositional'. See the \code{\link{transform}} function.
+#' @return A data frame in long format with appropriate transfomation if requested.
 #' @export
 #' @examples \dontrun{
 #'   # Example data
 #'     library(microbiome)
 #'     data("dietswap")
 #'     pseq <- subset_samples(dietswap, group == "DI" & nationality == "AFR")
-#'     pseq_df <- phy_to_ldf(pseq)
+#'     pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
+#'     
 #'           }
 #' @keywords utilities
-phy_to_ldf = function(x)
+phy_to_ldf = function(x, transform.counts)
 {
-  message("sample_data must have a column named SampleID, \n consisting of namesm corresponding to samples names in otu_table")
+  
+  if (is.null(transform.counts)) {
+    
+  } else if (transform.counts == "log10") {
+    x <- transform(x, "log10")
+  } else if (transform.counts == "Z-OTU") {
+    x <- transform(x, "Z", "OTU")
+  } else if (transform.counts == "Z-Sample") {
+    x <- transform(x, "Z", "Sample")
+  } else if (transform.counts == "compositional") {
+    x <- transform(x, "compositional", "OTU")
+  } else {
+    stop("Please provide appropriate transformation")
+  }
+  
+  message("An additonal column Sam_rep with sample names is created for reference purpose")
   meta_df = data.frame(sample_data(x))
+  meta_df$Sam_rep <- rownames(meta_df)
   tax_df = data.frame(tax_table(x)) %>% 
     rownames_to_column("OTU")
   otu_df = data.frame(otu_table(x), 
                       check.names = FALSE) %>% rownames_to_column("OTU")
-  suppressWarnings(otu_df %>% left_join(tax_df) %>% gather_("SampleID", 
+  suppressWarnings(suppressMessages(otu_df %>% left_join(tax_df) %>% gather_("Sam_rep", 
                                            "Abundance", setdiff(colnames(otu_df), 
-                                                                "OTU")) %>% left_join(meta_df))
+                                                                "OTU")) %>% left_join(meta_df)))
 }
