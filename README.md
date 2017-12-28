@@ -1,5 +1,6 @@
 # Experimental stage
-%% This package is in experimental stage and should be used only for testing/trial purposes %%  
+
+**This package is in experimental stage and should be used only for testing/trial purposes** 
 I will keep improving this with time and feedback.  
 
 ![Alt text](https://github.com/microsud/microbiomeutilities/blob/Devel/inst/extdata/images/Anonymous-work-in-progress.png)
