@@ -7,14 +7,18 @@
 #'          Here, we directly take the phyloseq object as input and make the necessary formatting.
 #' @param x \code{\link{phyloseq-class}} object
 #' @return  \code{\link{phyloseq-class}} object.
+#' @import tidyr 
+#' @import dplyr  
+#' @import microbiome
+#' @import phyloseq
 #' @export
 #' @examples \dontrun{
 #'   # Example data
 #'     library(microbiome)
 #'     library(microbiomeUtilities)
-#'     data(DynamicsIBD)
-#'     p0 <- DynamicsIBD
-#'     p0.f <- format_phyloseq(p0)
+#'     data("biogeogut")
+#'     p0 <- biogeogut
+#'     p0.f <- format_phyloseq(biogeogut)
 #'           }
 #' @keywords utilities
 format_phyloseq <- function(x)
