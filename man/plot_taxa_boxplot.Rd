@@ -29,13 +29,13 @@ Plot taxon abundance for samples.
 \dontrun{
   # Example data
     library(microbiomeutilities)
-    data("DynamicsIBD")
-    ps1 <- DynamicsIBD
-    colnames(tax_table(ps1)) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species" )
+    library(RColorBrewer)
+    data("biogeogut")
+    ps1 <- biogeogut
     pn <- plot_taxa_boxplot(ps1,
     taxonomic.level = "Phylum",
-    top.otu = 3, VariableA = "ibd_subtype",
-    type = "dotplot",title = "rel plot")
+    top.otu = 3, VariableA = "SampleType",
+    title = "Rel plot", color = "Set2")
     print(pn)
 
           }

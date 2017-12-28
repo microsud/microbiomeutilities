@@ -14,7 +14,7 @@ plot_ReadDistribution(x, groups, plot.type = c("density", "histogram"))
 \item{plot.type}{either density or histogram plot}
 }
 \value{
-A \code{\link{ggplot}} plot object
+A \code{\link{ggplot}} plot object.
 }
 \description{
 Plots distribution of reads.

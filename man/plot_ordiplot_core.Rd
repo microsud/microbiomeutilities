@@ -18,9 +18,9 @@ plot_ordiplot_core(x, ordiObject, coreplot = c(TRUE, FALSE), prevalences,
 
 \item{detections}{Detections as supported by microbiome package.}
 
-\item{shape}{Variable of interest from metadata..}
+\item{color.opt}{Variable of interest from metadata.}
 
-\item{color}{Variable of interest from metadata.}
+\item{shape}{Variable of interest from metadata.}
 }
 \value{
 plot
@@ -32,20 +32,24 @@ on the species ordination.
 \details{
 Most commonly it is observed that the taxonomy file has classification until a given
          taxonomic level.
-         Hence, to avoid loss of OTU information while using the function tax_glom() for merging #'          at a specific taxonomic level.
+         Hence, to avoid loss of OTU information while using the function tax_glom() for merging at a specific taxonomic level.
          we will fill the empty cells with the maximum classification available along with the
-         #' OTU number. This code is a slight modification.
+         OTU number. This code is a slight modification.
          the code from  \pkg{ampvis} \code{\link{phyloseq-class}}. Here, we directly take the
-         #' phyloseq object as input and make the necessary formatting.
+         phyloseq object as input and make the necessary formatting.
 }
 \examples{
 \dontrun{
   # Example data
-    data(DynamicsIBD)
-    ps <- DynamicsIBD
-    ps1 <- format_phyloseq(ps)
-    px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE, prevalences = prev.thres,
-    detections = det.thres, color = "ibd_subtype", shape = NULL)
+    library(microbiome)
+    library(microbiomeUtilities)
+    library(RColorBrewer)
+    data("biogeogut")
+    p0 <- biogeogut
+    ps1 <- format_phyloseq(ps0)
+    px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE, 
+    prevalences = prev.thres,
+    detections = det.thres, color.opt = "SampleType", shape = NULL)
           }
 }
 \keyword{utilities}
