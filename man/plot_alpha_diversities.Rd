@@ -48,4 +48,8 @@ Useful for instances where user is interested only in some OTUs. For example OTU
     
           }
 }
+\keyword{<-}
+\keyword{c("shannon,}
+\keyword{index.val}
+\keyword{simpson")}
 \keyword{utilities}

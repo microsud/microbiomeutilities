@@ -13,6 +13,7 @@
 #' @import ggpubr 
 #' @import microbiome
 #' @import RColorBrewer
+#' @importFrom reshape2 melt
 #' @export
 #' @examples \dontrun{
 #'   # Example data
@@ -31,7 +32,7 @@
 #'     
 #'           }
 #' @keywords utilities
-#' 
+#' index.val <- c("shannon, simpson")
 plot_alpha_diversities <- function(x, type, index.val = "all", plot.type, variableA, palette){
   
   x1 <- x
@@ -51,6 +52,9 @@ plot_alpha_diversities <- function(x, type, index.val = "all", plot.type, variab
     adiv <- evenness(x, index = index.val)
     adiv$sam_rep_nw <- rownames(adiv)
     
+  } else if (type == "global"){
+    adiv <- global(x, index = index.val)
+    adiv$sam_rep_nw <- rownames(adiv)   
   }
     adiv.nw <- melt(adiv)
     colnames(adiv.nw) <- c("sam_rep_nw","Diversity","div.val")
