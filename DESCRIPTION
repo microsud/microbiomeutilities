@@ -18,18 +18,20 @@ Imports:
     reshape2,
     stats,
     tidyr,
-    utils,
+	utils,
     data.table,
     vegan,
     plyr,
     ggpubr,
     RColorBrewer,
-    ape,
-    viridis
+    viridis,
+	pheatmap,
+	ggrepel
 Suggests:
     BiocGenerics,
     knitr,
-    rmarkdown
+    rmarkdown,
+	ape
 BugReports: https://github.com/microbiome/microbiome/issues
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
