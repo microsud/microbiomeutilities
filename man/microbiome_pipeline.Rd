@@ -49,6 +49,11 @@ you have in VaraibleA.}
 \value{
 A HTML report with graphs and data stats.
 }
+\description{
+Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and 
+             Composition analysis of OTU tables. This function save all intermediate files incuding figures and phyloseq 
+             objects in user specified directory.
+}
 \author{
 Contact: Sudarshan Shetty \email{sudarshanshetty9@gmail.com}
 }

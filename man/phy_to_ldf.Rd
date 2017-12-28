@@ -20,9 +20,9 @@ Faster alternative to psmelt function from \code{\link{phyloseq-class}} object.
 \examples{
 \dontrun{
   # Example data
-    library(microbiome)
-    data("dietswap")
-    pseq <- subset_samples(dietswap, group == "DI" & nationality == "AFR")
+    library(microbiomeutilities)
+    data("biogeogut")
+    pseq <- biogeogut
     pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
     
           }

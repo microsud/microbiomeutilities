@@ -19,10 +19,10 @@ microbiome_heatmap(phyobj, subset_otu, transformation, VariableA, heatcolors,
 \item{heatcolors}{is the option for colors in \code{\link{pheatmap}}. Default is to use viridis
 inferno}
 
-\item{...}{Arguments to be passed (for \code{\link{pheatmap}} pheatmap).}
+\item{...}{Arguments to be passed \code{\link{pheatmap}}.}
 }
 \value{
-A \code{\link{pheatmap}} plot object
+A \code{\link{pheatmap}} plot object.
 }
 \description{
 Plot heatmap using \code{\link{phyloseq-class}} object as input.
@@ -30,13 +30,13 @@ Plot heatmap using \code{\link{phyloseq-class}} object as input.
 \examples{
 \dontrun{
   # Example data
-    library(microbiome)
-    data(DynamicIBD)
-    ps0 <- DynamicIBD
-    colnames(tax_table(ps)) <- c("Domain", "Phylum", "Order", "Class", "Family", "Rank6" "Rank7")
+    library(microbiomeutilities)
+    library(viridis)
+    data("biogeogut")
+    ps0 <- biogeogut
 
     p <- microbiome_heatmap(ps, subset_otu = 10,
-    VariableA = "ibd_subtype",
+    VariableA = "SampleType",
     heatcolors = NA)
           }
 }

@@ -27,9 +27,9 @@ Most commonly it is observed that the taxonomy file has classification until a g
   # Example data
     library(microbiome)
     library(microbiomeUtilities)
-    data(DynamicsIBD)
-    p0 <- DynamicsIBD
-    p0.f <- format_phyloseq(p0)
+    data("biogeogut")
+    p0 <- biogeogut
+    p0.f <- format_phyloseq(biogeogut)
           }
 }
 \keyword{utilities}
