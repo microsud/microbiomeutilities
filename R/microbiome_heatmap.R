@@ -6,19 +6,24 @@
 #' @param VariableA main variable of Interest.
 #' @param heatcolors is the option for colors in \code{\link{pheatmap}}. Default is to use viridis
 #'        inferno
-#' @param ... Arguments to be passed (for \code{\link{pheatmap}} pheatmap).
-#' @return A \code{\link{pheatmap}} plot object
+#' @param ... Arguments to be passed \code{\link{pheatmap}}.
+#' @return A \code{\link{pheatmap}} plot object.
+#' @import tidyr 
+#' @import microbiome
+#' @import phyloseq
+#' @import pheatmap
+#' @import viridis
 #' @export
 #' @author Sudarshan A. Shetty (sudarshanshetty9@gmail.com)
 #' @examples \dontrun{
 #'   # Example data
-#'     library(microbiome)
-#'     data(DynamicIBD)
-#'     ps0 <- DynamicIBD
-#'     colnames(tax_table(ps)) <- c("Domain", "Phylum", "Order", "Class", "Family", "Rank6" "Rank7")
+#'     library(microbiomeutilities)
+#'     library(viridis)
+#'     data("biogeogut")
+#'     ps0 <- biogeogut
 #'
 #'     p <- microbiome_heatmap(ps, subset_otu = 10,
-#'     VariableA = "ibd_subtype",
+#'     VariableA = "SampleType",
 #'     heatcolors = NA)
 #'           }
 #' @keywords utilities
@@ -27,7 +32,7 @@ microbiome_heatmap <- function(phyobj, subset_otu, transformation,
 {
 
 
-  topOTU <- phyobj1 <- phyobj2 <- otu.mat <- meta.tab <- tax.tab <- taxDF <- tax.lev <- select.meta <- color.heatmap <- NULL
+  topOTU <- phyobj1 <- phyobj2 <- otu.mat <- meta.tab <- tax.tab <- taxDF <- tax.lev <- Taxa_level <- select.meta <- color.heatmap <- NULL
     if (!is.na(subset_otu))
     {
 
@@ -99,7 +104,7 @@ microbiome_heatmap <- function(phyobj, subset_otu, transformation,
     color.heatmap <- heatcolors
 
   }
-  heatmap <- pheatmap::pheatmap(otu.mat, annotation_col = select.meta,
+  heatmap <- pheatmap(otu.mat, annotation_col = select.meta,
                      main = "Heatmap", color = color.heatmap, ...)
   return(heatmap)
 }

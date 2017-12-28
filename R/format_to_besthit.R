@@ -4,22 +4,27 @@
 #'          row.names for both tax_table and otu_table have best hit, until maximun genus level (species classification with short amplicons is a myth)is made available. This code is a 
 #'          slight modification of the code from  \pkg{ampvis} \code{\link{phyloseq-class}}. 
 #'          Here, we directly take the phyloseq object as input and make the necessary formatting.
-#' @param x \code{\link{phyloseq-class}} object
+#'          
+#' @param pobj \code{\link{phyloseq-class}} object
 #' @return  \code{\link{phyloseq-class}} object.
+#' @import tidyr 
+#' @import dplyr  
+#' @import microbiome
+#' @import phyloseq
 #' @export
 #' @examples \dontrun{
 #'   # Example data
 #'     library(microbiome)
 #'     library(microbiomeUtilities)
-#'     data(DynamicsIBD)
-#'     p0 <- DynamicsIBD
+#'     data("biogeogut")
+#'     p0 <- biogeogut
 #'     p0.f <- format_to_besthit(p0)
 #'           }
 #' @keywords utilities
 
 format_to_besthit <- function(pobj){
   
-  Domain <- Phylum <- Class <- Order <- Family <- Genus <- Species <- x <- y <- NULL
+  Domain <- Phylum <- Class <- Order <- Family <- Genus <- Species  <- tax <- taxmat <- new.tax <- best_hit <- x <- y <- NULL
   
   x <- pobj
   
@@ -88,7 +93,7 @@ format_to_besthit <- function(pobj){
                                                                                                                                                                                                                                              paste("g__", Genus, "", sep = "")), Species))
     
   } 
-  
+  me <- NULL
   me <- as.data.frame(x@tax_table)
   me$Domain <- tax$Domain
   me$Phylum <- tax$Phylum
@@ -119,9 +124,11 @@ format_to_besthit <- function(pobj){
   tax.new$top_hit <- tax.unit$best_hit
   rownames(tax.new) <- tax.new$top_hit
   
+  OTU <- TAX <- sampledata <- NULL
   OTU = otu_table(as.matrix(otu.1), taxa_are_rows = TRUE)
   TAX = tax_table(as.matrix(tax.new))
   sampledata <- sample_data(meta(x))
+  p.new <- NULL
   p.new <- merge_phyloseq(OTU, TAX, sampledata)
   
   return(p.new)

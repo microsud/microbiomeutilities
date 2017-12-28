@@ -3,8 +3,7 @@
 #' on the species ordination.
 #' @details Most commonly it is observed that the taxonomy file has classification until a given
 #'          taxonomic level.
-#'          Hence, to avoid loss of OTU information while using the function tax_glom() for merging 
-#'          at a specific taxonomic level.
+#'          Hence, to avoid loss of OTU information while using the function tax_glom() for merging at a specific taxonomic level.
 #'          we will fill the empty cells with the maximum classification available along with the
 #'          OTU number. This code is a slight modification.
 #'          the code from  \pkg{ampvis} \code{\link{phyloseq-class}}. Here, we directly take the
@@ -14,17 +13,24 @@
 #' @param coreplot TRUE or FALSE for core heatmap from microbiome package.
 #' @param prevalences Prevalences as supported by microbiome package.
 #' @param detections Detections as supported by microbiome package.
-#' @param color Variable of interest from metadata.
-#' @param shape Variable of interest from metadata..
+#' @param color.opt Variable of interest from metadata.
+#' @param shape Variable of interest from metadata.
+#' @import ggplot2
+#' @import ggrepel
+#' @importFrom grDevices colorRampPalette
 #' @return plot
 #' @export
 #' @examples \dontrun{
 #'   # Example data
-#'     data(DynamicsIBD)
-#'     ps <- DynamicsIBD
-#'     ps1 <- format_phyloseq(ps)
-#'     px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE, prevalences = prev.thres,
-#'     detections = det.thres, color = "ibd_subtype", shape = NULL)
+#'     library(microbiome)
+#'     library(microbiomeUtilities)
+#'     library(RColorBrewer)
+#'     data("biogeogut")
+#'     p0 <- biogeogut
+#'     ps1 <- format_phyloseq(ps0)
+#'     px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE, 
+#'     prevalences = prev.thres,
+#'     detections = det.thres, color.opt = "SampleType", shape = NULL)
 #'           }
 #' @keywords utilities
 #'
@@ -88,6 +94,8 @@ plot_ordiplot_core <-
 
 
     # We will merege all the column into one except the Doamin as all is bacteria in this case
+    Genus <- NULL
+    Phylum <- NULL
     tax.unit <-
       tidyr::unite(tax2,
                    Taxa_level,
@@ -114,7 +122,7 @@ plot_ordiplot_core <-
     df2 <-
       mutate(df1, Core = ifelse(Core == TRUE, paste(Genus), df1$Core))
     p2 <- ggplot(df2, aes(x = NMDS1, y = NMDS2, label = NA)) + theme_bw() +
-      ggrepel::geom_text_repel(
+      geom_text_repel(
         data = subset(x = df2, subset =  Core != FALSE),
         aes(label = Genus),
         alpha = 0.5,
@@ -126,9 +134,9 @@ plot_ordiplot_core <-
 
     if (coreplot==TRUE) {
       p3 <- ggarrange(p1, ggarrange(ncol = 2, p0, p2), nrow = 2)
-      return(p3)
+      print(p3)
     } else {
       p4 <- ggarrange(p0, p2)
-      return(p4)
+      print(p4)
     }
   }

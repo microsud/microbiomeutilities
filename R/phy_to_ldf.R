@@ -3,12 +3,15 @@
 #' @param x \code{\link{phyloseq-class}} object
 #' @param transform.counts Data transform to be used in plotting (but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample', 'log10' and 'compositional'. See the \code{\link{transform}} function.
 #' @return A data frame in long format with appropriate transfomation if requested.
+#' @import tidyr 
+#' @import dplyr  
+#' @import microbiome
 #' @export
 #' @examples \dontrun{
 #'   # Example data
-#'     library(microbiome)
-#'     data("dietswap")
-#'     pseq <- subset_samples(dietswap, group == "DI" & nationality == "AFR")
+#'     library(microbiomeutilities)
+#'     data("biogeogut")
+#'     pseq <- biogeogut
 #'     pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
 #'     
 #'           }

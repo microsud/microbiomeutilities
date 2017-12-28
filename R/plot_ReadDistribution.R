@@ -5,7 +5,8 @@
 #' @param plot.type either density or histogram plot
 #
 #' @author Contact: SUdarshan Shetty \email{sudarshanshetty9@@gmail.com}
-#' @return A \code{\link{ggplot}} plot object
+#' @return A \code{\link{ggplot}} plot object.
+#' @importFrom data.table data.table
 #' @export
 #' @examples \dontrun{
 #'   # Example data
