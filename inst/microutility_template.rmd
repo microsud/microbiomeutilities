@@ -105,6 +105,8 @@ library(data.table)
 library(DT)
 library(RColorBrewer)
 library(phyloseq)
+library(tibble)
+library(ggpubr)
 ```
 
 
@@ -359,9 +361,11 @@ The caculations can be done on rarefied or non-rarefied data which can be specif
 
 ### Non-phylogenetic diversity measures  
 
+Below you can find 
+
 For more on this check [**Microbiome:Diversities**](http://microbiome.github.io/microbiome/Diversity.html)
 
-```{r div-non-phylo, fig.height= 6, fig.width=14}
+```{r div-non-phylo, fig.height=8, fig.width=14}
 
 if (!is.na(samsize)) {
   
@@ -373,6 +377,37 @@ if (!is.na(samsize)) {
 }
 
 metadf <- meta(ps3)
+metadf$sam_rep_nw <- rownames(metadf)
+
+adiv.meta <- estimate_richness(ps3)
+colnames(adiv.meta)
+
+adiv.meta$sam_rep_nw <- rownames(adiv.meta)
+
+adiv.nw <- reshape2::melt(adiv.meta)
+colnames(adiv.nw) <- c("sam_rep_nw","Diversity","div.val")
+meta_df_nw <- reshape2::melt(metadf)
+meta_adiv <- merge.data.frame(meta_df_nw, adiv.nw, by = "sam_rep_nw")
+colnames(meta_adiv)
+
+p <- ggqqplot(meta_adiv, "div.val", 
+              facet.by = c("Diversity", VariableA), 
+              color = VariableA)
+p <- facet(p , facet.by = c("Diversity", VariableA), scales = "free")
+print(p)
+
+#Create 2x2 plot environment 
+ggsave(paste0(out_dir,"/AlphaDiversity/Non-phylogenetic_alpha_diversity_qqnorm.pdf"), height = 8, width= 12)
+
+
+#shapiro.test
+shapiro.test(adiv.meta$Observed)
+shapiro.test(adiv.meta$Chao1)
+shapiro.test(adiv.meta$ACE)
+shapiro.test(adiv.meta$Shannon)
+shapiro.test(adiv.meta$Simpson)
+shapiro.test(adiv.meta$InvSimpson)
+shapiro.test(adiv.meta$Fisher)
 
 alpha_div <- plot_richness(ps3, 
                            color = VariableA, 
@@ -409,7 +444,7 @@ if (!is.na(treefilename)){
   message("Rarefyied phyloseq object will be used to calculate PD")
   print(ps3)
   otu_table_ps3 <- as.data.frame(ps3@otu_table)
- metadata_table_ps3  <- meta(ps3)
+  metadata_table_ps3  <- meta(ps3)
 
  message("include.root in pd is set to FALSE by default")
 
@@ -423,8 +458,16 @@ if (!is.na(treefilename)){
  select.meta <- metadata_table_ps3[,c(VariableA,VariableB)] #, "Phyogenetic_diversity"]
  select.meta$Phyogenetic_diversity <- df.pd$PD 
  colnames(select.meta) <- c("VariableA", "VariableB", "Phyogenetic_diversity")
-
- plot.pd <- ggplot(select.meta, aes(VariableA, Phyogenetic_diversity)) + geom_boxplot(aes(fill = VariableB)) + geom_point(size = 2) +  theme(axis.text.x = element_text(size=14, angle = 90))  + theme_bw() + scale_fill_brewer(palette = col.palette)
+ 
+ shapiro.test(select.meta$Phyogenetic_diversity)
+ 
+ qqnorm(select.meta$Phyogenetic_diversity)
+ 
+ plot.pd <- ggplot(select.meta, aes(VariableA, Phyogenetic_diversity)) + 
+   geom_boxplot(aes(fill = VariableB)) + geom_point(size = 2) +  
+   theme(axis.text.x = element_text(size=14, angle = 90)) + 
+   theme_bw() + scale_fill_brewer(palette = col.palette)
+ 
  print(plot.pd)
 
  ggsave(paste0(out_dir, "/AlphaDiversity/Phylogenetic_diversityon_nonRafrefied_data.pdf"), 
@@ -521,7 +564,7 @@ pn0 <- plot_taxa_boxplot(ps1,
                         taxonomic.level = "Phylum", 
                         top.otu = 10, VariableA, 
                         title = "Relative abundance Phylum level")
-
+pn0
 ggsave(paste0(out_dir,"/Others/compositionboxplot_Phylum.pdf"), height = 6, width = 12)
 ```
 
@@ -568,7 +611,7 @@ pn1 <- plot_taxa_boxplot(ps3.com,
                         top.otu = 10, VariableA, 
                         title = "Relative abundance Family level")
 
-
+pn1
 ggsave(paste0(out_dir,"/Others/compositionboxplot_Family.pdf"), height = 6, width = 16)
        
 ```
