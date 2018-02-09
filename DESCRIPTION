@@ -1,11 +1,11 @@
 Package: microbiomeutilities
 Type: Package
-Title: microbiomeutilities: An R package with utility functions for the microbiome R package 
-Version: 0.1.1
-Author: Sudarshan A. Shetty and Leo Lahti
+Title: microbiomeutilities: An R package with utility functions for the microbiome R package
+Version: 0.99.0
+Author: Sudarshan Shetty [aut, cre], Leo Lahti [aut]
 Maintainer: The package maintainer <sudarshanshetty9@gmail.com>
 Description: This is a supporting tool for extending the functionality of both phyloseq and microbiome R packages.
-License: BSD_2_clause + file LICENSE
+License: BSD_2_clause 
 Encoding: UTF-8
 LazyData: true
 Depends:
@@ -26,11 +26,13 @@ Imports:
     RColorBrewer,
     viridis,
     pheatmap,
-    ggrepel
+    ggrepel,
+    tibble,
+	scales
 Suggests:
     BiocGenerics,
     knitr,
-    rmarkdown,
+    rmarkdown,	
     ape
 BugReports: https://github.com/microbiome/microbiome/issues
 VignetteBuilder: knitr
