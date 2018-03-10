@@ -2,6 +2,8 @@
 
 export(format_phyloseq)
 export(format_to_besthit)
+export(get_microbiome_data)
+export(list_microbiome_data)
 export(microbiome_pipeline)
 export(percent_classified)
 export(phy_to_ldf)
