@@ -15,7 +15,7 @@
 
 list_microbiome_data <- function(){
 
-  message("data from Duvallet et al 2017 https://www.nature.com/articles/s41467-017-01973-8.pdf?origin=ppub")
+  message("Data from Duvallet et al 2017 https://www.nature.com/articles/s41467-017-01973-8.pdf?origin=ppub")
   message("1] Schubert et al., CDI 336 samples [cdi_schubert.rds]")
   message("2] Youngster et al., CDI 23 samples [cdi_youngster.rds]")
   message("3] Goodrich et al., OB 613 samples [ob_goodrich.rds]")
