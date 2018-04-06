@@ -7,7 +7,7 @@ I will keep improving this with time and feedback.
 
 [image source clker.com](http://www.clker.com/clipart-work-in-progress.html)
 
-# microbiomeutilities
+# [microbiomeutilities](https://microsud.github.io/microbiometutorials.gihub.io/microbiome_tutorial.html)
 This is mainly a _wrapper tool R package_. Apart for some simple scripts for plotting, this package has a single function `microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a _HTML_ report for convenient investigating of the data.     
 Check the [repository wiki](https://github.com/microsud/microbiomeutilities/wiki)  
 
