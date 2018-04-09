@@ -17,7 +17,7 @@ Reproducibilty is an essential aspect of data analysis. Especially for sequencin
 1. How many reads/samples? if there is large difference this may affect the choices you make for alpha diversity, betadiversity and differential abundance testing.
 2. How many reads/OTU ? this is aslo important to see if there are lot of OTUs with small mean & large coefficient of variation (C.V.).  
 
-This tempate for microbiome data analysis, handling and visualisation. This makes it easy to follow some standard procedures for looking at your data and reporting your results. This first-hand look at your data will aid in making different choices for more thorough and in-dept investigation.   
+This tempate is for microbiome data analysis, handling and visualisation. This makes it easy to follow some standard procedures for looking at your data and reporting your results. This first-hand look at your data will aid in making different choices for more thorough and in-dept investigation.   
 
 Check this link on [Organize your data and code](http://kbroman.org/steps2rr/pages/organize.html).    
 
@@ -155,7 +155,7 @@ summarize_phyloseq(ps0)
 ### Library sizes (density plot)  
 
 Check the library sizes for each of the samples within the main variable. Do you think it is okay or there is difference in library sizes and will this affect you downstream statistical analysis?  
-```{r, qc-1}
+```{r, qc-1, eval=FALSE}
 
 SeqDepth = colSums(otu_table(ps0))
 sample_data(ps0)$SeqDepth = SeqDepth
@@ -439,9 +439,7 @@ For more on this check [**Picante**](https://academic.oup.com/bioinformatics/art
 
 if (!is.na(treefilename)){
   
-  if (!is.na(samsize)) {
-  
-  message("Rarefyied phyloseq object will be used to calculate PD")
+   message("If sam.size was provided then rarefyied phyloseq object will be used to calculate PD")
   print(ps3)
   otu_table_ps3 <- as.data.frame(ps3@otu_table)
   metadata_table_ps3  <- meta(ps3)
@@ -479,7 +477,7 @@ if (!is.na(treefilename)){
   message("No tree supplied, PD cannot be calculated")
   
 }
-}
+
   
 
 ```
@@ -560,10 +558,10 @@ Top 5 Phyla are shown below:
 
 ```{r fig.height= 6, fig.width=14}
 
-pn0 <- plot_taxa_boxplot(ps1, 
+pn0 <- plot_taxa_boxplot(ps3.com, 
                         taxonomic.level = "Phylum", 
-                        top.otu = 10, VariableA, 
-                        title = "Relative abundance Phylum level")
+                        top.otu = 6, VariableA, 
+                        title = "Relative abundance Phylum level", color = "Paired")
 pn0
 ggsave(paste0(out_dir,"/Others/compositionboxplot_Phylum.pdf"), height = 6, width = 12)
 ```
@@ -609,7 +607,7 @@ Top 10 Families are shown below:
 pn1 <- plot_taxa_boxplot(ps3.com, 
                         taxonomic.level = "Family", 
                         top.otu = 10, VariableA, 
-                        title = "Relative abundance Family level")
+                        title = "Relative abundance Family level", color = "Paired")
 
 pn1
 ggsave(paste0(out_dir,"/Others/compositionboxplot_Family.pdf"), height = 6, width = 16)
@@ -757,7 +755,7 @@ if (heatmap == TRUE) {
     theme(axis.text = element_text(face = "italic"))
   
   ps3.rel.heatmap <- ps3.rel.heatmap + 
-    scale_fill_distiller(palette = "YlOrRd", trans = "reverse")
+    scale_fill_distiller("Relative abundance", palette = "YlOrRd", trans = "reverse")
 
   print(ps3.rel.heatmap)
   
@@ -771,10 +769,8 @@ ggsave(paste0(out_dir,"/Others/Heatmap rel abun tranformed Family.pdf"),
 ```
 
 
-Full results as well as lists of differentially expressed features are provided in the following text files which can be easily read in a spreadsheet. For each comparison:
 
-
-# R session information and parameters
+## R session information and parameters
 
 The versions of the R software and Bioconductor packages used for this analysis are listed below. It is important to save them if one wants to re-perform the analysis in the same conditions.
 
