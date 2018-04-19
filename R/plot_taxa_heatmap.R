@@ -19,6 +19,7 @@
 #'
 #'     library(microbiomeutilities)
 #'     library(viridis)
+#'     library(RColorBrewer)
 #'     data("biogeogut")
 #'     ps0 <- biogeogut
 #'

@@ -31,6 +31,7 @@ Plot heatmap using \code{\link{phyloseq-class}} object as input.
 
     library(microbiomeutilities)
     library(viridis)
+    library(RColorBrewer)
     data("biogeogut")
     ps0 <- biogeogut
 
