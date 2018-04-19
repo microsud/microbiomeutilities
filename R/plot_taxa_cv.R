@@ -8,6 +8,7 @@
 #' @import dplyr
 #' @import microbiome
 #' @import phyloseq
+#' @import graphics
 #' @export
 #' @examples
 #'     library(microbiome)
@@ -21,6 +22,7 @@
 #'
 plot_taxa_cv <- function(x, plot.type){
 
+  MeanAbun <- CV <- Phylum <- NULL
   cal_cv <- function(x) abs(sd(x)/mean(x))
   x.mean.rel <- apply(otu_table(x), 1, function(x) mean(x))
   #head(ps.mean.rel)
