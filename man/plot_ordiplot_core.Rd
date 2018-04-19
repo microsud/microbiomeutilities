@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_ordiplot_core.R
 \name{plot_ordiplot_core}
 \alias{plot_ordiplot_core}
-\title{Plotting core microibota on ordinations}
+\title{Plotting core microbiota on ordinations}
 \usage{
 plot_ordiplot_core(x, ordiObject, coreplot = c(TRUE, FALSE), prevalences,
   detections, color.opt, shape)
@@ -26,7 +26,7 @@ plot_ordiplot_core(x, ordiObject, coreplot = c(TRUE, FALSE), prevalences,
 plot
 }
 \description{
-This function will plot the ordaination alsong with highligthing the core microbes
+This function will plot the ordaination along with highligthing the core microbes
 on the species ordination.
 }
 \details{
@@ -47,7 +47,7 @@ Most commonly it is observed that the taxonomy file has classification until a g
     data("biogeogut")
     p0 <- biogeogut
     ps1 <- format_phyloseq(ps0)
-    px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE, 
+    px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE,
     prevalences = prev.thres,
     detections = det.thres, color.opt = "SampleType", shape = NULL)
           }

@@ -35,7 +35,7 @@ microbiome_pipeline(otufile, mapping, taxonomy, treefilename, type, work_dir,
 
 \item{filterPrev}{Filter OTUs not detected in less than this percent of samples.}
 
-\item{col.palette}{= 'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups 
+\item{col.palette}{= 'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups
 you have in VaraibleA.}
 
 \item{filterpseq}{TRUE or FALSE.}
@@ -50,9 +50,34 @@ you have in VaraibleA.}
 A HTML report with graphs and data stats.
 }
 \description{
-Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and 
-             Composition analysis of OTU tables. This function save all intermediate files incuding figures and phyloseq 
+Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and
+             Composition analysis of OTU tables. This function save all intermediate files incuding figures and phyloseq
              objects in user specified directory.
+}
+\examples{
+\dontrun{
+
+library(microbiomeutilities)
+library(microbiome)
+microbiome_pipeline(otufile = "my.biom",
+                   mapping = "mymap.csv",
+                   taxonomy = NULL,
+                   treefilename = "myTree.tre",
+                   type = "biom",
+                   work_dir = "F:/path/my/input/filefolder",
+                   out_dir = "F:/path/to/save/my/files/folder",
+                   VariableA = "MC_type1",
+                   VariableB = "Region",
+                   UnConstOrd = TRUE,
+                   heatmap = TRUE,
+                   filterCount = 4,
+                   filterPrev = 0.01,
+                   col.palette = "Paired",
+                   filterpseq = TRUE,
+                   samsize = NA,
+                   projectname = "Mock",
+                   author = "Sudarshan")
+                   }
 }
 \author{
 Contact: Sudarshan Shetty \email{sudarshanshetty9@gmail.com}

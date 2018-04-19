@@ -1,21 +1,21 @@
 #' @title Microbiome analysis pipeline
-#' @description Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and 
-#'              Composition analysis of OTU tables. This function save all intermediate files incuding figures and phyloseq 
+#' @description Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and
+#'              Composition analysis of OTU tables. This function save all intermediate files incuding figures and phyloseq
 #'              objects in user specified directory.
-#' @param otufile biom object, otu_table in csv format or mothur shared files.   
-#' @param mapping Metadata variable to check for groups based sequencing effort csv format.              
+#' @param otufile biom object, otu_table in csv format or mothur shared files.
+#' @param mapping Metadata variable to check for groups based sequencing effort csv format.
 #' @param taxonomy NULL or csv fomatted file.
-#' @param treefilename for phylogenetic based diversity analysis "*.tre" file 
+#' @param treefilename for phylogenetic based diversity analysis "*.tre" file
 #' @param type  "biom", "mothur", "simple" simple is for *.csv file.
 #' @param work_dir Working directory where input files are stored.
 #' @param out_dir Output directory where all outputs are to be stored.
 #' @param VariableA Main variable of interest.
-#' @param VariableB Secondary variable of interest.           
+#' @param VariableB Secondary variable of interest.
 #' @param UnConstOrd If unconstrained ordination to be plotted TRUE or FALSE.
 #' @param heatmap Heatmap or not option is TRUE or FALSE.
-#' @param filterCount Filter OTUs below this count number. 
+#' @param filterCount Filter OTUs below this count number.
 #' @param filterPrev Filter OTUs not detected in less than this percent of samples.
-#' @param col.palette = 'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups 
+#' @param col.palette = 'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups
 #'                      you have in VaraibleA.
 #' @param filterpseq TRUE or FALSE.
 #' @param samsize Number of reads to rarefy your data and save the rarefied phyobject.
@@ -23,17 +23,17 @@
 #' @param author Name of the author/investigator.
 #' @author Contact: Sudarshan Shetty \email{sudarshanshetty9@@gmail.com}
 #' @return A HTML report with graphs and data stats.
-#' @import tidyr 
-#' @import dplyr  
+#' @import tidyr
+#' @import dplyr
 #' @import microbiome
 #' @import phyloseq
 #' @import ggplot2
 #' @export
 #' @examples \dontrun{
-#'     # Example data
-#'     library(microbiomeutilities)
-#'     library(microbiome)
-#'     microbiome_pipeline(otufile = "my.biom",
+#'
+#' library(microbiomeutilities)
+#' library(microbiome)
+#' microbiome_pipeline(otufile = "my.biom",
 #'                    mapping = "mymap.csv",
 #'                    taxonomy = NULL,
 #'                    treefilename = "myTree.tre",
@@ -51,6 +51,7 @@
 #'                    samsize = NA,
 #'                    projectname = "Mock",
 #'                    author = "Sudarshan")
+#'                    }
 #' @keywords utilities
 
 microbiome_pipeline <- function(otufile,
@@ -100,7 +101,7 @@ microbiome_pipeline <- function(otufile,
                         author))
     cat("HTML report created in output directory\n")
   }
-  
-}                               
-                                    
+
+}
+
 

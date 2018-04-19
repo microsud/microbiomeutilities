@@ -10,6 +10,8 @@ plot_taxa_heatmap(x, subset.top, transformation, VariableA, heatcolors = NULL,
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object.}
 
+\item{subset.top}{either NA or number of Top OTUs to use for plotting.}
+
 \item{transformation}{either 'log10', 'clr','Z', 'compositional', or NA}
 
 \item{VariableA}{main variable of Interest.}
@@ -18,8 +20,6 @@ plot_taxa_heatmap(x, subset.top, transformation, VariableA, heatcolors = NULL,
 inferno}
 
 \item{...}{Arguments to be passed \code{\link{pheatmap}}.}
-
-\item{subset_otu}{either NA or number of Top OTUs to use for plotting.}
 }
 \value{
 A \code{\link{pheatmap}} plot object.
@@ -28,17 +28,17 @@ A \code{\link{pheatmap}} plot object.
 Plot heatmap using \code{\link{phyloseq-class}} object as input.
 }
 \examples{
-\dontrun{
-  # Example data
+
     library(microbiomeutilities)
     library(viridis)
     data("biogeogut")
     ps0 <- biogeogut
 
-    p <- plot_taxa_heatmap(ps, taxonomic.level = "Genus", subset.top = 10,
-    VariableA = "SampleType",
-    heatcolors = NA)
-          }
+    heat.sample <- plot_taxa_heatmap(ps0, subset.top = 20,
+                                VariableA = "SampleType",
+                                heatcolors =brewer.pal(100, "Blues"),
+                                transformation = "log10")
+
 }
 \author{
 Sudarshan A. Shetty (sudarshanshetty9@gmail.com)

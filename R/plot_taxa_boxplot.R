@@ -8,8 +8,7 @@
 #' @param color any of the palette supported by ggpubr/RColorBrewer packages or  user specified as c("red", "blue").
 #' @return A \code{\link{ggplot}} plot object.
 #' @export
-#' @examples \dontrun{
-#'   # Example data
+#' @examples
 #'     library(microbiomeutilities)
 #'     library(RColorBrewer)
 #'     data("biogeogut")
@@ -20,11 +19,11 @@
 #'     title = "Rel plot", color = "Set2")
 #'     print(pn)
 #'
-#'           }
 #' @keywords utilities
 
 plot_taxa_boxplot <- function(x, taxonomic.level, top.otu, VariableA, title, color = NULL){
 
+  Abundance <- NULL
   if (!is.null(x@phy_tree)){
 
     message("For plotting purpuses the phy_tree will be removed")
@@ -48,14 +47,32 @@ plot_taxa_boxplot <- function(x, taxonomic.level, top.otu, VariableA, title, col
   if (!taxonomic.level == "OTU") {
 
     x <- aggregate_taxa(x, taxonomic.level, top = top.otu)
+
   }
 
   x1 <- transform(x, "compositional")
-  x.df0 <- suppressWarnings(suppressMessages(phy_to_ldf(x1, transform.counts = NULL))) 
-  p <- ggboxplot(x.df0, x = taxonomic.level, y = "Abundance", fill = VariableA, palette = color)
-  p <- p + ylab("Relative Abundance") + ggtitle(title) + theme(axis.text.x = element_text(face="italic", angle = 90))
-  p <- ggpar(p, legend = "right")
+
+  x.df0 <- suppressWarnings(suppressMessages(phy_to_ldf(x1, transform.counts = NULL)))
+
+
+  p <- ggplot(x.df0, aes(x =x.df0[,taxonomic.level],
+                      y=Abundance,
+                      fill = x.df0[,VariableA]))
+
+  p <- p + geom_boxplot(position = position_dodge(1)) +
+    geom_point(position = position_dodge(width = 0.75),
+               aes(group = x.df0[, VariableA]))
+
+  p <- p + ggtitle(title) + theme_bw() +
+    theme(axis.text.x = element_text(face ="italic",
+                                     angle = 90))
+
+  p <- p + ylab("Relative abundance") + xlab(taxonomic.level) +
+    scale_fill_brewer(VariableA,
+                      palette = color)
+
   return(p)
+
 }
 
 

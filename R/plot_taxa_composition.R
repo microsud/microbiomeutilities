@@ -29,15 +29,15 @@
 #'     plot_taxa_composition(pseq, taxonomic.level = "Phylum")
 #'           }
 #' @keywords utilities
-plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, transform, otu.sort = NULL, palette = brewer.pal(12, "Paired"), x.label = "sample", 
-                               plot.type = "barplot", average_by, verbose = FALSE, mar = c(5, 12, 1, 
-                                                                               1), ...) 
+plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, transform, otu.sort = NULL, palette = brewer.pal(12, "Paired"), x.label = "sample",
+                               plot.type = "barplot", average_by, verbose = FALSE, mar = c(5, 12, 1,
+                                                                               1), ...)
 {
   Sample <- Abundance <- Taxon <- horiz <- value <- scales <- ID <- meta <- OTU <- taxic <- otu.df <- taxmat <- new.tax <- NULL
   if (!is.null(x@phy_tree)) {
     x@phy_tree = NULL
   }
-  
+
   taxic <- x@tax_table
   taxic <- as.data.frame.matrix(taxic)
   otu.df <- abundances(x)
@@ -47,7 +47,7 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
   new.tax <- tax_table(taxmat)
   tax_table(x) <- new.tax
   xorig <- x
-  
+
   # Merge the taxa at a higher taxonomic level
   if (!taxonomic.level == "OTU") {
     if (verbose) {
@@ -55,11 +55,11 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
     }
     x <- aggregate_taxa(x, taxonomic.level)
   }
-  
+
   if (verbose) {
     message("Check data transforms.")
   }
-  
+
   if (is.null(transform)) {
     x <- x
   } else if (transform == "Z-OTU") {
@@ -71,7 +71,7 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
   } else {
     x <- microbiome::transform(x, transform)
   }
-  
+
   abu <- abundances(x)
   group <- NULL
   if (!is.null(average_by)) {
@@ -90,7 +90,7 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
   if (is.null(sample.sort) || sample.sort == "none" || !is.null(average_by)) {
     sample.sort <- colnames(abu)
   }
-  else if (length(sample.sort) == 1 && sample.sort %in% names(sample_data(x)) && 
+  else if (length(sample.sort) == 1 && sample.sort %in% names(sample_data(x)) &&
            is.null(average_by)) {
     sample.sort <- rownames(sample_data(x))[order(sample_data(x)[[sample.sort]])]
   }
@@ -98,11 +98,11 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
     sample.sort <- sample.sort
   }
   else if (length(sample.sort) == 1 && sample.sort == "neatmap") {
-    sample.sort <- neatsort(x, method = "NMDS", distance = "bray", 
+    sample.sort <- neatsort(x, method = "NMDS", distance = "bray",
                             target = "sites", first = NULL)
   }
   else if (!sample.sort %in% names(sample_data(x))) {
-    warning(paste("The sample.sort argument", sample.sort, 
+    warning(paste("The sample.sort argument", sample.sort,
                   "is not included in sample_data(x). \n            Using original sample ordering."))
     sample.sort <- sample_names(x)
   }
@@ -119,7 +119,7 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
     otu.sort <- otu.sort
   }
   else if (length(otu.sort) == 1 && otu.sort == "neatmap") {
-    otu.sort <- neatsort(x, method = "NMDS", distance = "bray", 
+    otu.sort <- neatsort(x, method = "NMDS", distance = "bray",
                          target = "species", first = NULL)
   }
   if (verbose) {
@@ -129,19 +129,19 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
   names(dfm) <- c("OTU", "Sample", "Abundance")
   dfm$Sample <- factor(dfm$Sample, levels = sample.sort)
   dfm$OTU <- factor(dfm$OTU, levels = otu.sort)
-  
+
   colourCount = length(unique(dfm$OTU))  #define number of variable colors based on number of Family (change the level accordingly to phylum/class/order)
-  getPalette = colorRampPalette(palette)  
-  
+  getPalette = colorRampPalette(palette)
+
   if (x.label %in% colnames(sample_data(x)) & is.null(average_by)) {
     meta <- sample_data(x)
-    dfm$xlabel <- as.vector(unlist(meta[as.character(dfm$Sample), 
+    dfm$xlabel <- as.vector(unlist(meta[as.character(dfm$Sample),
                                         x.label]))
     if (is.factor(meta[, x.label])) {
       lev <- levels(meta[, x.label])
     }
     else {
-      lev <- unique(as.character(unname(unlist(meta[, 
+      lev <- unique(as.character(unname(unlist(meta[,
                                                     x.label]))))
     }
     dfm$xlabel <- factor(dfm$xlabel, levels = lev)
@@ -158,13 +158,13 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
     p <- p + geom_bar(position = "stack", stat = "identity")
     p <- p + scale_x_discrete(labels = dfm$xlabel, breaks = dfm$Sample)
     p <- p + ylab("Abundance") +  scale_fill_manual(taxonomic.level, values = getPalette(colourCount))
-    p <- p + theme(axis.text.x = element_text(angle = 90, 
+    p <- p + theme(axis.text.x = element_text(angle = 90,
                                               vjust = 0.5, hjust = 0))
     p <- p + guides(fill = guide_legend(reverse = FALSE))
   }
   else if (plot.type == "lineplot") {
     dfm <- dfm %>% arrange(OTU)
-    p <- ggplot(dfm, aes(x = Sample, y = Abundance, color = OTU, 
+    p <- ggplot(dfm, aes(x = Sample, y = Abundance, color = OTU,
                          group = OTU))
     p <- p + geom_point()
     p <- p + geom_line() + scale_color_brewer(guide = guide_legend(title = taxonomic.level))
@@ -173,11 +173,12 @@ plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, trans
       suppressMessages(p <- p + ylab("Relative abundance (%)") +  scale_color_manual(taxonomic.level, values = getPalette(colourCount)))
     }
     else {
-      p <- p + ylab("Abundance") 
+      p <- p + ylab("Abundance")
     }
-    p <- p + theme(axis.text.x = element_text(angle = 90, 
+    p <- p + theme(axis.text.x = element_text(angle = 90,
                                               vjust = 0.5, hjust = 0))
-    suppressMessages(p <- p + guides(fill = guide_legend(reverse = FALSE)) +  scale_color_manual(taxonomic.level, values = getPalette(colourCount)))
+    suppressMessages(p <- p + guides(fill = guide_legend(reverse = FALSE)) +
+                       scale_color_manual(taxonomic.level, values = getPalette(colourCount)))
   }
-  p + theme_bw()
+  p + theme_bw() + theme(axis.text.x = element_text(face ="italic", angle = 90))
 }

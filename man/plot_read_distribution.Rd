@@ -20,13 +20,12 @@ A \code{\link{ggplot}} plot object.
 Plots distribution of reads.
 }
 \examples{
-\dontrun{
-  # Example data
     library(microbiome)
     data(biogeogut)
     ps0 <- biogeogut
     p <- plot_read_distribution(ps0, groups='SampleType', plot.type= 'density')
-          }
+    print(p)
+
 }
 \author{
 Contact: Sudarshan Shetty \email{sudarshanshetty9@gmail.com}

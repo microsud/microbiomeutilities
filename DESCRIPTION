@@ -2,7 +2,9 @@ Package: microbiomeutilities
 Type: Package
 Title: microbiomeutilities: An R package with utility functions for the microbiome R package
 Version: 0.99.0
-Author: Sudarshan Shetty [aut, cre], Leo Lahti [aut]
+Authors@R: c(
+    person("Sudarshan", "Shetty", email = "sudarshan.shetty@wur.nl", role = c("aut", "cre")),
+    person("Leo", "Lahti", role = "aut"))
 Maintainer: The package maintainer <sudarshanshetty9@gmail.com>
 Description: This is a supporting tool for extending the functionality of both phyloseq and microbiome R packages.
 License: BSD_2_clause 

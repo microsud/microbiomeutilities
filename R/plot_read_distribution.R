@@ -8,13 +8,13 @@
 #' @return A \code{\link{ggplot}} plot object.
 #' @importFrom data.table data.table
 #' @export
-#' @examples \dontrun{
-#'   # Example data
+#' @examples
 #'     library(microbiome)
 #'     data(biogeogut)
 #'     ps0 <- biogeogut
 #'     p <- plot_read_distribution(ps0, groups='SampleType', plot.type= 'density')
-#'           }
+#'     print(p)
+#'
 #' @keywords utilities
 
 plot_read_distribution <- function(x, groups, plot.type = c("density",

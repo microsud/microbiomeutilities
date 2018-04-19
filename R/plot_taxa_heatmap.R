@@ -15,17 +15,18 @@
 #' @import viridis
 #' @export
 #' @author Sudarshan A. Shetty (sudarshanshetty9@gmail.com)
-#' @examples \dontrun{
-#'   # Example data
+#' @examples
+#'
 #'     library(microbiomeutilities)
 #'     library(viridis)
 #'     data("biogeogut")
 #'     ps0 <- biogeogut
 #'
-#'     p <- plot_taxa_heatmap(ps, taxonomic.level = "Genus", subset.top = 10,
-#'     VariableA = "SampleType",
-#'     heatcolors = NA)
-#'           }
+#'     heat.sample <- plot_taxa_heatmap(ps0, subset.top = 20,
+#'                                 VariableA = "SampleType",
+#'                                 heatcolors =brewer.pal(100, "Blues"),
+#'                                 transformation = "log10")
+#'
 #' @keywords utilities
 plot_taxa_heatmap <- function(x, subset.top, transformation,
                               VariableA, heatcolors = NULL, ...)

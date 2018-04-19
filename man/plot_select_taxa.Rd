@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_select_taxa.R
 \name{plot_select_taxa}
 \alias{plot_select_taxa}
-\title{plot_select_taxa plot selected OTUs of interest}
+\title{A boxplot for user specified list of taxa}
 \usage{
 plot_select_taxa(x, select.taxa, variableA, palette, plot.type)
 }
@@ -24,7 +24,7 @@ plot_select_taxa(x, select.taxa, variableA, palette, plot.type)
 User specifed OTUs are plotted.
 }
 \details{
-Useful for instances where user is interested only in some OTUs. For example OTUs 
+Useful for instances where user is interested only in some OTUs. For example OTUs
          reported to be significantly diferent.
 }
 \examples{
@@ -34,14 +34,14 @@ Useful for instances where user is interested only in some OTUs. For example OTU
     library(microbiomeUtilities)
     data("biogeogut")
     p0 <- biogeogut
-    
+
     select.taxa <- c("OTU-370251:Endozoicimonaceae", "OTU-311173:Helicobacteraceae")
-    
+
     p0.f <- format_to_besthit(p0)
-    p <- select_taxa_plot(ps2.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
-    
+    p <- select_taxa_plot(p0.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
+
     ggpar(p, yscale = "log10", ylab = "Abundance (log10)")
-    
+
           }
 }
 \keyword{utilities}
