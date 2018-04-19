@@ -1,5 +1,15 @@
 # Development stage 
 
+microbiomeutilities    
+==========  
+
+<br> 
+
+[![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)  
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=for-the-badge)](https://twitter.com/gutmicrobe)  
+
+<br>  
+
 **This package is in experimental stage and should be used with caution** 
 I will keep improving this with time and feedback.  
 
