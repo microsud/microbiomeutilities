@@ -36,6 +36,6 @@ Suggests:
     knitr,
     rmarkdown,	
     ape
-BugReports: https://github.com/microbiome/microbiome/issues
+BugReports: https://github.com/microsud/microbiomeutilities/issues
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
