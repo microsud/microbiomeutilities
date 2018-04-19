@@ -155,16 +155,18 @@ summarize_phyloseq(ps0)
 ### Library sizes (density plot)  
 
 Check the library sizes for each of the samples within the main variable. Do you think it is okay or there is difference in library sizes and will this affect you downstream statistical analysis?  
-```{r, qc-1, eval=FALSE}
+```{r, qc-1}
 
-SeqDepth = colSums(otu_table(ps0))
-sample_data(ps0)$SeqDepth = SeqDepth
+SeqDepth <- colSums(otu_table(ps0))
+
+sample_data(ps0)$SeqDepth <- SeqDepth
+
 meta.df <- meta(ps0)
 
-qc_plot1 <- ggplot(meta.df, aes(x = SeqDepth, group = meta.df[,VariableA], color = meta.df[,VariableA])) + 
-  geom_line(size = 1.5, stat = "density") +
-  xlab("Sequencing depth") + theme_bw()
+qc_plot1 <- plot_read_distribution(ps0, groups= VariableA, plot.type= 'density')
+
 print(qc_plot1)
+
 ggsave(paste0(out_dir,"/QC/ReadDistribution_density.pdf"))
 
 message("QC plots for Read Distribution stored in QC folder as ReadDistribution.pdf")
@@ -177,6 +179,11 @@ message("QC plots for Read Distribution stored in QC folder as ReadDistribution.
 ```{r, qc-3}
 
 message("Investigating library sizes")
+SeqDepth <- colSums(otu_table(ps0))
+
+sample_data(ps0)$SeqDepth <- SeqDepth
+
+meta.df <- meta(ps0)
 
 lib.hist <- ggplot(meta.df, aes(x = SeqDepth)) + geom_histogram() + 
   facet_wrap(~meta.df[,VariableA]) +
@@ -327,6 +334,57 @@ ggsave(paste0(out_dir,"/QC/Variance After filtering.pdf"))
 ```
 
 
+### Coefficient of variation (raw)  
+
+This is coefficient of variation for all OTU counts without filtering for min number of reads/OTU and prevalence.  
+
+```{r qc-CV1}
+
+
+cv_plot <- plot_taxa_cv(ps1, "hist")
+print(cv_plot)
+
+ggsave(paste0(out_dir, "/QC/Coefficient of variation before filtering.pdf"))
+
+message("QC plots for OTU variance stored in QC folder as Variance before filtering.pdf")
+
+```
+
+
+### Coefficient of variation (filtered)   
+
+This is coefficient of variation for all OTU counts after filtering for min number of reads/OTU and prevalence. 
+
+```{r qc-CV2}
+
+if (filterpseq == TRUE) {
+message(paste0("Filtering OTUs with less than ", filterCount, " counts"))
+message(paste0("in at least ", filterPrev*100, " % of the samples "))
+
+ps2 = filter_taxa(ps1, function(x) sum(x > filterCount) > (filterPrev * length(x)), TRUE)
+
+message("Using the filtered phyloseq object as ps_filtered.rds")
+
+message("Below is the content of filtered phyloseqobject (based on filterCount and filterPrev) stored as ps_filtered.rds")
+
+print(ps2) 
+
+cv_plot <- plot_taxa_cv(ps2, "hist")
+print(cv_plot)
+ggsave(paste0(out_dir,"/QC/Coefficient of variation After filtering.pdf"))
+
+} else 
+  {
+    
+    message("filterpseq was false. Did not filter and hence will not save the filtered phyloseq")
+    
+    ps2 <- ps1
+    
+}
+
+
+```
+
 ## Measuring the kurtosis  
 
 Kurtosis is essentially a measure of how much weight is at the tails of the distribution relative to the weight around the location.  
@@ -409,12 +467,14 @@ shapiro.test(adiv.meta$Simpson)
 shapiro.test(adiv.meta$InvSimpson)
 shapiro.test(adiv.meta$Fisher)
 
-alpha_div <- plot_richness(ps3, 
-                           color = VariableA, 
-                           shape = VariableB, 
-                           measures = c("Observed", "Chao1", "Shannon", "InvSimpson"))
+alpha_div <- plot_richness(ps3, x = VariableA,
+                           color = VariableB, 
+                           measures = c("Observed", 
+                                        "Chao1", 
+                                        "Shannon", 
+                                        "InvSimpson")) + geom_boxplot()
 
-alpha_div <- alpha_div + geom_point(size = 2) + ggtitle("Non phylogenetic diversity") + scale_color_brewer(palette = col.palette)
+alpha_div <- alpha_div + theme_bw() + geom_point(size = 2) + ggtitle("Non phylogenetic diversity") + scale_color_brewer(palette = col.palette) + rotate_x_text()
 
 print(alpha_div)
 ggsave(paste0(out_dir,"/AlphaDiversity/Non-phylogenetic_alpha_diversity.pdf"), 
@@ -491,7 +551,7 @@ Having a look at the phyloegnetic composition of you data is useful for many rea
 
 ```{r fig.height= 6, fig.width=14}
 
-ps3.com <- ps3 # create a new pseq object
+ps3.com <- ps1 # create a new pseq object
 # We need to set Palette
 taxic <- as.data.frame(ps3.com@tax_table)  # this will help in setting large color options
 
@@ -627,7 +687,7 @@ The counts are compositionally tranformed and then used for ordinations.
 
 ps3.rel <- microbiome::transform(ps3, "compositional")
 
-bc.pcoa <- ordinate(ps3.rel, method = "PCoA", distance = "bray")
+bc.pcoa <- phyloseq::ordinate(ps3.rel, method = "PCoA", distance = "bray")
 
 bc.pcoa.plot <- plot_ordination(ps3.rel, bc.pcoa, 
                                 type = "split", axes = 1:2,
@@ -736,35 +796,28 @@ message("Unweighted Unifrac distance gives negative values and standard anova an
 
 ## Heatmap  
 
-```{r heatmap}
+```{r heatmap, fig.height=9, fig.width=10}
+
 
 if (heatmap == TRUE) {
   
-  pseq.fam <- aggregate_taxa(ps3.com, "Family")
-  pseq.fam.rel <- transform(pseq.fam, "compositional")
-  ps3.rel.heatmap <- plot_composition(pseq.fam.rel, 
-                             sample.sort = VariableB, 
-                             otu.sort = NULL, 
-                             x.label = VariableA, 
-                             plot.type = "heatmap", 
-                             verbose = FALSE)
+heat.sample <- plot_taxa_heatmap(ps3, subset.top = 50,
+                                 VariableA = VariableA,
+                                 heatcolors =brewer.pal(9, "Blues"),
+                                 transformation = "compositional",
+                                 file = "./Others/Heatmap rel abun top 50 OTUs.tiff",
+                                 height = 9, width = 10)
+print(paste0("heatmap saved in ", out_dir))
 
-  ps3.rel.heatmap <- ps3.rel.heatmap + theme(legend.position = "bottom") + 
-    theme_bw() + theme(axis.text.x = element_text(angle = 90)) + 
-    ggtitle("Heatmap relative abundance") + 
-    theme(axis.text = element_text(face = "italic"))
-  
-  ps3.rel.heatmap <- ps3.rel.heatmap + 
-    scale_fill_distiller("Relative abundance", palette = "YlOrRd", trans = "reverse")
+# Duplicate for printing in the HTML file  
+heat.sample.dup <- plot_taxa_heatmap(ps3, subset.top = 50,
+                                 VariableA = VariableA,
+                                 heatcolors =brewer.pal(9, "Blues"),
+                                 transformation = "compositional")
 
-  print(ps3.rel.heatmap)
-  
+
 }
 
-ggsave(paste0(out_dir,"/Others/Heatmap rel abun tranformed Family.pdf"), 
-       plot = ps3.rel.heatmap,
-       height = 6,
-       width = 10)
 
 ```
 
