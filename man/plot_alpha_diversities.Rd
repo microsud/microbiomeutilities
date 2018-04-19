@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_alpha_diversities.R
 \name{plot_alpha_diversities}
 \alias{plot_alpha_diversities}
-\title{plot_alpha_diversities}
+\title{Creat a plot for alpha diversities calculated using the \code{\link{microbiome}} package}
 \usage{
 plot_alpha_diversities(x, type, index.val = "all", plot.type, variableA,
   palette)
@@ -27,26 +27,23 @@ plot_alpha_diversities(x, type, index.val = "all", plot.type, variableA,
 Utility plot function for diversity measures calcualted by \code{\link{microbiome}} package.
 }
 \details{
-Useful for instances where user is interested only in some OTUs. For example OTUs 
+Useful for instances where user is interested only in some OTUs. For example OTUs
          reported to be significantly diferent.
 }
 \examples{
-\dontrun{
-  # Example data
     library(microbiome)
-    library(microbiomeUtilities)
+    library(microbiomeutilities)
     data("biogeogut")
     p0 <- biogeogut
-    p <- plot_alpha_diversities(p0, 
-    type = "diversities", 
-    index.val = "all", 
-    plot.type = "stripchart", 
-    variableA = "SampleType", 
+    p <- plot_alpha_diversities(p0,
+    type = "diversities",
+    index.val = "all",
+    plot.type = "stripchart",
+    variableA = "SampleType",
     palette = "jco")
-    
+
     print(p)
-    
-          }
+
 }
 \keyword{<-}
 \keyword{c("shannon,}

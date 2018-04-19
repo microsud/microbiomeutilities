@@ -4,10 +4,12 @@
 \alias{plot_taxa_cv}
 \title{Coefficient of variations}
 \usage{
-plot_taxa_cv(x)
+plot_taxa_cv(x, plot.type)
 }
 \arguments{
-\item{x}{\code{\link{phyloseq-class}} object}
+\item{x}{\code{\link{phyloseq-class}} object.}
+
+\item{plot.type}{scatter or hist (histogram)}
 }
 \value{
 A \code{\link{ggplot}} plot object.
@@ -19,15 +21,12 @@ Plots CV for OTUs/ASVs.
 Check if there are spurious OTUs/ASVs.
 }
 \examples{
-\dontrun{
-  # Example data
     library(microbiome)
-    library(microbiomeUtilities)
+    library(microbiomeutilities)
     data("biogeogut")
     p0 <- biogeogut
-    ps.rel <- microbiome::transform(ps, "compositional")
-    p <- plot_taxa_cv(ps.rel)
+    p <- plot_taxa_cv(p0, plot.type = "hist")
     print(p)
-          }
+
 }
 \keyword{utilities}

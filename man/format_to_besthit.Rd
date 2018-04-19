@@ -4,10 +4,10 @@
 \alias{format_to_besthit}
 \title{Formatting the Phyloseq Object advanced}
 \usage{
-format_to_besthit(pobj)
+format_to_besthit(x)
 }
 \arguments{
-\item{pobj}{\code{\link{phyloseq-class}} object}
+\item{x}{\code{\link{phyloseq-class}} object}
 }
 \value{
 \code{\link{phyloseq-class}} object.
@@ -17,8 +17,8 @@ Format the phyloseq object to add the best taxonomy in phyloseq object (tax_tabl
 }
 \details{
 Most commonly it is observed that the taxonomy file has classification until a given taxonomic level.
-         row.names for both tax_table and otu_table have best hit, until maximun genus level (species classification with short amplicons is a myth)is made available. This code is a 
-         slight modification of the code from  \pkg{ampvis} \code{\link{phyloseq-class}}. 
+         row.names for both tax_table and otu_table have best hit, until maximun genus level (species classification with short amplicons is a myth)is made available. This code is a
+         slight modification of the code from  \pkg{ampvis} \code{\link{phyloseq-class}}.
          Here, we directly take the phyloseq object as input and make the necessary formatting.
 }
 \examples{
@@ -26,6 +26,7 @@ Most commonly it is observed that the taxonomy file has classification until a g
   # Example data
     library(microbiome)
     library(microbiomeUtilities)
+    library(tibble)
     data("biogeogut")
     p0 <- biogeogut
     p0.f <- format_to_besthit(p0)

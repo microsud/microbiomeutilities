@@ -24,7 +24,7 @@ Faster alternative to psmelt function from \code{\link{phyloseq-class}} object.
     data("biogeogut")
     pseq <- biogeogut
     pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
-    
+
           }
 }
 \keyword{utilities}

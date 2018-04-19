@@ -16,14 +16,11 @@ table with information on percent OTUs classified.
 Summarize the percent taxa classification for \code{\link{phyloseq-class}}.
 }
 \examples{
-\dontrun{
-  # Example data
     library(microbiomeutilities)
     data("biogeogut")
     pseq <- biogeogut
     percent_classified(pseq)
-    
-          }
+
 }
 \author{
 Contact: Sudarshan A. Shetty \email{sudarshanshetty9@gmail.com}

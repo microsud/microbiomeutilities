@@ -23,6 +23,7 @@ You can download few example datasets in phyloseq format from Duvallet et al 201
   # Example data
     library(microbiome)
     library(microbiomeUtilities)
+    list_microbiome_data()
     ps1 <- get_microbiome_data(studynumber = 1)
     # this will download the first study listed in list_microbiome_data() function
     print(p)

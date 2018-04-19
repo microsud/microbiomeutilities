@@ -1,10 +1,11 @@
 #' @title Convert phyloseq object to long data format
-#' @description Faster alternative to psmelt function from \code{\link{phyloseq-class}} object. 
+#' @description Faster alternative to psmelt function from \code{\link{phyloseq-class}} object.
 #' @param x \code{\link{phyloseq-class}} object
 #' @param transform.counts Data transform to be used in plotting (but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample', 'log10' and 'compositional'. See the \code{\link{transform}} function.
 #' @return A data frame in long format with appropriate transfomation if requested.
-#' @import tidyr 
-#' @import dplyr  
+#' @import tidyr
+#' @import dplyr
+#' @importFrom tibble rownames_to_column
 #' @import microbiome
 #' @export
 #' @examples \dontrun{
@@ -13,12 +14,12 @@
 #'     data("biogeogut")
 #'     pseq <- biogeogut
 #'     pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
-#'     
+#'
 #'           }
 #' @keywords utilities
 phy_to_ldf = function(x, transform.counts)
 {
-  
+
   if (is.null(transform.counts)) {
     x <- x
   } else if (transform.counts == "log10") {
@@ -32,15 +33,15 @@ phy_to_ldf = function(x, transform.counts)
   } else {
     stop("Please provide appropriate transformation")
   }
-  
+
   message("An additonal column Sam_rep with sample names is created for reference purpose")
   meta_df = data.frame(sample_data(x))
   meta_df$Sam_rep <- rownames(meta_df)
-  tax_df = data.frame(tax_table(x)) %>% 
+  tax_df = data.frame(tax_table(x)) %>%
     rownames_to_column("OTUID")
-  otu_df = data.frame(otu_table(x), 
+  otu_df = data.frame(otu_table(x),
                       check.names = FALSE) %>% rownames_to_column("OTUID")
-  suppressWarnings(suppressMessages(otu_df %>% left_join(tax_df) %>% gather_("Sam_rep", 
-                                           "Abundance", setdiff(colnames(otu_df), 
+  suppressWarnings(suppressMessages(otu_df %>% left_join(tax_df) %>% gather_("Sam_rep",
+                                           "Abundance", setdiff(colnames(otu_df),
                                                                 "OTUID")) %>% left_join(meta_df)))
 }

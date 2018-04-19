@@ -1,26 +1,25 @@
 #' @title Coefficient of variations
 #' @description Plots CV for OTUs/ASVs.
 #' @details Check if there are spurious OTUs/ASVs.
-#' @param x \code{\link{phyloseq-class}} object
+#' @param x \code{\link{phyloseq-class}} object.
+#' @param plot.type scatter or hist (histogram)
 #' @return A \code{\link{ggplot}} plot object.
 #' @import tidyr
 #' @import dplyr
 #' @import microbiome
 #' @import phyloseq
 #' @export
-#' @examples \dontrun{
-#'   # Example data
+#' @examples
 #'     library(microbiome)
-#'     library(microbiomeUtilities)
+#'     library(microbiomeutilities)
 #'     data("biogeogut")
 #'     p0 <- biogeogut
-#'     ps.rel <- microbiome::transform(ps, "compositional")
-#'     p <- plot_taxa_cv(ps.rel)
+#'     p <- plot_taxa_cv(p0, plot.type = "hist")
 #'     print(p)
-#'           }
+#'
 #' @keywords utilities
 #'
-plot_taxa_cv <- function(x){
+plot_taxa_cv <- function(x, plot.type){
 
   cal_cv <- function(x) abs(sd(x)/mean(x))
   x.mean.rel <- apply(otu_table(x), 1, function(x) mean(x))
@@ -39,10 +38,18 @@ plot_taxa_cv <- function(x){
   h <- hist(tax.x.df$MeanAbun)
 
   #head(tax.ps.df)
+  if(plot.type == "scatter")
   cvplot <- ggplot(tax.x.df,
                    aes(MeanAbun, CV),
                    label = NA) + geom_point(aes(color = Phylum)) + scale_x_continuous(breaks= h$breaks) +
-    theme_bw() + xlab("Mean Relative Abundance")
+    theme_bw() + xlab("Abundance")
+
+  else{
+
+    cvplot <- ggplot(tax.x.df, aes(CV)) + geom_histogram() + theme_bw()
+  }
+
+
     return(cvplot)
 }
 

@@ -13,13 +13,9 @@ Data are used from Duvallet et al 2017 https://www.nature.com/articles/s41467-01
 Data for practice, also an example for importing mothur files from Baxtrer et al 2016. The source file for these data is the microbiomedatarepo https://github.com/microsud/microbiomedatarepo.
 }
 \examples{
-\dontrun{
-  # Example data
-    library(microbiome)
-    library(microbiomeUtilities)
+    library(microbiomeutilities)
 
     list_microbiome_data()
 
-          }
 }
 \keyword{utilities}

@@ -2,20 +2,17 @@
 #' @description Data are used from Duvallet et al 2017 https://www.nature.com/articles/s41467-017-01973-8.pdf?origin=ppub.
 #' @details Data for practice, also an example for importing mothur files from Baxtrer et al 2016. The source file for these data is the microbiomedatarepo https://github.com/microsud/microbiomedatarepo.
 #' @export
-#' @examples \dontrun{
-#'   # Example data
-#'     library(microbiome)
-#'     library(microbiomeUtilities)
+#' @examples
+#'     library(microbiomeutilities)
 #'
 #'     list_microbiome_data()
 #'
-#'           }
 #' @keywords utilities
 #'
 
 list_microbiome_data <- function(){
 
-  message("Data from Duvallet et al 2017 https://www.nature.com/articles/s41467-017-01973-8.pdf?origin=ppub")
+  print("data from Duvallet et al 2017 https://www.nature.com/articles/s41467-017-01973-8.pdf?origin=ppub")
   message("1] Schubert et al., CDI 336 samples [cdi_schubert.rds]")
   message("2] Youngster et al., CDI 23 samples [cdi_youngster.rds]")
   message("3] Goodrich et al., OB 613 samples [ob_goodrich.rds]")

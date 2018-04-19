@@ -26,8 +26,6 @@ A \code{\link{ggplot}} plot object.
 Plot taxon abundance for samples.
 }
 \examples{
-\dontrun{
-  # Example data
     library(microbiomeutilities)
     library(RColorBrewer)
     data("biogeogut")
@@ -38,6 +36,5 @@ Plot taxon abundance for samples.
     title = "Rel plot", color = "Set2")
     print(pn)
 
-          }
 }
 \keyword{utilities}

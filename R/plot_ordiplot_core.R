@@ -1,5 +1,5 @@
-#' @title Plotting core microibota on ordinations
-#' @description This function will plot the ordaination alsong with highligthing the core microbes
+#' @title Plotting core microbiota on ordinations
+#' @description This function will plot the ordaination along with highligthing the core microbes
 #' on the species ordination.
 #' @details Most commonly it is observed that the taxonomy file has classification until a given
 #'          taxonomic level.
@@ -28,7 +28,7 @@
 #'     data("biogeogut")
 #'     p0 <- biogeogut
 #'     ps1 <- format_phyloseq(ps0)
-#'     px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE, 
+#'     px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE,
 #'     prevalences = prev.thres,
 #'     detections = det.thres, color.opt = "SampleType", shape = NULL)
 #'           }
