@@ -4,7 +4,6 @@ cache: packages
 warnings_are_errors: false
 r_packages:
 - ade4
-- bayesm
 - Cairo
 - dplyr
 - energy
@@ -13,9 +12,7 @@ r_packages:
 - GGally
 - ggplot2
 - ggrepel
-- hrbrthemes
 - Hmisc
-- intergraph
 - knitr
 - lme4
 - maptree
@@ -23,9 +20,7 @@ r_packages:
 - Matrix
 - memoise
 - minet
-- mixOmics
 - moments
-- network
 - qvalue
 - reshape2
 - rmarkdown
@@ -34,17 +29,14 @@ r_packages:
 - scales
 - survival
 - tgp
-- Rtsne
 - tidyr
 - vegan
-- WGCNA
 - ggpubr
 - tidyverse
 - pheatmap
 - data.table
 bioc_packages:
 - BiocInstaller
-- DESeq2
 - phyloseq
 r_github_packages:
 - cran/RUnit
