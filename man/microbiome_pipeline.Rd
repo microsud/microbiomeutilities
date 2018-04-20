@@ -15,7 +15,7 @@ microbiome_pipeline(otufile, mapping, taxonomy, treefilename, type, work_dir,
 
 \item{taxonomy}{NULL or csv fomatted file.}
 
-\item{treefilename}{for phylogenetic based diversity analysis "*.tre" file}
+\item{treefilename}{For phylogenetic based diversity analysis "*.tre" file}
 
 \item{type}{"biom", "mothur", "simple" simple is for *.csv file.}
 
@@ -35,7 +35,7 @@ microbiome_pipeline(otufile, mapping, taxonomy, treefilename, type, work_dir,
 
 \item{filterPrev}{Filter OTUs not detected in less than this percent of samples.}
 
-\item{col.palette}{= 'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups
+\item{col.palette}{'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups
 you have in VaraibleA.}
 
 \item{filterpseq}{TRUE or FALSE.}
@@ -47,7 +47,7 @@ you have in VaraibleA.}
 \item{author}{Name of the author/investigator.}
 }
 \value{
-A HTML report with graphs and data stats.
+A HTML report with graphs and data stats which can serve as guide for actual analysis.
 }
 \description{
 Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and

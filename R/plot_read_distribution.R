@@ -2,7 +2,7 @@
 #' @description Plots distribution of reads.
 #' @param x \code{\link{phyloseq-class}} object
 #' @param groups Metadata variable to check for groups based sequencing effort.
-#' @param plot.type either density or histogram plot
+#' @param plot.type Either density or histogram plot
 #
 #' @author Contact: Sudarshan Shetty \email{sudarshanshetty9@@gmail.com}
 #' @return A \code{\link{ggplot}} plot object.

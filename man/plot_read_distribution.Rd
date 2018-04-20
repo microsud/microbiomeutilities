@@ -11,7 +11,7 @@ plot_read_distribution(x, groups, plot.type = c("density", "histogram"))
 
 \item{groups}{Metadata variable to check for groups based sequencing effort.}
 
-\item{plot.type}{either density or histogram plot}
+\item{plot.type}{Either density or histogram plot}
 }
 \value{
 A \code{\link{ggplot}} plot object.
