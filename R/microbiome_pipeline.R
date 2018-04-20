@@ -5,7 +5,7 @@
 #' @param otufile biom object, otu_table in csv format or mothur shared files.
 #' @param mapping Metadata variable to check for groups based sequencing effort csv format.
 #' @param taxonomy NULL or csv fomatted file.
-#' @param treefilename for phylogenetic based diversity analysis "*.tre" file
+#' @param treefilename For phylogenetic based diversity analysis "*.tre" file
 #' @param type  "biom", "mothur", "simple" simple is for *.csv file.
 #' @param work_dir Working directory where input files are stored.
 #' @param out_dir Output directory where all outputs are to be stored.
@@ -15,14 +15,14 @@
 #' @param heatmap Heatmap or not option is TRUE or FALSE.
 #' @param filterCount Filter OTUs below this count number.
 #' @param filterPrev Filter OTUs not detected in less than this percent of samples.
-#' @param col.palette = 'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups
+#' @param col.palette 'Spectral', 'Set2', 'Paired' use any of the RColorbrewer palette depending on number of groups
 #'                      you have in VaraibleA.
 #' @param filterpseq TRUE or FALSE.
 #' @param samsize Number of reads to rarefy your data and save the rarefied phyobject.
 #' @param projectname Name of the project.
 #' @param author Name of the author/investigator.
 #' @author Contact: Sudarshan Shetty \email{sudarshanshetty9@@gmail.com}
-#' @return A HTML report with graphs and data stats.
+#' @return A HTML report with graphs and data stats which can serve as guide for actual analysis.
 #' @import tidyr
 #' @import dplyr
 #' @import microbiome

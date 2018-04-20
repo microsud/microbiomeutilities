@@ -18,7 +18,7 @@ plot_alpha_diversities(x, type, index.val = "all", plot.type, variableA,
 
 \item{variableA}{Variable of interested to be checked. This will also be used to color the plot}
 
-\item{palette}{Any of the RColorBrewer plettes.}
+\item{palette}{Any of the \code{\link{RColorBrewer}} plettes.}
 }
 \value{
 \code{\link{ggplot}} object. This can be further modified using ggpubr.
@@ -27,8 +27,8 @@ plot_alpha_diversities(x, type, index.val = "all", plot.type, variableA,
 Utility plot function for diversity measures calcualted by \code{\link{microbiome}} package.
 }
 \details{
-Useful for instances where user is interested only in some OTUs. For example OTUs
-         reported to be significantly diferent.
+Uses the \code{\link{microbiome}} package global function to calcualte diversities and then returns
+a plot.
 }
 \examples{
     library(microbiome)

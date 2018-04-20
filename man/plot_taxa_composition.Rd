@@ -26,17 +26,17 @@ plot_taxa_composition(x, sample.sort = NULL, taxonomic.level, transform,
 
 \item{otu.sort}{Order taxa. Same options as for the sample.sort argument but instead of metadata, taxonomic table is used. Also possible to sort by 'abundance'.}
 
-\item{palette}{brewer.pal(12, "Paired") the number and palette has to be specified \code{\link{RColorBrewer}}}
+\item{palette}{The number and palette \code{\link{RColorBrewer}} has to be specified e.g brewer.pal(12, "Paired").}
 
 \item{x.label}{Specify how to label the x axis. This should be one of the variables in sample_variables(x).}
 
-\item{plot.type}{Plot type: 'barplot' or 'lineplot'}
+\item{plot.type}{Plot type: 'barplot' or 'lineplot'.}
 
 \item{average_by}{Variable to group.}
 
-\item{verbose}{verbose}
+\item{verbose}{verbose.}
 
-\item{mar}{Figure margins}
+\item{mar}{Figure margins.}
 
 \item{...}{Arguments to be passed (for \code{\link{neatsort}} function)}
 }
@@ -44,7 +44,7 @@ plot_taxa_composition(x, sample.sort = NULL, taxonomic.level, transform,
 A \code{\link{ggplot}} plot object.
 }
 \description{
-Plot taxon abundance for samples.
+Plot taxon abundance for samples. It is a legacy function from \code{\link{microbiome}}.
 }
 \examples{
 \dontrun{

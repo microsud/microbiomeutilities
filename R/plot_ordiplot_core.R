@@ -1,13 +1,7 @@
 #' @title Plotting core microbiota on ordinations
 #' @description This function will plot the ordaination along with highligthing the core microbes
 #' on the species ordination.
-#' @details Most commonly it is observed that the taxonomy file has classification until a given
-#'          taxonomic level.
-#'          Hence, to avoid loss of OTU information while using the function tax_glom() for merging at a specific taxonomic level.
-#'          we will fill the empty cells with the maximum classification available along with the
-#'          OTU number. This code is a slight modification.
-#'          the code from  \pkg{ampvis} \code{\link{phyloseq-class}}. Here, we directly take the
-#'          phyloseq object as input and make the necessary formatting.
+#' @details This function is useful for visualizing core taxa in a 2D ordination plot.
 #' @param x \code{\link{phyloseq-class}} object
 #' @param ordiObject Output of ordinate from package phyloseq. Only NMDS and Bray supported.
 #' @param coreplot TRUE or FALSE for core heatmap from microbiome package.

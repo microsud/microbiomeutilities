@@ -1,5 +1,5 @@
 #' @title Taxonomic Composition Plot
-#' @description Plot taxon abundance for samples.
+#' @description Plot taxon abundance for samples. It is a legacy function from \code{\link{microbiome}}.
 #' @param x \code{\link{phyloseq-class}} object
 #' @param taxonomic.level Merge the OTUs (for phyloseq object) into a higher taxonomic level. This has to be one from colnames(tax_table(x)).
 #' @param sample.sort Order samples. Various criteria are available:
@@ -11,12 +11,12 @@
 #'   }
 #' @param otu.sort Order taxa. Same options as for the sample.sort argument but instead of metadata, taxonomic table is used. Also possible to sort by 'abundance'.
 #' @param x.label Specify how to label the x axis. This should be one of the variables in sample_variables(x).
-#' @param plot.type Plot type: 'barplot' or 'lineplot'
-#' @param verbose verbose
+#' @param plot.type Plot type: 'barplot' or 'lineplot'.
+#' @param verbose verbose.
 #' @param transform Data transform to be used in plotting (but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample', 'log10' and 'compositional'. See the \code{\link{transform}} function.
-#' @param mar Figure margins
+#' @param mar Figure margins.
 #' @param average_by Variable to group.
-#' @param palette brewer.pal(12, "Paired") the number and palette has to be specified \code{\link{RColorBrewer}}
+#' @param palette The number and palette \code{\link{RColorBrewer}} has to be specified e.g brewer.pal(12, "Paired").
 #' @param ... Arguments to be passed (for \code{\link{neatsort}} function)
 #' @return A \code{\link{ggplot}} plot object.
 #' @export

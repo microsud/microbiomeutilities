@@ -15,7 +15,7 @@ phy_to_ldf(x, transform.counts)
 A data frame in long format with appropriate transfomation if requested.
 }
 \description{
-Faster alternative to psmelt function from \code{\link{phyloseq-class}} object.
+An alternative to psmelt function from \code{\link{phyloseq-class}} object.
 }
 \examples{
 \dontrun{
