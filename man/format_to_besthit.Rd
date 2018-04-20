@@ -2,7 +2,7 @@
 % Please edit documentation in R/format_to_besthit.R
 \name{format_to_besthit}
 \alias{format_to_besthit}
-\title{Formatting the Phyloseq Object advanced}
+\title{Formatting the \code{\link{phyloseq-class}} Object advanced}
 \usage{
 format_to_besthit(x)
 }

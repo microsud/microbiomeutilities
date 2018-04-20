@@ -1,4 +1,4 @@
-#' @title Heatmap using phyloseq and pheatmap
+#' @title Heatmap using \code{\link{phyloseq-class}} and \code{\link{pheatmap}}
 #' @description Plot heatmap using \code{\link{phyloseq-class}} object as input.
 #' @param x \code{\link{phyloseq-class}} object.
 #' @param subset.top either NA or number of Top OTUs to use for plotting.

@@ -1,4 +1,4 @@
-#' @title Summarize the percent taxa classification for phyloseq
+#' @title Summarize the percent taxa classification for \code{\link{phyloseq-class}}
 #' @description Summarize the percent taxa classification for \code{\link{phyloseq-class}}.
 #' @param x \code{\link{phyloseq-class}} object
 #' @return table with information on percent OTUs classified.
@@ -48,8 +48,8 @@ percent_classified <- function(x)
 
   ta <- as.data.frame.matrix(tax_table(x))
 
-  message("Only patterns such as [g__] or similar is expected. [g__<empty>] or similar not considered\n
-          please convert for eg. g__unclassified to uniform [g__]")
+  message("Only patterns such as [g__] or similar is expected. [g__<empty>] or [g__unclassified] not considered\n
+          please convert for eg. g__unclassified to uniform [g__] or NAs")
 
   tax_table(x)[is.na(tax_table(x)[,1])] <- "k__"
   tax_table(x)[is.na(tax_table(x)[,2])] <- "p__"

@@ -13,21 +13,16 @@
 #' @import microbiome
 #' @import RColorBrewer
 #' @export
-#' @examples \dontrun{
-#'   # Example data
+#' @examples
 #'     library(microbiome)
-#'     library(microbiomeUtilities)
+#'     library(microbiomeutilities)
 #'     data("biogeogut")
 #'     p0 <- biogeogut
-#'
-#'     select.taxa <- c("OTU-370251:Endozoicimonaceae", "OTU-311173:Helicobacteraceae")
-#'
 #'     p0.f <- format_to_besthit(p0)
-#'     p <- select_taxa_plot(p0.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
+#'     select.taxa <- c("OTU-4431292:Oscillospira", "OTU-661266:Blautia")
+#'     p <- plot_select_taxa(p0.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
+#'     print(p)
 #'
-#'     ggpar(p, yscale = "log10", ylab = "Abundance (log10)")
-#'
-#'           }
 #' @keywords utilities
 #'
 
@@ -35,7 +30,7 @@ plot_select_taxa <- function(x, select.taxa, variableA, palette, plot.type){
 
   x.rel <- x.prun <- x.df <- p.box <- p.vio <- p.strp <- NULL
 
-  x.rel <- transform(x, "compositional")
+  x.rel <- microbiome::transform(x, "compositional")
 
   x.prun <- prune_taxa(select.taxa, x.rel)
 

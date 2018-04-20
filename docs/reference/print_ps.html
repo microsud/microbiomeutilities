@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Heatmap using <code>phyloseq-class</code> and <code>pheatmap</code> — plot_taxa_heatmap • microbiomeutilities</title>
+<title>Overview of <code>phyloseq-class</code> — print_ps • microbiomeutilities</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,9 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-<meta property="og:title" content="Heatmap using <code>phyloseq-class</code> and <code>pheatmap</code> — plot_taxa_heatmap" />
+<meta property="og:title" content="Overview of <code>phyloseq-class</code> — print_ps" />
 
-<meta property="og:description" content="Plot heatmap using phyloseq-class object as input." />
+<meta property="og:description" content="Prints an overview phyloseq-class." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -91,67 +91,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Heatmap using <code>phyloseq-class</code> and <code>pheatmap</code></h1>
+    <h1>Overview of <code>phyloseq-class</code></h1>
     
-    <div class="hidden name"><code>plot_taxa_heatmap.Rd</code></div>
+    <div class="hidden name"><code>print_ps.Rd</code></div>
     </div>
 
     
-    <p>Plot heatmap using <code>phyloseq-class</code> object as input.</p>
+    <p>Prints an overview <code>phyloseq-class</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>plot_taxa_heatmap</span>(<span class='no'>x</span>, <span class='no'>subset.top</span>, <span class='no'>transformation</span>, <span class='no'>VariableA</span>, <span class='kw'>heatcolors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>print_ps</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>phyloseq-class</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>subset.top</th>
-      <td><p>either NA or number of Top OTUs to use for plotting.</p></td>
-    </tr>
-    <tr>
-      <th>transformation</th>
-      <td><p>either 'log10', 'clr','Z', 'compositional', or NA</p></td>
-    </tr>
-    <tr>
-      <th>VariableA</th>
-      <td><p>main variable of Interest.</p></td>
-    </tr>
-    <tr>
-      <th>heatcolors</th>
-      <td><p>is the option for colors in <code>pheatmap</code>. Default is to use viridis
-inferno</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments to be passed <code>pheatmap</code>.</p></td>
+      <td><p><code>phyloseq-class</code> object</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>pheatmap</code> plot object.</p>
+    <p>Prints information about the <code>phyloseq-class</code> object.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-    <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
-    <span class='fu'>library</span>(<span class='no'>viridis</span>)
-    <span class='fu'>library</span>(<span class='no'>RColorBrewer</span>)
+    <pre class="examples"><div class='input'>    <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
-    <span class='no'>ps0</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
-
-    <span class='no'>heat.sample</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_taxa_heatmap</span>(<span class='no'>ps0</span>, <span class='kw'>subset.top</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-                                <span class='kw'>VariableA</span> <span class='kw'>=</span> <span class='st'>"SampleType"</span>,
-                                <span class='kw'>heatcolors</span> <span class='kw'>=</span><span class='fu'><a href='http://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer'>brewer.pal</a></span>(<span class='fl'>100</span>, <span class='st'>"Blues"</span>),
-                                <span class='kw'>transformation</span> <span class='kw'>=</span> <span class='st'>"log10"</span>)</div><div class='output co'>#&gt; <span class='message'>Top 20 OTUs selected </span></div><div class='output co'>#&gt; <span class='message'>log10, if zeros in data then log10(1+x) will be used</span></div><div class='output co'>#&gt; <span class='message'>First top taxa were selected and </span>
-#&gt; <span class='message'>then abundances tranformed to log10(1+X)</span></div><div class='output co'>#&gt; <span class='warning'>Warning: OTU table contains zeroes. Using log10(1 + x) transform.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: n too large, allowed maximum for palette Blues is 9</span>
-#&gt; <span class='warning'>Returning the palette you asked for with that many colors</span></div><div class='img'><img src='plot_taxa_heatmap-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <span class='no'>pseq</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
+    <span class='fu'>print_ps</span>(<span class='no'>pseq</span>)</div><div class='output co'>#&gt; <span class='message'>object is phyloseq</span></div><div class='output co'>#&gt; <span class='message'>Compositional = No</span></div><div class='output co'>#&gt; <span class='message'>ntaxa = 19063</span></div><div class='output co'>#&gt; <span class='message'>nsamples = 14</span></div><div class='output co'>#&gt; <span class='message'>nsamplesvariables = 6</span></div><div class='output co'>#&gt; <span class='message'>nranks = 7</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -166,7 +135,7 @@ inferno</p></td>
 
     <h2>Author</h2>
     
-Sudarshan A. Shetty (sudarshanshetty9@gmail.com)
+Contact: Sudarshan A. Shetty <a href='mailto:sudarshanshetty9@gmail.com'>sudarshanshetty9@gmail.com</a>
 
   </div>
 </div>
