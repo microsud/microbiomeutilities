@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_taxa_heatmap.R
 \name{plot_taxa_heatmap}
 \alias{plot_taxa_heatmap}
-\title{Heatmap using phyloseq and pheatmap}
+\title{Heatmap using \code{\link{phyloseq-class}} and \code{\link{pheatmap}}}
 \usage{
 plot_taxa_heatmap(x, subset.top, transformation, VariableA, heatcolors = NULL,
   ...)

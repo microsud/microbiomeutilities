@@ -208,9 +208,9 @@ summarize_phyloseq(ps0)
 Check the library sizes for each of the samples within the main variable. Do you think it is okay or there is difference in library sizes and will this affect you downstream statistical analysis?  
 ```{r, qc-1}
 
-qc_plot1 <- plot_read_distribution(ps0, groups = VariableB, 
+qc_plot1 <- plot_ReadDistribution(ps0, groups = VariableB, 
     plot.type = "histogram")
-qc_plot1
+
 ggsave("./QC/ReadDistribution.pdf")
 
 message("QC plots for ReadDistribution stored in QC folder as ReadDistribution.pdf")

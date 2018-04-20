@@ -35,7 +35,8 @@ plot_taxa_boxplot <- function(x, taxonomic.level, top.otu, VariableA, title, col
   }
 
   taxic <- as.data.frame(x@tax_table);
-  otudf <- as.data.frame(otu_table(x));
+  # using abundances function from microbiome as sometime otu_table can have taxa_are_rows FALSE in phyloseq
+  otudf <- as.data.frame(abundances(x));
   taxic$OTU <- row.names(otudf);
   taxmat <- as.matrix(taxic);
   new.tax <- tax_table(taxmat);

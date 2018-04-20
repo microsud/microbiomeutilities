@@ -1,4 +1,4 @@
-#' @title Formatting the Phyloseq Object advanced
+#' @title Formatting the \code{\link{phyloseq-class}} Object advanced
 #' @description Format the phyloseq object to add the best taxonomy in phyloseq object (tax_table and otu_table).
 #' @details Most commonly it is observed that the taxonomy file has classification until a given taxonomic level.
 #'          row.names for both tax_table and otu_table have best hit, until maximun genus level (species classification with short amplicons is a myth)is made available. This code is a

@@ -2,7 +2,7 @@
 % Please edit documentation in R/percent_classified.R
 \name{percent_classified}
 \alias{percent_classified}
-\title{Summarize the percent taxa classification for phyloseq}
+\title{Summarize the percent taxa classification for \code{\link{phyloseq-class}}}
 \usage{
 percent_classified(x)
 }

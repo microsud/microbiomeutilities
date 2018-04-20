@@ -70,12 +70,8 @@
 
     
     
-<div id="vignette-info" class="section level2">
-<h2 class="hasAnchor">
-<a href="#vignette-info" class="anchor"></a>Vignette Info</h2>
-<p>This package is in experimental stage and should be used only for testing/trial purposes. I will keep improving this with time and feedback.<br>
-This is mainly a wrapper tool R package. Apart for some simple scripts for data visualization, this package has a single function called <code>microbiome_pipeline</code> for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a HTML report for convenient investigating of the data.</p>
-</div>
+<p><strong>This package is in experimental stage and should be used only for testing/trial purposes. I will keep improving this with time and feedback.</strong></p>
+<p>This is mainly a wrapper tool R package. Apart for some simple scripts for data visualization, this package has a single function called <code>microbiome_pipeline</code> for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a HTML report for convenient investigating of the data.</p>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
@@ -232,6 +228,7 @@ ps0 &lt;-<span class="st"> </span>biogeogut
 <p>Some have only g__ of s__ information.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 ps0.f &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_phyloseq.html">format_phyloseq</a></span>(ps0)
+<span class="co">#&gt; This function will change Kingdom to Domain by default in taxonomy</span>
 <span class="co">#&gt; Warning: package 'bindrcpp' was built under R version 3.4.4</span>
 
 <span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f)))</code></pre></div>
@@ -404,9 +401,9 @@ ps0.f2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form
 <p>This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or similar is expected. [g__<empty>] or similar not considered pease convert for eg. g__unclassified to uniform [g__].</empty></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw"><a href="../reference/percent_classified.html">percent_classified</a></span>(ps0)
-<span class="co">#&gt; Only patterns such as [g__] or similar is expected. [g__&lt;empty&gt;] or similar not considered</span>
+<span class="co">#&gt; Only patterns such as [g__] or similar is expected. [g__&lt;empty&gt;] or [g__unclassified] not considered</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;           please convert for eg. g__unclassified to uniform [g__]</span>
+<span class="co">#&gt;           please convert for eg. g__unclassified to uniform [g__] or NAs</span>
 <span class="co">#&gt;                Percent_classified</span>
 <span class="co">#&gt; Domain.Kingdom          99.9948 %</span>
 <span class="co">#&gt; Phylum                  99.9895 %</span>
@@ -664,10 +661,9 @@ otu &lt;-<span class="st"> </span><span class="kw">abundances</span>(psf2.rel)
 meta &lt;-<span class="st"> </span><span class="kw">meta</span>(psf2.rel)
 
 <span class="kw">library</span>(vegan)
-<span class="co">#&gt; Warning: package 'vegan' was built under R version 3.4.4</span>
 <span class="co">#&gt; Loading required package: permute</span>
 <span class="co">#&gt; Loading required package: lattice</span>
-<span class="co">#&gt; This is vegan 2.5-1</span>
+<span class="co">#&gt; This is vegan 2.4-4</span>
 permanova &lt;-<span class="st"> </span><span class="kw">adonis</span>(<span class="kw">t</span>(otu) ~<span class="st"> </span>SampleType,
                <span class="dt">data =</span> meta, <span class="dt">permutations=</span><span class="dv">99</span>, <span class="dt">method =</span> <span class="st">"bray"</span>)
 
@@ -757,7 +753,7 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
 <span class="co">#&gt;  [1] dplyr_0.7.4                RColorBrewer_1.1-2        </span>
-<span class="co">#&gt;  [3] vegan_2.5-1                lattice_0.20-35           </span>
+<span class="co">#&gt;  [3] vegan_2.4-4                lattice_0.20-35           </span>
 <span class="co">#&gt;  [5] permute_0.9-4              bindrcpp_0.2.2            </span>
 <span class="co">#&gt;  [7] tibble_1.4.2               knitr_1.20                </span>
 <span class="co">#&gt;  [9] microbiomeutilities_0.99.0 microbiome_1.1.10012      </span>
@@ -828,8 +824,7 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#vignette-info">Vignette Info</a></li>
-      <li><a href="#install">Install</a></li>
+<li><a href="#install">Install</a></li>
       <li><a href="#example-data">Example data</a></li>
       <li><a href="#microbiome-analysis-pipeline">Microbiome analysis pipeline</a></li>
       <li><a href="#formatting-the-phyloseq-object">Formatting the Phyloseq Object</a></li>

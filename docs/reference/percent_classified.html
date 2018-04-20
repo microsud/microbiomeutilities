@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summarize the percent taxa classification for phyloseq — percent_classified • microbiomeutilities</title>
+<title>Summarize the percent taxa classification for <code>phyloseq-class</code> — percent_classified • microbiomeutilities</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,7 +25,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-<meta property="og:title" content="Summarize the percent taxa classification for phyloseq — percent_classified" />
+<meta property="og:title" content="Summarize the percent taxa classification for <code>phyloseq-class</code> — percent_classified" />
 
 <meta property="og:description" content="Summarize the percent taxa classification for phyloseq-class." />
 <meta name="twitter:card" content="summary" />
@@ -91,7 +91,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summarize the percent taxa classification for phyloseq</h1>
+    <h1>Summarize the percent taxa classification for <code>phyloseq-class</code></h1>
     
     <div class="hidden name"><code>percent_classified.Rd</code></div>
     </div>
@@ -120,9 +120,9 @@
     <pre class="examples"><div class='input'>    <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
     <span class='no'>pseq</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
-    <span class='fu'>percent_classified</span>(<span class='no'>pseq</span>)</div><div class='output co'>#&gt; <span class='message'>Only patterns such as [g__] or similar is expected. [g__&lt;empty&gt;] or similar not considered</span>
+    <span class='fu'>percent_classified</span>(<span class='no'>pseq</span>)</div><div class='output co'>#&gt; <span class='message'>Only patterns such as [g__] or similar is expected. [g__&lt;empty&gt;] or [g__unclassified] not considered</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>          please convert for eg. g__unclassified to uniform [g__]</span></div><div class='output co'>#&gt;                Percent_classified
+#&gt; <span class='message'>          please convert for eg. g__unclassified to uniform [g__] or NAs</span></div><div class='output co'>#&gt;                Percent_classified
 #&gt; Domain.Kingdom          99.9948 %
 #&gt; Phylum                  99.9895 %
 #&gt; Class                   99.8059 %

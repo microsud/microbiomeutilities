@@ -2,7 +2,7 @@
 % Please edit documentation in R/phy_to_ldf.R
 \name{phy_to_ldf}
 \alias{phy_to_ldf}
-\title{Convert phyloseq object to long data format}
+\title{Convert \code{\link{phyloseq-class}} object to long data format}
 \usage{
 phy_to_ldf(x, transform.counts)
 }

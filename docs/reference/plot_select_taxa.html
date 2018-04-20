@@ -138,22 +138,14 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-  <span class='co'># Example data</span>
-    <span class='fu'>library</span>(<span class='no'>microbiome</span>)
-    <span class='fu'>library</span>(<span class='no'>microbiomeUtilities</span>)
+    <pre class="examples"><div class='input'>    <span class='fu'>library</span>(<span class='no'>microbiome</span>)
+    <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
     <span class='no'>p0</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
-
-    <span class='no'>select.taxa</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"OTU-370251:Endozoicimonaceae"</span>, <span class='st'>"OTU-311173:Helicobacteraceae"</span>)
-
     <span class='no'>p0.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='no'>p0</span>)
-    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>select_taxa_plot</span>(<span class='no'>p0.f</span>, <span class='no'>select.taxa</span>, <span class='st'>"SampleType"</span>, <span class='st'>"Paired"</span>, <span class='kw'>plot.type</span> <span class='kw'>=</span> <span class='st'>"stripchart"</span>)
-
-    <span class='fu'>ggpar</span>(<span class='no'>p</span>, <span class='kw'>yscale</span> <span class='kw'>=</span> <span class='st'>"log10"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Abundance (log10)"</span>)
-
-
-<span class='co'># }</span></pre>
+    <span class='no'>select.taxa</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"OTU-4431292:Oscillospira"</span>, <span class='st'>"OTU-661266:Blautia"</span>)
+    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_select_taxa</span>(<span class='no'>p0.f</span>, <span class='no'>select.taxa</span>, <span class='st'>"SampleType"</span>, <span class='st'>"Paired"</span>, <span class='kw'>plot.type</span> <span class='kw'>=</span> <span class='st'>"stripchart"</span>)</div><div class='output co'>#&gt; <span class='message'>An additonal column Sam_rep with sample names is created for reference purpose</span></div><div class='input'>    <span class='fu'>print</span>(<span class='no'>p</span>)</div><div class='img'><img src='plot_select_taxa-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -28,20 +28,14 @@ Useful for instances where user is interested only in some OTUs. For example OTU
          reported to be significantly diferent.
 }
 \examples{
-\dontrun{
-  # Example data
     library(microbiome)
-    library(microbiomeUtilities)
+    library(microbiomeutilities)
     data("biogeogut")
     p0 <- biogeogut
-
-    select.taxa <- c("OTU-370251:Endozoicimonaceae", "OTU-311173:Helicobacteraceae")
-
     p0.f <- format_to_besthit(p0)
-    p <- select_taxa_plot(p0.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
+    select.taxa <- c("OTU-4431292:Oscillospira", "OTU-661266:Blautia")
+    p <- plot_select_taxa(p0.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
+    print(p)
 
-    ggpar(p, yscale = "log10", ylab = "Abundance (log10)")
-
-          }
 }
 \keyword{utilities}
