@@ -21,12 +21,13 @@
 
 taxa_summary <- function(x, level) {
 
-  pobj <- taxdf <- pobj.ag <- otudf <- outputdf
+  pobj <- taxdf <- pobj.ag <- otudf <- outputdf <- NULL
+
   pobj <- x
 
   taxdf <- as.data.frame(pobj@tax_table)
   taxdf$OTU <- rownames(tax_table(pobj))
-  tax_table(pobj) <- tax_table(as.matrix(taxdf))
+  tax_table(pobj) <- tax_table(as.matrix(taxdf, quote = FALSE))
 
   pobj.ag <- microbiome::aggregate_taxa(pobj, level)
   com <- all(sample_sums(pobj.ag) == 1)
@@ -34,13 +35,16 @@ taxa_summary <- function(x, level) {
 
     message("Data provided is compositional \n will use values directly")
 
+
     otudf2 <- as.data.frame(abundances(pobj.ag))
+    rownames(otudf2) <- tax_table(pobj.ag)[,level]
 
   } else {
 
     message("Data provided is not compositional \n will first transform")
     otudf2 <- as.data.frame(abundances(pobj.ag, "compositional"))
 
+    rownames(otudf2) <- tax_table(pobj.ag)[,level]
   }
 
   output=NULL
