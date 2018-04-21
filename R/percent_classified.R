@@ -57,7 +57,12 @@ percent_classified <- function(x)
   tax_table(x)[is.na(tax_table(x)[,4])] <- "o__"
   tax_table(x)[is.na(tax_table(x)[,5])] <- "f__"
   tax_table(x)[is.na(tax_table(x)[,6])] <- "g__"
-  tax_table(x)[is.na(tax_table(x)[,7])] <- "s__"
+
+  if (ncol(ta) == 7){
+    tax_table(x)[is.na(tax_table(x)[,7])] <- "s__"
+  }
+
+
 
   ############################### DOMAIN######################
 
@@ -134,20 +139,21 @@ percent_classified <- function(x)
     lev7 <- paste0(signif(((nrow(ta)) - (ls + lsna))/(nrow(ta)) *
                             100), " %")
 
-    df1 <- data.frame(`Domain/Kingdom` = lev1, Phylum = lev2,
-                      Class = lev3, Order = lev4, Family = lev5, Genus = lev6,
-                      Species = lev7, `OTUs/ASVs` = nrow(ta))
-    df1 <- t(df1)
-    colnames(df1) <- "Percent_classified"
-    return(as.data.frame.matrix(df1))
+
+    Taxonomic_Levels <- c("Domain",  "Phylum",  "Class",   "Order",   "Family",  "Genus",   "Species", "OTUs/ASVs")
+    Percent_Classification <- c(lev1,  lev2,  lev3,   lev4,   lev5,  lev6,   lev7, nrow(ta))
+    df1 <- as.data.frame(cbind(Taxonomic_Levels, Percent_Classification))
+    return(df1)
+
   } else
+
   {
 
-    df2 <- data.frame(`Domain/Kingdom` = lev1, Phylum = lev2,
-                      Class = lev3, Order = lev4, Family = lev5, Genus = lev6,
-                      `OTUs/ASVs` = nrow(ta))
-    df2 <- t(df2)
-    colnames(df2) <- "Percent_classified"
+    Taxonomic_Levels <- c("Domain",  "Phylum",  "Class",   "Order",   "Family",  "Genus", "OTUs/ASVs")
+    Percent_Classification <- c(lev1, lev2, lev3,  lev4,  lev5,  lev6, nrow(ta))
+
+    df2 <- as.data.frame(cbind(Taxonomic_Levels, Percent_Classification))
+
     return(as.data.frame.matrix(df2))
   }
 
