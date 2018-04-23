@@ -4,23 +4,25 @@
 \alias{plot_ordiplot_core}
 \title{Plotting core microbiota on ordinations}
 \usage{
-plot_ordiplot_core(x, ordiObject, coreplot = c(TRUE, FALSE), prevalences,
-  detections, color.opt, shape)
+plot_ordiplot_core(x, ordiObject, prevalences, detections, min.prevalence,
+  color.opt, shape, Samples = c(TRUE, FALSE))
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
 
 \item{ordiObject}{Output of ordinate from package phyloseq. Only NMDS and Bray supported.}
 
-\item{coreplot}{TRUE or FALSE for core heatmap from microbiome package.}
-
 \item{prevalences}{Prevalences as supported by microbiome package.}
 
 \item{detections}{Detections as supported by microbiome package.}
 
+\item{min.prevalence}{Minimum prevalence value to plot.}
+
 \item{color.opt}{Variable of interest from metadata.}
 
 \item{shape}{Variable of interest from metadata.}
+
+\item{Samples}{c("TRUE" or "FALSE")}
 }
 \value{
 plot
@@ -34,16 +36,24 @@ This function is useful for visualizing core taxa in a 2D ordination plot.
 }
 \examples{
 \dontrun{
-  # Example data
-    library(microbiome)
-    library(microbiomeUtilities)
+
+    library(microbiomeutilities)
     library(RColorBrewer)
     data("biogeogut")
     p0 <- biogeogut
-    ps1 <- format_phyloseq(ps0)
-    px <- plot_ordiplot_core(ps1, ordiObject = ordi, coreplot = TRUE,
-    prevalences = prev.thres,
-    detections = det.thres, color.opt = "SampleType", shape = NULL)
-          }
+    ps1 <- format_to_besthit(p0)
+    ps1 <- format_to_besthit(p0)
+    ps1 <- subset_samples(ps1, SampleType == "Stool")
+    ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
+    prev.thres <- seq(.05, 1, .05)
+    det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
+    pseq.rel <- microbiome::transform(ps1, "compositional")
+    ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
+
+    p <- plot_ordiplot_core(pseq.rel, ord.bray,
+    prev.thres, det.thres, min.prevalence = 0.9,
+    color.opt = "SampleType", shape = NULL, Sample = TRUE)
+    p
+}
 }
 \keyword{utilities}

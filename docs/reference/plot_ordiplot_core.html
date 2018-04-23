@@ -102,8 +102,8 @@ on the species ordination." />
 on the species ordination.</p>
     
 
-    <pre class="usage"><span class='fu'>plot_ordiplot_core</span>(<span class='no'>x</span>, <span class='no'>ordiObject</span>, <span class='kw'>coreplot</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>), <span class='no'>prevalences</span>,
-  <span class='no'>detections</span>, <span class='no'>color.opt</span>, <span class='no'>shape</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_ordiplot_core</span>(<span class='no'>x</span>, <span class='no'>ordiObject</span>, <span class='no'>prevalences</span>, <span class='no'>detections</span>, <span class='no'>min.prevalence</span>,
+  <span class='no'>color.opt</span>, <span class='no'>shape</span>, <span class='kw'>Samples</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -117,10 +117,6 @@ on the species ordination.</p>
       <td><p>Output of ordinate from package phyloseq. Only NMDS and Bray supported.</p></td>
     </tr>
     <tr>
-      <th>coreplot</th>
-      <td><p>TRUE or FALSE for core heatmap from microbiome package.</p></td>
-    </tr>
-    <tr>
       <th>prevalences</th>
       <td><p>Prevalences as supported by microbiome package.</p></td>
     </tr>
@@ -129,12 +125,20 @@ on the species ordination.</p>
       <td><p>Detections as supported by microbiome package.</p></td>
     </tr>
     <tr>
+      <th>min.prevalence</th>
+      <td><p>Minimum prevalence value to plot.</p></td>
+    </tr>
+    <tr>
       <th>color.opt</th>
       <td><p>Variable of interest from metadata.</p></td>
     </tr>
     <tr>
       <th>shape</th>
       <td><p>Variable of interest from metadata.</p></td>
+    </tr>
+    <tr>
+      <th>Samples</th>
+      <td><p>c("TRUE" or "FALSE")</p></td>
     </tr>
     </table>
     
@@ -149,17 +153,23 @@ on the species ordination.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-  <span class='co'># Example data</span>
-    <span class='fu'>library</span>(<span class='no'>microbiome</span>)
-    <span class='fu'>library</span>(<span class='no'>microbiomeUtilities</span>)
+    <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>library</span>(<span class='no'>RColorBrewer</span>)
     <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
     <span class='no'>p0</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
-    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_phyloseq.html'>format_phyloseq</a></span>(<span class='no'>ps0</span>)
-    <span class='no'>px</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_ordiplot_core</span>(<span class='no'>ps1</span>, <span class='kw'>ordiObject</span> <span class='kw'>=</span> <span class='no'>ordi</span>, <span class='kw'>coreplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-    <span class='kw'>prevalences</span> <span class='kw'>=</span> <span class='no'>prev.thres</span>,
-    <span class='kw'>detections</span> <span class='kw'>=</span> <span class='no'>det.thres</span>, <span class='kw'>color.opt</span> <span class='kw'>=</span> <span class='st'>"SampleType"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='no'>p0</span>)
+    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='no'>p0</span>)
+    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'>subset_samples</span>(<span class='no'>ps1</span>, <span class='no'>SampleType</span> <span class='kw'>==</span> <span class='st'>"Stool"</span>)
+    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'>prune_taxa</span>(<span class='fu'>taxa_sums</span>(<span class='no'>ps1</span>) <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='no'>ps1</span>)
+    <span class='no'>prev.thres</span> <span class='kw'>&lt;-</span> <span class='fu'>seq</span>(<span class='fl'>.05</span>, <span class='fl'>1</span>, <span class='fl'>.05</span>)
+    <span class='no'>det.thres</span> <span class='kw'>&lt;-</span> <span class='fl'>10</span>^<span class='fu'>seq</span>(<span class='fu'>log10</span>(<span class='fl'>1e-4</span>), <span class='fu'>log10</span>(<span class='fl'>.2</span>), <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+    <span class='no'>pseq.rel</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>microbiome</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/microbiome/topics/transform'>transform</a></span>(<span class='no'>ps1</span>, <span class='st'>"compositional"</span>)
+    <span class='no'>ord.bray</span> <span class='kw'>&lt;-</span> <span class='fu'>ordinate</span>(<span class='no'>pseq.rel</span>, <span class='st'>"NMDS"</span>, <span class='st'>"bray"</span>)
 
+    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_ordiplot_core</span>(<span class='no'>pseq.rel</span>, <span class='no'>ord.bray</span>,
+    <span class='no'>prev.thres</span>, <span class='no'>det.thres</span>, <span class='kw'>min.prevalence</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+    <span class='kw'>color.opt</span> <span class='kw'>=</span> <span class='st'>"SampleType"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Sample</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <span class='no'>p</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

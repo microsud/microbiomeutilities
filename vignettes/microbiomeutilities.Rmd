@@ -14,11 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+**This package is in experimental stage and should be used only for testing/trial purposes. I will keep improving this with time and feedback.**   
 
-
-## Vignette Info
-
-This package is in experimental stage and should be used only for testing/trial purposes. I will keep improving this with time and feedback.  
 This is mainly a wrapper tool R package. Apart for some simple scripts for data visualization, this package has a single function called `microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a HTML report for convenient investigating of the data.  
 
 
@@ -32,7 +29,7 @@ devtools::install_github("microsud/microbiomeutilities")
 ```  
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 library(microbiomeutilities)
 library(microbiome)
@@ -48,8 +45,9 @@ A subset of human intestinal biopsy and faecal data from pre-print [Shetty SA et
 
 Useful resources:  
 
-For more information you can have a look at [Phyloseq](http://joey711.github.io/phyloseq/)  
-Tools for microbiome analysis in R. **Microbiome package version 1.1.2.** URL: [http://microbiome.github.com/microbiome](http://microbiome.github.com/microbiome).  
+For more information on phyloseq data structure and uses you can have a look at [Phyloseq](http://joey711.github.io/phyloseq/)  
+
+Tools for microbiome analysis in R. **Microbiome package** URL: [microbiome package](http://microbiome.github.com/microbiome).  
 
 
 ```{r}
@@ -65,7 +63,7 @@ print(ps0)
 
 ## Microbiome analysis pipeline  
 
-Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. This function save all intermediate files incuding figures and phyloseq objects in user specified directory.
+Function `microbiome_pipeline` generates an `HTML` report with preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. This function saves all intermediate files incuding figures and phyloseq objects in user specified directory.
 
 ```{r, eval=FALSE}
 
@@ -129,7 +127,7 @@ As can be seen, the rownames have the OTUIDs and available toxonomic name(s).
 
 ## Summarize the percent taxa classification for phyloseq  
 
-This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or similar is expected. [g__<empty>] or similar not considered pease convert for eg. g__unclassified to uniform [g__].  
+This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
 
 ```{r}
 
@@ -137,20 +135,30 @@ percent_classified(ps0)
 
 ```
 
+
+```{r}
+
+tax_sum <- taxa_summary(ps0, "Phylum")
+kable(tax_sum)
+```
+
+
+
 ## Distribution of reads  
 
-Useful for QC purposes.  
+Useful for QC purposes. Check for siatribution of sequencing depth.     
 
 ```{r}
 
 p <- plot_read_distribution(ps0, groups="SampleType", plot.type= "density")
 print(p)
+
 ```
 
 
 ## Convert phyloseq object to long data format  
 
-Useful in the user wants to plot specific features ot imporve base plots.  
+Useful if the user wants to plot specific features.  
 
 ```{r}
 
@@ -162,9 +170,9 @@ kable(head(pseq_df))
 
 ## Plot alpha diversities  
 
-Utility plot function for diversity measures calcualted by microbiome package.  
+Utility plot function for diversity measures calcualted by `microbiome` package.  
 
-```{r, fig.width=6, fig.height=4}
+```{r, fig.width=8, fig.height=4}
 
 library(microbiome)
 data("biogeogut")
@@ -186,22 +194,25 @@ print(p)
 ## Plot ordination and core  
 
 ```{r, fig.height=8, fig.width=12}
-library(phyloseq)
-library(microbiome)
-data("atlas1006")
-pseq <- atlas1006
 
-pseq.rel <- microbiome::transform(pseq, "compositional")
-
-pseq.core <- subset_samples(pseq.rel, gender == "female" & DNA_extraction_method == "r" & bmi_group == "lean")
-
+library(microbiomeutilities)
+library(RColorBrewer)
+data("biogeogut")
+p0 <- biogeogut
+ps1 <- format_to_besthit(p0)
+ ps1 <- format_to_besthit(p0)
+ps1 <- subset_samples(ps1, SampleType == "Stool")
+ ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
 prev.thres <- seq(.05, 1, .05)
-det.thres <- 10^seq(log10(1e-2), log10(.2), length = 10)
+det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
+pseq.rel <- microbiome::transform(ps1, "compositional")
+ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
 
-# Currently only NMDS is supported
-ord.bray <- ordinate(pseq.core, "NMDS", "bray")
+p <- plot_ordiplot_core(pseq.rel, ord.bray,
+prev.thres, det.thres, min.prevalence = 0.9,
+ color.opt = "SampleType", shape = NULL, Sample = TRUE)
 
-px <- plot_ordiplot_core(pseq.core, ordiObject = ord.bray, coreplot = TRUE, prevalences = prev.thres, detections = det.thres, color.opt = "diversity", shape = NULL)
+print(p)
 
 ```
 
@@ -212,6 +223,7 @@ px <- plot_ordiplot_core(pseq.core, ordiObject = ord.bray, coreplot = TRUE, prev
 ```{r, fig.width=8}
 
 ps.f2 <- format_to_besthit(ps0)
+
 psf2.rel <- microbiome::transform(ps.f2, "compositional")
 otu <- abundances(psf2.rel)
 meta <- meta(psf2.rel)
@@ -231,7 +243,7 @@ top.coef.df <- as.data.frame(top.coef)
 my_taxa <- c(rownames(top.coef.df))
 
 p <- plot_select_taxa(psf2.rel, my_taxa, "SampleType", "Paired", plot.type = "boxplot")
-p
+print(p)
 ```
 
 ## Plot taxa boxplot  
@@ -252,12 +264,16 @@ print(pn)
 ## Plot taxa barplot  
 
 ```{r, fig.width=6, fig.height=4}
+
 library(RColorBrewer)
 library(dplyr)
 
+# reduce data for egample purposes
 ps.cor <- core(ps0, detection = 10, prevalence = 0.5)
+
 p <- plot_taxa_composition(ps.cor, taxonomic.level = "Phylum", transform = "compositional", average_by = NULL)
-p
+print(p)
+
 ```
 
 ## Heatmap using phyloseq and pheatmap   
@@ -268,8 +284,8 @@ Useful for visualisng differences in top otus between sample groups.
 
 heat.sample <- plot_taxa_heatmap(ps0, subset.top = 20,
     VariableA = "SampleType",
-    heatcolors =brewer.pal(100, "Blues"),
-    transformation = "log10")
+    heatcolors =brewer.pal(6, "Blues"),
+    transformation = "compositional")
 
 ```
 
