@@ -4,10 +4,12 @@
 \alias{get_microbiome_data}
 \title{Download test microbiome data}
 \usage{
-get_microbiome_data(studynumber = 1)
+get_microbiome_data(disease, study)
 }
 \arguments{
-\item{studynumber}{A numerical value corresponsing to the one given by list_microbiome_data()}
+\item{disease}{Disease of interest as shown in list_microbiome_data()}
+
+\item{study}{Name of the study as shown in list_microbiome_data()}
 }
 \value{
 \code{\link{phyloseq-class}} object.
@@ -24,9 +26,8 @@ You can download few example datasets in phyloseq format from Duvallet et al 201
     library(microbiome)
     library(microbiomeUtilities)
     list_microbiome_data()
-    ps1 <- get_microbiome_data(studynumber = 1)
-    # this will download the first study listed in list_microbiome_data() function
-    print(p)
+    ps1 <- get_microbiome_data(disease = "CDI", "Schubert2014_CDI")
+    print_ps(ps1)
           }
 }
 \keyword{utilities}

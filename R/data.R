@@ -1,8 +1,8 @@
 #' Comparison of small intestine and stool microbiota
 #'
 #' Data from a Shetty SA, et al.
-#' Bacterial community was profilled using V4 (EMP primers) and analysed QIIME. Coolosed ref based OTU picking.
-#' Taxonomic assignmetn was done using RDP classifier (80% threshold, wang method).
+#' Bacterial community was profilled using V4 (EMP primers) and analysed with QIIME. Closed ref based OTU picking.
+#' Taxonomic assignment was done using RDP classifier (80% threshold, Wang method).
 #'
 #' @docType data
 #'

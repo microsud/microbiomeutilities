@@ -105,9 +105,12 @@ Some have only g__ of s__ information.
 
 ```{r}
 
+# reduce size for example
+ps0 <- core(ps0, detection = 10, prevalence = 20/100)
+
 ps0.f <- format_phyloseq(ps0)
 
-kable(head(tax_table(ps0.f)))
+kable(head(tax_table(ps0.f))[3:6])
 
 ```
 
@@ -116,10 +119,12 @@ There is a second version which will change the names in both otu table and taxo
 
 
 ```{r}
+# reduce size for example
+ps0 <- core(ps0, detection = 10, prevalence = 20/100)
 
 ps0.f2 <- format_to_besthit(ps0)
 
-kable(head(tax_table(ps0.f2)))
+kable(head(tax_table(ps0.f2))[3:6])
 
 ```
 
@@ -129,7 +134,7 @@ As can be seen, the rownames have the OTUIDs and available toxonomic name(s).
 
 This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
 
-```{r}
+```{r, eval=FALSE}
 
 percent_classified(ps0)
 
@@ -148,7 +153,7 @@ kable(tax_sum)
 
 Useful for QC purposes. Check for siatribution of sequencing depth.     
 
-```{r}
+```{r, eval=FALSE}
 
 p <- plot_read_distribution(ps0, groups="SampleType", plot.type= "density")
 print(p)
@@ -161,6 +166,9 @@ print(p)
 Useful if the user wants to plot specific features.  
 
 ```{r}
+
+# reduce size for example
+ps0 <- core(ps0, detection = 10, prevalence = 20/100)
 
 pseq_df <- phy_to_ldf(ps0, transform.counts = NULL)
 
@@ -178,6 +186,7 @@ library(microbiome)
 data("biogeogut")
 ps0 <- biogeogut
 
+ps0 <- core(ps0, detection = 2, prevalence = 20/100)
 p <- plot_alpha_diversities(ps0, 
                             type = "diversities", 
                             index.val = "all", 
@@ -199,13 +208,18 @@ library(microbiomeutilities)
 library(RColorBrewer)
 data("biogeogut")
 p0 <- biogeogut
+
+
 ps1 <- format_to_besthit(p0)
- ps1 <- format_to_besthit(p0)
+
 ps1 <- subset_samples(ps1, SampleType == "Stool")
- ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
+ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
 prev.thres <- seq(.05, 1, .05)
 det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
 pseq.rel <- microbiome::transform(ps1, "compositional")
+# reduce size for example
+pseq.rel <- core(pseq.rel, detection = 0.001, prevalence = 20/100)
+
 ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
 
 p <- plot_ordiplot_core(pseq.rel, ord.bray,
@@ -244,6 +258,7 @@ my_taxa <- c(rownames(top.coef.df))
 
 p <- plot_select_taxa(psf2.rel, my_taxa, "SampleType", "Paired", plot.type = "boxplot")
 print(p)
+
 ```
 
 ## Plot taxa boxplot  
@@ -311,7 +326,6 @@ sessionInfo()
  + [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
  + [tidyr](http://tidyr.tidyverse.org/)
  + [utils](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/00Index.html)
- + [data.table](https://cran.r-project.org/web/packages/data.table/index.html)
  + [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
  + [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html)
  + [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)
