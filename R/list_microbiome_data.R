@@ -3,10 +3,11 @@
 #' @details Data for practice, also an example for importing mothur files from Baxtrer et al 2016. The source file for these data is the microbiomedatarepo https://github.com/microsud/microbiomedatarepo.
 #' @param printtab Print in console or not, defaut is TRUE and will print output.
 #' @export
-#' @examples
+#' @examples \dontrun{
 #'     library(microbiomeutilities)
 #'
 #'     df <- list_microbiome_data(printtab = FALSE)
+#'     }
 #'
 #' @keywords utilities
 #'

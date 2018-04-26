@@ -21,12 +21,15 @@ Plots CV for OTUs/ASVs.
 Check if there are spurious OTUs/ASVs.
 }
 \examples{
+\dontrun{
+  # Example data
     library(microbiome)
     library(microbiomeutilities)
     data("biogeogut")
     p0 <- biogeogut
     p <- plot_taxa_cv(p0, plot.type = "hist")
     print(p)
+    }
 
 }
 \keyword{utilities}

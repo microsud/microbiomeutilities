@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Download test microbiome data — get_microbiome_data" />
 
 <meta property="og:description" content="Test microbiome data in phyloseq format." />
@@ -38,8 +41,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -96,18 +97,24 @@
     <div class="hidden name"><code>get_microbiome_data.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Test microbiome data in phyloseq format.</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>get_microbiome_data</span>(<span class='kw'>studynumber</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>get_microbiome_data</span>(<span class='no'>disease</span>, <span class='no'>study</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>studynumber</th>
-      <td><p>A numerical value corresponsing to the one given by list_microbiome_data()</p></td>
+      <th>disease</th>
+      <td><p>Disease of interest as shown in list_microbiome_data()</p></td>
+    </tr>
+    <tr>
+      <th>study</th>
+      <td><p>Name of the study as shown in list_microbiome_data()</p></td>
     </tr>
     </table>
     
@@ -126,9 +133,8 @@
     <span class='fu'>library</span>(<span class='no'>microbiome</span>)
     <span class='fu'>library</span>(<span class='no'>microbiomeUtilities</span>)
     <span class='fu'><a href='list_microbiome_data.html'>list_microbiome_data</a></span>()
-    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'>get_microbiome_data</span>(<span class='kw'>studynumber</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-    <span class='co'># this will download the first study listed in list_microbiome_data() function</span>
-    <span class='fu'>print</span>(<span class='no'>p</span>)
+    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'>get_microbiome_data</span>(<span class='kw'>disease</span> <span class='kw'>=</span> <span class='st'>"CDI"</span>, <span class='st'>"Schubert2014_CDI"</span>)
+    <span class='fu'><a href='print_ps.html'>print_ps</a></span>(<span class='no'>ps1</span>)
 
 <span class='co'># }</span></pre>
   </div>

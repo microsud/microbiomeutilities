@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Formatting the <code>phyloseq-class</code> Object — format_phyloseq" />
 
 <meta property="og:description" content="Format the phyloseq object to add the best taxonomy in phyloseq object (tax_table)." />
@@ -38,8 +41,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -96,9 +97,11 @@
     <div class="hidden name"><code>format_phyloseq.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Format the phyloseq object to add the best taxonomy in phyloseq object (tax_table).</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>format_phyloseq</span>(<span class='no'>x</span>)</pre>
     
@@ -125,32 +128,16 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>    <span class='fu'>library</span>(<span class='no'>microbiome</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <span class='fu'>library</span>(<span class='no'>microbiome</span>)
     <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
     <span class='no'>p0</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
-    <span class='no'>p0.f</span> <span class='kw'>&lt;-</span> <span class='fu'>format_phyloseq</span>(<span class='no'>p0</span>)</div><div class='output co'>#&gt; <span class='message'>This function will change Kingdom to Domain by default in taxonomy</span></div><div class='input'>    <span class='fu'>head</span>(<span class='fu'>tax_table</span>(<span class='no'>p0.f</span>))</div><div class='output co'>#&gt; Taxonomy Table:     [6 taxa by 7 taxonomic ranks]:
-#&gt;         Domain     Phylum           Class                 Order              
-#&gt; 541135  "Bacteria" "Firmicutes"     "Bacilli"             "Lactobacillales"  
-#&gt; 1050608 "Bacteria" "Actinobacteria" "Actinobacteria"      "Actinomycetales"  
-#&gt; 370251  "Bacteria" "Proteobacteria" "Gammaproteobacteria" "Oceanospirillales"
-#&gt; 188753  "Bacteria" "Firmicutes"     "Clostridia"          "Clostridiales"    
-#&gt; 217472  "Bacteria" "Acidobacteria"  "Acidobacteriia"      "Acidobacteriales" 
-#&gt; 623634  "Bacteria" "Acidobacteria"  "Solibacteres"        "Solibacterales"   
-#&gt;         Family               Genus                        
-#&gt; 541135  "Lactobacillaceae"   "Lactobacillus"              
-#&gt; 1050608 "Corynebacteriaceae" "Corynebacterium"            
-#&gt; 370251  "Endozoicimonaceae"  "f__Endozoicimonaceae_370251"
-#&gt; 188753  "Lachnospiraceae"    "Blautia"                    
-#&gt; 217472  "Koribacteraceae"    "Candidatus Koribacter"      
-#&gt; 623634  "Solibacteraceae"    "Candidatus Solibacter"      
-#&gt;         Species                          
-#&gt; 541135  "f__Lactobacillus_541135"        
-#&gt; 1050608 "f__Corynebacterium_1050608"     
-#&gt; 370251  "f__Endozoicimonaceae_370251"    
-#&gt; 188753  "f__Blautia_188753"              
-#&gt; 217472  "f__Candidatus Koribacter_217472"
-#&gt; 623634  "f__Candidatus Solibacter_623634"</div></pre>
+    <span class='no'>p0.f</span> <span class='kw'>&lt;-</span> <span class='fu'>format_phyloseq</span>(<span class='no'>p0</span>)
+    <span class='fu'>head</span>(<span class='fu'>tax_table</span>(<span class='no'>p0.f</span>))
+
+<span class='co'># }</span><div class='input'>    
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

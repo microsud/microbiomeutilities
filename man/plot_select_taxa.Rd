@@ -28,6 +28,8 @@ Useful for instances where user is interested only in some OTUs. For example OTU
          reported to be significantly diferent.
 }
 \examples{
+\dontrun{
+  # Example data
     library(microbiome)
     library(microbiomeutilities)
     data("biogeogut")
@@ -36,6 +38,7 @@ Useful for instances where user is interested only in some OTUs. For example OTU
     select.taxa <- c("OTU-4431292:Oscillospira", "OTU-661266:Blautia")
     p <- plot_select_taxa(p0.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
     print(p)
-
+    
+    }
 }
 \keyword{utilities}

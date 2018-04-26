@@ -210,91 +210,20 @@ ps0 &lt;-<span class="st"> </span>biogeogut
 </table>
 <p>Some have only g__ of s__ information.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-ps0.f &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_phyloseq.html">format_phyloseq</a></span>(ps0)
-<span class="co">#&gt; This function will change Kingdom to Domain by default in taxonomy</span>
-<span class="co">#&gt; Warning: package 'bindrcpp' was built under R version 3.4.4</span>
+<span class="co"># reduce size for example</span>
+ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
 
-<span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f)))</code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th></th>
-<th align="left">Domain</th>
-<th align="left">Phylum</th>
-<th align="left">Class</th>
-<th align="left">Order</th>
-<th align="left">Family</th>
-<th align="left">Genus</th>
-<th align="left">Species</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>541135</td>
-<td align="left">Bacteria</td>
-<td align="left">Firmicutes</td>
-<td align="left">Bacilli</td>
-<td align="left">Lactobacillales</td>
-<td align="left">Lactobacillaceae</td>
-<td align="left">Lactobacillus</td>
-<td align="left">f__Lactobacillus_541135</td>
-</tr>
-<tr class="even">
-<td>1050608</td>
-<td align="left">Bacteria</td>
-<td align="left">Actinobacteria</td>
-<td align="left">Actinobacteria</td>
-<td align="left">Actinomycetales</td>
-<td align="left">Corynebacteriaceae</td>
-<td align="left">Corynebacterium</td>
-<td align="left">f__Corynebacterium_1050608</td>
-</tr>
-<tr class="odd">
-<td>370251</td>
-<td align="left">Bacteria</td>
-<td align="left">Proteobacteria</td>
-<td align="left">Gammaproteobacteria</td>
-<td align="left">Oceanospirillales</td>
-<td align="left">Endozoicimonaceae</td>
-<td align="left">f__Endozoicimonaceae_370251</td>
-<td align="left">f__Endozoicimonaceae_370251</td>
-</tr>
-<tr class="even">
-<td>188753</td>
-<td align="left">Bacteria</td>
-<td align="left">Firmicutes</td>
-<td align="left">Clostridia</td>
-<td align="left">Clostridiales</td>
-<td align="left">Lachnospiraceae</td>
-<td align="left">Blautia</td>
-<td align="left">f__Blautia_188753</td>
-</tr>
-<tr class="odd">
-<td>217472</td>
-<td align="left">Bacteria</td>
-<td align="left">Acidobacteria</td>
-<td align="left">Acidobacteriia</td>
-<td align="left">Acidobacteriales</td>
-<td align="left">Koribacteraceae</td>
-<td align="left">Candidatus Koribacter</td>
-<td align="left">f__Candidatus Koribacter_217472</td>
-</tr>
-<tr class="even">
-<td>623634</td>
-<td align="left">Bacteria</td>
-<td align="left">Acidobacteria</td>
-<td align="left">Solibacteres</td>
-<td align="left">Solibacterales</td>
-<td align="left">Solibacteraceae</td>
-<td align="left">Candidatus Solibacter</td>
-<td align="left">f__Candidatus Solibacter_623634</td>
-</tr>
-</tbody>
-</table>
+ps0.f &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_phyloseq.html">format_phyloseq</a></span>(ps0)
+
+<span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f))[<span class="dv">3</span>:<span class="dv">6</span>])</code></pre></div>
 <p>Now the available taxonomy is added.<br>
 There is a second version which will change the names in both otu table and taxonomy table. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reduce size for example</span>
+ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
+
 ps0.f2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(ps0)
 
-<span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f2)))</code></pre></div>
+<span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f2))[<span class="dv">3</span>:<span class="dv">6</span>])</code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th></th>
@@ -309,70 +238,48 @@ ps0.f2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>OTU-541135:Lactobacillus</td>
-<td align="left">Bacteria</td>
-<td align="left">Firmicutes</td>
-<td align="left">Bacilli</td>
-<td align="left">Lactobacillales</td>
-<td align="left">Lactobacillaceae</td>
-<td align="left">Lactobacillus</td>
-<td align="left">g__Lactobacillus</td>
-<td align="left">OTU-541135:Lactobacillus</td>
-</tr>
-<tr class="even">
-<td>OTU-1050608:Corynebacterium</td>
-<td align="left">Bacteria</td>
-<td align="left">Actinobacteria</td>
-<td align="left">Actinobacteria</td>
-<td align="left">Actinomycetales</td>
-<td align="left">Corynebacteriaceae</td>
-<td align="left">Corynebacterium</td>
-<td align="left">g__Corynebacterium</td>
-<td align="left">OTU-1050608:Corynebacterium</td>
-</tr>
-<tr class="odd">
-<td>OTU-370251:f__Endozoicimonaceae</td>
-<td align="left">Bacteria</td>
-<td align="left">Proteobacteria</td>
-<td align="left">Gammaproteobacteria</td>
-<td align="left">Oceanospirillales</td>
-<td align="left">Endozoicimonaceae</td>
-<td align="left">f__Endozoicimonaceae</td>
-<td align="left">f__Endozoicimonaceae</td>
-<td align="left">OTU-370251:f__Endozoicimonaceae</td>
-</tr>
-<tr class="even">
-<td>OTU-188753:Blautia</td>
+<td>OTU-189592:f__Lachnospiraceae</td>
 <td align="left">Bacteria</td>
 <td align="left">Firmicutes</td>
 <td align="left">Clostridia</td>
 <td align="left">Clostridiales</td>
 <td align="left">Lachnospiraceae</td>
-<td align="left">Blautia</td>
-<td align="left">g__Blautia</td>
-<td align="left">OTU-188753:Blautia</td>
-</tr>
-<tr class="odd">
-<td>OTU-217472:Candidatus Koribacter</td>
-<td align="left">Bacteria</td>
-<td align="left">Acidobacteria</td>
-<td align="left">Acidobacteriia</td>
-<td align="left">Acidobacteriales</td>
-<td align="left">Koribacteraceae</td>
-<td align="left">Candidatus Koribacter</td>
-<td align="left">g__Candidatus Koribacter</td>
-<td align="left">OTU-217472:Candidatus Koribacter</td>
+<td align="left">f__Lachnospiraceae</td>
+<td align="left">f__Lachnospiraceae</td>
+<td align="left">OTU-189592:f__Lachnospiraceae</td>
 </tr>
 <tr class="even">
-<td>OTU-623634:Candidatus Solibacter</td>
+<td>OTU-311173:f__Helicobacteraceae</td>
 <td align="left">Bacteria</td>
-<td align="left">Acidobacteria</td>
-<td align="left">Solibacteres</td>
-<td align="left">Solibacterales</td>
-<td align="left">Solibacteraceae</td>
-<td align="left">Candidatus Solibacter</td>
-<td align="left">g__Candidatus Solibacter</td>
-<td align="left">OTU-623634:Candidatus Solibacter</td>
+<td align="left">Proteobacteria</td>
+<td align="left">Epsilonproteobacteria</td>
+<td align="left">Campylobacterales</td>
+<td align="left">Helicobacteraceae</td>
+<td align="left">f__Helicobacteraceae</td>
+<td align="left">f__Helicobacteraceae</td>
+<td align="left">OTU-311173:f__Helicobacteraceae</td>
+</tr>
+<tr class="odd">
+<td>OTU-194104:Coprococcus</td>
+<td align="left">Bacteria</td>
+<td align="left">Firmicutes</td>
+<td align="left">Clostridia</td>
+<td align="left">Clostridiales</td>
+<td align="left">Lachnospiraceae</td>
+<td align="left">Coprococcus</td>
+<td align="left">g__Coprococcus</td>
+<td align="left">OTU-194104:Coprococcus</td>
+</tr>
+<tr class="even">
+<td>OTU-191687:Coprococcus</td>
+<td align="left">Bacteria</td>
+<td align="left">Firmicutes</td>
+<td align="left">Clostridia</td>
+<td align="left">Clostridiales</td>
+<td align="left">Lachnospiraceae</td>
+<td align="left">Coprococcus</td>
+<td align="left">g__Coprococcus</td>
+<td align="left">OTU-191687:Coprococcus</td>
 </tr>
 </tbody>
 </table>
@@ -388,14 +295,14 @@ ps0.f2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form
 <span class="co">#&gt; </span>
 <span class="co">#&gt;           please convert for eg. g__unclassified to uniform [g__] or NAs</span>
 <span class="co">#&gt;   Taxonomic_Levels Percent_Classification</span>
-<span class="co">#&gt; 1           Domain              99.9948 %</span>
-<span class="co">#&gt; 2           Phylum              99.9895 %</span>
-<span class="co">#&gt; 3            Class              99.8059 %</span>
-<span class="co">#&gt; 4            Order              98.4682 %</span>
-<span class="co">#&gt; 5           Family              87.3367 %</span>
-<span class="co">#&gt; 6            Genus              55.6838 %</span>
-<span class="co">#&gt; 7          Species              17.9772 %</span>
-<span class="co">#&gt; 8        OTUs/ASVs                  19063</span></code></pre></div>
+<span class="co">#&gt; 1           Domain              99.9232 %</span>
+<span class="co">#&gt; 2           Phylum              99.9232 %</span>
+<span class="co">#&gt; 3            Class              99.9232 %</span>
+<span class="co">#&gt; 4            Order              99.1551 %</span>
+<span class="co">#&gt; 5           Family              92.8571 %</span>
+<span class="co">#&gt; 6            Genus              65.5146 %</span>
+<span class="co">#&gt; 7          Species              25.2688 %</span>
+<span class="co">#&gt; 8        OTUs/ASVs                   1302</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 tax_sum &lt;-<span class="st"> </span><span class="kw"><a href="../reference/taxa_summary.html">taxa_summary</a></span>(ps0, <span class="st">"Phylum"</span>)
 <span class="co">#&gt; Data provided is not compositional </span>
@@ -411,319 +318,95 @@ tax_sum &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tax
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">p__Firmicutes</td>
-<td align="left">0.788082497512705</td>
-<td align="left">0.459848226649128</td>
-<td align="left">0.441254468879226</td>
-<td align="left">0.14842871450415</td>
-</tr>
-<tr class="even">
-<td align="left">p__Actinobacteria</td>
-<td align="left">0.746566841628112</td>
-<td align="left">0.172314456701022</td>
-<td align="left">0.0696300860856344</td>
-<td align="left">0.224441692879574</td>
-</tr>
-<tr class="odd">
 <td align="left">p__Proteobacteria</td>
-<td align="left">0.496513917951784</td>
-<td align="left">0.158378330171694</td>
-<td align="left">0.132796009653088</td>
-<td align="left">0.144597900313421</td>
+<td align="left">0.505820644374447</td>
+<td align="left">0.160066044386969</td>
+<td align="left">0.130093201561243</td>
+<td align="left">0.149271942844063</td>
 </tr>
 <tr class="even">
-<td align="left">p__Acidobacteria</td>
-<td align="left">0.000347205328827773</td>
-<td align="left">7.90462174369465e-05</td>
-<td align="left">1.31309105778369e-05</td>
-<td align="left">0.000119545094947851</td>
-</tr>
-<tr class="odd">
-<td align="left">p__Crenarchaeota</td>
-<td align="left">0.00017677415675876</td>
-<td align="left">3.6066057468981e-05</td>
-<td align="left">1.02123554134977e-05</td>
-<td align="left">5.1552434270983e-05</td>
-</tr>
-<tr class="even">
-<td align="left">p__Chloroflexi</td>
-<td align="left">0.000410572235052605</td>
-<td align="left">9.97047375159692e-05</td>
-<td align="left">1.81774435053788e-05</td>
-<td align="left">0.00014087267611533</td>
-</tr>
-<tr class="odd">
-<td align="left">p__Bacteroidetes</td>
-<td align="left">0.176311167064961</td>
-<td align="left">0.0867332448761004</td>
-<td align="left">0.0948124481889113</td>
-<td align="left">0.056716832998034</td>
-</tr>
-<tr class="even">
-<td align="left">p__Planctomycetes</td>
-<td align="left">0.000232773979450236</td>
-<td align="left">7.54811429815197e-05</td>
-<td align="left">7.4215748345353e-06</td>
-<td align="left">9.43520018502368e-05</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">0.800742072004174</td>
+<td align="left">0.452227050778992</td>
+<td align="left">0.434968332053413</td>
+<td align="left">0.152499338245618</td>
 </tr>
 <tr class="odd">
 <td align="left">p__Cyanobacteria</td>
-<td align="left">0.0289266439035136</td>
-<td align="left">0.00480453245392559</td>
-<td align="left">0.00176009539745434</td>
-<td align="left">0.00785714639094799</td>
+<td align="left">0.0304867969750816</td>
+<td align="left">0.00484084690131034</td>
+<td align="left">0.00165835815888446</td>
+<td align="left">0.0082911292888929</td>
 </tr>
 <tr class="even">
-<td align="left">p__Tenericutes</td>
-<td align="left">0.0269522006625651</td>
-<td align="left">0.00241319964620587</td>
-<td align="left">0.000181905749276683</td>
-<td align="left">0.00712234796497308</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">0.177608683751593</td>
+<td align="left">0.0851510931759493</td>
+<td align="left">0.0894749188186949</td>
+<td align="left">0.0568154240131054</td>
 </tr>
 <tr class="odd">
+<td align="left">p__Actinobacteria</td>
+<td align="left">0.769980345219467</td>
+<td align="left">0.180344742823455</td>
+<td align="left">0.0674513807697574</td>
+<td align="left">0.23708159145978</td>
+</tr>
+<tr class="even">
 <td align="left">p__Verrucomicrobia</td>
-<td align="left">0.480223292851242</td>
-<td align="left">0.107050184932518</td>
-<td align="left">0.0233774668438226</td>
-<td align="left">0.145628946750621</td>
-</tr>
-<tr class="even">
-<td align="left">p__[Thermi]</td>
-<td align="left">0.00130584780315342</td>
-<td align="left">0.000270077302318603</td>
-<td align="left">2.64061100097892e-05</td>
-<td align="left">0.000450648385553297</td>
+<td align="left">0.495973278901466</td>
+<td align="left">0.111861986945998</td>
+<td align="left">0.0249694984346421</td>
+<td align="left">0.15112668787269</td>
 </tr>
 <tr class="odd">
-<td align="left">p__AD3</td>
-<td align="left">3.07848600058491e-05</td>
-<td align="left">3.27587462019308e-06</td>
-<td align="left">0</td>
-<td align="left">8.87865275163025e-06</td>
+<td align="left">p__[Thermi]</td>
+<td align="left">0.00110056403907002</td>
+<td align="left">0.000204270306703256</td>
+<td align="left">9.13500951267977e-06</td>
+<td align="left">0.000373340613093799</td>
 </tr>
 <tr class="even">
 <td align="left">p__Fusobacteria</td>
-<td align="left">0.00329946357108393</td>
-<td align="left">0.000567048234851298</td>
-<td align="left">4.04491765065732e-05</td>
-<td align="left">0.000979884289358478</td>
-</tr>
-<tr class="odd">
-<td align="left">p__TM7</td>
-<td align="left">0.0362903008954261</td>
-<td align="left">0.00593363497042541</td>
-<td align="left">0.000492898877000854</td>
-<td align="left">0.0108335813609163</td>
-</tr>
-<tr class="even">
-<td align="left">p__Spirochaetes</td>
-<td align="left">0.00735672063736829</td>
-<td align="left">0.000568048382949663</td>
-<td align="left">1.29765860497247e-05</td>
-<td align="left">0.00195507905338325</td>
-</tr>
-<tr class="odd">
-<td align="left">p__Gemmatimonadetes</td>
-<td align="left">0.000105541692737978</td>
-<td align="left">1.82934674152798e-05</td>
-<td align="left">2.36630383341221e-06</td>
-<td align="left">3.23718991323651e-05</td>
-</tr>
-<tr class="even">
-<td align="left">p__BRC1</td>
-<td align="left">2.21149890973104e-06</td>
-<td align="left">1.57964207837931e-07</td>
-<td align="left">0</td>
-<td align="left">5.9104794510269e-07</td>
-</tr>
-<tr class="odd">
-<td align="left">p__WPS-2</td>
-<td align="left">4.42299781946207e-05</td>
-<td align="left">3.5856101264477e-06</td>
-<td align="left">0</td>
-<td align="left">1.18058731229867e-05</td>
-</tr>
-<tr class="even">
-<td align="left">p__Nitrospirae</td>
-<td align="left">0.000107747010020472</td>
-<td align="left">1.82357194282387e-05</td>
-<td align="left">2.2946726878878e-06</td>
-<td align="left">3.14252021604013e-05</td>
+<td align="left">0.00323802310168529</td>
+<td align="left">0.00042636544700105</td>
+<td align="left">1.2167295591728e-05</td>
+<td align="left">0.000886848313031661</td>
 </tr>
 <tr class="odd">
 <td align="left">p__Lentisphaerae</td>
-<td align="left">0.000137276962239883</td>
-<td align="left">2.40783509888569e-05</td>
-<td align="left">5.37793433542176e-06</td>
-<td align="left">3.92945542481875e-05</td>
+<td align="left">0.000119070000626684</td>
+<td align="left">1.93844269237892e-05</td>
+<td align="left">0</td>
+<td align="left">3.4168967507866e-05</td>
 </tr>
 <tr class="even">
-<td align="left">p__Euryarchaeota</td>
-<td align="left">0.00198049266037629</td>
-<td align="left">0.000228187024528476</td>
-<td align="left">6.92807269399283e-06</td>
-<td align="left">0.000536031110849026</td>
+<td align="left">p__TM7</td>
+<td align="left">0.0331323554988695</td>
+<td align="left">0.00403993479934955</td>
+<td align="left">0.000117805230173725</td>
+<td align="left">0.0089207431707071</td>
 </tr>
 <tr class="odd">
+<td align="left">p__Tenericutes</td>
+<td align="left">0.0015651473201372</td>
+<td align="left">0.000363639009851278</td>
+<td align="left">0.000106429576499644</td>
+<td align="left">0.000568815358520954</td>
+</tr>
+<tr class="even">
 <td align="left">p__Synergistetes</td>
-<td align="left">0.00141727415962427</td>
-<td align="left">0.000452834039527414</td>
-<td align="left">0.000109527814550652</td>
-<td align="left">0.000568060718282255</td>
+<td align="left">0.00130005504737588</td>
+<td align="left">0.000428968915046436</td>
+<td align="left">0.000111817958507749</td>
+<td align="left">0.00052098776329193</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">p__Elusimicrobia</td>
-<td align="left">0.000120619077414832</td>
-<td align="left">3.63937421406076e-05</td>
-<td align="left">2.47641521537313e-05</td>
-<td align="left">4.17579793616951e-05</td>
-</tr>
-<tr class="odd">
-<td align="left">p__Armatimonadetes</td>
-<td align="left">5.7023921535084e-06</td>
-<td align="left">4.073137252506e-07</td>
-<td align="left">0</td>
-<td align="left">1.52402840881832e-06</td>
-</tr>
-<tr class="even">
-<td align="left">p__SR1</td>
-<td align="left">0.000112936621043857</td>
-<td align="left">8.54079412664644e-06</td>
-<td align="left">0</td>
-<td align="left">3.00991497698227e-05</td>
-</tr>
-<tr class="odd">
-<td align="left">p__Deferribacteres</td>
-<td align="left">5.67013539686471e-05</td>
-<td align="left">1.14771532017948e-05</td>
-<td align="left">2.68896716771088e-06</td>
-<td align="left">1.89757298451056e-05</td>
-</tr>
-<tr class="even">
-<td align="left">p__TM6</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-</tr>
-<tr class="odd">
-<td align="left">p__SBR1093</td>
-<td align="left">2.43264880070414e-05</td>
-<td align="left">3.24126252070945e-06</td>
-<td align="left">0</td>
-<td align="left">7.61025506689207e-06</td>
-</tr>
-<tr class="even">
-<td align="left">p__Chlorobi</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-</tr>
-<tr class="odd">
-<td align="left">p__FBP</td>
-<td align="left">8.84599563892415e-06</td>
-<td align="left">6.31856831351725e-07</td>
-<td align="left">0</td>
-<td align="left">2.36419178041076e-06</td>
-</tr>
-<tr class="even">
-<td align="left">p__Thermotogae</td>
-<td align="left">5.13081000097485e-05</td>
-<td align="left">3.66486428641061e-06</td>
-<td align="left">0</td>
-<td align="left">1.37126665287723e-05</td>
-</tr>
-<tr class="odd">
-<td align="left">p__NKB19</td>
-<td align="left">6.03095387074158e-05</td>
-<td align="left">4.30782419338684e-06</td>
-<td align="left">0</td>
-<td align="left">1.61184022141094e-05</td>
-</tr>
-<tr class="even">
-<td align="left">p__OD1</td>
-<td align="left">2.65379869167725e-05</td>
-<td align="left">3.11751166980697e-06</td>
-<td align="left">0</td>
-<td align="left">8.1375479669482e-06</td>
-</tr>
-<tr class="odd">
-<td align="left">p__WS3</td>
-<td align="left">4.56191372280672e-05</td>
-<td align="left">5.94726277664907e-06</td>
-<td align="left">0</td>
-<td align="left">1.32918409508262e-05</td>
-</tr>
-<tr class="even">
-<td align="left">p__OP11</td>
-<td align="left">7.09562058297619e-06</td>
-<td align="left">5.06830041641156e-07</td>
-<td align="left">0</td>
-<td align="left">1.89638436914558e-06</td>
-</tr>
-<tr class="odd">
-<td align="left">p__GAL15</td>
-<td align="left">3.54781029148809e-06</td>
-<td align="left">2.53415020820578e-07</td>
-<td align="left">0</td>
-<td align="left">9.48192184572788e-07</td>
-</tr>
-<tr class="even">
-<td align="left">p__GN02</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-</tr>
-<tr class="odd">
-<td align="left">p__FCPU426</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-</tr>
-<tr class="even">
-<td align="left">p__</td>
-<td align="left">2.21149890973104e-06</td>
-<td align="left">1.57964207837931e-07</td>
-<td align="left">0</td>
-<td align="left">5.9104794510269e-07</td>
-</tr>
-<tr class="odd">
-<td align="left">p__OP1</td>
-<td align="left">1.99034901875793e-05</td>
-<td align="left">1.42167787054138e-06</td>
-<td align="left">0</td>
-<td align="left">5.31943150592421e-06</td>
-</tr>
-<tr class="even">
-<td align="left">p__SAR406</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-</tr>
-<tr class="odd">
-<td align="left">p__NC10</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-</tr>
-<tr class="even">
-<td align="left">p__KSB3</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-</tr>
-<tr class="odd">
-<td align="left">p__TPD-58</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
+<td align="left">7.57432304487786e-05</td>
+<td align="left">2.56720824508302e-05</td>
+<td align="left">1.36309902054188e-05</td>
+<td align="left">2.90669284168875e-05</td>
 </tr>
 </tbody>
 </table>
@@ -734,15 +417,16 @@ tax_sum &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tax
 <p>Useful for QC purposes. Check for siatribution of sequencing depth.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_read_distribution.html">plot_read_distribution</a></span>(ps0, <span class="dt">groups=</span><span class="st">"SampleType"</span>, <span class="dt">plot.type=</span> <span class="st">"density"</span>)
-<span class="co">#&gt; [1] "Done plotting"</span>
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
 <div id="convert-phyloseq-object-to-long-data-format" class="section level2">
 <h2 class="hasAnchor">
 <a href="#convert-phyloseq-object-to-long-data-format" class="anchor"></a>Convert phyloseq object to long data format</h2>
 <p>Useful if the user wants to plot specific features.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># reduce size for example</span>
+ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
+
 pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy_to_ldf.html">phy_to_ldf</a></span>(ps0, <span class="dt">transform.counts =</span> <span class="ot">NULL</span>)
 <span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
 
@@ -768,42 +452,6 @@ pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">541135</td>
-<td align="left">k__Bacteria</td>
-<td align="left">p__Firmicutes</td>
-<td align="left">c__Bacilli</td>
-<td align="left">o__Lactobacillales</td>
-<td align="left">f__Lactobacillaceae</td>
-<td align="left">g__Lactobacillus</td>
-<td align="left">s__</td>
-<td align="left">cb110</td>
-<td align="right">0</td>
-<td align="left">cb110</td>
-<td align="left">Subject_110</td>
-<td align="left">C</td>
-<td align="left">cb110.fasta</td>
-<td align="right">1</td>
-<td align="left">Biopsy</td>
-</tr>
-<tr class="even">
-<td align="left">1050608</td>
-<td align="left">k__Bacteria</td>
-<td align="left">p__Actinobacteria</td>
-<td align="left">c__Actinobacteria</td>
-<td align="left">o__Actinomycetales</td>
-<td align="left">f__Corynebacteriaceae</td>
-<td align="left">g__Corynebacterium</td>
-<td align="left">s__</td>
-<td align="left">cb110</td>
-<td align="right">5</td>
-<td align="left">cb110</td>
-<td align="left">Subject_110</td>
-<td align="left">C</td>
-<td align="left">cb110.fasta</td>
-<td align="right">1</td>
-<td align="left">Biopsy</td>
-</tr>
-<tr class="odd">
 <td align="left">370251</td>
 <td align="left">k__Bacteria</td>
 <td align="left">p__Proteobacteria</td>
@@ -822,16 +470,16 @@ pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy
 <td align="left">Biopsy</td>
 </tr>
 <tr class="even">
-<td align="left">188753</td>
+<td align="left">1081058</td>
 <td align="left">k__Bacteria</td>
 <td align="left">p__Firmicutes</td>
-<td align="left">c__Clostridia</td>
-<td align="left">o__Clostridiales</td>
-<td align="left">f__Lachnospiraceae</td>
-<td align="left">g__Blautia</td>
+<td align="left">c__Bacilli</td>
+<td align="left">o__Bacillales</td>
+<td align="left">f__Planococcaceae</td>
+<td align="left">g__</td>
 <td align="left">s__</td>
 <td align="left">cb110</td>
-<td align="right">1</td>
+<td align="right">5</td>
 <td align="left">cb110</td>
 <td align="left">Subject_110</td>
 <td align="left">C</td>
@@ -840,16 +488,16 @@ pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy
 <td align="left">Biopsy</td>
 </tr>
 <tr class="odd">
-<td align="left">217472</td>
+<td align="left">189592</td>
 <td align="left">k__Bacteria</td>
-<td align="left">p__Acidobacteria</td>
-<td align="left">c__Acidobacteriia</td>
-<td align="left">o__Acidobacteriales</td>
-<td align="left">f__Koribacteraceae</td>
-<td align="left">g__Candidatus Koribacter</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">c__Clostridia</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">f__Lachnospiraceae</td>
+<td align="left">g__</td>
 <td align="left">s__</td>
 <td align="left">cb110</td>
-<td align="right">0</td>
+<td align="right">11</td>
 <td align="left">cb110</td>
 <td align="left">Subject_110</td>
 <td align="left">C</td>
@@ -858,16 +506,52 @@ pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy
 <td align="left">Biopsy</td>
 </tr>
 <tr class="even">
-<td align="left">623634</td>
+<td align="left">311173</td>
 <td align="left">k__Bacteria</td>
-<td align="left">p__Acidobacteria</td>
-<td align="left">c__Solibacteres</td>
-<td align="left">o__Solibacterales</td>
-<td align="left">f__Solibacteraceae</td>
-<td align="left">g__Candidatus Solibacter</td>
+<td align="left">p__Proteobacteria</td>
+<td align="left">c__Epsilonproteobacteria</td>
+<td align="left">o__Campylobacterales</td>
+<td align="left">f__Helicobacteraceae</td>
+<td align="left">g__</td>
 <td align="left">s__</td>
 <td align="left">cb110</td>
-<td align="right">0</td>
+<td align="right">9</td>
+<td align="left">cb110</td>
+<td align="left">Subject_110</td>
+<td align="left">C</td>
+<td align="left">cb110.fasta</td>
+<td align="right">1</td>
+<td align="left">Biopsy</td>
+</tr>
+<tr class="odd">
+<td align="left">194104</td>
+<td align="left">k__Bacteria</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">c__Clostridia</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">f__Lachnospiraceae</td>
+<td align="left">g__Coprococcus</td>
+<td align="left">s__</td>
+<td align="left">cb110</td>
+<td align="right">173</td>
+<td align="left">cb110</td>
+<td align="left">Subject_110</td>
+<td align="left">C</td>
+<td align="left">cb110.fasta</td>
+<td align="right">1</td>
+<td align="left">Biopsy</td>
+</tr>
+<tr class="even">
+<td align="left">191687</td>
+<td align="left">k__Bacteria</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">c__Clostridia</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">f__Lachnospiraceae</td>
+<td align="left">g__Coprococcus</td>
+<td align="left">s__</td>
+<td align="left">cb110</td>
+<td align="right">10</td>
 <td align="left">cb110</td>
 <td align="left">Subject_110</td>
 <td align="left">C</td>
@@ -887,6 +571,7 @@ pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy
 <span class="kw">data</span>(<span class="st">"biogeogut"</span>)
 ps0 &lt;-<span class="st"> </span>biogeogut
 
+ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">2</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_alpha_diversities.html">plot_alpha_diversities</a></span>(ps0, 
                             <span class="dt">type =</span> <span class="st">"diversities"</span>, 
                             <span class="dt">index.val =</span> <span class="st">"all"</span>, 
@@ -907,50 +592,55 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_alph
 <span class="kw">library</span>(RColorBrewer)
 <span class="kw">data</span>(<span class="st">"biogeogut"</span>)
 p0 &lt;-<span class="st"> </span>biogeogut
+
+
 ps1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(p0)
- ps1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(p0)
+
 ps1 &lt;-<span class="st"> </span><span class="kw">subset_samples</span>(ps1, SampleType ==<span class="st"> "Stool"</span>)
- ps1 &lt;-<span class="st"> </span><span class="kw">prune_taxa</span>(<span class="kw">taxa_sums</span>(ps1) &gt;<span class="st"> </span><span class="dv">0</span>, ps1)
+ps1 &lt;-<span class="st"> </span><span class="kw">prune_taxa</span>(<span class="kw">taxa_sums</span>(ps1) &gt;<span class="st"> </span><span class="dv">0</span>, ps1)
 prev.thres &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">05</span>, <span class="dv">1</span>, .<span class="dv">05</span>)
 det.thres &lt;-<span class="st"> </span><span class="dv">10</span>^<span class="kw">seq</span>(<span class="kw">log10</span>(<span class="fl">1e-4</span>), <span class="kw">log10</span>(.<span class="dv">2</span>), <span class="dt">length =</span> <span class="dv">10</span>)
 pseq.rel &lt;-<span class="st"> </span>microbiome::<span class="kw">transform</span>(ps1, <span class="st">"compositional"</span>)
+<span class="co"># reduce size for example</span>
+pseq.rel &lt;-<span class="st"> </span><span class="kw">core</span>(pseq.rel, <span class="dt">detection =</span> <span class="fl">0.001</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
+
 ord.bray &lt;-<span class="st"> </span><span class="kw">ordinate</span>(pseq.rel, <span class="st">"NMDS"</span>, <span class="st">"bray"</span>)
-<span class="co">#&gt; Run 0 stress 0.03158633 </span>
-<span class="co">#&gt; Run 1 stress 0.1499999 </span>
-<span class="co">#&gt; Run 2 stress 0.1103514 </span>
-<span class="co">#&gt; Run 3 stress 0.0315863 </span>
+<span class="co">#&gt; Run 0 stress 0.004997386 </span>
+<span class="co">#&gt; Run 1 stress 0.1492817 </span>
+<span class="co">#&gt; Run 2 stress 0.1078702 </span>
+<span class="co">#&gt; Run 3 stress 0.004997307 </span>
 <span class="co">#&gt; ... New best solution</span>
-<span class="co">#&gt; ... Procrustes: rmse 4.027427e-05  max resid 6.428555e-05 </span>
+<span class="co">#&gt; ... Procrustes: rmse 5.229215e-05  max resid 8.994558e-05 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 4 stress 0.07422367 </span>
-<span class="co">#&gt; Run 5 stress 0.1482091 </span>
-<span class="co">#&gt; Run 6 stress 0.03158629 </span>
-<span class="co">#&gt; ... New best solution</span>
-<span class="co">#&gt; ... Procrustes: rmse 1.8137e-05  max resid 2.497816e-05 </span>
+<span class="co">#&gt; Run 4 stress 0.004997402 </span>
+<span class="co">#&gt; ... Procrustes: rmse 5.846613e-05  max resid 0.0001004882 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 7 stress 0.03158628 </span>
-<span class="co">#&gt; ... New best solution</span>
-<span class="co">#&gt; ... Procrustes: rmse 4.234627e-05  max resid 6.288592e-05 </span>
+<span class="co">#&gt; Run 5 stress 0.2466014 </span>
+<span class="co">#&gt; Run 6 stress 0.004997396 </span>
+<span class="co">#&gt; ... Procrustes: rmse 5.606648e-05  max resid 9.649984e-05 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 8 stress 0.07887621 </span>
-<span class="co">#&gt; Run 9 stress 0.1482091 </span>
-<span class="co">#&gt; Run 10 stress 0.07422367 </span>
-<span class="co">#&gt; Run 11 stress 0.1482091 </span>
-<span class="co">#&gt; Run 12 stress 0.07422368 </span>
-<span class="co">#&gt; Run 13 stress 0.03158629 </span>
-<span class="co">#&gt; ... Procrustes: rmse 3.528564e-05  max resid 5.786359e-05 </span>
+<span class="co">#&gt; Run 7 stress 0.004997406 </span>
+<span class="co">#&gt; ... Procrustes: rmse 7.748666e-05  max resid 0.0001336052 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 14 stress 0.03158631 </span>
-<span class="co">#&gt; ... Procrustes: rmse 3.504526e-05  max resid 5.595693e-05 </span>
+<span class="co">#&gt; Run 8 stress 0.07886549 </span>
+<span class="co">#&gt; Run 9 stress 0.1410893 </span>
+<span class="co">#&gt; Run 10 stress 0.07170925 </span>
+<span class="co">#&gt; Run 11 stress 0.1492817 </span>
+<span class="co">#&gt; Run 12 stress 0.2933061 </span>
+<span class="co">#&gt; Run 13 stress 0.004997422 </span>
+<span class="co">#&gt; ... Procrustes: rmse 6.399234e-05  max resid 0.0001102909 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 15 stress 0.03158631 </span>
-<span class="co">#&gt; ... Procrustes: rmse 8.167784e-05  max resid 0.0001225303 </span>
+<span class="co">#&gt; Run 14 stress 0.004997393 </span>
+<span class="co">#&gt; ... Procrustes: rmse 5.343867e-05  max resid 9.145739e-05 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 16 stress 0.1103514 </span>
-<span class="co">#&gt; Run 17 stress 0.1482091 </span>
-<span class="co">#&gt; Run 18 stress 0.1482091 </span>
-<span class="co">#&gt; Run 19 stress 0.07887641 </span>
-<span class="co">#&gt; Run 20 stress 0.07422367 </span>
+<span class="co">#&gt; Run 15 stress 0.004997317 </span>
+<span class="co">#&gt; ... Procrustes: rmse 1.251365e-05  max resid 2.137185e-05 </span>
+<span class="co">#&gt; ... Similar to previous best</span>
+<span class="co">#&gt; Run 16 stress 0.1078702 </span>
+<span class="co">#&gt; Run 17 stress 0.1492817 </span>
+<span class="co">#&gt; Run 18 stress 0.2215083 </span>
+<span class="co">#&gt; Run 19 stress 0.07886549 </span>
+<span class="co">#&gt; Run 20 stress 0.07170925 </span>
 <span class="co">#&gt; *** Solution reached</span>
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_ordiplot_core.html">plot_ordiplot_core</a></span>(pseq.rel, ord.bray,
@@ -974,7 +664,7 @@ meta &lt;-<span class="st"> </span><span class="kw">meta</span>(psf2.rel)
 <span class="kw">library</span>(vegan)
 <span class="co">#&gt; Loading required package: permute</span>
 <span class="co">#&gt; Loading required package: lattice</span>
-<span class="co">#&gt; This is vegan 2.4-4</span>
+<span class="co">#&gt; This is vegan 2.5-1</span>
 permanova &lt;-<span class="st"> </span><span class="kw">adonis</span>(<span class="kw">t</span>(otu) ~<span class="st"> </span>SampleType,
                <span class="dt">data =</span> meta, <span class="dt">permutations=</span><span class="dv">99</span>, <span class="dt">method =</span> <span class="st">"bray"</span>)
 
@@ -1014,7 +704,6 @@ pn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_tax
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">library</span>(RColorBrewer)
 <span class="kw">library</span>(dplyr)
-<span class="co">#&gt; Warning: package 'dplyr' was built under R version 3.4.3</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -1046,7 +735,7 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-17-1.png" width="768"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">sessionInfo</span>()
-<span class="co">#&gt; R version 3.4.1 (2017-06-30)</span>
+<span class="co">#&gt; R version 3.4.4 (2018-03-15)</span>
 <span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
 <span class="co">#&gt; Running under: Windows 7 x64 (build 7601) Service Pack 1</span>
 <span class="co">#&gt; </span>
@@ -1061,40 +750,40 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt;  [1] dplyr_0.7.4                vegan_2.4-4               </span>
+<span class="co">#&gt;  [1] dplyr_0.7.4                vegan_2.5-1               </span>
 <span class="co">#&gt;  [3] lattice_0.20-35            permute_0.9-4             </span>
 <span class="co">#&gt;  [5] RColorBrewer_1.1-2         bindrcpp_0.2.2            </span>
 <span class="co">#&gt;  [7] tibble_1.4.2               knitr_1.20                </span>
-<span class="co">#&gt;  [9] microbiomeutilities_0.99.0 microbiome_1.1.10012      </span>
-<span class="co">#&gt; [11] ggplot2_2.2.1              phyloseq_1.23.1           </span>
+<span class="co">#&gt;  [9] microbiomeutilities_0.99.0 microbiome_1.0.2          </span>
+<span class="co">#&gt; [11] ggplot2_2.2.1              phyloseq_1.22.3           </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] viridis_0.5.1       Biobase_2.36.2      tidyr_0.8.0        </span>
-<span class="co">#&gt;  [4] viridisLite_0.3.0   jsonlite_1.5        splines_3.4.1      </span>
+<span class="co">#&gt;  [1] viridis_0.5.1       Biobase_2.38.0      tidyr_0.8.0        </span>
+<span class="co">#&gt;  [4] viridisLite_0.3.0   jsonlite_1.5        splines_3.4.4      </span>
 <span class="co">#&gt;  [7] foreach_1.4.4       assertthat_0.2.0    highr_0.6          </span>
-<span class="co">#&gt; [10] stats4_3.4.1        yaml_2.1.18         ggrepel_0.7.0      </span>
+<span class="co">#&gt; [10] stats4_3.4.4        yaml_2.1.18         ggrepel_0.7.0      </span>
 <span class="co">#&gt; [13] pillar_1.2.1        backports_1.1.2     glue_1.2.0         </span>
-<span class="co">#&gt; [16] digest_0.6.15       XVector_0.16.0      colorspace_1.3-2   </span>
+<span class="co">#&gt; [16] digest_0.6.15       XVector_0.18.0      colorspace_1.3-2   </span>
 <span class="co">#&gt; [19] cowplot_0.9.2       htmltools_0.3.6     Matrix_1.2-14      </span>
 <span class="co">#&gt; [22] plyr_1.8.4          pkgconfig_2.0.1     pheatmap_1.0.8     </span>
-<span class="co">#&gt; [25] zlibbioc_1.22.0     purrr_0.2.4         scales_0.5.0       </span>
-<span class="co">#&gt; [28] Rtsne_0.13          mgcv_1.8-23         IRanges_2.10.5     </span>
-<span class="co">#&gt; [31] ggpubr_0.1.6        BiocGenerics_0.22.1 lazyeval_0.2.1     </span>
-<span class="co">#&gt; [34] survival_2.41-3     magrittr_1.5        crayon_1.3.4       </span>
-<span class="co">#&gt; [37] memoise_1.1.0       evaluate_0.10.1     fs_1.2.2           </span>
-<span class="co">#&gt; [40] nlme_3.1-137        MASS_7.3-49         xml2_1.2.0         </span>
-<span class="co">#&gt; [43] tools_3.4.1         data.table_1.10.4-3 stringr_1.3.0      </span>
-<span class="co">#&gt; [46] S4Vectors_0.14.7    munsell_0.4.3       ggsci_2.8          </span>
-<span class="co">#&gt; [49] cluster_2.0.7-1     Biostrings_2.44.2   ade4_1.7-11        </span>
-<span class="co">#&gt; [52] compiler_3.4.1      pkgdown_0.1.0.9000  rlang_0.2.0.9001   </span>
-<span class="co">#&gt; [55] rhdf5_2.20.0        grid_3.4.1          iterators_1.0.9    </span>
-<span class="co">#&gt; [58] biomformat_1.4.0    rstudioapi_0.7      igraph_1.2.1       </span>
-<span class="co">#&gt; [61] labeling_0.3        rmarkdown_1.9       gtable_0.2.0       </span>
-<span class="co">#&gt; [64] codetools_0.2-15    multtest_2.32.0     roxygen2_6.0.1     </span>
-<span class="co">#&gt; [67] reshape2_1.4.3      R6_2.2.2            gridExtra_2.3      </span>
-<span class="co">#&gt; [70] bindr_0.1.1         commonmark_1.4      rprojroot_1.3-2    </span>
-<span class="co">#&gt; [73] desc_1.1.1          ape_5.1             stringi_1.1.7      </span>
-<span class="co">#&gt; [76] parallel_3.4.1      Rcpp_0.12.16        tidyselect_0.2.4</span></code></pre></div>
+<span class="co">#&gt; [25] zlibbioc_1.24.0     purrr_0.2.4         scales_0.5.0       </span>
+<span class="co">#&gt; [28] mgcv_1.8-23         IRanges_2.12.0      ggpubr_0.1.6       </span>
+<span class="co">#&gt; [31] BiocGenerics_0.24.0 lazyeval_0.2.1      survival_2.42-3    </span>
+<span class="co">#&gt; [34] magrittr_1.5        crayon_1.3.4        memoise_1.1.0      </span>
+<span class="co">#&gt; [37] evaluate_0.10.1     fs_1.2.2            nlme_3.1-137       </span>
+<span class="co">#&gt; [40] MASS_7.3-49         xml2_1.2.0          tools_3.4.4        </span>
+<span class="co">#&gt; [43] data.table_1.10.4-3 stringr_1.3.0       S4Vectors_0.16.0   </span>
+<span class="co">#&gt; [46] munsell_0.4.3       ggsci_2.8           cluster_2.0.7-1    </span>
+<span class="co">#&gt; [49] Biostrings_2.46.0   ade4_1.7-11         compiler_3.4.4     </span>
+<span class="co">#&gt; [52] pkgdown_1.0.0       rlang_0.2.0         rhdf5_2.22.0       </span>
+<span class="co">#&gt; [55] grid_3.4.4          iterators_1.0.9     biomformat_1.6.0   </span>
+<span class="co">#&gt; [58] rstudioapi_0.7      igraph_1.2.1        labeling_0.3       </span>
+<span class="co">#&gt; [61] rmarkdown_1.9       gtable_0.2.0        codetools_0.2-15   </span>
+<span class="co">#&gt; [64] multtest_2.34.0     roxygen2_6.0.1      reshape2_1.4.3     </span>
+<span class="co">#&gt; [67] R6_2.2.2            gridExtra_2.3       bindr_0.1.1        </span>
+<span class="co">#&gt; [70] commonmark_1.4      rprojroot_1.3-2     desc_1.1.1         </span>
+<span class="co">#&gt; [73] ape_5.1             stringi_1.1.7       parallel_3.4.4     </span>
+<span class="co">#&gt; [76] Rcpp_0.12.16        tidyselect_0.2.4</span></code></pre></div>
 </div>
 <div id="package-requirements" class="section level2">
 <h2 class="hasAnchor">
@@ -1111,7 +800,6 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <li><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html">stats</a></li>
 <li><a href="http://tidyr.tidyverse.org/">tidyr</a></li>
 <li><a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/00Index.html">utils</a></li>
-<li><a href="https://cran.r-project.org/web/packages/data.table/index.html">data.table</a></li>
 <li><a href="https://cran.r-project.org/web/packages/vegan/index.html">vegan</a></li>
 <li><a href="https://cran.r-project.org/web/packages/ggpubr/index.html">ggpubr</a></li>
 <li><a href="https://cran.r-project.org/web/packages/RColorBrewer/index.html">RColorBrewer</a></li>

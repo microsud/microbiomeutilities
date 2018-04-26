@@ -103,7 +103,7 @@ kable(head(tax_table(ps0)))
 
 Some have only g__ of s__ information.  
 
-```{r}
+```{r, eval=FALSE}
 
 # reduce size for example
 ps0 <- core(ps0, detection = 10, prevalence = 20/100)
@@ -134,7 +134,7 @@ As can be seen, the rownames have the OTUIDs and available toxonomic name(s).
 
 This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
 
-```{r, eval=FALSE}
+```{r}
 
 percent_classified(ps0)
 

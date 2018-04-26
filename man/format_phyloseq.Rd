@@ -23,11 +23,14 @@ Most commonly it is observed that the taxonomy file has classification until a g
          Here, we directly take the phyloseq object as input and make the necessary formatting.
 }
 \examples{
+\dontrun{
     library(microbiome)
     library(microbiomeutilities)
     data("biogeogut")
     p0 <- biogeogut
     p0.f <- format_phyloseq(p0)
     head(tax_table(p0.f))
+    }
+    
 }
 \keyword{utilities}
