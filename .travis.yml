@@ -2,7 +2,9 @@ language: r
 sudo: required
 cache: packages
 warnings_are_errors: false
+r: devel
 r_packages:
+- devtools
 - ade4
 - Cairo
 - dplyr
@@ -38,7 +40,8 @@ r_packages:
 bioc_packages:
 - BiocInstaller
 - phyloseq
+- microbiome
 r_github_packages:
 - cran/RUnit
-- microbiome/microbiome
+- microsud/microbiomeutilities
 - jimhester/covr

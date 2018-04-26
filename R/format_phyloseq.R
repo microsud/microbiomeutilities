@@ -12,13 +12,15 @@
 #' @import microbiome
 #' @import phyloseq
 #' @export
-#' @examples
+#' @examples \dontrun{
 #'     library(microbiome)
 #'     library(microbiomeutilities)
 #'     data("biogeogut")
 #'     p0 <- biogeogut
 #'     p0.f <- format_phyloseq(p0)
 #'     head(tax_table(p0.f))
+#'     }
+#'     
 #' @keywords utilities
 format_phyloseq <- function(x) {
   Domain <- Phylum <- Class <- Order <- Family <- Genus <- Species <- NULL

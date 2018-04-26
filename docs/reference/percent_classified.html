@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Summarize the percent taxa classification for <code>phyloseq-class</code> — percent_classified" />
 
 <meta property="og:description" content="Summarize the percent taxa classification for phyloseq-class." />
@@ -38,8 +41,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -96,9 +97,11 @@
     <div class="hidden name"><code>percent_classified.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Summarize the percent taxa classification for <code>phyloseq-class</code>.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>percent_classified</span>(<span class='no'>x</span>)</pre>
     
@@ -117,20 +120,13 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>    <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
     <span class='no'>pseq</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
-    <span class='fu'>percent_classified</span>(<span class='no'>pseq</span>)</div><div class='output co'>#&gt; <span class='message'>Only patterns such as [g__] or similar is expected. [g__&lt;empty&gt;] or [g__unclassified] not considered</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>          please convert for eg. g__unclassified to uniform [g__] or NAs</span></div><div class='output co'>#&gt;   Taxonomic_Levels Percent_Classification
-#&gt; 1           Domain              99.9948 %
-#&gt; 2           Phylum              99.9895 %
-#&gt; 3            Class              99.8059 %
-#&gt; 4            Order              98.4682 %
-#&gt; 5           Family              87.3367 %
-#&gt; 6            Genus              55.6838 %
-#&gt; 7          Species              17.9772 %
-#&gt; 8        OTUs/ASVs                  19063</div><div class='input'>
+    <span class='fu'>percent_classified</span>(<span class='no'>pseq</span>)
+
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

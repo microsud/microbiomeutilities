@@ -4,7 +4,10 @@
 \alias{list_microbiome_data}
 \title{List of available datasets}
 \usage{
-list_microbiome_data()
+list_microbiome_data(printtab = TRUE)
+}
+\arguments{
+\item{printtab}{Print in console or not, defaut is TRUE and will print output.}
 }
 \description{
 Data are used from Duvallet et al 2017 https://www.nature.com/articles/s41467-017-01973-8.pdf?origin=ppub.
@@ -13,9 +16,11 @@ Data are used from Duvallet et al 2017 https://www.nature.com/articles/s41467-01
 Data for practice, also an example for importing mothur files from Baxtrer et al 2016. The source file for these data is the microbiomedatarepo https://github.com/microsud/microbiomedatarepo.
 }
 \examples{
+\dontrun{
     library(microbiomeutilities)
 
-    list_microbiome_data()
+    df <- list_microbiome_data(printtab = FALSE)
+    }
 
 }
 \keyword{utilities}

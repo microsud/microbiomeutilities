@@ -13,7 +13,8 @@
 #' @import microbiome
 #' @import RColorBrewer
 #' @export
-#' @examples
+#' @examples \dontrun{
+#'   # Example data
 #'     library(microbiome)
 #'     library(microbiomeutilities)
 #'     data("biogeogut")
@@ -22,7 +23,8 @@
 #'     select.taxa <- c("OTU-4431292:Oscillospira", "OTU-661266:Blautia")
 #'     p <- plot_select_taxa(p0.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
 #'     print(p)
-#'
+#'     
+#'     }
 #' @keywords utilities
 #'
 

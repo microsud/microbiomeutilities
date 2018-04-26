@@ -34,11 +34,12 @@
 #' @importFrom stats frequency
 #' @export
 #' @author Contact: Sudarshan A. Shetty \email{sudarshanshetty9@@gmail.com}
-#' @examples
+#' @examples \dontrun{
 #'     library(microbiomeutilities)
 #'     data("biogeogut")
 #'     pseq <- biogeogut
 #'     percent_classified(pseq)
+#'     }
 #'
 #' @keywords utilities
 percent_classified <- function(x)

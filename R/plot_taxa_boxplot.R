@@ -8,7 +8,8 @@
 #' @param color any of the palette supported by ggpubr/RColorBrewer packages or  user specified as c("red", "blue").
 #' @return A \code{\link{ggplot}} plot object.
 #' @export
-#' @examples
+#' @examples \dontrun{
+#'   # Example data
 #'     library(microbiomeutilities)
 #'     library(RColorBrewer)
 #'     data("biogeogut")
@@ -18,6 +19,7 @@
 #'     top.otu = 3, VariableA = "SampleType",
 #'     title = "Rel plot", color = "Set2")
 #'     print(pn)
+#'     }
 #'
 #' @keywords utilities
 

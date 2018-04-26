@@ -10,14 +10,16 @@
 #' @import phyloseq
 #' @import graphics
 #' @export
-#' @examples
+#' @examples \dontrun{
+#'   # Example data
 #'     library(microbiome)
 #'     library(microbiomeutilities)
 #'     data("biogeogut")
 #'     p0 <- biogeogut
 #'     p <- plot_taxa_cv(p0, plot.type = "hist")
 #'     print(p)
-#'
+#'     }
+#' 
 #' @keywords utilities
 #'
 plot_taxa_cv <- function(x, plot.type){

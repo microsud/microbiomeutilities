@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="A boxplot for user specified list of taxa — plot_select_taxa" />
 
 <meta property="og:description" content="User specifed OTUs are plotted." />
@@ -38,8 +41,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -96,9 +97,11 @@
     <div class="hidden name"><code>plot_select_taxa.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>User specifed OTUs are plotted.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>plot_select_taxa</span>(<span class='no'>x</span>, <span class='no'>select.taxa</span>, <span class='no'>variableA</span>, <span class='no'>palette</span>, <span class='no'>plot.type</span>)</pre>
     
@@ -138,14 +141,19 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>    <span class='fu'>library</span>(<span class='no'>microbiome</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+  <span class='co'># Example data</span>
+    <span class='fu'>library</span>(<span class='no'>microbiome</span>)
     <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
     <span class='no'>p0</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
     <span class='no'>p0.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='no'>p0</span>)
     <span class='no'>select.taxa</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"OTU-4431292:Oscillospira"</span>, <span class='st'>"OTU-661266:Blautia"</span>)
-    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_select_taxa</span>(<span class='no'>p0.f</span>, <span class='no'>select.taxa</span>, <span class='st'>"SampleType"</span>, <span class='st'>"Paired"</span>, <span class='kw'>plot.type</span> <span class='kw'>=</span> <span class='st'>"stripchart"</span>)</div><div class='output co'>#&gt; <span class='message'>An additonal column Sam_rep with sample names is created for reference purpose</span></div><div class='input'>    <span class='fu'>print</span>(<span class='no'>p</span>)</div><div class='img'><img src='plot_select_taxa-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_select_taxa</span>(<span class='no'>p0.f</span>, <span class='no'>select.taxa</span>, <span class='st'>"SampleType"</span>, <span class='st'>"Paired"</span>, <span class='kw'>plot.type</span> <span class='kw'>=</span> <span class='st'>"stripchart"</span>)
+    <span class='fu'>print</span>(<span class='no'>p</span>)
+
+
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
