@@ -13,10 +13,6 @@ microbiomeutilities
 **This package is in experimental stage and should be used with caution** 
 I will keep improving this with time and feedback.  
 
-![Alt text](https://github.com/microsud/microbiomeutilities/blob/Devel/inst/extdata/images/Anonymous-work-in-progress.png)
-
-[image source clker.com](http://www.clker.com/clipart-work-in-progress.html)
-
 # microbiomeutilities
 This is mainly a _wrapper tool R package_. Apart for some simple scripts for plotting, this package has a single function `microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a _HTML_ report for convenient investigating of the data.     
 Check the [repository wiki](https://github.com/microsud/microbiomeutilities/wiki)  
@@ -55,37 +51,6 @@ URL: [http://microbiome.github.com/microbiome](http://microbiome.github.com/micr
  $ _OTU or ASVs amplicon sequence variants as suggested recently (Callahan, McMurdie & Holmes, 2017)_.   
 
 
-The RUniverse for microbiome data analytics has several tools some listed below. 
-
-### Tools:
-1.	Ampvis	[Tools for visualising amplicon sequencing data](http://madsalbertsen.github.io/ampvis/)  
-2.	CCREPE	[Compositionality Corrected by PErmutation and REnormalization](http://bioconductor.org/packages/release/bioc/html/ccrepe.html)  
-3.	DADA2	[Divisive Amplicon Denoising Algorithm](https://www.nature.com/nmeth/journal/v13/n7/full/nmeth.3869.html)  
-4.	DESeq2	[Differential expression analysis for sequence count data](https://www.bioconductor.org/packages/devel/bioc/vignettes/phyloseq/inst/doc/phyloseq-mixture-models.html)  
-5.	edgeR	[empirical analysis of DGE in R](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2796818/)  
-6.	mare	[Microbiota Analysis in R Easily](https://github.com/katrikorpela/mare)  
-7.	Metacoder	[An R package for visualization and manipulation of community taxonomic diversity data](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005404)  
-8.	metagenomeSeq	[Differential abundance analysis for microbial marker-gene surveys](http://www.nature.com/nmeth/journal/v10/n12/full/nmeth.2658.html)  
-9.	microbiome R package	[Tools for microbiome analysis in R](https://github.com/microbiome/microbiome)  
-10.	MINT	[Multivariate INTegrative method](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-017-1553-8)  
-11.	mixDIABLO	[Data Integration Analysis for Biomarker discovery using Latent variable approaches for ‘Omics studies](http://mixomics.org/mixdiablo/)  
-12.	mixMC	[Multivariate Statistical Framework to Gain Insight into Microbial Communities](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160169)  
-13.	MMinte	[Methodology for the large-scale assessment of microbial metabolic interactions (MMinte) from 16S rDNA data](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1230-3)  
-14.	pathostat	[Statistical Microbiome Analysis on metagenomics results from sequencing data samples](https://bioconductor.org/packages/release/bioc/html/PathoStat.html)  
-15.	phylofactor	[Phylogenetic factorization of compositional data](https://peerj.com/articles/2969/)  
-16.	phylogeo	[Geographic analysis and visualization of microbiome data](https://www.ncbi.nlm.nih.gov/pubmed/25913208)  
-17.	qiimer	[R tools compliment qiime](https://github.com/kylebittinger/qiimer)  
-18.	RAM	[R for Amplicon-Sequencing-Based Microbial-Ecology](https://cran.r-project.org/web/packages/RAM/RAM.pdf)  
-19.	ShinyPhyloseq	[Web-tool with user interface for Phyloseq](http://joey711.github.io/shiny-phyloseq/)  
-20.	SigTree	[Identify and Visualize Significantly Responsive Branches in a Phylogenetic Tree](http://www.sciencedirect.com/science/article/pii/S2001037017300132)  
-21.	SPIEC-EASI	[Sparse and Compositionally Robust Inference of Microbial Ecological Networks](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004226)  
-22.	structSSI	[Simultaneous and Selective Inference for Grouped or Hierarchically Structured Data](https://www.jstatsoft.org/article/view/v059i13)  
-23.	Tax4Fun	[Predicting functional profiles from metagenomic 16S rRNA gene data](https://www.ncbi.nlm.nih.gov/pubmed/25957349)  
-24.	taxize	[Taxonomic Information from Around the Web](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3901538/)    
-25. labdsv	[Ordination and Multivariate Analysis for Ecology](https://cran.r-project.org/web/packages/labdsv/labdsv.pdf)  
-26. Vegan	[R package for community ecologists](https://github.com/vegandevs/vegan)  
-27.	igraph	[Network Analysis and Visualization in R](http://igraph.org/r/)
-
 ### Useful resources are provided by:  
 1. [Ben J. Callahan and Colleagues: Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses](https://f1000research.com/articles/5-1492/v2).   
 2. [Comeau AM and Colleagues: Microbiome Helper: a Custom and Streamlined Workflow for Microbiome Research](http://msystems.asm.org/content/2/1/e00127-16)  
@@ -106,5 +71,28 @@ A good practise is to use Rmarkdown for documenting your results and sharing wit
 3. Caporaso, J. G., Kuczynski, J., Stombaugh, J., Bittinger, K., Bushman, F. D., Costello, E. K., Fierer, N., Peña, A. G., Goodrich, J. K. & Gordon, J. I. (2010). QIIME allows analysis of high-throughput community sequencing data. Nature methods 7, 335-336.  
 4. Schloss, P. D., Westcott, S. L., Ryabin, T., Hall, J. R., Hartmann, M., Hollister, E. B., Lesniewski, R. A., Oakley, B. B., Parks, D. H. & Robinson, C. J. (2009). Introducing mothur: open-source, platform-independent, community-supported software for describing and comparing microbial communities. Applied and environmental microbiology 75, 7537-7541.  
 Team, R. C. (2000). R language definition. Vienna, Austria: R foundation for statistical computing.  
+
+### Datasets from:  
+Duvallet, Claire, et al. "Meta-analysis of gut microbiome studies identifies disease-specific and shared responses." Nature communications 8.1 (2017): 1784.   
+Son, J. et al. Comparison of fecal microbiota in children with autism spectrum disorders and neurotypical siblings in the simons simplex collection. PLoS ONE 10, e0137725 (2015).  
+Kang, D. W. et al. Reduced incidence of Prevotella and other fermenters in intestinal microflora of autistic children. PLoS ONE8, e68322 (2013).  
+Schubert, A. M. et al. Microbiome data distinguish patients with clostridium difficile infection and non-c. difficile-associated diarrhea from healthy controls. mBio 5, e01021–14–e01021–14 (2014).  
+Youngster, I. et al. Fecal microbiota transplant for relapsing clostridium difficile infection using a frozen inoculum from unrelated donors: a randomized, open-label, controlled pilot study. Clin. Infect. Dis. 58, 1515–1522 (2014).  
+Baxter, N. T., Ruffin, M. T., Rogers, M. A. & Schloss, P. D. Microbiota-based model improves the sensitivity of fecal immunochemical test for detecting colonic lesions. Genome Med. 8, 37 (2016).  
+Zackular, Joseph P., et al. "The gut microbiome modulates colon tumorigenesis." MBio 4.6 (2013): e00692-13.
+Zeller, G. et al. Potential of fecal microbiota for early-stage detection of colorectal cancer. Mol. Syst. Biol. 10, 766–766 (2014).
+Singh, P. et al. Intestinal microbial communities associated with acute enteric infections and disease recovery. Microbiome 3, 45 (2015).  
+Noguera-Julian, M. et al. Gut microbiota linked to sexual preference and hiv infection. EBioMedicine 5, 135–146 (2016).
+Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic inflammation in chronic HIV infection. J. Infect. Dis. 211, 19–27 (2014).  
+Lozupone, C. A. et al. Alterations in the gut microbiota associated with hiv-1 infection. Cell Host Microbe 14, 329–339 (2013).
+Gevers, D. et al. The treatment-naive microbiome in new-onset crohn’s disease. Cell Host Microbe 15, 382–392 (2014).
+Zhang, Z. et al Large-scale survey of gut microbiota associated with MHE via 16s rRNA-based pyrosequencing. Am. J. Gastroenterol. 108, 1601–1611 (2013).  
+Wong, J. M. W., Souza, R. De, Kendall, C. W. C., Emam, A. & Jenkins, D. J. A. Colonic health: fermentation and short chain fatty acids. J. Clin. Gastroenterol. 40, 235–243 (2006).  
+Ross, M. C. et al. 16s gut community of the cameron county hispanic cohort. Microbiome 3, 7 (2015).
+Zupancic, M. L. et al. Analysis of the gut microbiota in the old order Amish and its relation to the metabolic syndrome. PLoS ONE 7, e43052 (2012).  
+Scher, J. U. et al. Expansion of intestinal prevotella copri correlates with enhanced susceptibility to arthritis. eLife 2, e01202 (2013).  
+Alkanani, A. K. et al. Alterations in intestinal microbiota correlate with susceptibility to type 1 diabetes. Diabetes 64, 3510–3520 (2015).  
+Scheperjans, F. et al Gut microbiota are related to parkinson’s disease and clinical phenotype. Mov. Disord. 30, 350–358 (2014).
+
 
 
