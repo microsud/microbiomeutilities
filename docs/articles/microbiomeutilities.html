@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>microbiomeutilities example • microbiomeutilities</title>
+<title>microbiomeutilities vignette • microbiomeutilities</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="microbiomeutilities example">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="microbiomeutilities vignette">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -60,7 +60,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>microbiomeutilities example</h1>
+      <h1>microbiomeutilities vignette</h1>
             
       
       
@@ -733,6 +733,209 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <span class="co">#&gt; First converted to compositional </span>
 <span class="co">#&gt;  then top taxa were selected</span></code></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-17-1.png" width="768"></p>
+</div>
+<div id="microbiomehd-datasets-as-phyloseq-objects" class="section level2">
+<h2 class="hasAnchor">
+<a href="#microbiomehd-datasets-as-phyloseq-objects" class="anchor"></a>MicrobiomeHD datasets as phyloseq objects</h2>
+<p>We provide access to a subset of studies included in the <code>MicrobiomeHD</code> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses</a>. Nature communications.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+study &lt;-<span class="st"> </span><span class="kw"><a href="../reference/list_microbiome_data.html">list_microbiome_data</a></span>(<span class="dt">printtab =</span> <span class="ot">FALSE</span>)
+
+knitr::<span class="kw">kable</span>(study)</code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Study</th>
+<th align="left">Disease</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Son2015_ASD</td>
+<td align="left">ASD</td>
+</tr>
+<tr class="even">
+<td align="left">Kang2013_ASD</td>
+<td align="left">ASD</td>
+</tr>
+<tr class="odd">
+<td align="left">Schubert2014_CDI</td>
+<td align="left">CDI</td>
+</tr>
+<tr class="even">
+<td align="left">Youngster2014_CDI</td>
+<td align="left">CDI</td>
+</tr>
+<tr class="odd">
+<td align="left">Baxter2016_CRC</td>
+<td align="left">CRC</td>
+</tr>
+<tr class="even">
+<td align="left">Zackular2014_CRC</td>
+<td align="left">CRC</td>
+</tr>
+<tr class="odd">
+<td align="left">Zeller2014_CRC</td>
+<td align="left">CRC</td>
+</tr>
+<tr class="even">
+<td align="left">Singh2015_EDD</td>
+<td align="left">EDD</td>
+</tr>
+<tr class="odd">
+<td align="left">NogueraJulian2016_HIV</td>
+<td align="left">HIV</td>
+</tr>
+<tr class="even">
+<td align="left">Dinh2015_HIV</td>
+<td align="left">HIV</td>
+</tr>
+<tr class="odd">
+<td align="left">Lozupone2013_HIV</td>
+<td align="left">HIV</td>
+</tr>
+<tr class="even">
+<td align="left">Gevers2014_IBD</td>
+<td align="left">IBD</td>
+</tr>
+<tr class="odd">
+<td align="left">Zhang2013_LIV</td>
+<td align="left">LIV</td>
+</tr>
+<tr class="even">
+<td align="left">Wong2013_NASH</td>
+<td align="left">NASH</td>
+</tr>
+<tr class="odd">
+<td align="left">Ross2015_OB</td>
+<td align="left">OB</td>
+</tr>
+<tr class="even">
+<td align="left">Zupancic2012_OB</td>
+<td align="left">OB</td>
+</tr>
+<tr class="odd">
+<td align="left">Scher2013_PAR</td>
+<td align="left">PAR</td>
+</tr>
+<tr class="even">
+<td align="left">Alkanani2015_T1D</td>
+<td align="left">T1D</td>
+</tr>
+<tr class="odd">
+<td align="left">Scheperjans2015_PAR</td>
+<td align="left">PAR</td>
+</tr>
+<tr class="even">
+<td align="left">Alkanani2015_T1D</td>
+<td align="left">T1D</td>
+</tr>
+</tbody>
+</table>
+<p>Below is the per study reference.</p>
+<p><strong>NOTE</strong>: When using these studies, please cite <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Duvallet et al. 2017</a> and the respective studies.</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Study</th>
+<th align="left">Disease</th>
+<th align="left">Reference</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Son2015_ASD</td>
+<td align="left">ASD</td>
+<td align="left">Son, J. et al. Comparison of fecal microbiota in children with autism spectrum disorders and neurotypical siblings in the simons simplex collection. PLoS ONE 10, e0137725 (2015).</td>
+</tr>
+<tr class="even">
+<td align="left">Kang2013_ASD</td>
+<td align="left">ASD</td>
+<td align="left">Kang, D. W. et al. Reduced incidence of Prevotella and other fermenters in intestinal microflora of autistic children. PLoS ONE8, e68322 (2013).</td>
+</tr>
+<tr class="odd">
+<td align="left">Schubert2014_CDI</td>
+<td align="left">CDI</td>
+<td align="left">Schubert, A. M. et al. Microbiome data distinguish patients with clostridium difficile infection and non-c. difficile-associated diarrhea from healthy controls. mBio 5, e01021–14–e01021–14 (2014).</td>
+</tr>
+<tr class="even">
+<td align="left">Youngster2014_CDI</td>
+<td align="left">CDI</td>
+<td align="left">Youngster, I. et al. Fecal microbiota transplant for relapsing clostridium difficile infection using a frozen inoculum from unrelated donors: a randomized, open-label, controlled pilot study. Clin. Infect. Dis. 58, 1515–1522 (2014).</td>
+</tr>
+<tr class="odd">
+<td align="left">Baxter2016_CRC</td>
+<td align="left">CRC</td>
+<td align="left">Baxter, N. T., Ruffin, M. T., Rogers, M. A. &amp; Schloss, P. D. Microbiota-based model improves the sensitivity of fecal immunochemical test for detecting colonic lesions. Genome Med. 8, 37 (2016).</td>
+</tr>
+<tr class="even">
+<td align="left">Zackular2014_CRC</td>
+<td align="left">CRC</td>
+<td align="left">Zackular, Joseph P., et al. “The gut microbiome modulates colon tumorigenesis.” MBio 4.6 (2013): e00692-13.</td>
+</tr>
+<tr class="odd">
+<td align="left">Zeller2014_CRC</td>
+<td align="left">CRC</td>
+<td align="left">Zeller, G. et al. Potential of fecal microbiota for early-stage detection of colorectal cancer. Mol. Syst. Biol. 10, 766–766 (2014).</td>
+</tr>
+<tr class="even">
+<td align="left">Singh2015_EDD</td>
+<td align="left">EDD</td>
+<td align="left">Singh, P. et al. Intestinal microbial communities associated with acute enteric infections and disease recovery. Microbiome 3, 45 (2015).</td>
+</tr>
+<tr class="odd">
+<td align="left">NogueraJulian2016_HIV</td>
+<td align="left">HIV</td>
+<td align="left">Noguera-Julian, M. et al. Gut microbiota linked to sexual preference and hiv infection. EBioMedicine 5, 135–146 (2016).</td>
+</tr>
+<tr class="even">
+<td align="left">Dinh2015_HIV</td>
+<td align="left">HIV</td>
+<td align="left">Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic inflammation in chronic HIV infection. J. Infect. Dis. 211, 19–27 (2014).</td>
+</tr>
+<tr class="odd">
+<td align="left">Lozupone2013_HIV</td>
+<td align="left">HIV</td>
+<td align="left">Lozupone, C. A. et al. Alterations in the gut microbiota associated with hiv-1 infection. Cell Host Microbe 14, 329–339 (2013).</td>
+</tr>
+<tr class="even">
+<td align="left">Gevers2014_IBD</td>
+<td align="left">IBD</td>
+<td align="left">Gevers, D. et al. The treatment-naive microbiome in new-onset crohn’s disease. Cell Host Microbe 15, 382–392 (2014).</td>
+</tr>
+<tr class="odd">
+<td align="left">Zhang2013_LIV</td>
+<td align="left">LIV</td>
+<td align="left">Zhang, Z. et al Large-scale survey of gut microbiota associated with MHE via 16s rRNA-based pyrosequencing. Am. J. Gastroenterol. 108, 1601–1611 (2013).</td>
+</tr>
+<tr class="even">
+<td align="left">Wong2013_NASH</td>
+<td align="left">NASH</td>
+<td align="left">Wong, J. M. W., Souza, R. De, Kendall, C. W. C., Emam, A. &amp; Jenkins, D. J. A. Colonic health: fermentation and short chain fatty acids. J. Clin. Gastroenterol. 40, 235–243 (2006).</td>
+</tr>
+<tr class="odd">
+<td align="left">Ross2015_OB</td>
+<td align="left">OB</td>
+<td align="left">Ross, M. C. et al. 16s gut community of the cameron county hispanic cohort. Microbiome 3, 7 (2015).</td>
+</tr>
+<tr class="even">
+<td align="left">Zupancic2012_OB</td>
+<td align="left">OB</td>
+<td align="left">Zupancic, M. L. et al. Analysis of the gut microbiota in the old order Amish and its relation to the metabolic syndrome. PLoS ONE 7, e43052 (2012).</td>
+</tr>
+<tr class="odd">
+<td align="left">Scher2013_PAR</td>
+<td align="left">PAR</td>
+<td align="left">Scher, J. U. et al. Expansion of intestinal prevotella copri correlates with enhanced susceptibility to arthritis. eLife 2, e01202 (2013).</td>
+</tr>
+<tr class="even">
+<td align="left">Alkanani2015_T1D</td>
+<td align="left">T1D</td>
+<td align="left">Alkanani, A. K. et al. Alterations in intestinal microbiota correlate with susceptibility to type 1 diabetes. Diabetes 64, 3510–3520 (2015).</td>
+</tr>
+<tr class="odd">
+<td align="left">Scheperjans2015_PAR</td>
+<td align="left">PAR</td>
+<td align="left">Scheperjans, F. et al Gut microbiota are related to parkinson’s disease and clinical phenotype. Mov. Disord. 30, 350–358 (2014).</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">sessionInfo</span>()
 <span class="co">#&gt; R version 3.4.4 (2018-03-15)</span>
@@ -834,6 +1037,7 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
       <li><a href="#plot-taxa-boxplot">Plot taxa boxplot</a></li>
       <li><a href="#plot-taxa-barplot">Plot taxa barplot</a></li>
       <li><a href="#heatmap-using-phyloseq-and-pheatmap">Heatmap using phyloseq and pheatmap</a></li>
+      <li><a href="#microbiomehd-datasets-as-phyloseq-objects">MicrobiomeHD datasets as phyloseq objects</a></li>
       <li><a href="#package-requirements">Package requirements</a></li>
       </ul>
 </div>
