@@ -21,8 +21,8 @@ An alternative to psmelt function from \code{\link{phyloseq-class}} object.
 \dontrun{
   # Example data
     library(microbiomeutilities)
-    data("biogeogut")
-    pseq <- biogeogut
+    data("zackular2014")
+    pseq <- zackular2014
     pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
 
           }

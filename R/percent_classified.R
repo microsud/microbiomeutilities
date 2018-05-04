@@ -36,8 +36,8 @@
 #' @author Contact: Sudarshan A. Shetty \email{sudarshanshetty9@@gmail.com}
 #' @examples \dontrun{
 #'     library(microbiomeutilities)
-#'     data("biogeogut")
-#'     pseq <- biogeogut
+#'     data("zackular2014")
+#'     pseq <- zackular2014
 #'     percent_classified(pseq)
 #'     }
 #'

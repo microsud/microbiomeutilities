@@ -146,11 +146,11 @@ inferno</p></td>
     <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>library</span>(<span class='no'>viridis</span>)
     <span class='fu'>library</span>(<span class='no'>RColorBrewer</span>)
-    <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
-    <span class='no'>ps0</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
+    <span class='fu'>data</span>(<span class='st'>"zackular2014"</span>)
+    <span class='no'>ps0</span> <span class='kw'>&lt;-</span> <span class='no'>zackular2014</span>
 
     <span class='no'>heat.sample</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_taxa_heatmap</span>(<span class='no'>ps0</span>, <span class='kw'>subset.top</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-                                <span class='kw'>VariableA</span> <span class='kw'>=</span> <span class='st'>"SampleType"</span>,
+                                <span class='kw'>VariableA</span> <span class='kw'>=</span> <span class='st'>"DiseaseState"</span>,
                                 <span class='kw'>heatcolors</span> <span class='kw'>=</span><span class='fu'><a href='http://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer'>brewer.pal</a></span>(<span class='fl'>100</span>, <span class='st'>"Blues"</span>),
                                 <span class='kw'>transformation</span> <span class='kw'>=</span> <span class='st'>"log10"</span>)</div><div class='output co'>#&gt; <span class='message'>Top 20 OTUs selected </span></div><div class='output co'>#&gt; <span class='message'>log10, if zeros in data then log10(1+x) will be used</span></div><div class='output co'>#&gt; <span class='message'>First top taxa were selected and </span>
 #&gt; <span class='message'>then abundances tranformed to log10(1+X)</span></div><div class='output co'>#&gt; <span class='warning'>Warning: OTU table contains zeroes. Using log10(1 + x) transform.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: n too large, allowed maximum for palette Blues is 9</span>

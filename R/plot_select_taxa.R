@@ -4,7 +4,7 @@
 #'          reported to be significantly diferent.
 #'
 #' @param x \code{\link{phyloseq-class}} object.
-#' @param select.taxa a character list of taxa to be plotted. eg. select.taxa <- c("OTU-370251", "OTU-311173", "OTU-341024", "OTU-179814").
+#' @param select.taxa a character list of taxa to be plotted. eg. select.taxa <- c("OTU-370251", "OTU-311173", "OTU-341024").
 #' @param variableA Variable of interested to be checked. This will also be used to color the plot.
 #' @param palette Any of the RColorBrewer plettes.
 #' @param plot.type Three optons c("stripchart", "boxplot", "violin")
@@ -17,11 +17,11 @@
 #'   # Example data
 #'     library(microbiome)
 #'     library(microbiomeutilities)
-#'     data("biogeogut")
-#'     p0 <- biogeogut
+#'     data("zackular2014")
+#'     p0 <- zackular2014
 #'     p0.f <- format_to_besthit(p0)
-#'     select.taxa <- c("OTU-4431292:Oscillospira", "OTU-661266:Blautia")
-#'     p <- plot_select_taxa(p0.f, select.taxa, "SampleType", "Paired", plot.type = "stripchart")
+#'     select.taxa <- c("OTU-d__denovo31:Dorea", "OTU-d__denovo24:Blautia")
+#'     p <- plot_select_taxa(p0.f, select.taxa, "DiseaseState", "Paired", plot.type = "stripchart")
 #'     print(p)
 #'     
 #'     }

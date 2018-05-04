@@ -14,8 +14,8 @@
 #'   # Example data
 #'     library(microbiome)
 #'     library(microbiomeutilities)
-#'     data("biogeogut")
-#'     p0 <- biogeogut
+#'     data("zackular2014")
+#'     p0 <- zackular2014
 #'     p <- plot_taxa_cv(p0, plot.type = "hist")
 #'     print(p)
 #'     }

@@ -33,13 +33,13 @@ a plot.
 \examples{
     library(microbiome)
     library(microbiomeutilities)
-    data("biogeogut")
-    p0 <- biogeogut
+    data("zackular2014")
+    p0 <- zackular2014
     p <- plot_alpha_diversities(p0,
     type = "diversities",
     index.val = "all",
     plot.type = "stripchart",
-    variableA = "SampleType",
+    variableA = "DiseaseState",
     palette = "jco")
 
     print(p)

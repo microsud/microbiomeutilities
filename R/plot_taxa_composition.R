@@ -29,9 +29,15 @@
 #'     plot_taxa_composition(pseq, taxonomic.level = "Phylum")
 #'           }
 #' @keywords utilities
-plot_taxa_composition <- function (x, sample.sort = NULL, taxonomic.level, transform, otu.sort = NULL, palette = brewer.pal(12, "Paired"), x.label = "sample",
-                               plot.type = "barplot", average_by, verbose = FALSE, mar = c(5, 12, 1,
-                                                                               1), ...)
+plot_taxa_composition <- function (x, sample.sort = NULL, 
+                                   taxonomic.level = "Phylum", 
+                                   transform = "compositional", 
+                                   otu.sort = NULL, 
+                                   palette = brewer.pal(12, "Paired"), 
+                                   x.label = "sample", 
+                                   plot.type = "barplot", average_by = NULL, 
+                                   verbose = FALSE, 
+                                   mar = c(5, 12, 1,1), ...)
 {
   Sample <- Abundance <- Taxon <- horiz <- value <- scales <- ID <- meta <- OTU <- taxic <- otu.df <- taxmat <- new.tax <- NULL
   if (!is.null(x@phy_tree)) {

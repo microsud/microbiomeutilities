@@ -17,8 +17,8 @@ Prints an overview \code{\link{phyloseq-class}}.
 }
 \examples{
     library(microbiomeutilities)
-    data("biogeogut")
-    pseq <- biogeogut
+    data("zackular2014")
+    pseq <- zackular2014
     print_ps(pseq)
 
 }

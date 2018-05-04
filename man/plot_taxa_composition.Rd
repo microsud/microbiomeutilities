@@ -4,10 +4,10 @@
 \alias{plot_taxa_composition}
 \title{Taxonomic Composition Plot}
 \usage{
-plot_taxa_composition(x, sample.sort = NULL, taxonomic.level, transform,
-  otu.sort = NULL, palette = brewer.pal(12, "Paired"), x.label = "sample",
-  plot.type = "barplot", average_by, verbose = FALSE, mar = c(5, 12, 1,
-  1), ...)
+plot_taxa_composition(x, sample.sort = NULL, taxonomic.level = "Phylum",
+  transform = "compositional", otu.sort = NULL, palette = brewer.pal(12,
+  "Paired"), x.label = "sample", plot.type = "barplot", average_by = NULL,
+  verbose = FALSE, mar = c(5, 12, 1, 1), ...)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}

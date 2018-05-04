@@ -114,7 +114,7 @@
     </tr>
     <tr>
       <th>select.taxa</th>
-      <td><p>a character list of taxa to be plotted. eg. select.taxa &lt;- c("OTU-370251", "OTU-311173", "OTU-341024", "OTU-179814").</p></td>
+      <td><p>a character list of taxa to be plotted. eg. select.taxa &lt;- c("OTU-370251", "OTU-311173", "OTU-341024").</p></td>
     </tr>
     <tr>
       <th>variableA</th>
@@ -145,11 +145,11 @@
   <span class='co'># Example data</span>
     <span class='fu'>library</span>(<span class='no'>microbiome</span>)
     <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
-    <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
-    <span class='no'>p0</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
+    <span class='fu'>data</span>(<span class='st'>"zackular2014"</span>)
+    <span class='no'>p0</span> <span class='kw'>&lt;-</span> <span class='no'>zackular2014</span>
     <span class='no'>p0.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='no'>p0</span>)
-    <span class='no'>select.taxa</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"OTU-4431292:Oscillospira"</span>, <span class='st'>"OTU-661266:Blautia"</span>)
-    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_select_taxa</span>(<span class='no'>p0.f</span>, <span class='no'>select.taxa</span>, <span class='st'>"SampleType"</span>, <span class='st'>"Paired"</span>, <span class='kw'>plot.type</span> <span class='kw'>=</span> <span class='st'>"stripchart"</span>)
+    <span class='no'>select.taxa</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"OTU-d__denovo31:Dorea"</span>, <span class='st'>"OTU-d__denovo24:Blautia"</span>)
+    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_select_taxa</span>(<span class='no'>p0.f</span>, <span class='no'>select.taxa</span>, <span class='st'>"DiseaseState"</span>, <span class='st'>"Paired"</span>, <span class='kw'>plot.type</span> <span class='kw'>=</span> <span class='st'>"stripchart"</span>)
     <span class='fu'>print</span>(<span class='no'>p</span>)
 
 
