@@ -4,7 +4,7 @@ Kang2013_ASD	ASD	"Kang, D. W. et al. Reduced incidence of Prevotella and other f
 Schubert2014_CDI	CDI	"Schubert, A. M. et al. Microbiome data distinguish patients with clostridium difficile infection and non-c. difficile-associated diarrhea from healthy controls. mBio 5, e01021–14–e01021–14 (2014)."
 Youngster2014_CDI	CDI	"Youngster, I. et al. Fecal microbiota transplant for relapsing clostridium difficile infection using a frozen inoculum from unrelated donors: a randomized, open-label, controlled pilot study. Clin. Infect. Dis. 58, 1515–1522 (2014)."
 Baxter2016_CRC	CRC	"Baxter, N. T., Ruffin, M. T., Rogers, M. A. & Schloss, P. D. Microbiota-based model improves the sensitivity of fecal immunochemical test for detecting colonic lesions. Genome Med. 8, 37 (2016)."
-Zackular2014_CRC	CRC	"Zackular, Joseph P., et al. ""The gut microbiome modulates colon tumorigenesis."" MBio 4.6 (2013): e00692-13."
+Zackular2014_CRC	CRC	"Zackular, Joseph P., et al. The gut microbiome modulates colon tumorigenesis. MBio 4.6 (2013): e00692-13."
 Zeller2014_CRC	CRC	"Zeller, G. et al. Potential of fecal microbiota for early-stage detection of colorectal cancer. Mol. Syst. Biol. 10, 766–766 (2014)."
 Singh2015_EDD	EDD	"Singh, P. et al. Intestinal microbial communities associated with acute enteric infections and disease recovery. Microbiome 3, 45 (2015)."
 NogueraJulian2016_HIV	HIV	"Noguera-Julian, M. et al. Gut microbiota linked to sexual preference and hiv infection. EBioMedicine 5, 135–146 (2016)."
