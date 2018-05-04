@@ -322,7 +322,7 @@ Below is the per study reference.
 
 **NOTE**: When using these studies, please cite [Duvallet et al. 2017](https://www.nature.com/articles/s41467-017-01973-8#ref-CR33) and the respective studies.  
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 
 file <- system.file("extdata", "microbiomeHD_ref.txt", package="microbiomeutilities")
 reference <- read.table(file, header = T, sep = "\t")
