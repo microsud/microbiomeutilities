@@ -11,8 +11,8 @@
 #' @examples \dontrun{
 #'   # Example data
 #'     library(microbiomeutilities)
-#'     data("biogeogut")
-#'     pseq <- biogeogut
+#'     data("zackular2014")
+#'     pseq <- zackular2014
 #'     pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
 #'
 #'           }

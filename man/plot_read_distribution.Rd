@@ -21,9 +21,9 @@ Plots distribution of reads.
 }
 \examples{
     library(microbiome)
-    data(biogeogut)
-    ps0 <- biogeogut
-    p <- plot_read_distribution(ps0, groups='SampleType', plot.type= 'density')
+    data(zackular2014)
+    ps0 <- zackular2014
+    p <- plot_read_distribution(ps0, groups='DiseaseState', plot.type= 'density')
     print(p)
 
 }

@@ -1,12 +1,11 @@
-#' Comparison of small intestine and stool microbiota
+#' Test data
 #'
-#' Data from a Shetty SA, et al.
-#' Bacterial community was profilled using V4 (EMP primers) and analysed with QIIME. Closed ref based OTU picking.
-#' Taxonomic assignment was done using RDP classifier (80% threshold, Wang method).
+#' Data from a Zackular, Joseph P., et al. "The gut microbiome modulates colon tumorigenesis." MBio 4.6 (2013): e00692
+#' -13.
 #'
 #' @docType data
 #'
-#' @usage data("biogeogut")
+#' @usage data("zackular2014")
 #'
 #' @format An object of class \code{"phyloseq"}.
 #'
@@ -14,9 +13,10 @@
 #'
 #' @examples \dontrun{
 #' library(microbiomeutilities)
-#' data("biogeogut")
-#' pseq <- biogeogut
-#' print(biogeogut)
+#' data("zackular2014")
+#' pseq <- zackular2014
+#' print(zackular2014)
 #'           }
 #'           
-"biogeogut"
+
+"zackular2014"

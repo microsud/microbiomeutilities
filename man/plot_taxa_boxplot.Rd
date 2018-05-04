@@ -30,11 +30,11 @@ Plot taxon abundance for samples.
   # Example data
     library(microbiomeutilities)
     library(RColorBrewer)
-    data("biogeogut")
-    ps1 <- biogeogut
+    data("zackular2014")
+    ps1 <- zackular2014
     pn <- plot_taxa_boxplot(ps1,
     taxonomic.level = "Phylum",
-    top.otu = 3, VariableA = "SampleType",
+    top.otu = 3, VariableA = "DiseaseState",
     title = "Rel plot", color = "Set2")
     print(pn)
     }

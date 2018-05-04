@@ -144,11 +144,11 @@
   <span class='co'># Example data</span>
     <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>library</span>(<span class='no'>RColorBrewer</span>)
-    <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
-    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
+    <span class='fu'>data</span>(<span class='st'>"zackular2014"</span>)
+    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='no'>zackular2014</span>
     <span class='no'>pn</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_taxa_boxplot</span>(<span class='no'>ps1</span>,
     <span class='kw'>taxonomic.level</span> <span class='kw'>=</span> <span class='st'>"Phylum"</span>,
-    <span class='kw'>top.otu</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>VariableA</span> <span class='kw'>=</span> <span class='st'>"SampleType"</span>,
+    <span class='kw'>top.otu</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>VariableA</span> <span class='kw'>=</span> <span class='st'>"DiseaseState"</span>,
     <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Rel plot"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"Set2"</span>)
     <span class='fu'>print</span>(<span class='no'>pn</span>)
 

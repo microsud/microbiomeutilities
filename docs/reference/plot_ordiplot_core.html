@@ -158,11 +158,10 @@ on the species ordination.</p>
     <pre class="examples"><span class='co'># NOT RUN {</span>
     <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>library</span>(<span class='no'>RColorBrewer</span>)
-    <span class='fu'>data</span>(<span class='st'>"biogeogut"</span>)
-    <span class='no'>p0</span> <span class='kw'>&lt;-</span> <span class='no'>biogeogut</span>
+    <span class='fu'>data</span>(<span class='st'>"zackular2014"</span>)
+    <span class='no'>p0</span> <span class='kw'>&lt;-</span> <span class='no'>zackular2014</span>
     <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='no'>p0</span>)
-    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='no'>p0</span>)
-    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'>subset_samples</span>(<span class='no'>ps1</span>, <span class='no'>SampleType</span> <span class='kw'>==</span> <span class='st'>"Stool"</span>)
+    <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'>subset_samples</span>(<span class='no'>ps1</span>, <span class='no'>DiseaseState</span> <span class='kw'>==</span> <span class='st'>"H"</span>)
     <span class='no'>ps1</span> <span class='kw'>&lt;-</span> <span class='fu'>prune_taxa</span>(<span class='fu'>taxa_sums</span>(<span class='no'>ps1</span>) <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='no'>ps1</span>)
     <span class='no'>prev.thres</span> <span class='kw'>&lt;-</span> <span class='fu'>seq</span>(<span class='fl'>.05</span>, <span class='fl'>1</span>, <span class='fl'>.05</span>)
     <span class='no'>det.thres</span> <span class='kw'>&lt;-</span> <span class='fl'>10</span>^<span class='fu'>seq</span>(<span class='fu'>log10</span>(<span class='fl'>1e-4</span>), <span class='fu'>log10</span>(<span class='fl'>.2</span>), <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>)
@@ -171,7 +170,7 @@ on the species ordination.</p>
 
     <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_ordiplot_core</span>(<span class='no'>pseq.rel</span>, <span class='no'>ord.bray</span>,
     <span class='no'>prev.thres</span>, <span class='no'>det.thres</span>, <span class='kw'>min.prevalence</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
-    <span class='kw'>color.opt</span> <span class='kw'>=</span> <span class='st'>"SampleType"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Sample</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <span class='kw'>color.opt</span> <span class='kw'>=</span> <span class='st'>"DiseaseState"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Sample</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
     <span class='no'>p</span>
 <span class='co'># }</span></pre>
   </div>

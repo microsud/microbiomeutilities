@@ -87,19 +87,19 @@ devtools::<span class="kw">install_github</span>(<span class="st">"microsud/micr
 <div id="example-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-data" class="anchor"></a>Example data</h2>
-<p>A subset of human intestinal biopsy and faecal data from pre-print <a href="https://www.biorxiv.org/content/early/2017/12/06/227272">Shetty SA et al. 2017</a>.</p>
+<p>Data from pre-print <a href="http://mbio.asm.org/content/4/6/e00692-13">Zackular et al., 2014: The Gut Microbiome Modulates Colon Tumorigenesis</a>.</p>
 <p>Useful resources:</p>
 <p>For more information on phyloseq data structure and uses you can have a look at <a href="http://joey711.github.io/phyloseq/">Phyloseq</a></p>
 <p>Tools for microbiome analysis in R. <strong>Microbiome package</strong> URL: <a href="http://microbiome.github.com/microbiome">microbiome package</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="kw">data</span>(<span class="st">"biogeogut"</span>)
-ps0 &lt;-<span class="st"> </span>biogeogut
+<span class="kw">data</span>(<span class="st">"zackular2014"</span>)
+ps0 &lt;-<span class="st"> </span>zackular2014
 
 <span class="kw">print</span>(ps0)
 <span class="co">#&gt; phyloseq-class experiment-level object</span>
-<span class="co">#&gt; otu_table()   OTU Table:         [ 19063 taxa and 14 samples ]</span>
-<span class="co">#&gt; sample_data() Sample Data:       [ 14 samples by 6 sample variables ]</span>
-<span class="co">#&gt; tax_table()   Taxonomy Table:    [ 19063 taxa by 7 taxonomic ranks ]</span></code></pre></div>
+<span class="co">#&gt; otu_table()   OTU Table:         [ 2078 taxa and 88 samples ]</span>
+<span class="co">#&gt; sample_data() Sample Data:       [ 88 samples by 7 sample variables ]</span>
+<span class="co">#&gt; tax_table()   Taxonomy Table:    [ 2078 taxa by 7 taxonomic ranks ]</span></code></pre></div>
 </div>
 <div id="microbiome-analysis-pipeline" class="section level2">
 <h2 class="hasAnchor">
@@ -147,37 +147,47 @@ ps0 &lt;-<span class="st"> </span>biogeogut
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>541135</td>
+<td>d__denovo1773</td>
 <td align="left">k__Bacteria</td>
-<td align="left">p__Firmicutes</td>
-<td align="left">c__Bacilli</td>
-<td align="left">o__Lactobacillales</td>
-<td align="left">f__Lactobacillaceae</td>
-<td align="left">g__Lactobacillus</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides</td>
 <td align="left">s__</td>
 </tr>
 <tr class="even">
-<td>1050608</td>
+<td>d__denovo1771</td>
 <td align="left">k__Bacteria</td>
-<td align="left">p__Actinobacteria</td>
-<td align="left">c__Actinobacteria</td>
-<td align="left">o__Actinomycetales</td>
-<td align="left">f__Corynebacteriaceae</td>
-<td align="left">g__Corynebacterium</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides</td>
 <td align="left">s__</td>
 </tr>
 <tr class="odd">
-<td>370251</td>
+<td>d__denovo1776</td>
 <td align="left">k__Bacteria</td>
-<td align="left">p__Proteobacteria</td>
-<td align="left">c__Gammaproteobacteria</td>
-<td align="left">o__Oceanospirillales</td>
-<td align="left">f__Endozoicimonaceae</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">c__Clostridia</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">f__Ruminococcaceae</td>
 <td align="left">g__</td>
 <td align="left">s__</td>
 </tr>
 <tr class="even">
-<td>188753</td>
+<td>d__denovo1777</td>
+<td align="left">k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides</td>
+<td align="left">s__</td>
+</tr>
+<tr class="odd">
+<td>d__denovo1775</td>
 <td align="left">k__Bacteria</td>
 <td align="left">p__Firmicutes</td>
 <td align="left">c__Clostridia</td>
@@ -186,24 +196,14 @@ ps0 &lt;-<span class="st"> </span>biogeogut
 <td align="left">g__Blautia</td>
 <td align="left">s__</td>
 </tr>
-<tr class="odd">
-<td>217472</td>
-<td align="left">k__Bacteria</td>
-<td align="left">p__Acidobacteria</td>
-<td align="left">c__Acidobacteriia</td>
-<td align="left">o__Acidobacteriales</td>
-<td align="left">f__Koribacteraceae</td>
-<td align="left">g__Candidatus Koribacter</td>
-<td align="left">s__</td>
-</tr>
 <tr class="even">
-<td>623634</td>
+<td>d__denovo2639</td>
 <td align="left">k__Bacteria</td>
-<td align="left">p__Acidobacteria</td>
-<td align="left">c__Solibacteres</td>
-<td align="left">o__Solibacterales</td>
-<td align="left">f__Solibacteraceae</td>
-<td align="left">g__Candidatus Solibacter</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides</td>
 <td align="left">s__</td>
 </tr>
 </tbody>
@@ -238,48 +238,48 @@ ps0.f2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>OTU-189592:f__Lachnospiraceae</td>
+<td>OTU-d__denovo165:f__Ruminococcaceae</td>
+<td align="left">Bacteria</td>
+<td align="left">Firmicutes</td>
+<td align="left">Clostridia</td>
+<td align="left">Clostridiales</td>
+<td align="left">Ruminococcaceae</td>
+<td align="left">f__Ruminococcaceae</td>
+<td align="left">f__Ruminococcaceae</td>
+<td align="left">OTU-d__denovo165:f__Ruminococcaceae</td>
+</tr>
+<tr class="even">
+<td>OTU-d__denovo167:Coprococcus</td>
 <td align="left">Bacteria</td>
 <td align="left">Firmicutes</td>
 <td align="left">Clostridia</td>
 <td align="left">Clostridiales</td>
 <td align="left">Lachnospiraceae</td>
-<td align="left">f__Lachnospiraceae</td>
-<td align="left">f__Lachnospiraceae</td>
-<td align="left">OTU-189592:f__Lachnospiraceae</td>
-</tr>
-<tr class="even">
-<td>OTU-311173:f__Helicobacteraceae</td>
-<td align="left">Bacteria</td>
-<td align="left">Proteobacteria</td>
-<td align="left">Epsilonproteobacteria</td>
-<td align="left">Campylobacterales</td>
-<td align="left">Helicobacteraceae</td>
-<td align="left">f__Helicobacteraceae</td>
-<td align="left">f__Helicobacteraceae</td>
-<td align="left">OTU-311173:f__Helicobacteraceae</td>
+<td align="left">Coprococcus</td>
+<td align="left">g__Coprococcus</td>
+<td align="left">OTU-d__denovo167:Coprococcus</td>
 </tr>
 <tr class="odd">
-<td>OTU-194104:Coprococcus</td>
+<td>OTU-d__denovo166:o__Clostridiales</td>
 <td align="left">Bacteria</td>
 <td align="left">Firmicutes</td>
 <td align="left">Clostridia</td>
 <td align="left">Clostridiales</td>
-<td align="left">Lachnospiraceae</td>
-<td align="left">Coprococcus</td>
-<td align="left">g__Coprococcus</td>
-<td align="left">OTU-194104:Coprococcus</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">OTU-d__denovo166:o__Clostridiales</td>
 </tr>
 <tr class="even">
-<td>OTU-191687:Coprococcus</td>
+<td>OTU-d__denovo161:Roseburia</td>
 <td align="left">Bacteria</td>
 <td align="left">Firmicutes</td>
 <td align="left">Clostridia</td>
 <td align="left">Clostridiales</td>
 <td align="left">Lachnospiraceae</td>
-<td align="left">Coprococcus</td>
-<td align="left">g__Coprococcus</td>
-<td align="left">OTU-191687:Coprococcus</td>
+<td align="left">Roseburia</td>
+<td align="left">g__Roseburia</td>
+<td align="left">OTU-d__denovo161:Roseburia</td>
 </tr>
 </tbody>
 </table>
@@ -295,14 +295,14 @@ ps0.f2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form
 <span class="co">#&gt; </span>
 <span class="co">#&gt;           please convert for eg. g__unclassified to uniform [g__] or NAs</span>
 <span class="co">#&gt;   Taxonomic_Levels Percent_Classification</span>
-<span class="co">#&gt; 1           Domain              99.9232 %</span>
-<span class="co">#&gt; 2           Phylum              99.9232 %</span>
-<span class="co">#&gt; 3            Class              99.9232 %</span>
-<span class="co">#&gt; 4            Order              99.1551 %</span>
-<span class="co">#&gt; 5           Family              92.8571 %</span>
-<span class="co">#&gt; 6            Genus              65.5146 %</span>
-<span class="co">#&gt; 7          Species              25.2688 %</span>
-<span class="co">#&gt; 8        OTUs/ASVs                   1302</span></code></pre></div>
+<span class="co">#&gt; 1           Domain                 99.5 %</span>
+<span class="co">#&gt; 2           Phylum                 99.5 %</span>
+<span class="co">#&gt; 3            Class                   99 %</span>
+<span class="co">#&gt; 4            Order                   99 %</span>
+<span class="co">#&gt; 5           Family                 97.5 %</span>
+<span class="co">#&gt; 6            Genus                 80.5 %</span>
+<span class="co">#&gt; 7          Species                 -0.5 %</span>
+<span class="co">#&gt; 8        OTUs/ASVs                    200</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 tax_sum &lt;-<span class="st"> </span><span class="kw"><a href="../reference/taxa_summary.html">taxa_summary</a></span>(ps0, <span class="st">"Phylum"</span>)
 <span class="co">#&gt; Data provided is not compositional </span>
@@ -318,95 +318,53 @@ tax_sum &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tax
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">p__Proteobacteria</td>
-<td align="left">0.505820644374447</td>
-<td align="left">0.160066044386969</td>
-<td align="left">0.130093201561243</td>
-<td align="left">0.149271942844063</td>
-</tr>
-<tr class="even">
 <td align="left">p__Firmicutes</td>
-<td align="left">0.800742072004174</td>
-<td align="left">0.452227050778992</td>
-<td align="left">0.434968332053413</td>
-<td align="left">0.152499338245618</td>
-</tr>
-<tr class="odd">
-<td align="left">p__Cyanobacteria</td>
-<td align="left">0.0304867969750816</td>
-<td align="left">0.00484084690131034</td>
-<td align="left">0.00165835815888446</td>
-<td align="left">0.0082911292888929</td>
+<td align="left">0.938702718865466</td>
+<td align="left">0.632215259187888</td>
+<td align="left">0.634069631401654</td>
+<td align="left">0.186558659452389</td>
 </tr>
 <tr class="even">
 <td align="left">p__Bacteroidetes</td>
-<td align="left">0.177608683751593</td>
-<td align="left">0.0851510931759493</td>
-<td align="left">0.0894749188186949</td>
-<td align="left">0.0568154240131054</td>
+<td align="left">0.77520831039166</td>
+<td align="left">0.243009108261216</td>
+<td align="left">0.170031595087053</td>
+<td align="left">0.184741228455718</td>
 </tr>
 <tr class="odd">
 <td align="left">p__Actinobacteria</td>
-<td align="left">0.769980345219467</td>
-<td align="left">0.180344742823455</td>
-<td align="left">0.0674513807697574</td>
-<td align="left">0.23708159145978</td>
+<td align="left">0.239570602807597</td>
+<td align="left">0.0320558241277642</td>
+<td align="left">0.0156884949226686</td>
+<td align="left">0.0415554036141861</td>
 </tr>
 <tr class="even">
+<td align="left">p__Proteobacteria</td>
+<td align="left">0.394890253922297</td>
+<td align="left">0.0353682325052657</td>
+<td align="left">0.0113792598497232</td>
+<td align="left">0.0684708878042132</td>
+</tr>
+<tr class="odd">
 <td align="left">p__Verrucomicrobia</td>
-<td align="left">0.495973278901466</td>
-<td align="left">0.111861986945998</td>
-<td align="left">0.0249694984346421</td>
-<td align="left">0.15112668787269</td>
-</tr>
-<tr class="odd">
-<td align="left">p__[Thermi]</td>
-<td align="left">0.00110056403907002</td>
-<td align="left">0.000204270306703256</td>
-<td align="left">9.13500951267977e-06</td>
-<td align="left">0.000373340613093799</td>
+<td align="left">0.305658324265506</td>
+<td align="left">0.0282593697373209</td>
+<td align="left">0.000100148060027087</td>
+<td align="left">0.061780449994701</td>
 </tr>
 <tr class="even">
-<td align="left">p__Fusobacteria</td>
-<td align="left">0.00323802310168529</td>
-<td align="left">0.00042636544700105</td>
-<td align="left">1.2167295591728e-05</td>
-<td align="left">0.000886848313031661</td>
+<td align="left">p__Euryarchaeota</td>
+<td align="left">0.30114063247046</td>
+<td align="left">0.0274355245134364</td>
+<td align="left">4.81433454220324e-05</td>
+<td align="left">0.061342757370339</td>
 </tr>
 <tr class="odd">
-<td align="left">p__Lentisphaerae</td>
-<td align="left">0.000119070000626684</td>
-<td align="left">1.93844269237892e-05</td>
+<td align="left">p__Deinococcus-Thermus</td>
+<td align="left">0.0356312744176846</td>
+<td align="left">0.00165668166710886</td>
 <td align="left">0</td>
-<td align="left">3.4168967507866e-05</td>
-</tr>
-<tr class="even">
-<td align="left">p__TM7</td>
-<td align="left">0.0331323554988695</td>
-<td align="left">0.00403993479934955</td>
-<td align="left">0.000117805230173725</td>
-<td align="left">0.0089207431707071</td>
-</tr>
-<tr class="odd">
-<td align="left">p__Tenericutes</td>
-<td align="left">0.0015651473201372</td>
-<td align="left">0.000363639009851278</td>
-<td align="left">0.000106429576499644</td>
-<td align="left">0.000568815358520954</td>
-</tr>
-<tr class="even">
-<td align="left">p__Synergistetes</td>
-<td align="left">0.00130005504737588</td>
-<td align="left">0.000428968915046436</td>
-<td align="left">0.000111817958507749</td>
-<td align="left">0.00052098776329193</td>
-</tr>
-<tr class="odd">
-<td align="left">p__Elusimicrobia</td>
-<td align="left">7.57432304487786e-05</td>
-<td align="left">2.56720824508302e-05</td>
-<td align="left">1.36309902054188e-05</td>
-<td align="left">2.90669284168875e-05</td>
+<td align="left">0.00535480262819235</td>
 </tr>
 </tbody>
 </table>
@@ -416,7 +374,7 @@ tax_sum &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tax
 <a href="#distribution-of-reads" class="anchor"></a>Distribution of reads</h2>
 <p>Useful for QC purposes. Check for siatribution of sequencing depth.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_read_distribution.html">plot_read_distribution</a></span>(ps0, <span class="dt">groups=</span><span class="st">"SampleType"</span>, <span class="dt">plot.type=</span> <span class="st">"density"</span>)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_read_distribution.html">plot_read_distribution</a></span>(ps0, <span class="dt">groups=</span><span class="st">"DiseaseState"</span>, <span class="dt">plot.type=</span> <span class="st">"density"</span>)
 <span class="kw">print</span>(p)</code></pre></div>
 </div>
 <div id="convert-phyloseq-object-to-long-data-format" class="section level2">
@@ -443,121 +401,128 @@ pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy
 <th align="left">Species</th>
 <th align="left">Sam_rep</th>
 <th align="right">Abundance</th>
-<th align="left">SampleID</th>
-<th align="left">Subject</th>
-<th align="left">Age</th>
-<th align="left">InputFileName</th>
-<th align="right">Sex</th>
-<th align="left">SampleType</th>
+<th align="left">investigation_type</th>
+<th align="left">project_name</th>
+<th align="left">DiseaseState</th>
+<th align="right">age</th>
+<th align="left">body_product</th>
+<th align="left">FOBT.result</th>
+<th align="left">material</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">370251</td>
-<td align="left">k__Bacteria</td>
-<td align="left">p__Proteobacteria</td>
-<td align="left">c__Gammaproteobacteria</td>
-<td align="left">o__Oceanospirillales</td>
-<td align="left">f__Endozoicimonaceae</td>
-<td align="left">g__</td>
-<td align="left">s__</td>
-<td align="left">cb110</td>
-<td align="right">29</td>
-<td align="left">cb110</td>
-<td align="left">Subject_110</td>
-<td align="left">C</td>
-<td align="left">cb110.fasta</td>
-<td align="right">1</td>
-<td align="left">Biopsy</td>
-</tr>
-<tr class="even">
-<td align="left">1081058</td>
-<td align="left">k__Bacteria</td>
-<td align="left">p__Firmicutes</td>
-<td align="left">c__Bacilli</td>
-<td align="left">o__Bacillales</td>
-<td align="left">f__Planococcaceae</td>
-<td align="left">g__</td>
-<td align="left">s__</td>
-<td align="left">cb110</td>
-<td align="right">5</td>
-<td align="left">cb110</td>
-<td align="left">Subject_110</td>
-<td align="left">C</td>
-<td align="left">cb110.fasta</td>
-<td align="right">1</td>
-<td align="left">Biopsy</td>
-</tr>
-<tr class="odd">
-<td align="left">189592</td>
+<td align="left">d__denovo66</td>
 <td align="left">k__Bacteria</td>
 <td align="left">p__Firmicutes</td>
 <td align="left">c__Clostridia</td>
 <td align="left">o__Clostridiales</td>
 <td align="left">f__Lachnospiraceae</td>
+<td align="left">g__Ruminococcus2</td>
+<td align="left">s__</td>
+<td align="left">Adenoma10-2757</td>
+<td align="right">27</td>
+<td align="left">metagenomic</td>
+<td align="left">The Gut Microbiome Improves Predictive Models for Diagnosis of Colorectal Cancer</td>
+<td align="left">nonCRC</td>
+<td align="right">37</td>
+<td align="left">feces</td>
+<td align="left">negative</td>
+<td align="left">feces</td>
+</tr>
+<tr class="even">
+<td align="left">d__denovo175</td>
+<td align="left">k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Rikenellaceae</td>
+<td align="left">g__Alistipes</td>
+<td align="left">s__</td>
+<td align="left">Adenoma10-2757</td>
+<td align="right">0</td>
+<td align="left">metagenomic</td>
+<td align="left">The Gut Microbiome Improves Predictive Models for Diagnosis of Colorectal Cancer</td>
+<td align="left">nonCRC</td>
+<td align="right">37</td>
+<td align="left">feces</td>
+<td align="left">negative</td>
+<td align="left">feces</td>
+</tr>
+<tr class="odd">
+<td align="left">d__denovo165</td>
+<td align="left">k__Bacteria</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">c__Clostridia</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">f__Ruminococcaceae</td>
 <td align="left">g__</td>
 <td align="left">s__</td>
-<td align="left">cb110</td>
+<td align="left">Adenoma10-2757</td>
+<td align="right">49</td>
+<td align="left">metagenomic</td>
+<td align="left">The Gut Microbiome Improves Predictive Models for Diagnosis of Colorectal Cancer</td>
+<td align="left">nonCRC</td>
+<td align="right">37</td>
+<td align="left">feces</td>
+<td align="left">negative</td>
+<td align="left">feces</td>
+</tr>
+<tr class="even">
+<td align="left">d__denovo167</td>
+<td align="left">k__Bacteria</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">c__Clostridia</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">f__Lachnospiraceae</td>
+<td align="left">g__Coprococcus</td>
+<td align="left">s__</td>
+<td align="left">Adenoma10-2757</td>
+<td align="right">155</td>
+<td align="left">metagenomic</td>
+<td align="left">The Gut Microbiome Improves Predictive Models for Diagnosis of Colorectal Cancer</td>
+<td align="left">nonCRC</td>
+<td align="right">37</td>
+<td align="left">feces</td>
+<td align="left">negative</td>
+<td align="left">feces</td>
+</tr>
+<tr class="odd">
+<td align="left">d__denovo166</td>
+<td align="left">k__Bacteria</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">c__Clostridia</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">f__</td>
+<td align="left">g__</td>
+<td align="left">s__</td>
+<td align="left">Adenoma10-2757</td>
+<td align="right">0</td>
+<td align="left">metagenomic</td>
+<td align="left">The Gut Microbiome Improves Predictive Models for Diagnosis of Colorectal Cancer</td>
+<td align="left">nonCRC</td>
+<td align="right">37</td>
+<td align="left">feces</td>
+<td align="left">negative</td>
+<td align="left">feces</td>
+</tr>
+<tr class="even">
+<td align="left">d__denovo161</td>
+<td align="left">k__Bacteria</td>
+<td align="left">p__Firmicutes</td>
+<td align="left">c__Clostridia</td>
+<td align="left">o__Clostridiales</td>
+<td align="left">f__Lachnospiraceae</td>
+<td align="left">g__Roseburia</td>
+<td align="left">s__</td>
+<td align="left">Adenoma10-2757</td>
 <td align="right">11</td>
-<td align="left">cb110</td>
-<td align="left">Subject_110</td>
-<td align="left">C</td>
-<td align="left">cb110.fasta</td>
-<td align="right">1</td>
-<td align="left">Biopsy</td>
-</tr>
-<tr class="even">
-<td align="left">311173</td>
-<td align="left">k__Bacteria</td>
-<td align="left">p__Proteobacteria</td>
-<td align="left">c__Epsilonproteobacteria</td>
-<td align="left">o__Campylobacterales</td>
-<td align="left">f__Helicobacteraceae</td>
-<td align="left">g__</td>
-<td align="left">s__</td>
-<td align="left">cb110</td>
-<td align="right">9</td>
-<td align="left">cb110</td>
-<td align="left">Subject_110</td>
-<td align="left">C</td>
-<td align="left">cb110.fasta</td>
-<td align="right">1</td>
-<td align="left">Biopsy</td>
-</tr>
-<tr class="odd">
-<td align="left">194104</td>
-<td align="left">k__Bacteria</td>
-<td align="left">p__Firmicutes</td>
-<td align="left">c__Clostridia</td>
-<td align="left">o__Clostridiales</td>
-<td align="left">f__Lachnospiraceae</td>
-<td align="left">g__Coprococcus</td>
-<td align="left">s__</td>
-<td align="left">cb110</td>
-<td align="right">173</td>
-<td align="left">cb110</td>
-<td align="left">Subject_110</td>
-<td align="left">C</td>
-<td align="left">cb110.fasta</td>
-<td align="right">1</td>
-<td align="left">Biopsy</td>
-</tr>
-<tr class="even">
-<td align="left">191687</td>
-<td align="left">k__Bacteria</td>
-<td align="left">p__Firmicutes</td>
-<td align="left">c__Clostridia</td>
-<td align="left">o__Clostridiales</td>
-<td align="left">f__Lachnospiraceae</td>
-<td align="left">g__Coprococcus</td>
-<td align="left">s__</td>
-<td align="left">cb110</td>
-<td align="right">10</td>
-<td align="left">cb110</td>
-<td align="left">Subject_110</td>
-<td align="left">C</td>
-<td align="left">cb110.fasta</td>
-<td align="right">1</td>
-<td align="left">Biopsy</td>
+<td align="left">metagenomic</td>
+<td align="left">The Gut Microbiome Improves Predictive Models for Diagnosis of Colorectal Cancer</td>
+<td align="left">nonCRC</td>
+<td align="right">37</td>
+<td align="left">feces</td>
+<td align="left">negative</td>
+<td align="left">feces</td>
 </tr>
 </tbody>
 </table>
@@ -568,18 +533,16 @@ pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy
 <p>Utility plot function for diversity measures calcualted by <code>microbiome</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">library</span>(microbiome)
-<span class="kw">data</span>(<span class="st">"biogeogut"</span>)
-ps0 &lt;-<span class="st"> </span>biogeogut
+<span class="kw">data</span>(<span class="st">"zackular2014"</span>)
+ps0 &lt;-<span class="st"> </span>zackular2014
 
 ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">2</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_alpha_diversities.html">plot_alpha_diversities</a></span>(ps0, 
                             <span class="dt">type =</span> <span class="st">"diversities"</span>, 
                             <span class="dt">index.val =</span> <span class="st">"all"</span>, 
                             <span class="dt">plot.type =</span> <span class="st">"stripchart"</span>, 
-                            <span class="dt">variableA =</span> <span class="st">"SampleType"</span>, 
+                            <span class="dt">variableA =</span> <span class="st">"DiseaseState"</span>, 
                             <span class="dt">palette =</span> <span class="st">"jco"</span>)
-<span class="co">#&gt; Using sam_rep_nw as id variables</span>
-<span class="co">#&gt; Using SampleID, Subject, Age, InputFileName, SampleType, sam_rep_nw as id variables</span>
 
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-12-1.png" width="768"></p>
@@ -590,13 +553,13 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_alph
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">library</span>(microbiomeutilities)
 <span class="kw">library</span>(RColorBrewer)
-<span class="kw">data</span>(<span class="st">"biogeogut"</span>)
-p0 &lt;-<span class="st"> </span>biogeogut
+<span class="kw">data</span>(<span class="st">"zackular2014"</span>)
+p0 &lt;-<span class="st"> </span>zackular2014
 
 
 ps1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(p0)
 
-ps1 &lt;-<span class="st"> </span><span class="kw">subset_samples</span>(ps1, SampleType ==<span class="st"> "Stool"</span>)
+ps1 &lt;-<span class="st"> </span><span class="kw">subset_samples</span>(ps1, DiseaseState ==<span class="st"> "H"</span>)
 ps1 &lt;-<span class="st"> </span><span class="kw">prune_taxa</span>(<span class="kw">taxa_sums</span>(ps1) &gt;<span class="st"> </span><span class="dv">0</span>, ps1)
 prev.thres &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">05</span>, <span class="dv">1</span>, .<span class="dv">05</span>)
 det.thres &lt;-<span class="st"> </span><span class="dv">10</span>^<span class="kw">seq</span>(<span class="kw">log10</span>(<span class="fl">1e-4</span>), <span class="kw">log10</span>(.<span class="dv">2</span>), <span class="dt">length =</span> <span class="dv">10</span>)
@@ -605,47 +568,38 @@ pseq.rel &lt;-<span class="st"> </span>microbiome::<span class="kw">transform</s
 pseq.rel &lt;-<span class="st"> </span><span class="kw">core</span>(pseq.rel, <span class="dt">detection =</span> <span class="fl">0.001</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
 
 ord.bray &lt;-<span class="st"> </span><span class="kw">ordinate</span>(pseq.rel, <span class="st">"NMDS"</span>, <span class="st">"bray"</span>)
-<span class="co">#&gt; Run 0 stress 0.004997386 </span>
-<span class="co">#&gt; Run 1 stress 0.1492817 </span>
-<span class="co">#&gt; Run 2 stress 0.1078702 </span>
-<span class="co">#&gt; Run 3 stress 0.004997307 </span>
-<span class="co">#&gt; ... New best solution</span>
-<span class="co">#&gt; ... Procrustes: rmse 5.229215e-05  max resid 8.994558e-05 </span>
+<span class="co">#&gt; Run 0 stress 0.1925851 </span>
+<span class="co">#&gt; Run 1 stress 0.1925852 </span>
+<span class="co">#&gt; ... Procrustes: rmse 0.0001333266  max resid 0.0006043361 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 4 stress 0.004997402 </span>
-<span class="co">#&gt; ... Procrustes: rmse 5.846613e-05  max resid 0.0001004882 </span>
+<span class="co">#&gt; Run 2 stress 0.2431167 </span>
+<span class="co">#&gt; Run 3 stress 0.1991279 </span>
+<span class="co">#&gt; Run 4 stress 0.2042816 </span>
+<span class="co">#&gt; Run 5 stress 0.203173 </span>
+<span class="co">#&gt; Run 6 stress 0.2248904 </span>
+<span class="co">#&gt; Run 7 stress 0.2135613 </span>
+<span class="co">#&gt; Run 8 stress 0.1925851 </span>
+<span class="co">#&gt; ... Procrustes: rmse 3.775377e-05  max resid 0.0001468821 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 5 stress 0.2466014 </span>
-<span class="co">#&gt; Run 6 stress 0.004997396 </span>
-<span class="co">#&gt; ... Procrustes: rmse 5.606648e-05  max resid 9.649984e-05 </span>
+<span class="co">#&gt; Run 9 stress 0.2238146 </span>
+<span class="co">#&gt; Run 10 stress 0.2244357 </span>
+<span class="co">#&gt; Run 11 stress 0.1925851 </span>
+<span class="co">#&gt; ... Procrustes: rmse 7.774405e-05  max resid 0.00032036 </span>
 <span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 7 stress 0.004997406 </span>
-<span class="co">#&gt; ... Procrustes: rmse 7.748666e-05  max resid 0.0001336052 </span>
-<span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 8 stress 0.07886549 </span>
-<span class="co">#&gt; Run 9 stress 0.1410893 </span>
-<span class="co">#&gt; Run 10 stress 0.07170925 </span>
-<span class="co">#&gt; Run 11 stress 0.1492817 </span>
-<span class="co">#&gt; Run 12 stress 0.2933061 </span>
-<span class="co">#&gt; Run 13 stress 0.004997422 </span>
-<span class="co">#&gt; ... Procrustes: rmse 6.399234e-05  max resid 0.0001102909 </span>
-<span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 14 stress 0.004997393 </span>
-<span class="co">#&gt; ... Procrustes: rmse 5.343867e-05  max resid 9.145739e-05 </span>
-<span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 15 stress 0.004997317 </span>
-<span class="co">#&gt; ... Procrustes: rmse 1.251365e-05  max resid 2.137185e-05 </span>
-<span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 16 stress 0.1078702 </span>
-<span class="co">#&gt; Run 17 stress 0.1492817 </span>
-<span class="co">#&gt; Run 18 stress 0.2215083 </span>
-<span class="co">#&gt; Run 19 stress 0.07886549 </span>
-<span class="co">#&gt; Run 20 stress 0.07170925 </span>
+<span class="co">#&gt; Run 12 stress 0.2207064 </span>
+<span class="co">#&gt; Run 13 stress 0.2235846 </span>
+<span class="co">#&gt; Run 14 stress 0.1955387 </span>
+<span class="co">#&gt; Run 15 stress 0.2262274 </span>
+<span class="co">#&gt; Run 16 stress 0.2387625 </span>
+<span class="co">#&gt; Run 17 stress 0.2313222 </span>
+<span class="co">#&gt; Run 18 stress 0.2500976 </span>
+<span class="co">#&gt; Run 19 stress 0.2442357 </span>
+<span class="co">#&gt; Run 20 stress 0.2161705 </span>
 <span class="co">#&gt; *** Solution reached</span>
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_ordiplot_core.html">plot_ordiplot_core</a></span>(pseq.rel, ord.bray,
 prev.thres, det.thres, <span class="dt">min.prevalence =</span> <span class="fl">0.9</span>,
- <span class="dt">color.opt =</span> <span class="st">"SampleType"</span>, <span class="dt">shape =</span> <span class="ot">NULL</span>, <span class="dt">Sample =</span> <span class="ot">TRUE</span>)
+ <span class="dt">color.opt =</span> <span class="st">"DiseaseState"</span>, <span class="dt">shape =</span> <span class="ot">NULL</span>, <span class="dt">Sample =</span> <span class="ot">TRUE</span>)
 <span class="co">#&gt; Convergence reached in the ordination object provided</span>
 
 <span class="kw">print</span>(p)</code></pre></div>
@@ -665,21 +619,21 @@ meta &lt;-<span class="st"> </span><span class="kw">meta</span>(psf2.rel)
 <span class="co">#&gt; Loading required package: permute</span>
 <span class="co">#&gt; Loading required package: lattice</span>
 <span class="co">#&gt; This is vegan 2.5-1</span>
-permanova &lt;-<span class="st"> </span><span class="kw">adonis</span>(<span class="kw">t</span>(otu) ~<span class="st"> </span>SampleType,
+permanova &lt;-<span class="st"> </span><span class="kw">adonis</span>(<span class="kw">t</span>(otu) ~<span class="st"> </span>DiseaseState,
                <span class="dt">data =</span> meta, <span class="dt">permutations=</span><span class="dv">99</span>, <span class="dt">method =</span> <span class="st">"bray"</span>)
 
 <span class="co"># P-value</span>
 <span class="kw">print</span>(<span class="kw">as.data.frame</span>(permanova$aov.tab)[<span class="st">"group"</span>, <span class="st">"Pr(&gt;F)"</span>])
 <span class="co">#&gt; [1] NA</span>
 
-coef &lt;-<span class="st"> </span><span class="kw">coefficients</span>(permanova)[<span class="st">"SampleType1"</span>,]
-top.coef &lt;-<span class="st"> </span>coef[<span class="kw">rev</span>(<span class="kw">order</span>(<span class="kw">abs</span>(coef)))[<span class="dv">1</span>:<span class="dv">6</span>]]
+coef &lt;-<span class="st"> </span><span class="kw">coefficients</span>(permanova)[<span class="st">"DiseaseState1"</span>,]
+top.coef &lt;-<span class="st"> </span>coef[<span class="kw">rev</span>(<span class="kw">order</span>(<span class="kw">abs</span>(coef)))[<span class="dv">1</span>:<span class="dv">3</span>]]
 
 top.coef.df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(top.coef)
 
 my_taxa &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(top.coef.df))
 
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_select_taxa.html">plot_select_taxa</a></span>(psf2.rel, my_taxa, <span class="st">"SampleType"</span>, <span class="st">"Paired"</span>, <span class="dt">plot.type =</span> <span class="st">"boxplot"</span>)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_select_taxa.html">plot_select_taxa</a></span>(psf2.rel, my_taxa, <span class="st">"DiseaseState"</span>, <span class="st">"Paired"</span>, <span class="dt">plot.type =</span> <span class="st">"boxplot"</span>)
 <span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-14-1.png" width="768"></p>
@@ -691,7 +645,7 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_sele
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 pn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_taxa_boxplot.html">plot_taxa_boxplot</a></span>(ps0,
                         <span class="dt">taxonomic.level =</span> <span class="st">"Phylum"</span>,
-                        <span class="dt">top.otu =</span> <span class="dv">5</span>, <span class="dt">VariableA =</span> <span class="st">"SampleType"</span>,
+                        <span class="dt">top.otu =</span> <span class="dv">5</span>, <span class="dt">VariableA =</span> <span class="st">"DiseaseState"</span>,
                         <span class="dt">title =</span> <span class="st">"Relative abudance plot"</span>, <span class="dt">color =</span> <span class="st">"Set2"</span>)
 <span class="co">#&gt; The phy_tree slot is empty, easy to make the plot</span>
 
@@ -726,7 +680,7 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_taxa
 <p>Useful for visualisng differences in top otus between sample groups.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_taxa_heatmap.html">plot_taxa_heatmap</a></span>(ps0, <span class="dt">subset.top =</span> <span class="dv">20</span>,
-    <span class="dt">VariableA =</span> <span class="st">"SampleType"</span>,
+    <span class="dt">VariableA =</span> <span class="st">"DiseaseState"</span>,
     <span class="dt">heatcolors =</span><span class="kw">brewer.pal</span>(<span class="dv">6</span>, <span class="st">"Blues"</span>),
     <span class="dt">transformation =</span> <span class="st">"compositional"</span>)
 <span class="co">#&gt; Top 20 OTUs selected</span>
@@ -979,7 +933,7 @@ knitr::<span class="kw">kable</span>(study)</code></pre></div>
 <span class="co">#&gt; [46] munsell_0.4.3       ggsci_2.8           cluster_2.0.7-1    </span>
 <span class="co">#&gt; [49] Biostrings_2.46.0   ade4_1.7-11         compiler_3.4.4     </span>
 <span class="co">#&gt; [52] pkgdown_1.0.0       rlang_0.2.0         rhdf5_2.22.0       </span>
-<span class="co">#&gt; [55] grid_3.4.4          iterators_1.0.9     biomformat_1.6.0   </span>
+<span class="co">#&gt; [55] grid_3.4.4          iterators_1.0.9     biomformat_1.7.0   </span>
 <span class="co">#&gt; [58] rstudioapi_0.7      igraph_1.2.1        labeling_0.3       </span>
 <span class="co">#&gt; [61] rmarkdown_1.9       gtable_0.2.0        codetools_0.2-15   </span>
 <span class="co">#&gt; [64] multtest_2.34.0     roxygen2_6.0.1      reshape2_1.4.3     </span>

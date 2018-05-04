@@ -18,8 +18,8 @@ Summarize the percent taxa classification for \code{\link{phyloseq-class}}.
 \examples{
 \dontrun{
     library(microbiomeutilities)
-    data("biogeogut")
-    pseq <- biogeogut
+    data("zackular2014")
+    pseq <- zackular2014
     percent_classified(pseq)
     }
 

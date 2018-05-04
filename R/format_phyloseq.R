@@ -15,8 +15,8 @@
 #' @examples \dontrun{
 #'     library(microbiome)
 #'     library(microbiomeutilities)
-#'     data("biogeogut")
-#'     p0 <- biogeogut
+#'     data("zackular2014")
+#'     p0 <- zackular2014
 #'     p0.f <- format_phyloseq(p0)
 #'     head(tax_table(p0.f))
 #'     }

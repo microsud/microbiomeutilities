@@ -17,8 +17,8 @@
 #'     library(microbiome)
 #'     library(microbiomeUtilities)
 #'     library(tibble)
-#'     data("biogeogut")
-#'     p0 <- biogeogut
+#'     data("zackular2014")
+#'     p0 <- zackular2014
 #'     p0.f <- format_to_besthit(p0)
 #'           }
 #' @keywords utilities

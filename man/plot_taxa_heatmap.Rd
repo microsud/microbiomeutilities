@@ -32,11 +32,11 @@ Plot heatmap using \code{\link{phyloseq-class}} object as input.
     library(microbiomeutilities)
     library(viridis)
     library(RColorBrewer)
-    data("biogeogut")
-    ps0 <- biogeogut
+    data("zackular2014")
+    ps0 <- zackular2014
 
     heat.sample <- plot_taxa_heatmap(ps0, subset.top = 20,
-                                VariableA = "SampleType",
+                                VariableA = "DiseaseState",
                                 heatcolors =brewer.pal(100, "Blues"),
                                 transformation = "log10")
 

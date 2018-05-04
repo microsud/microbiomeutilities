@@ -9,8 +9,8 @@
 #' @examples \dontrun{
 #'     # Example data
 #'     library(microbiomeutilities)
-#'     data("biogeogut")
-#'     p0 <- biogeogut
+#'     data("zackular2014")
+#'     p0 <- zackular2014
 #'     p0.rel <- microbiome::transform(p0, "compositional")
 #'     tx.sum1 <- taxa_summary(p0, "Phylum")
 #'
