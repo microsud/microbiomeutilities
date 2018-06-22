@@ -77,7 +77,7 @@
 <a href="#install" class="anchor"></a>Install</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
-devtools::<span class="kw">install_github</span>(<span class="st">"microsud/microbiomeutilities"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"microsud/microbiomeutilities"</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">library</span>(microbiomeutilities)
 <span class="kw">library</span>(microbiome)
@@ -211,19 +211,19 @@ ps0 &lt;-<span class="st"> </span>zackular2014
 <p>Some have only g__ of s__ information.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># reduce size for example</span>
-ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
+ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span><span class="op">/</span><span class="dv">100</span>)
 
 ps0.f &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_phyloseq.html">format_phyloseq</a></span>(ps0)
 
-<span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f))[<span class="dv">3</span>:<span class="dv">6</span>])</code></pre></div>
+<span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f))[<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>])</code></pre></div>
 <p>Now the available taxonomy is added.<br>
 There is a second version which will change the names in both otu table and taxonomy table. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reduce size for example</span>
-ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
+ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span><span class="op">/</span><span class="dv">100</span>)
 
 ps0.f2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(ps0)
 
-<span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f2))[<span class="dv">3</span>:<span class="dv">6</span>])</code></pre></div>
+<span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">tax_table</span>(ps0.f2))[<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>])</code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th></th>
@@ -383,7 +383,7 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_read
 <p>Useful if the user wants to plot specific features.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># reduce size for example</span>
-ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
+ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="dv">20</span><span class="op">/</span><span class="dv">100</span>)
 
 pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy_to_ldf.html">phy_to_ldf</a></span>(ps0, <span class="dt">transform.counts =</span> <span class="ot">NULL</span>)
 <span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
@@ -536,7 +536,7 @@ pseq_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/phy
 <span class="kw">data</span>(<span class="st">"zackular2014"</span>)
 ps0 &lt;-<span class="st"> </span>zackular2014
 
-ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">2</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
+ps0 &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span class="dt">detection =</span> <span class="dv">2</span>, <span class="dt">prevalence =</span> <span class="dv">20</span><span class="op">/</span><span class="dv">100</span>)
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_alpha_diversities.html">plot_alpha_diversities</a></span>(ps0, 
                             <span class="dt">type =</span> <span class="st">"diversities"</span>, 
                             <span class="dt">index.val =</span> <span class="st">"all"</span>, 
@@ -559,48 +559,43 @@ p0 &lt;-<span class="st"> </span>zackular2014
 
 ps1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(p0)
 
-ps1 &lt;-<span class="st"> </span><span class="kw">subset_samples</span>(ps1, DiseaseState ==<span class="st"> "H"</span>)
-ps1 &lt;-<span class="st"> </span><span class="kw">prune_taxa</span>(<span class="kw">taxa_sums</span>(ps1) &gt;<span class="st"> </span><span class="dv">0</span>, ps1)
+ps1 &lt;-<span class="st"> </span><span class="kw">subset_samples</span>(ps1, DiseaseState <span class="op">==</span><span class="st"> "H"</span>)
+ps1 &lt;-<span class="st"> </span><span class="kw">prune_taxa</span>(<span class="kw">taxa_sums</span>(ps1) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, ps1)
 prev.thres &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">05</span>, <span class="dv">1</span>, .<span class="dv">05</span>)
-det.thres &lt;-<span class="st"> </span><span class="dv">10</span>^<span class="kw">seq</span>(<span class="kw">log10</span>(<span class="fl">1e-4</span>), <span class="kw">log10</span>(.<span class="dv">2</span>), <span class="dt">length =</span> <span class="dv">10</span>)
-pseq.rel &lt;-<span class="st"> </span>microbiome::<span class="kw">transform</span>(ps1, <span class="st">"compositional"</span>)
+det.thres &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="kw">log10</span>(<span class="fl">1e-4</span>), <span class="kw">log10</span>(.<span class="dv">2</span>), <span class="dt">length =</span> <span class="dv">10</span>)
+pseq.rel &lt;-<span class="st"> </span>microbiome<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbiome/topics/transform">transform</a></span>(ps1, <span class="st">"compositional"</span>)
 <span class="co"># reduce size for example</span>
-pseq.rel &lt;-<span class="st"> </span><span class="kw">core</span>(pseq.rel, <span class="dt">detection =</span> <span class="fl">0.001</span>, <span class="dt">prevalence =</span> <span class="dv">20</span>/<span class="dv">100</span>)
+pseq.rel &lt;-<span class="st"> </span><span class="kw">core</span>(pseq.rel, <span class="dt">detection =</span> <span class="fl">0.001</span>, <span class="dt">prevalence =</span> <span class="dv">20</span><span class="op">/</span><span class="dv">100</span>)
 
 ord.bray &lt;-<span class="st"> </span><span class="kw">ordinate</span>(pseq.rel, <span class="st">"NMDS"</span>, <span class="st">"bray"</span>)
 <span class="co">#&gt; Run 0 stress 0.1925851 </span>
-<span class="co">#&gt; Run 1 stress 0.1925852 </span>
-<span class="co">#&gt; ... Procrustes: rmse 0.0001333266  max resid 0.0006043361 </span>
-<span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 2 stress 0.2431167 </span>
-<span class="co">#&gt; Run 3 stress 0.1991279 </span>
-<span class="co">#&gt; Run 4 stress 0.2042816 </span>
-<span class="co">#&gt; Run 5 stress 0.203173 </span>
-<span class="co">#&gt; Run 6 stress 0.2248904 </span>
-<span class="co">#&gt; Run 7 stress 0.2135613 </span>
-<span class="co">#&gt; Run 8 stress 0.1925851 </span>
-<span class="co">#&gt; ... Procrustes: rmse 3.775377e-05  max resid 0.0001468821 </span>
-<span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 9 stress 0.2238146 </span>
-<span class="co">#&gt; Run 10 stress 0.2244357 </span>
-<span class="co">#&gt; Run 11 stress 0.1925851 </span>
-<span class="co">#&gt; ... Procrustes: rmse 7.774405e-05  max resid 0.00032036 </span>
-<span class="co">#&gt; ... Similar to previous best</span>
-<span class="co">#&gt; Run 12 stress 0.2207064 </span>
-<span class="co">#&gt; Run 13 stress 0.2235846 </span>
-<span class="co">#&gt; Run 14 stress 0.1955387 </span>
-<span class="co">#&gt; Run 15 stress 0.2262274 </span>
-<span class="co">#&gt; Run 16 stress 0.2387625 </span>
-<span class="co">#&gt; Run 17 stress 0.2313222 </span>
-<span class="co">#&gt; Run 18 stress 0.2500976 </span>
-<span class="co">#&gt; Run 19 stress 0.2442357 </span>
-<span class="co">#&gt; Run 20 stress 0.2161705 </span>
-<span class="co">#&gt; *** Solution reached</span>
+<span class="co">#&gt; Run 1 stress 0.2480169 </span>
+<span class="co">#&gt; Run 2 stress 0.2128403 </span>
+<span class="co">#&gt; Run 3 stress 0.249104 </span>
+<span class="co">#&gt; Run 4 stress 0.2382931 </span>
+<span class="co">#&gt; Run 5 stress 0.1985553 </span>
+<span class="co">#&gt; Run 6 stress 0.205819 </span>
+<span class="co">#&gt; Run 7 stress 0.2042817 </span>
+<span class="co">#&gt; Run 8 stress 0.2167662 </span>
+<span class="co">#&gt; Run 9 stress 0.1980402 </span>
+<span class="co">#&gt; Run 10 stress 0.2235846 </span>
+<span class="co">#&gt; Run 11 stress 0.2047694 </span>
+<span class="co">#&gt; Run 12 stress 0.2562018 </span>
+<span class="co">#&gt; Run 13 stress 0.1955604 </span>
+<span class="co">#&gt; Run 14 stress 0.2288775 </span>
+<span class="co">#&gt; Run 15 stress 0.1955387 </span>
+<span class="co">#&gt; Run 16 stress 0.2461613 </span>
+<span class="co">#&gt; Run 17 stress 0.2314738 </span>
+<span class="co">#&gt; Run 18 stress 0.2412755 </span>
+<span class="co">#&gt; Run 19 stress 0.2497893 </span>
+<span class="co">#&gt; Run 20 stress 0.1985549 </span>
+<span class="co">#&gt; *** No convergence -- monoMDS stopping criteria:</span>
+<span class="co">#&gt;     20: stress ratio &gt; sratmax</span>
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_ordiplot_core.html">plot_ordiplot_core</a></span>(pseq.rel, ord.bray,
 prev.thres, det.thres, <span class="dt">min.prevalence =</span> <span class="fl">0.9</span>,
  <span class="dt">color.opt =</span> <span class="st">"DiseaseState"</span>, <span class="dt">shape =</span> <span class="ot">NULL</span>, <span class="dt">Sample =</span> <span class="ot">TRUE</span>)
-<span class="co">#&gt; Convergence reached in the ordination object provided</span>
+<span class="co">#&gt; Caution: Convergence was not reached in the ordination object provided</span>
 
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-13-1.png" width="1152"></p>
@@ -611,23 +606,23 @@ prev.thres, det.thres, <span class="dt">min.prevalence =</span> <span class="fl"
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 ps.f2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(ps0)
 
-psf2.rel &lt;-<span class="st"> </span>microbiome::<span class="kw">transform</span>(ps.f2, <span class="st">"compositional"</span>)
+psf2.rel &lt;-<span class="st"> </span>microbiome<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbiome/topics/transform">transform</a></span>(ps.f2, <span class="st">"compositional"</span>)
 otu &lt;-<span class="st"> </span><span class="kw">abundances</span>(psf2.rel)
 meta &lt;-<span class="st"> </span><span class="kw">meta</span>(psf2.rel)
 
 <span class="kw">library</span>(vegan)
 <span class="co">#&gt; Loading required package: permute</span>
 <span class="co">#&gt; Loading required package: lattice</span>
-<span class="co">#&gt; This is vegan 2.5-1</span>
-permanova &lt;-<span class="st"> </span><span class="kw">adonis</span>(<span class="kw">t</span>(otu) ~<span class="st"> </span>DiseaseState,
+<span class="co">#&gt; This is vegan 2.5-2</span>
+permanova &lt;-<span class="st"> </span><span class="kw">adonis</span>(<span class="kw">t</span>(otu) <span class="op">~</span><span class="st"> </span>DiseaseState,
                <span class="dt">data =</span> meta, <span class="dt">permutations=</span><span class="dv">99</span>, <span class="dt">method =</span> <span class="st">"bray"</span>)
 
 <span class="co"># P-value</span>
-<span class="kw">print</span>(<span class="kw">as.data.frame</span>(permanova$aov.tab)[<span class="st">"group"</span>, <span class="st">"Pr(&gt;F)"</span>])
+<span class="kw">print</span>(<span class="kw">as.data.frame</span>(permanova<span class="op">$</span>aov.tab)[<span class="st">"group"</span>, <span class="st">"Pr(&gt;F)"</span>])
 <span class="co">#&gt; [1] NA</span>
 
 coef &lt;-<span class="st"> </span><span class="kw">coefficients</span>(permanova)[<span class="st">"DiseaseState1"</span>,]
-top.coef &lt;-<span class="st"> </span>coef[<span class="kw">rev</span>(<span class="kw">order</span>(<span class="kw">abs</span>(coef)))[<span class="dv">1</span>:<span class="dv">3</span>]]
+top.coef &lt;-<span class="st"> </span>coef[<span class="kw">rev</span>(<span class="kw">order</span>(<span class="kw">abs</span>(coef)))[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]]
 
 top.coef.df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(top.coef)
 
@@ -695,7 +690,7 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 study &lt;-<span class="st"> </span><span class="kw"><a href="../reference/list_microbiome_data.html">list_microbiome_data</a></span>(<span class="dt">printtab =</span> <span class="ot">FALSE</span>)
 
-knitr::<span class="kw">kable</span>(study)</code></pre></div>
+knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(study)</code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">Study</th>
@@ -786,161 +781,65 @@ knitr::<span class="kw">kable</span>(study)</code></pre></div>
 </table>
 <p>Below is the per study reference.</p>
 <p><strong>NOTE</strong>: When using these studies, please cite <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Duvallet et al. 2017</a> and the respective studies.</p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">Study</th>
-<th align="left">Disease</th>
-<th align="left">Reference</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">Son2015_ASD</td>
-<td align="left">ASD</td>
-<td align="left">Son, J. et al. Comparison of fecal microbiota in children with autism spectrum disorders and neurotypical siblings in the simons simplex collection. PLoS ONE 10, e0137725 (2015).</td>
-</tr>
-<tr class="even">
-<td align="left">Kang2013_ASD</td>
-<td align="left">ASD</td>
-<td align="left">Kang, D. W. et al. Reduced incidence of Prevotella and other fermenters in intestinal microflora of autistic children. PLoS ONE8, e68322 (2013).</td>
-</tr>
-<tr class="odd">
-<td align="left">Schubert2014_CDI</td>
-<td align="left">CDI</td>
-<td align="left">Schubert, A. M. et al. Microbiome data distinguish patients with clostridium difficile infection and non-c. difficile-associated diarrhea from healthy controls. mBio 5, e01021–14–e01021–14 (2014).</td>
-</tr>
-<tr class="even">
-<td align="left">Youngster2014_CDI</td>
-<td align="left">CDI</td>
-<td align="left">Youngster, I. et al. Fecal microbiota transplant for relapsing clostridium difficile infection using a frozen inoculum from unrelated donors: a randomized, open-label, controlled pilot study. Clin. Infect. Dis. 58, 1515–1522 (2014).</td>
-</tr>
-<tr class="odd">
-<td align="left">Baxter2016_CRC</td>
-<td align="left">CRC</td>
-<td align="left">Baxter, N. T., Ruffin, M. T., Rogers, M. A. &amp; Schloss, P. D. Microbiota-based model improves the sensitivity of fecal immunochemical test for detecting colonic lesions. Genome Med. 8, 37 (2016).</td>
-</tr>
-<tr class="even">
-<td align="left">Zackular2014_CRC</td>
-<td align="left">CRC</td>
-<td align="left">Zackular, Joseph P., et al. “The gut microbiome modulates colon tumorigenesis.” MBio 4.6 (2013): e00692-13.</td>
-</tr>
-<tr class="odd">
-<td align="left">Zeller2014_CRC</td>
-<td align="left">CRC</td>
-<td align="left">Zeller, G. et al. Potential of fecal microbiota for early-stage detection of colorectal cancer. Mol. Syst. Biol. 10, 766–766 (2014).</td>
-</tr>
-<tr class="even">
-<td align="left">Singh2015_EDD</td>
-<td align="left">EDD</td>
-<td align="left">Singh, P. et al. Intestinal microbial communities associated with acute enteric infections and disease recovery. Microbiome 3, 45 (2015).</td>
-</tr>
-<tr class="odd">
-<td align="left">NogueraJulian2016_HIV</td>
-<td align="left">HIV</td>
-<td align="left">Noguera-Julian, M. et al. Gut microbiota linked to sexual preference and hiv infection. EBioMedicine 5, 135–146 (2016).</td>
-</tr>
-<tr class="even">
-<td align="left">Dinh2015_HIV</td>
-<td align="left">HIV</td>
-<td align="left">Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic inflammation in chronic HIV infection. J. Infect. Dis. 211, 19–27 (2014).</td>
-</tr>
-<tr class="odd">
-<td align="left">Lozupone2013_HIV</td>
-<td align="left">HIV</td>
-<td align="left">Lozupone, C. A. et al. Alterations in the gut microbiota associated with hiv-1 infection. Cell Host Microbe 14, 329–339 (2013).</td>
-</tr>
-<tr class="even">
-<td align="left">Gevers2014_IBD</td>
-<td align="left">IBD</td>
-<td align="left">Gevers, D. et al. The treatment-naive microbiome in new-onset crohn’s disease. Cell Host Microbe 15, 382–392 (2014).</td>
-</tr>
-<tr class="odd">
-<td align="left">Zhang2013_LIV</td>
-<td align="left">LIV</td>
-<td align="left">Zhang, Z. et al Large-scale survey of gut microbiota associated with MHE via 16s rRNA-based pyrosequencing. Am. J. Gastroenterol. 108, 1601–1611 (2013).</td>
-</tr>
-<tr class="even">
-<td align="left">Wong2013_NASH</td>
-<td align="left">NASH</td>
-<td align="left">Wong, V. W. et al. Molecular characterization of the fecal microbiota in patients with nonalcoholic steatohepatitis – a longitudinal study. PLoS ONE 8, e62885 (2013).</td>
-</tr>
-<tr class="odd">
-<td align="left">Ross2015_OB</td>
-<td align="left">OB</td>
-<td align="left">Ross, M. C. et al. 16s gut community of the cameron county hispanic cohort. Microbiome 3, 7 (2015).</td>
-</tr>
-<tr class="even">
-<td align="left">Zupancic2012_OB</td>
-<td align="left">OB</td>
-<td align="left">Zupancic, M. L. et al. Analysis of the gut microbiota in the old order Amish and its relation to the metabolic syndrome. PLoS ONE 7, e43052 (2012).</td>
-</tr>
-<tr class="odd">
-<td align="left">Scher2013_PAR</td>
-<td align="left">PAR</td>
-<td align="left">Scher, J. U. et al. Expansion of intestinal prevotella copri correlates with enhanced susceptibility to arthritis. eLife 2, e01202 (2013).</td>
-</tr>
-<tr class="even">
-<td align="left">Alkanani2015_T1D</td>
-<td align="left">T1D</td>
-<td align="left">Alkanani, A. K. et al. Alterations in intestinal microbiota correlate with susceptibility to type 1 diabetes. Diabetes 64, 3510–3520 (2015).</td>
-</tr>
-<tr class="odd">
-<td align="left">Scheperjans2015_PAR</td>
-<td align="left">PAR</td>
-<td align="left">Scheperjans, F. et al Gut microbiota are related to parkinson’s disease and clinical phenotype. Mov. Disord. 30, 350–358 (2014).</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"microbiomeHD_ref.txt"</span>, <span class="dt">package=</span><span class="st">"microbiomeutilities"</span>)
+reference &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> T, <span class="dt">sep =</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)
+
+knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(reference)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">sessionInfo</span>()
 <span class="co">#&gt; R version 3.4.4 (2018-03-15)</span>
 <span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
-<span class="co">#&gt; Running under: Windows 7 x64 (build 7601) Service Pack 1</span>
+<span class="co">#&gt; Running under: Windows 10 x64 (build 17134)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Matrix products: default</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] LC_COLLATE=Dutch_Netherlands.1252  LC_CTYPE=Dutch_Netherlands.1252   </span>
-<span class="co">#&gt; [3] LC_MONETARY=Dutch_Netherlands.1252 LC_NUMERIC=C                      </span>
-<span class="co">#&gt; [5] LC_TIME=Dutch_Netherlands.1252    </span>
+<span class="co">#&gt; [1] LC_COLLATE=English_United States.1252 </span>
+<span class="co">#&gt; [2] LC_CTYPE=English_United States.1252   </span>
+<span class="co">#&gt; [3] LC_MONETARY=English_United States.1252</span>
+<span class="co">#&gt; [4] LC_NUMERIC=C                          </span>
+<span class="co">#&gt; [5] LC_TIME=English_United States.1252    </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; attached base packages:</span>
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt;  [1] dplyr_0.7.4                vegan_2.5-1               </span>
+<span class="co">#&gt;  [1] dplyr_0.7.5                vegan_2.5-2               </span>
 <span class="co">#&gt;  [3] lattice_0.20-35            permute_0.9-4             </span>
 <span class="co">#&gt;  [5] RColorBrewer_1.1-2         bindrcpp_0.2.2            </span>
 <span class="co">#&gt;  [7] tibble_1.4.2               knitr_1.20                </span>
-<span class="co">#&gt;  [9] microbiomeutilities_0.99.0 microbiome_1.0.2          </span>
-<span class="co">#&gt; [11] ggplot2_2.2.1              phyloseq_1.23.1           </span>
+<span class="co">#&gt;  [9] microbiomeutilities_0.99.0 microbiome_1.1.10013      </span>
+<span class="co">#&gt; [11] ggplot2_2.2.1.9000         phyloseq_1.22.3           </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] viridis_0.5.1       Biobase_2.38.0      tidyr_0.8.0        </span>
+<span class="co">#&gt;  [1] viridis_0.5.1       Biobase_2.38.0      tidyr_0.8.1        </span>
 <span class="co">#&gt;  [4] viridisLite_0.3.0   jsonlite_1.5        splines_3.4.4      </span>
 <span class="co">#&gt;  [7] foreach_1.4.4       assertthat_0.2.0    highr_0.6          </span>
-<span class="co">#&gt; [10] stats4_3.4.4        yaml_2.1.18         ggrepel_0.7.0      </span>
+<span class="co">#&gt; [10] stats4_3.4.4        ggrepel_0.8.0       yaml_2.1.19        </span>
 <span class="co">#&gt; [13] pillar_1.2.2        backports_1.1.2     glue_1.2.0         </span>
 <span class="co">#&gt; [16] digest_0.6.15       XVector_0.18.0      colorspace_1.3-2   </span>
-<span class="co">#&gt; [19] cowplot_0.9.2       htmltools_0.3.6     Matrix_1.2-14      </span>
-<span class="co">#&gt; [22] plyr_1.8.4          pkgconfig_2.0.1     pheatmap_1.0.8     </span>
+<span class="co">#&gt; [19] cowplot_0.9.2       htmltools_0.3.6     Matrix_1.2-12      </span>
+<span class="co">#&gt; [22] plyr_1.8.4          pkgconfig_2.0.1     pheatmap_1.0.10    </span>
 <span class="co">#&gt; [25] zlibbioc_1.24.0     purrr_0.2.4         scales_0.5.0       </span>
-<span class="co">#&gt; [28] mgcv_1.8-23         IRanges_2.12.0      ggpubr_0.1.6       </span>
-<span class="co">#&gt; [31] BiocGenerics_0.24.0 lazyeval_0.2.1      survival_2.42-3    </span>
-<span class="co">#&gt; [34] magrittr_1.5        crayon_1.3.4        memoise_1.1.0      </span>
-<span class="co">#&gt; [37] evaluate_0.10.1     fs_1.2.2            nlme_3.1-137       </span>
-<span class="co">#&gt; [40] MASS_7.3-49         xml2_1.2.0          tools_3.4.4        </span>
-<span class="co">#&gt; [43] data.table_1.10.4-3 stringr_1.3.0       S4Vectors_0.16.0   </span>
-<span class="co">#&gt; [46] munsell_0.4.3       ggsci_2.8           cluster_2.0.7-1    </span>
-<span class="co">#&gt; [49] Biostrings_2.46.0   ade4_1.7-11         compiler_3.4.4     </span>
-<span class="co">#&gt; [52] pkgdown_1.0.0       rlang_0.2.0         rhdf5_2.22.0       </span>
-<span class="co">#&gt; [55] grid_3.4.4          iterators_1.0.9     biomformat_1.7.0   </span>
-<span class="co">#&gt; [58] rstudioapi_0.7      igraph_1.2.1        labeling_0.3       </span>
-<span class="co">#&gt; [61] rmarkdown_1.9       gtable_0.2.0        codetools_0.2-15   </span>
-<span class="co">#&gt; [64] multtest_2.34.0     roxygen2_6.0.1      reshape2_1.4.3     </span>
-<span class="co">#&gt; [67] R6_2.2.2            gridExtra_2.3       bindr_0.1.1        </span>
-<span class="co">#&gt; [70] commonmark_1.4      rprojroot_1.3-2     desc_1.1.1         </span>
-<span class="co">#&gt; [73] ape_5.1             stringi_1.1.7       parallel_3.4.4     </span>
-<span class="co">#&gt; [76] Rcpp_0.12.16        tidyselect_0.2.4</span></code></pre></div>
+<span class="co">#&gt; [28] Rtsne_0.13          mgcv_1.8-23         IRanges_2.12.0     </span>
+<span class="co">#&gt; [31] ggpubr_0.1.6        withr_2.1.2         BiocGenerics_0.24.0</span>
+<span class="co">#&gt; [34] lazyeval_0.2.1      survival_2.41-3     magrittr_1.5       </span>
+<span class="co">#&gt; [37] crayon_1.3.4        memoise_1.1.0       evaluate_0.10.1    </span>
+<span class="co">#&gt; [40] fs_1.2.2            nlme_3.1-131.1      MASS_7.3-49        </span>
+<span class="co">#&gt; [43] xml2_1.2.0          tools_3.4.4         data.table_1.11.2  </span>
+<span class="co">#&gt; [46] stringr_1.3.1       S4Vectors_0.16.0    munsell_0.4.3      </span>
+<span class="co">#&gt; [49] ggsci_2.9           cluster_2.0.6       Biostrings_2.46.0  </span>
+<span class="co">#&gt; [52] ade4_1.7-11         compiler_3.4.4      pkgdown_1.0.0      </span>
+<span class="co">#&gt; [55] rlang_0.2.0         rhdf5_2.22.0        grid_3.4.4         </span>
+<span class="co">#&gt; [58] iterators_1.0.9     biomformat_1.6.0    rstudioapi_0.7     </span>
+<span class="co">#&gt; [61] igraph_1.2.1        labeling_0.3        rmarkdown_1.9      </span>
+<span class="co">#&gt; [64] gtable_0.2.0        codetools_0.2-15    multtest_2.34.0    </span>
+<span class="co">#&gt; [67] roxygen2_6.0.1      reshape2_1.4.3      R6_2.2.2           </span>
+<span class="co">#&gt; [70] gridExtra_2.3       bindr_0.1.1         commonmark_1.5     </span>
+<span class="co">#&gt; [73] rprojroot_1.3-2     desc_1.2.0          ape_5.1            </span>
+<span class="co">#&gt; [76] stringi_1.2.2       parallel_3.4.4      Rcpp_0.12.17       </span>
+<span class="co">#&gt; [79] tidyselect_0.2.4</span></code></pre></div>
 </div>
 <div id="package-requirements" class="section level2">
 <h2 class="hasAnchor">
