@@ -1,7 +1,9 @@
 
 <br> 
 
-[![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=for-the-badge)](https://twitter.com/gutmicrobe)  
+[![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)  
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/gutmicrobe)
+
 
 <br>  
 
