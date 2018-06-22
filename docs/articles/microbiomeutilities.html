@@ -600,6 +600,25 @@ prev.thres, det.thres, <span class="dt">min.prevalence =</span> <span class="fl"
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-13-1.png" width="1152"></p>
 </div>
+<div id="plot-ordination-and-species-loading" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plot-ordination-and-species-loading" class="anchor"></a>Plot ordination and species loading</h2>
+<p>This functions is a utility function which depend on <code>vegan</code> and <code>phyloseq</code>. Given a phyloseq object and ordination object, it will plot species loadings with high variation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(microbiomeutilities)</span>
+
+<span class="kw">data</span>(<span class="st">"zackular2014"</span>)
+ps1 &lt;-<span class="st"> </span>zackular2014
+ps2 &lt;-<span class="st"> </span><span class="kw">tax_glom</span>(ps1, <span class="st">"Genus"</span>)
+ps2f &lt;-<span class="st"> </span><span class="kw"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(ps2)     
+orddi &lt;-<span class="st"> </span><span class="kw">ordinate</span>(ps2f, <span class="dt">method =</span> <span class="st">"CCA"</span>, <span class="dt">distance =</span> <span class="st">"bray"</span>)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_ordination_utils.html">plot_ordination_utils</a></span>(ps2f, orddi,
+                           <span class="dt">color=</span><span class="st">"DiseaseState"</span>, 
+                           <span class="dt">plot.arrow =</span> <span class="ot">TRUE</span>, 
+                           <span class="dt">scale.arrow =</span> <span class="fl">1.3</span>, <span class="dt">top.taxa =</span> <span class="dv">5</span>)
+
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+</div>
 <div id="visualize-abundance-of-select-taxa" class="section level2">
 <h2 class="hasAnchor">
 <a href="#visualize-abundance-of-select-taxa" class="anchor"></a>Visualize abundance of select taxa</h2>
@@ -631,7 +650,7 @@ my_taxa &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw"
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_select_taxa.html">plot_select_taxa</a></span>(psf2.rel, my_taxa, <span class="st">"DiseaseState"</span>, <span class="st">"Paired"</span>, <span class="dt">plot.type =</span> <span class="st">"boxplot"</span>)
 <span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-14-1.png" width="768"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-15-1.png" width="768"></p>
 </div>
 <div id="plot-taxa-boxplot" class="section level2">
 <h2 class="hasAnchor">
@@ -645,7 +664,7 @@ pn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_tax
 <span class="co">#&gt; The phy_tree slot is empty, easy to make the plot</span>
 
 <span class="kw">print</span>(pn)</code></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
 </div>
 <div id="plot-taxa-barplot" class="section level2">
 <h2 class="hasAnchor">
@@ -667,7 +686,7 @@ ps.cor &lt;-<span class="st"> </span><span class="kw">core</span>(ps0, <span cla
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_taxa_composition.html">plot_taxa_composition</a></span>(ps.cor, <span class="dt">taxonomic.level =</span> <span class="st">"Phylum"</span>, <span class="dt">transform =</span> <span class="st">"compositional"</span>, <span class="dt">average_by =</span> <span class="ot">NULL</span>)
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
 </div>
 <div id="heatmap-using-phyloseq-and-pheatmap" class="section level2">
 <h2 class="hasAnchor">
@@ -681,12 +700,13 @@ heat.sample &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <span class="co">#&gt; Top 20 OTUs selected</span>
 <span class="co">#&gt; First converted to compositional </span>
 <span class="co">#&gt;  then top taxa were selected</span></code></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-17-1.png" width="768"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-18-1.png" width="768"></p>
 </div>
 <div id="microbiomehd-datasets-as-phyloseq-objects" class="section level2">
 <h2 class="hasAnchor">
 <a href="#microbiomehd-datasets-as-phyloseq-objects" class="anchor"></a>MicrobiomeHD datasets as phyloseq objects</h2>
 <p>We provide access to a subset of studies included in the <code>MicrobiomeHD</code> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses</a>. Nature communications.</p>
+<p>The phyloseq objects are stored and accessed from <a href="https://github.com/microsud/microbiomedatarepo">microbiomedatarepo</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 study &lt;-<span class="st"> </span><span class="kw"><a href="../reference/list_microbiome_data.html">list_microbiome_data</a></span>(<span class="dt">printtab =</span> <span class="ot">FALSE</span>)
 
@@ -786,6 +806,13 @@ file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span cla
 reference &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> T, <span class="dt">sep =</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)
 
 knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(reference)</code></pre></div>
+<p>For more tutorials and examples of data anlaysis in R please check:</p>
+<ul>
+<li>
+<a href="https://goo.gl/CPChhd">Microbiome data analysis SpringSchool2018</a><br>
+</li>
+<li><a href="http://microbiome.github.io/microbiome/">Microbiome R package tutorials</a></li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">sessionInfo</span>()
 <span class="co">#&gt; R version 3.4.4 (2018-03-15)</span>
@@ -886,6 +913,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
       <li><a href="#convert-phyloseq-object-to-long-data-format">Convert phyloseq object to long data format</a></li>
       <li><a href="#plot-alpha-diversities">Plot alpha diversities</a></li>
       <li><a href="#plot-ordination-and-core">Plot ordination and core</a></li>
+      <li><a href="#plot-ordination-and-species-loading">Plot ordination and species loading</a></li>
       <li><a href="#visualize-abundance-of-select-taxa">Visualize abundance of select taxa</a></li>
       <li><a href="#plot-taxa-boxplot">Plot taxa boxplot</a></li>
       <li><a href="#plot-taxa-barplot">Plot taxa barplot</a></li>

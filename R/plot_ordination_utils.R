@@ -8,14 +8,13 @@
 #' @param scale.arrow If arrow is plotted a constant to multiply axis values for clearing visualisations.
 #' @param top.taxa Top varying taxa to plot, default is 5.
 #' @param color.opt Variable of interest from metadata.
-#' @param shape.opt Variable of interest from metadata.
 #' @import ggplot2
 #' @import ggrepel
 #' @import phyloseq
 #' @import microbiome
 #' @return plot
 #' @export
-#' @examples
+#' @examples \dontrun{
 #' 
 #'     library(microbiomeutilities)
 #'     library(RColorBrewer)
@@ -24,18 +23,16 @@
 #'     ps2 <- tax_glom(ps1, "Genus")
 #'     ps2f <- format_to_besthit(ps2)     
 #'     orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
-#'     p <- plot_utils_ordination(ps2f, orddi, color="DiseaseState", 
-#'     plot.arrow = TRUE,
-#'     scale.arrow = 0.1,
-#'     top.taxa = 5)
+#'     p <- plot_ordination_utils(ps2f, orddi, 
+#'     color="DiseaseState", plot.arrow = TRUE, 
+#'     scale.arrow = 1.3, top.taxa = 5)
 #'     print(p)
-#'
+#' }
 #' @keywords utilities
 #'
 plot_ordination_utils <- function(x,
                                   ordiObject,
                                   color.opt = NULL,
-                                  shape.opt = NULL,
                                   plot.arrow = TRUE,
                                   scale.arrow = NULL,
                                   top.taxa = 5)
@@ -66,8 +63,7 @@ plot_ordination_utils <- function(x,
   plot.ord.load <-
     ggplot() + geom_point(data = pdf.sam,
                           aes(pdf.sam[,
-                                      1], pdf.sam[, 2], color = pdf.sam[, color.opt], shape = pdf.sam[,
-                                                                                                      shape.opt]))
+                                      1], pdf.sam[, 2], color = pdf.sam[, color.opt]))
   plot.ord.load <- plot.ord.load + geom_text(data = pdf.tax3,
                                              aes(scale.arrow * pdf.tax3[, 1], scale.arrow * pdf.tax3[,
                                                                                                      2], label = best_hit)) + ggrepel::geom_text_repel()

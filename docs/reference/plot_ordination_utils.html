@@ -105,8 +105,8 @@ on the species ordination.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>plot_ordination_utils</span>(<span class='no'>x</span>, <span class='no'>ordiObject</span>, <span class='kw'>color.opt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shape.opt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>plot.arrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale.arrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>top.taxa</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_ordination_utils</span>(<span class='no'>x</span>, <span class='no'>ordiObject</span>, <span class='kw'>color.opt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>plot.arrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>scale.arrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>top.taxa</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -121,10 +121,6 @@ on the species ordination.</p>
     </tr>
     <tr>
       <th>color.opt</th>
-      <td><p>Variable of interest from metadata.</p></td>
-    </tr>
-    <tr>
-      <th>shape.opt</th>
       <td><p>Variable of interest from metadata.</p></td>
     </tr>
     <tr>
@@ -151,7 +147,7 @@ on the species ordination.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
     <span class='fu'>library</span>(<span class='no'>microbiomeutilities</span>)
     <span class='fu'>library</span>(<span class='no'>RColorBrewer</span>)
     <span class='fu'>data</span>(<span class='st'>"zackular2014"</span>)
@@ -159,12 +155,11 @@ on the species ordination.</p>
     <span class='no'>ps2</span> <span class='kw'>&lt;-</span> <span class='fu'>tax_glom</span>(<span class='no'>ps1</span>, <span class='st'>"Genus"</span>)
     <span class='no'>ps2f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='no'>ps2</span>)
     <span class='no'>orddi</span> <span class='kw'>&lt;-</span> <span class='fu'>ordinate</span>(<span class='no'>ps2f</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"CCA"</span>, <span class='kw'>distance</span> <span class='kw'>=</span> <span class='st'>"bray"</span>)
-    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_utils_ordination</span>(<span class='no'>ps2f</span>, <span class='no'>orddi</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"DiseaseState"</span>,
-    <span class='kw'>plot.arrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-    <span class='kw'>scale.arrow</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
-    <span class='kw'>top.taxa</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-    <span class='fu'>print</span>(<span class='no'>p</span>)</div><div class='img'><img src='plot_ordination_utils-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_ordination_utils</span>(<span class='no'>ps2f</span>, <span class='no'>orddi</span>,
+    <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"DiseaseState"</span>, <span class='kw'>plot.arrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <span class='kw'>scale.arrow</span> <span class='kw'>=</span> <span class='fl'>1.3</span>, <span class='kw'>top.taxa</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+    <span class='fu'>print</span>(<span class='no'>p</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

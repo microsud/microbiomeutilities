@@ -4,8 +4,8 @@
 \alias{plot_ordination_utils}
 \title{Plot species loading with ordinations}
 \usage{
-plot_ordination_utils(x, ordiObject, color.opt = NULL, shape.opt = NULL,
-  plot.arrow = TRUE, scale.arrow = NULL, top.taxa = 5)
+plot_ordination_utils(x, ordiObject, color.opt = NULL, plot.arrow = TRUE,
+  scale.arrow = NULL, top.taxa = 5)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
@@ -13,8 +13,6 @@ plot_ordination_utils(x, ordiObject, color.opt = NULL, shape.opt = NULL,
 \item{ordiObject}{Output of ordinate from package phyloseq. Only NMDS/CCA and Bray supported.}
 
 \item{color.opt}{Variable of interest from metadata.}
-
-\item{shape.opt}{Variable of interest from metadata.}
 
 \item{plot.arrow}{If arrow should be plotted for species either TRUE or FALSE.}
 
@@ -33,6 +31,7 @@ on the species ordination.
 This function is useful for visualizing specifc taxa that could be important in explaining variations in ordinations.
 }
 \examples{
+\dontrun{
 
     library(microbiomeutilities)
     library(RColorBrewer)
@@ -41,11 +40,10 @@ This function is useful for visualizing specifc taxa that could be important in 
     ps2 <- tax_glom(ps1, "Genus")
     ps2f <- format_to_besthit(ps2)     
     orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
-    p <- plot_utils_ordination(ps2f, orddi, color="DiseaseState", 
-    plot.arrow = TRUE,
-    scale.arrow = 0.1,
-    top.taxa = 5)
+    p <- plot_ordination_utils(ps2f, orddi, 
+    color="DiseaseState", plot.arrow = TRUE, 
+    scale.arrow = 1.3, top.taxa = 5)
     print(p)
-
+}
 }
 \keyword{utilities}
