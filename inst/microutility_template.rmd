@@ -644,8 +644,8 @@ colourCount = length(unique(taxic$Phylum))  #define number of variable colors ba
 getPalette = colorRampPalette(brewer.pal(12, col.palette))  # change the palette as well as the number of colors will change according to palette.
 
 # now edit the unclassified taxa
-tax_table(ps3.com)[tax_table(ps3.com)[, "Phylum"] == "f__", "Phylum"] <- "f__Unclassified Phylum"
-# We will also remove the 'f__' patterns for cleaner labels
+tax_table(ps3.com)[tax_table(ps3.com)[, "Phylum"] == "p__", "Phylum"] <- "f__Unclassified Phylum"
+# We will also remove the 'p__' patterns for cleaner labels
 tax_table(ps3.com)[, colnames(tax_table(ps3.com))] <- gsub(tax_table(ps3.com)[, 
     colnames(tax_table(ps3.com))], pattern = "[a-z]__", replacement = "")
 
