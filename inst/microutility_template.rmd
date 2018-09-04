@@ -11,27 +11,19 @@ output:
 title: '`r paste0("Microbiome analytics Report: ", projectname)`'
 ---
 
-# Microbiome analytics tool
+# Microbiome analytics report  
 
-Reproducibilty is an essential aspect of data analysis. Especially for sequencing data for microbial community profilling. There are lack of standards to analysing and reporting data. This is mostly because there are simply some aspects of the data that we do not control. In such cases it is important to have rational decision making and documenting it. In almost all microbiome profilling data choices regarding filtering parameters (OTU count, OTU prevalences), normalisation, transformation are routine practice. Pre-processing is an essential step and it is crucial that it is documented. There are some common approaches to look at the data.  
-1. How many reads/samples? if there is large difference this may affect the choices you make for alpha diversity, betadiversity and differential abundance testing.
-2. How many reads/OTU ? this is aslo important to see if there are lot of OTUs with small mean & large coefficient of variation (C.V.).  
-
-This tempate is for microbiome data analysis, handling and visualisation. This makes it easy to follow some standard procedures for looking at your data and reporting your results. This first-hand look at your data will aid in making different choices for more thorough and in-dept investigation.   
-
-Check this link on [Organize your data and code](http://kbroman.org/steps2rr/pages/organize.html).    
-
-You can find the source code at [microbiomeutilities github repo](https://github.com/microsud/microbiomeutilities).  
-A step wise guide can be found at [microbiomeutilities wiki](https://github.com/microsud/microbiomeutilities/wiki).
-
-## Set project attributes  
-
-Fill the details accordingly.  
+## Project attributes  
 
 **Author :** `r author`  
 
 **Project :** `r projectname`  
 
+This report includes exploratory analysis of data (taxa summary, read distribution, quality control checks, etc.), composition analysis, diversity analysis, ordination analysis.  
+Throught the document the code chunks can be checked by clicking in the *code* button on the left side.   
+
+
+A random seed is generated for the analysis done in the report.  
 ```{r set-seed}
 
 #generate a random number 
@@ -44,8 +36,9 @@ set.seed(n)
 
 ```
 
-
 ## Input parameters  
+
+Below are the user provided input parameters used for the analysis.   
 
 ```{r}
 
@@ -73,15 +66,15 @@ if(is.na(samsize )){
 parameters_setting <- c(otufile, mapping,Taxanomy_file, treefilename, type, work_dir, out_dir, VariableA, VariableB, UnConstOrd, heatmap, filterCount, filterPrev , col.palette ,filterpseq,sample_size, projectname , author)
 
 dft <- as.data.frame(cbind(parameters, parameters_setting))
-
+colnames(dft) <- c("Parameters", "User input")
   
 DT::datatable(dft)
 
 ```
 
+*Note:* If the output directory is default, then the working directory is where all the files will be saved.  
 
-
-Check the code chunk next to this of left side to see folder names where files are stored. 
+The following directories were created for saving the outputs at each step.  
 
 ```{r setup-2, warning=FALSE, message=TRUE, warning=TRUE}
 
@@ -126,9 +119,9 @@ if(file.exists("PhyloseqObjects")) {
 ```
 
 
-## Load libraries  
+## R packages    
 
-We have to load libraries click on the code tab on the left hand die of this doc for looking at the libraries that are installed. It is good to install these packages before.  
+To check for the main R packages used in the analysis were, click on the code button on the left side.
  
 ```{r load-libraries, warning=FALSE, message=FALSE}
 
@@ -186,7 +179,6 @@ DT::datatable(percent_classified(ps0))
 
 ```
 
-
 ## Taxonomic summary  
 
 An overview of Phylum level abundances in total dataset.  
@@ -199,7 +191,6 @@ DT::datatable(taxa_summary(ps0, "Phylum"))
 
 ## QC {.tabset}  
 
-
 ```{r, summary}
 
 print("Below is the summary of the phyloseq object")
@@ -207,7 +198,6 @@ print("Below is the summary of the phyloseq object")
 summarize_phyloseq(ps0)
 
 ```
-
 
 ### Library sizes (density plot)  
 
@@ -485,16 +475,12 @@ if (n > 3) {
 
 ## Alpha diversity {.tabset}  
 
-Alpha diversity measures are standard calculations in microbial ecology. The differences in richness and eveness between groups may have importance to understanding the ecology. There are numerous measures we use the defaults from `microbiome` R package and also the phylogenetic diversity from `picante`R package.  
+Alpha diversity measures are standard calculations in microbial ecology. The differences in richness and eveness between groups may have importance to understanding the ecology. There are numerous measures, we use the defaults from `phyloseq` R package and also the phylogenetic diversity from `picante`R package.  
 
 The caculations can be done on rarefied or non-rarefied data which can be specified by the `samsize` option in "Set project attributes" option above.
 
+### Non-phylogenetic diversity  
 
-### Non-phylogenetic diversity measures  
-
-Below you can find 
-
-For more on this check [**Microbiome:Diversities**](http://microbiome.github.io/microbiome/Diversity.html)
 
 ```{r div-non-phylo, fig.height=8, fig.width=14}
 
@@ -575,6 +561,8 @@ if (!is.na(samsize)){
 
 ```
 
+For a more comphrensive diversity measures check [**Microbiome:Diversities**](http://microbiome.github.io/microbiome/Diversity.html)  
+
 
 ### Phylogenetic diversity measures  
 
@@ -628,9 +616,9 @@ if (!is.na(treefilename)){
 ```
 
 
-## Micrbial community composition  {.tabset}   
+## Community composition  {.tabset}   
 
-Having a look at the phyloegnetic composition of you data is useful for many reasons. For this purpose we have two Phylum and Family level plots.
+The composition plots are limited to phylum and family level taxonomic ranks.  
 
 ### Phylum (Barplot)  
 
@@ -760,7 +748,6 @@ ggsave(paste0(out_dir,"/Others/compositionboxplot_Family.pdf"), height = 6, widt
 ```
 
 
-
 ## Beta Diversity (Ordinations) {.tabset}     
 
 
@@ -792,7 +779,7 @@ ps3_bray <- phyloseq::distance(ps3.rel, method = "bray")
 
 # use meta data from phylogenetic div code chunk.
 metadata_table_ps3  <- meta(ps3.rel)
-select.meta2 <- metadata_table_ps3[,c(VariableA,VariableB)] #, "Phyogenetic_diversity"]
+select.meta2 <- metadata_table_ps3[,c(VariableA,VariableB)] 
 
 colnames(select.meta2) <- c("VariableA", "VariableB")
 
@@ -878,7 +865,6 @@ message("Unweighted Unifrac distance gives negative values and standard anova an
 ```
 
 
-
 ## Heatmap  
 
 ```{r heatmap, fig.height=9, fig.width=10}
@@ -906,11 +892,15 @@ heat.sample.dup <- plot_taxa_heatmap(ps3, subset.top = 50,
 
 ```
 
+If you find this useful please cite:  
+
+Shetty SA, Lahti L, et al. (2018-). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis.  
+Leo Lahti, Sudarshan Shetty et al. (Bioconductor, 2017). Tools for microbiome analysis in R.  
 
 
 ## R session information and parameters
 
-The versions of the R software and Bioconductor packages used for this analysis are listed below. It is important to save them if one wants to re-perform the analysis in the same conditions.
+The versions of the R software and Bioconductor packages used for this analysis are listed below. It is important to save them if one wants to re-perform the analysis in the same conditions. Please cite the key R packages listed below.  
 
 ```{r }
 sessionInfo()
