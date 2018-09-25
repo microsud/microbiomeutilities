@@ -2,8 +2,7 @@
 <br> 
 
 [![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)  
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/gutmicrobe)
-
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/gutmicrobe)  
 
 <br>  
 
@@ -11,13 +10,12 @@
 I will keep improving this with time and feedback.  
 
 # About  
-The R package **microbiomeutilities** is a supporting package for the parent R package [microbiome](http://microbiome.github.com/microbiome). It includes functions for formatting and visualization of [phyloseq](https://github.com/joey711/phyloseq) object. The package has a function `microbiome_pipeline` which generates an _HTML_ report with infromation on preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The _HTML_ report can be convenient for having prelimanry insights into the data.    
+The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package. This utility tool includes functions for formatting and visualization of [phyloseq](https://github.com/joey711/phyloseq) object. The package has a function `microbiome_pipeline`, which generates an _HTML_ report with infromation on preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The _HTML_ report can be convenient for having prelimanry insights into the data.    
 
 [Package website and online documentation](https://microsud.github.io/microbiomeutilities/)  
  
 Example output of the `microbiome_pipeline`: [here](https://microsud.github.io/microbiomeutilities/index.html).  
 
-<br>
 The package provides access to a subset of studies included in the [MicrobiomeHD](https://zenodo.org/record/840333#.WuYuDoiFM2w) database from Duvallet et al 2017: [Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications](https://www.nature.com/articles/s41467-017-01973-8). These datasets are converted to phyloseq objects and can be directly used in R environment.  
 
 ## Install microbiomeutilities    
@@ -36,7 +34,6 @@ The microbiome R package relies on the independently developed
 [phyloseq](https://github.com/joey711/phyloseq) package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.  
 [ggplot2](http://ggplot2.org/) H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.  
 [tidyverse packages](https://www.tidyverse.org/).  
-
 
 **Microbiome package website with step-wise tutorials**:  
 URL: [http://microbiome.github.com/microbiome](http://microbiome.github.com/microbiome).  
