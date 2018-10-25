@@ -1,13 +1,9 @@
 
 <br> 
 
-[![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)  
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/gutmicrobe)  
+[![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)   
 
 <br>  
-
-**This package is in experimental stage and should be used with caution**  
-I will keep improving this with time and feedback.  
 
 # About  
 The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package. This utility tool includes functions for formatting and visualization of [phyloseq](https://github.com/joey711/phyloseq) object. The package has a function `microbiome_pipeline`, which generates an _HTML_ report with infromation on preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The _HTML_ report can be convenient for having prelimanry insights into the data.    
@@ -25,6 +21,7 @@ install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 
 ```  
+**Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2018, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 0.99.00). Zenodo. [![DOI](https://zenodo.org/badge/99698135.svg)](http://doi.org/10.5281/zenodo.1471685)   
 
 ## Direction for this package   
 Depending on the real world usefulness, practicality and success, we plan to include complete or parts of this package in the Microbiome R package.  
