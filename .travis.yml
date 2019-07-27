@@ -10,8 +10,8 @@ r_packages:
 - dplyr
 - energy
 - FD
-- gcookbook
-- GGally
+#- gcookbook
+#- GGally
 - ggplot2
 - ggrepel
 - Hmisc
@@ -21,9 +21,9 @@ r_packages:
 - MASS
 - Matrix
 - memoise
-- minet
+#- minet
 - moments
-- qvalue
+#- qvalue
 - reshape2
 - rmarkdown
 - robustbase
