@@ -37,11 +37,11 @@ r_packages:
 - tidyverse
 - pheatmap
 - data.table
-bioc_packages:
-- BiocInstaller
-- phyloseq
-- microbiome
+#bioc_packages:
 r_github_packages:
 - cran/RUnit
-- microsud/microbiomeutilities
+- joey711/phyloseq
+- microbiome/microbiome
+#- microsud/microbiomeutilities
 - jimhester/covr
+
