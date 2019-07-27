@@ -49,7 +49,7 @@ plot_taxa_boxplot <- function(x, taxonomic.level, top.otu, VariableA, title, col
 
   if (!taxonomic.level == "OTU") {
 
-    x <- aggregate_taxa(x, taxonomic.level, top = top.otu)
+    x <- aggregate_top_taxa(x, level = taxonomic.level, top = top.otu)
 
   }
 
