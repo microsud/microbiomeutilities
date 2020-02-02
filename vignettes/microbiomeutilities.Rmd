@@ -2,12 +2,12 @@
 title: "Getting started"
 output: rmarkdown::html_vignette
 vignette: >
-%\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Introduction to syncomR}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-  ---
+  \usepackage[utf8]{inputenc}
+---
   
-  ```{r setup, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
 collapse = TRUE,
 comment = "#>"
@@ -240,7 +240,7 @@ print(p)
 ## Visualize abundance of select taxa  
 
 
-```{r, fig.width=8}
+```{r, fig.width=8, eval=FALSE}
 
 ps.f2 <- format_to_besthit(ps0)
 
