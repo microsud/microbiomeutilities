@@ -2,15 +2,15 @@
 title: "Getting started"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+%\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
----
-
-```{r setup, include = FALSE}
+  ---
+  
+  ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+collapse = TRUE,
+comment = "#>"
 )
 ```
 
@@ -142,7 +142,8 @@ Useful for QC purposes. Check for siatribution of sequencing depth.
 
 ```{r, eval=FALSE}
 
-p <- plot_read_distribution(ps0, groups = "DiseaseState", plot.type = "density")
+p <- plot_read_distribution(ps0, groups = "DiseaseState", 
+                            plot.type = "density")
 print(p)
 ```
 
@@ -165,18 +166,18 @@ kable(head(pseq_df))
 
 Utility plot function for diversity measures calculated by `microbiome` package.  
 
-```{r, fig.width=8, fig.height=8, message=FALSE}
+```{r, fig.width=8, fig.height=6, message=FALSE}
 
 library(microbiome)
 data("zackular2014")
 ps0 <- zackular2014
 
 p <- plot_alpha_diversities(ps0,
-  type = "diversities",
-  index.val = "all",
-  plot.type = "stripchart",
-  variableA = "DiseaseState",
-  palette = "Paired"
+                            type = "evenness",
+                            index.val = "all",
+                            plot.type = "stripchart",
+                            variableA = "DiseaseState",
+                            palette = "Paired"
 )
 
 print(p)
@@ -185,7 +186,7 @@ print(p)
 
 ## Plot ordination and core  
 
-```{r, fig.height=8, fig.width=12}
+```{r, fig.height=8, fig.width=12, eval=FALSE}
 
 library(microbiomeutilities)
 library(RColorBrewer)
@@ -206,9 +207,9 @@ pseq.rel <- core(pseq.rel, detection = 0.001, prevalence = 20 / 100)
 ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
 
 p <- plot_ordiplot_core(pseq.rel, ord.bray,
-  prev.thres, det.thres,
-  min.prevalence = 0.9,
-  color.opt = "DiseaseState", shape = NULL, Sample = TRUE
+                        prev.thres, det.thres,
+                        min.prevalence = 0.9,
+                        color.opt = "DiseaseState", shape = NULL, Sample = TRUE
 )
 
 print(p)
@@ -227,9 +228,9 @@ ps2 <- tax_glom(ps1, "Genus")
 ps2f <- format_to_besthit(ps2)
 orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
 p <- plot_ordination_utils(ps2f, orddi,
-  color = "DiseaseState",
-  plot.arrow = TRUE,
-  scale.arrow = 0.5, top.taxa = 5
+                           color = "DiseaseState",
+                           plot.arrow = TRUE,
+                           scale.arrow = 0.5, top.taxa = 5
 )
 
 print(p)
@@ -249,8 +250,7 @@ meta <- meta(psf2.rel)
 
 library(vegan)
 permanova <- adonis(t(otu) ~ DiseaseState,
-  data = meta, permutations = 99, method = "bray"
-)
+                    data = meta, permutations = 99, method = "bray")
 
 # P-value
 print(as.data.frame(permanova$aov.tab)["group", "Pr(>F)"])
@@ -273,9 +273,9 @@ Plot relative abundance of top taxa specified by user.
 ```{r,fig.width=6, fig.height=4}
 
 pn <- plot_taxa_boxplot(ps0,
-  taxonomic.level = "Phylum",
-  top.otu = 5, VariableA = "DiseaseState",
-  title = "Relative abudance plot", color = "Set2"
+                        taxonomic.level = "Phylum",
+                        top.otu = 5, VariableA = "DiseaseState",
+                        title = "Relative abudance plot", color = "Set2"
 )
 
 print(pn)
@@ -283,15 +283,18 @@ print(pn)
 
 ## Plot taxa barplot  
 
-```{r, fig.width=6, fig.height=4}
+```{r, fig.width=12, fig.height=4}
 
 library(RColorBrewer)
 library(dplyr)
+library(microbiomeutilities)
 
 # reduce data for egample purposes
 ps.cor <- core(ps0, detection = 10, prevalence = 0.5)
 
-p <- plot_taxa_composition(ps.cor, taxonomic.level = "Phylum", transform = "compositional", average_by = NULL)
+p <- plot_taxa_composition(ps.cor, taxonomic.level = "Phylum", 
+                           transform = "compositional", average_by = NULL,
+                           palette = brewer.pal(12, "Set2"))
 print(p)
 ```
 
@@ -304,7 +307,7 @@ library(pheatmap)
 heat.sample <- plot_taxa_heatmap(ps0,
                                  subset.top = 20,
                                  VariableA = "DiseaseState",
-                                 heatcolors = brewer.pal(6, "Spectral"),
+                                 heatcolors = rev(brewer.pal(6, "Spectral")),
                                  transformation = "compositional",
                                  cluster_cols = F)
 ```
@@ -349,27 +352,27 @@ sessionInfo()
 ## Package requirements  
 
 * Depends:
- + [R (>= 3.4.1)](https://www.r-project.org/)
- + [phyloseq](https://joey711.github.io/phyloseq/index.html)
- + [ggplot2](http://ggplot2.org/)
- + [microbiome](https://bioconductor.org/packages/devel/bioc/html/microbiome.html)
++ [R (>= 3.4.1)](https://www.r-project.org/)
++ [phyloseq](https://joey711.github.io/phyloseq/index.html)
++ [ggplot2](http://ggplot2.org/)
++ [microbiome](https://bioconductor.org/packages/devel/bioc/html/microbiome.html)
 
 * Imports:
- + [plyr](https://cran.r-project.org/web/packages/plyr/index.html)
- + [reshape2](https://cran.rstudio.com/web/packages/reshape2/index.html)
- + [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
- + [tidyr](http://tidyr.tidyverse.org/)
- + [utils](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/00Index.html)
- + [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
- + [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html)
- + [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)
- + [viridis](https://cran.r-project.org/web/packages/viridis/index.html)
- + [pheatmap](https://cran.r-project.org/web/packages/pheatmap/index.html)
- + [ggrepel](https://cran.r-project.org/web/packages/ggrepel/index.html)
++ [plyr](https://cran.r-project.org/web/packages/plyr/index.html)
++ [reshape2](https://cran.rstudio.com/web/packages/reshape2/index.html)
++ [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
++ [tidyr](http://tidyr.tidyverse.org/)
++ [utils](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/00Index.html)
++ [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
++ [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html)
++ [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)
++ [viridis](https://cran.r-project.org/web/packages/viridis/index.html)
++ [pheatmap](https://cran.r-project.org/web/packages/pheatmap/index.html)
++ [ggrepel](https://cran.r-project.org/web/packages/ggrepel/index.html)
 
 * Suggests:
- + [BiocGenerics](https://bioconductor.org/packages/release/bioc/html/BiocGenerics.html)
- + [knitr](https://cran.r-project.org/web/packages/knitr/index.html)
- + [rmarkdown](http://rmarkdown.rstudio.com/)
- + [ape](https://cran.r-project.org/web/packages/ape/index.html)
- + [Picante](https://academic.oup.com/bioinformatics/article/26/11/1463/203321)
++ [BiocGenerics](https://bioconductor.org/packages/release/bioc/html/BiocGenerics.html)
++ [knitr](https://cran.r-project.org/web/packages/knitr/index.html)
++ [rmarkdown](http://rmarkdown.rstudio.com/)
++ [ape](https://cran.r-project.org/web/packages/ape/index.html)
++ [Picante](https://academic.oup.com/bioinformatics/article/26/11/1463/203321)
