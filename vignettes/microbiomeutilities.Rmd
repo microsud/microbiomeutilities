@@ -219,7 +219,7 @@ print(p)
 
 This functions is a utility function which depend on `vegan` and `phyloseq`. Given a phyloseq object and ordination object, it will plot species loadings with high variation.  
 
-```{r}
+```{r eval=FALSE}
 # library(microbiomeutilities)
 
 data("zackular2014")
@@ -240,7 +240,7 @@ print(p)
 ## Visualize abundance of select taxa  
 
 
-```{r, fig.width=8, eval=FALSE}
+```{r fig.width=8, eval=FALSE}
 
 ps.f2 <- format_to_besthit(ps0)
 
@@ -270,7 +270,7 @@ print(p)
 
 Plot relative abundance of top taxa specified by user. 
 
-```{r,fig.width=6, fig.height=4}
+```{r,fig.width=6, fig.height=4, eval=FALSE}
 
 pn <- plot_taxa_boxplot(ps0,
                         taxonomic.level = "Phylum",
@@ -302,7 +302,7 @@ print(p)
 
 Useful for visualisng differences in top otus between sample groups.  
 
-```{r, fig.width=10}
+```{r, fig.width=10, eval=FALSE}
 library(pheatmap)
 heat.sample <- plot_taxa_heatmap(ps0,
                                  subset.top = 20,
