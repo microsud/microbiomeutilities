@@ -12,21 +12,21 @@
 #' @import microbiome
 #' @import phyloseq
 #' @export
-#' @examples \dontrun{
-#'   # Example data
-#'     library(microbiome)
-#'     library(microbiomeUtilities)
-#'     library(tibble)
-#'     data("zackular2014")
-#'     p0 <- zackular2014
-#'     p0.f <- format_to_besthit(p0)
-#'           }
+#' @examples
+#' \dontrun{
+#' # Example data
+#' library(microbiome)
+#' library(microbiomeUtilities)
+#' library(tibble)
+#' data("zackular2014")
+#' p0 <- zackular2014
+#' p0.f <- format_to_besthit(p0)
+#' }
 #' @keywords utilities
 
 format_to_besthit <- function(x) {
-
   Domain <- Phylum <- Class <- Order <- Family <- Genus <-
-    Species  <- tax <- tax.merge <-
+    Species <- tax <- tax.merge <-
     best_hit <- y <- NULL
 
   # First harmonise the colnames in tax_table
@@ -36,13 +36,15 @@ format_to_besthit <- function(x) {
       c("Domain", "Phylum", "Class", "Order", "Family", "Genus")
   } else if (ncol(tax_table(x)) == 7) {
     colnames(tax_table(x)) <-
-      c("Domain",
+      c(
+        "Domain",
         "Phylum",
         "Class",
         "Order",
         "Family",
         "Genus",
-        "Species")
+        "Species"
+      )
   } else {
     stop("Taxonomic levels should be either 6 (untill genus) or 7 (until species) level")
   }
@@ -93,55 +95,72 @@ format_to_besthit <- function(x) {
 
   if (ncol(tax_table(x)) == 6) {
     tax <-
-      mutate(y, Domain, Domain = ifelse(Domain == "", "Unclassified", Domain)) %>% mutate(Phylum,
-                                                                                          Phylum = ifelse(Phylum == "", paste("k__", Domain, "", sep = ""), Phylum)) %>%
+      mutate(y, Domain, Domain = ifelse(Domain == "", "Unclassified", Domain)) %>%
+      mutate(Phylum,
+        Phylum = ifelse(Phylum == "", paste("k__", Domain, "", sep = ""), Phylum)
+      ) %>%
       mutate(Class, Class = ifelse(Class == "", ifelse(
         grepl("__", Phylum),
         Phylum,
         paste("c__",
-              Phylum, "", sep = "")
-      ), Class)) %>% mutate(Order, Order = ifelse(Order ==
-                                                    "", ifelse(
-                                                      grepl("__", Class), Class, paste("c__", Class, "", sep = "")
-                                                    ), Order)) %>%
+          Phylum, "",
+          sep = ""
+        )
+      ), Class)) %>%
+      mutate(Order, Order = ifelse(Order ==
+        "", ifelse(
+        grepl("__", Class), Class, paste("c__", Class, "", sep = "")
+      ), Order)) %>%
       mutate(Family, Family = ifelse(Family == "", ifelse(
         grepl("__", Order), Order, paste("o__",
-                                         Order, "", sep = "")
-      ), Family)) %>% mutate(Genus, Genus = ifelse(Genus ==
-                                                     "", ifelse(
-                                                       grepl("__", Family),
-                                                       Family,
-                                                       paste("f__", Family, "", sep = "")
-                                                     ),
-                                                   Genus))
-
+          Order, "",
+          sep = ""
+        )
+      ), Family)) %>%
+      mutate(Genus, Genus = ifelse(Genus ==
+        "", ifelse(
+        grepl("__", Family),
+        Family,
+        paste("f__", Family, "", sep = "")
+      ),
+      Genus
+      ))
   } else if (ncol(tax_table(x)) == 7) {
     tax <-
-      mutate(y, Domain, Domain = ifelse(Domain == "", "Unclassified", Domain)) %>% mutate(Phylum,
-                                                                                          Phylum = ifelse(Phylum == "", paste("k__", Domain, "", sep = ""), Phylum)) %>%
+      mutate(y, Domain, Domain = ifelse(Domain == "", "Unclassified", Domain)) %>%
+      mutate(Phylum,
+        Phylum = ifelse(Phylum == "", paste("k__", Domain, "", sep = ""), Phylum)
+      ) %>%
       mutate(Class, Class = ifelse(Class == "", ifelse(
         grepl("__", Phylum),
         Phylum,
         paste("c__",
-              Phylum, "", sep = "")
-      ), Class)) %>% mutate(Order, Order = ifelse(Order ==
-                                                    "", ifelse(
-                                                      grepl("__", Class), Class, paste("c__", Class, "", sep = "")
-                                                    ), Order)) %>%
+          Phylum, "",
+          sep = ""
+        )
+      ), Class)) %>%
+      mutate(Order, Order = ifelse(Order ==
+        "", ifelse(
+        grepl("__", Class), Class, paste("c__", Class, "", sep = "")
+      ), Order)) %>%
       mutate(Family, Family = ifelse(Family == "", ifelse(
         grepl("__", Order), Order, paste("o__",
-                                         Order, "", sep = "")
-      ), Family)) %>% mutate(Genus, Genus = ifelse(Genus ==
-                                                     "", ifelse(
-                                                       grepl("__", Family),
-                                                       Family,
-                                                       paste("f__", Family, "", sep = "")
-                                                     ),
-                                                   Genus)) %>% mutate(Species, Species = ifelse(Species == "", ifelse(
-                                                     grepl("__", Genus), Genus,
-                                                     paste("g__", Genus, "", sep = "")
-                                                   ), Species))
-
+          Order, "",
+          sep = ""
+        )
+      ), Family)) %>%
+      mutate(Genus, Genus = ifelse(Genus ==
+        "", ifelse(
+        grepl("__", Family),
+        Family,
+        paste("f__", Family, "", sep = "")
+      ),
+      Genus
+      )) %>%
+      mutate(Species, Species = ifelse(Species == "", ifelse(
+        grepl("__", Genus), Genus,
+        paste("g__", Genus, "", sep = "")
+      ), Species))
   }
 
   # we have un formatted taxonomy in y. and new in tax.
@@ -157,10 +176,11 @@ format_to_besthit <- function(x) {
   tax$col2 <- rownames(tax)
 
   tax.merge <- tidyr::unite(tax,
-                            best_hit,
-                            c("col2", "col1"),
-                            sep = ":",
-                            remove = TRUE)
+    best_hit,
+    c("col2", "col1"),
+    sep = ":",
+    remove = TRUE
+  )
 
   rownames(tax.merge) <- tax.merge$best_hit
 
@@ -168,16 +188,18 @@ format_to_besthit <- function(x) {
   rownames(otu.1) <- tax.merge$best_hit
 
   OTU <- otu_table(as.matrix(otu.1),
-                   taxa_are_rows = TRUE)
+    taxa_are_rows = TRUE
+  )
 
   TAX <- tax_table(as.matrix(tax.merge))
 
   sampledata <- sample_data(meta(x))
 
-  p.new <- merge_phyloseq(OTU,
-                          TAX,
-                          sampledata)
+  p.new <- merge_phyloseq(
+    OTU,
+    TAX,
+    sampledata
+  )
 
   return(p.new)
-
 }

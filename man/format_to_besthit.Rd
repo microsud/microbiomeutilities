@@ -23,13 +23,13 @@ Most commonly it is observed that the taxonomy file has classification until a g
 }
 \examples{
 \dontrun{
-  # Example data
-    library(microbiome)
-    library(microbiomeUtilities)
-    library(tibble)
-    data("zackular2014")
-    p0 <- zackular2014
-    p0.f <- format_to_besthit(p0)
-          }
+# Example data
+library(microbiome)
+library(microbiomeUtilities)
+library(tibble)
+data("zackular2014")
+p0 <- zackular2014
+p0.f <- format_to_besthit(p0)
+}
 }
 \keyword{utilities}

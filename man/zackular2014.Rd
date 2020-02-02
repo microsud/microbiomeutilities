@@ -18,7 +18,7 @@ library(microbiomeutilities)
 data("zackular2014")
 pseq <- zackular2014
 print(zackular2014)
-          }
-          
+}
+
 }
 \keyword{datasets}

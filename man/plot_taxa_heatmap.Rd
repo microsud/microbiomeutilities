@@ -4,8 +4,8 @@
 \alias{plot_taxa_heatmap}
 \title{Heatmap using \code{\link{phyloseq-class}} and \code{\link{pheatmap}}}
 \usage{
-plot_taxa_heatmap(x, subset.top, transformation, VariableA, heatcolors = NULL,
-  ...)
+plot_taxa_heatmap(x, subset.top, transformation, VariableA,
+  heatcolors = NULL, ...)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object.}
@@ -29,17 +29,18 @@ Plot heatmap using \code{\link{phyloseq-class}} object as input.
 }
 \examples{
 
-    library(microbiomeutilities)
-    library(viridis)
-    library(RColorBrewer)
-    data("zackular2014")
-    ps0 <- zackular2014
+library(microbiomeutilities)
+library(viridis)
+library(RColorBrewer)
+data("zackular2014")
+ps0 <- zackular2014
 
-    heat.sample <- plot_taxa_heatmap(ps0, subset.top = 20,
-                                VariableA = "DiseaseState",
-                                heatcolors =brewer.pal(100, "Blues"),
-                                transformation = "log10")
-
+heat.sample <- plot_taxa_heatmap(ps0,
+  subset.top = 20,
+  VariableA = "DiseaseState",
+  heatcolors = brewer.pal(100, "Blues"),
+  transformation = "log10"
+)
 }
 \author{
 Sudarshan A. Shetty (sudarshanshetty9@gmail.com)

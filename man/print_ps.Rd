@@ -16,11 +16,10 @@ Prints information about the \code{\link{phyloseq-class}} object.
 Prints an overview \code{\link{phyloseq-class}}.
 }
 \examples{
-    library(microbiomeutilities)
-    data("zackular2014")
-    pseq <- zackular2014
-    print_ps(pseq)
-
+library(microbiomeutilities)
+data("zackular2014")
+pseq <- zackular2014
+print_ps(pseq)
 }
 \author{
 Contact: Sudarshan A. Shetty \email{sudarshanshetty9@gmail.com}

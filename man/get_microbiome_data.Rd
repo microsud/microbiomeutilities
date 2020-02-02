@@ -22,12 +22,12 @@ You can download few example datasets in phyloseq format from Duvallet et al 201
 }
 \examples{
 \dontrun{
-  # Example data
-    library(microbiome)
-    library(microbiomeUtilities)
-    list_microbiome_data()
-    ps1 <- get_microbiome_data(disease = "CDI", "Schubert2014_CDI")
-    print_ps(ps1)
-          }
+# Example data
+library(microbiome)
+library(microbiomeUtilities)
+list_microbiome_data()
+ps1 <- get_microbiome_data(disease = "CDI", "Schubert2014_CDI")
+print_ps(ps1)
+}
 }
 \keyword{utilities}

@@ -3,17 +3,18 @@
 #' @details Data for practice, also an example for importing mothur files from Baxtrer et al 2016. The source file for these data is the microbiomedatarepo https://github.com/microsud/microbiomedatarepo.
 #' @param printtab Print in console or not, defaut is TRUE and will print output.
 #' @export
-#' @examples \dontrun{
-#'     library(microbiomeutilities)
-#'
-#'     df <- list_microbiome_data(printtab = FALSE)
-#'     }
-#'
+#' @examples
+#' \dontrun{
+#' library(microbiomeutilities)
+#' 
+#' df <- list_microbiome_data(printtab = FALSE)
+#' }
+#' 
 #' @keywords utilities
 #'
 
-list_microbiome_data <- function(printtab = TRUE){
-  
+list_microbiome_data <- function(printtab = TRUE) {
+
   # TODO add all the dataset from Duvallet et al 201 as phyloseq objects
   Study <-
     c(
@@ -38,7 +39,7 @@ list_microbiome_data <- function(printtab = TRUE){
       "Scheperjans2015_PAR",
       "Alkanani2015_T1D"
     )
-  
+
   Disease <-
     c(
       "ASD",
@@ -62,14 +63,11 @@ list_microbiome_data <- function(printtab = TRUE){
       "PAR",
       "T1D"
     )
-  
+
   microbiomeDB_pseq <- as.data.frame(cbind(Study, Disease))
-  if(printtab == TRUE){
+  if (printtab == TRUE) {
     print(microbiomeDB_pseq)
   } else {
-    
     return(microbiomeDB_pseq)
   }
-  
-  
 }

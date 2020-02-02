@@ -10,7 +10,7 @@ plot_alpha_diversities(x, type, index.val = "all", plot.type, variableA,
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object.}
 
-\item{type}{Either diversities (Diversity Index) or dominance    (Dominance Index) or evenness    (Evenness Index).}
+\item{type}{Either alpha (Diversity Index) or dominance    (Dominance Index) or evenness    (Evenness Index).}
 
 \item{index.val}{see global function in \code{\link{microbiome}} package.}
 
@@ -31,19 +31,19 @@ Uses the \code{\link{microbiome}} package global function to calcualte diversiti
 a plot.
 }
 \examples{
-    library(microbiome)
-    library(microbiomeutilities)
-    data("zackular2014")
-    p0 <- zackular2014
-    p <- plot_alpha_diversities(p0,
-    type = "diversities",
-    index.val = "all",
-    plot.type = "stripchart",
-    variableA = "DiseaseState",
-    palette = "jco")
+library(microbiome)
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+p <- plot_alpha_diversities(p0,
+  type = "diversities",
+  index.val = "all",
+  plot.type = "stripchart",
+  variableA = "DiseaseState",
+  palette = "jco"
+)
 
-    print(p)
-
+print(p)
 }
 \keyword{<-}
 \keyword{c("shannon,}

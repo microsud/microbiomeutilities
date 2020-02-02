@@ -8,18 +8,16 @@
 #' @importFrom tibble rownames_to_column
 #' @import microbiome
 #' @export
-#' @examples \dontrun{
-#'   # Example data
-#'     library(microbiomeutilities)
-#'     data("zackular2014")
-#'     pseq <- zackular2014
-#'     pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
-#'
-#'           }
+#' @examples
+#' \dontrun{
+#' # Example data
+#' library(microbiomeutilities)
+#' data("zackular2014")
+#' pseq <- zackular2014
+#' pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
+#' }
 #' @keywords utilities
-phy_to_ldf = function(x, transform.counts)
-{
-
+phy_to_ldf <- function(x, transform.counts) {
   if (is.null(transform.counts)) {
     x <- x
   } else if (transform.counts == "log10") {
@@ -35,13 +33,18 @@ phy_to_ldf = function(x, transform.counts)
   }
 
   message("An additonal column Sam_rep with sample names is created for reference purpose")
-  meta_df = data.frame(sample_data(x))
+  meta_df <- data.frame(sample_data(x))
   meta_df$Sam_rep <- rownames(meta_df)
-  tax_df = data.frame(tax_table(x)) %>%
+  tax_df <- data.frame(tax_table(x)) %>%
     rownames_to_column("OTUID")
-  otu_df = data.frame(otu_table(x),
-                      check.names = FALSE) %>% rownames_to_column("OTUID")
-  suppressWarnings(suppressMessages(otu_df %>% left_join(tax_df) %>% gather_("Sam_rep",
-                                           "Abundance", setdiff(colnames(otu_df),
-                                                                "OTUID")) %>% left_join(meta_df)))
+  otu_df <- data.frame(otu_table(x),
+    check.names = FALSE
+  ) %>% rownames_to_column("OTUID")
+  suppressWarnings(suppressMessages(otu_df %>% left_join(tax_df) %>% gather_(
+    "Sam_rep",
+    "Abundance", setdiff(
+      colnames(otu_df),
+      "OTUID"
+    )
+  ) %>% left_join(meta_df)))
 }

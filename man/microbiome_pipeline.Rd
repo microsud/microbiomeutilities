@@ -4,9 +4,10 @@
 \alias{microbiome_pipeline}
 \title{Microbiome analysis pipeline}
 \usage{
-microbiome_pipeline(otufile, mapping, taxonomy, treefilename, type, work_dir,
-  out_dir, VariableA, VariableB, UnConstOrd, heatmap, filterCount, filterPrev,
-  col.palette, filterpseq, samsize, projectname, author)
+microbiome_pipeline(otufile, mapping, taxonomy, treefilename, type,
+  work_dir, out_dir, VariableA, VariableB, UnConstOrd, heatmap,
+  filterCount, filterPrev, col.palette, filterpseq, samsize, projectname,
+  author)
 }
 \arguments{
 \item{otufile}{biom object, otu_table in csv format or mothur shared files.}
@@ -59,25 +60,27 @@ Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha
 
 library(microbiomeutilities)
 library(microbiome)
-microbiome_pipeline(otufile = "my.biom",
-                   mapping = "mymap.csv",
-                   taxonomy = NULL,
-                   treefilename = "myTree.tre",
-                   type = "biom",
-                   work_dir = "F:/path/my/input/filefolder",
-                   out_dir = "F:/path/to/save/my/files/folder",
-                   VariableA = "MC_type1",
-                   VariableB = "Region",
-                   UnConstOrd = TRUE,
-                   heatmap = TRUE,
-                   filterCount = 4,
-                   filterPrev = 0.01,
-                   col.palette = "Paired",
-                   filterpseq = TRUE,
-                   samsize = NA,
-                   projectname = "Mock",
-                   author = "Sudarshan")
-                   }
+microbiome_pipeline(
+  otufile = "my.biom",
+  mapping = "mymap.csv",
+  taxonomy = NULL,
+  treefilename = "myTree.tre",
+  type = "biom",
+  work_dir = "F:/path/my/input/filefolder",
+  out_dir = "F:/path/to/save/my/files/folder",
+  VariableA = "MC_type1",
+  VariableB = "Region",
+  UnConstOrd = TRUE,
+  heatmap = TRUE,
+  filterCount = 4,
+  filterPrev = 0.01,
+  col.palette = "Paired",
+  filterpseq = TRUE,
+  samsize = NA,
+  projectname = "Mock",
+  author = "Sudarshan"
+)
+}
 }
 \author{
 Contact: Sudarshan Shetty \email{sudarshanshetty9@gmail.com}

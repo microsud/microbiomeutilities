@@ -10,53 +10,48 @@
 #' @import phyloseq
 #' @import graphics
 #' @export
-#' @examples \dontrun{
-#'   # Example data
-#'     library(microbiome)
-#'     library(microbiomeutilities)
-#'     data("zackular2014")
-#'     p0 <- zackular2014
-#'     p <- plot_taxa_cv(p0, plot.type = "hist")
-#'     print(p)
-#'     }
+#' @examples
+#' \dontrun{
+#' # Example data
+#' library(microbiome)
+#' library(microbiomeutilities)
+#' data("zackular2014")
+#' p0 <- zackular2014
+#' p <- plot_taxa_cv(p0, plot.type = "hist")
+#' print(p)
+#' }
 #' 
 #' @keywords utilities
 #'
-plot_taxa_cv <- function(x, plot.type){
-
+plot_taxa_cv <- function(x, plot.type) {
   MeanAbun <- CV <- Phylum <- NULL
-  cal_cv <- function(x) abs(sd(x)/mean(x))
+  cal_cv <- function(x) abs(sd(x) / mean(x))
   x.mean.rel <- apply(otu_table(x), 1, function(x) mean(x))
-  #head(ps.mean.rel)
+  # head(ps.mean.rel)
   x.cvs <- apply(otu_table(x), 1, function(x) cal_cv(x))
-  #head(ps.cvs)
+  # head(ps.cvs)
 
-  #ps.dfa <- data.frame(ps.mean.rel)
-  #ps.dfb <- data.frame(ps.cvs)
-  #ps.dfa$CV <- ps.dfb$ps.cvs
-  #colnames(ps.dfa)[1] <- "Mean_abun"
-  #head(ps.dfa)
+  # ps.dfa <- data.frame(ps.mean.rel)
+  # ps.dfb <- data.frame(ps.cvs)
+  # ps.dfa$CV <- ps.dfb$ps.cvs
+  # colnames(ps.dfa)[1] <- "Mean_abun"
+  # head(ps.dfa)
   tax.x.df <- as.data.frame(tax_table(x))
   tax.x.df$MeanAbun <- cbind(x.mean.rel)
   tax.x.df$CV <- cbind(x.cvs)
   h <- hist(tax.x.df$MeanAbun)
 
-  #head(tax.ps.df)
-  if(plot.type == "scatter")
-  cvplot <- ggplot(tax.x.df,
-                   aes(MeanAbun, CV),
-                   label = NA) + geom_point(aes(color = Phylum)) + scale_x_continuous(breaks= h$breaks) +
-    theme_bw() + xlab("Abundance")
-
-  else{
-
+  # head(tax.ps.df)
+  if (plot.type == "scatter") {
+    cvplot <- ggplot(tax.x.df,
+      aes(MeanAbun, CV),
+      label = NA
+    ) + geom_point(aes(color = Phylum)) + scale_x_continuous(breaks = h$breaks) +
+      theme_bw() + xlab("Abundance")
+  } else {
     cvplot <- ggplot(tax.x.df, aes(CV)) + geom_histogram() + theme_bw()
   }
 
 
-    return(cvplot)
+  return(cvplot)
 }
-
-
-
-

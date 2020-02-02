@@ -37,22 +37,24 @@ This function is useful for visualizing core taxa in a 2D ordination plot.
 \examples{
 \dontrun{
 
-    library(microbiomeutilities)
-    library(RColorBrewer)
-    data("zackular2014")
-    p0 <- zackular2014
-    ps1 <- format_to_besthit(p0)
-    ps1 <- subset_samples(ps1, DiseaseState == "H")
-    ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
-    prev.thres <- seq(.05, 1, .05)
-    det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
-    pseq.rel <- microbiome::transform(ps1, "compositional")
-    ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
+library(microbiomeutilities)
+library(RColorBrewer)
+data("zackular2014")
+p0 <- zackular2014
+ps1 <- format_to_besthit(p0)
+ps1 <- subset_samples(ps1, DiseaseState == "H")
+ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
+prev.thres <- seq(.05, 1, .05)
+det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
+pseq.rel <- microbiome::transform(ps1, "compositional")
+ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
 
-    p <- plot_ordiplot_core(pseq.rel, ord.bray,
-    prev.thres, det.thres, min.prevalence = 0.9,
-    color.opt = "DiseaseState", shape = NULL, Sample = TRUE)
-    p
+p <- plot_ordiplot_core(pseq.rel, ord.bray,
+  prev.thres, det.thres,
+  min.prevalence = 0.9,
+  color.opt = "DiseaseState", shape = NULL, Sample = TRUE
+)
+p
 }
 }
 \keyword{utilities}

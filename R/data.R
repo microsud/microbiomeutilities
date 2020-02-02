@@ -11,12 +11,12 @@
 #'
 #' @keywords datasets
 #'
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' library(microbiomeutilities)
 #' data("zackular2014")
 #' pseq <- zackular2014
 #' print(zackular2014)
-#'           }
-#'           
-
+#' }
+#' 
 "zackular2014"

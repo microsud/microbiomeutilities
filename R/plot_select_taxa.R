@@ -13,23 +13,22 @@
 #' @import microbiome
 #' @import RColorBrewer
 #' @export
-#' @examples \dontrun{
-#'   # Example data
-#'     library(microbiome)
-#'     library(microbiomeutilities)
-#'     data("zackular2014")
-#'     p0 <- zackular2014
-#'     p0.f <- format_to_besthit(p0)
-#'     select.taxa <- c("OTU-d__denovo31:Dorea", "OTU-d__denovo24:Blautia")
-#'     p <- plot_select_taxa(p0.f, select.taxa, "DiseaseState", "Paired", plot.type = "stripchart")
-#'     print(p)
-#'     
-#'     }
+#' @examples
+#' \dontrun{
+#' # Example data
+#' library(microbiome)
+#' library(microbiomeutilities)
+#' data("zackular2014")
+#' p0 <- zackular2014
+#' p0.f <- format_to_besthit(p0)
+#' select.taxa <- c("OTU-d__denovo31:Dorea", "OTU-d__denovo24:Blautia")
+#' p <- plot_select_taxa(p0.f, select.taxa, "DiseaseState", "Paired", plot.type = "stripchart")
+#' print(p)
+#' }
 #' @keywords utilities
 #'
 
-plot_select_taxa <- function(x, select.taxa, variableA, palette, plot.type){
-
+plot_select_taxa <- function(x, select.taxa, variableA, palette, plot.type) {
   x.rel <- x.prun <- x.df <- p.box <- p.vio <- p.strp <- NULL
 
   x.rel <- microbiome::transform(x, "compositional")
@@ -38,30 +37,27 @@ plot_select_taxa <- function(x, select.taxa, variableA, palette, plot.type){
 
   x.df <- phy_to_ldf(x.prun, transform.counts = NULL)
 
-  if(plot.type == "boxplot"){
-
-    p <- ggboxplot(x.df, variableA, "Abundance", facet.by =  "OTUID",
-                       color = variableA, palette = palette,
-                       legend = "right", add = "jitter",
-                       panel.labs.background = list(fill = "white"))
-
-  } else if (plot.type == "violin"){
-
-    p <- ggviolin(x.df, variableA, "Abundance", facet.by =  "OTUID",
-                       color = variableA, palette = palette,
-                       legend = "right", add = "jitter",
-                       panel.labs.background = list(fill = "white"))
-
-  } else if (plot.type == "stripchart"){
-
-    p <- ggstripchart(x.df, variableA, "Abundance", facet.by =  "OTUID",
-                      color = variableA, palette = palette,
-                      legend = "right", panel.labs.background = list(fill = "white"))
-
+  if (plot.type == "boxplot") {
+    p <- ggboxplot(x.df, variableA, "Abundance",
+      facet.by = "OTUID",
+      color = variableA, palette = palette,
+      legend = "right", add = "jitter",
+      panel.labs.background = list(fill = "white")
+    )
+  } else if (plot.type == "violin") {
+    p <- ggviolin(x.df, variableA, "Abundance",
+      facet.by = "OTUID",
+      color = variableA, palette = palette,
+      legend = "right", add = "jitter",
+      panel.labs.background = list(fill = "white")
+    )
+  } else if (plot.type == "stripchart") {
+    p <- ggstripchart(x.df, variableA, "Abundance",
+      facet.by = "OTUID",
+      color = variableA, palette = palette,
+      legend = "right", panel.labs.background = list(fill = "white")
+    )
   }
 
   return(p)
-
 }
-
-
