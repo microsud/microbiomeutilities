@@ -215,57 +215,6 @@ p <- plot_ordiplot_core(pseq.rel, ord.bray,
 print(p)
 ```
 
-## Plot ordination and species loading  
-
-This functions is a utility function which depend on `vegan` and `phyloseq`. Given a phyloseq object and ordination object, it will plot species loadings with high variation.  
-
-```{r eval=FALSE}
-# library(microbiomeutilities)
-
-data("zackular2014")
-ps1 <- zackular2014
-ps2 <- tax_glom(ps1, "Genus")
-ps2f <- format_to_besthit(ps2)
-orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
-p <- plot_ordination_utils(ps2f, orddi,
-                           color = "DiseaseState",
-                           plot.arrow = TRUE,
-                           scale.arrow = 0.5, top.taxa = 5
-)
-
-print(p)
-```
-
-
-## Visualize abundance of select taxa  
-
-
-```{r fig.width=8, eval=FALSE}
-
-ps.f2 <- format_to_besthit(ps0)
-
-psf2.rel <- microbiome::transform(ps.f2, "compositional")
-otu <- abundances(psf2.rel)
-meta <- meta(psf2.rel)
-
-library(vegan)
-permanova <- adonis(t(otu) ~ DiseaseState,
-                    data = meta, permutations = 99, method = "bray")
-
-# P-value
-print(as.data.frame(permanova$aov.tab)["group", "Pr(>F)"])
-
-coef <- coefficients(permanova)["DiseaseState1", ]
-top.coef <- coef[rev(order(abs(coef)))[1:3]]
-
-top.coef.df <- as.data.frame(top.coef)
-
-my_taxa <- c(rownames(top.coef.df))
-
-p <- plot_select_taxa(psf2.rel, my_taxa, "DiseaseState", "Paired", plot.type = "boxplot")
-print(p)
-```
-
 ## Plot taxa boxplot  
 
 Plot relative abundance of top taxa specified by user. 
