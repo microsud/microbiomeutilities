@@ -15,36 +15,39 @@
 #' @importFrom grDevices colorRampPalette
 #' @return plot
 #' @export
-#' @examples \dontrun{
-#'
-#'     library(microbiomeutilities)
-#'     library(RColorBrewer)
-#'     data("zackular2014")
-#'     p0 <- zackular2014
-#'     ps1 <- format_to_besthit(p0)
-#'     ps1 <- subset_samples(ps1, DiseaseState == "H")
-#'     ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
-#'     prev.thres <- seq(.05, 1, .05)
-#'     det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
-#'     pseq.rel <- microbiome::transform(ps1, "compositional")
-#'     ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
-#'
-#'     p <- plot_ordiplot_core(pseq.rel, ord.bray,
-#'     prev.thres, det.thres, min.prevalence = 0.9,
-#'     color.opt = "DiseaseState", shape = NULL, Sample = TRUE)
-#'     p
-#'}
+#' @examples
+#' \dontrun{
+#' 
+#' library(microbiomeutilities)
+#' library(RColorBrewer)
+#' data("zackular2014")
+#' p0 <- zackular2014
+#' ps1 <- format_to_besthit(p0)
+#' ps1 <- subset_samples(ps1, DiseaseState == "H")
+#' ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
+#' prev.thres <- seq(.05, 1, .05)
+#' det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
+#' pseq.rel <- microbiome::transform(ps1, "compositional")
+#' ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
+#' 
+#' p <- plot_ordiplot_core(pseq.rel, ord.bray,
+#'   prev.thres, det.thres,
+#'   min.prevalence = 0.9,
+#'   color.opt = "DiseaseState", shape = NULL, Sample = TRUE
+#' )
+#' p
+#' }
 #' @keywords utilities
 #'
 plot_ordiplot_core <-
   function(x,
-           ordiObject,
-           prevalences,
-           detections,
-           min.prevalence,
-           color.opt,
-           shape,
-           Samples = c(TRUE, FALSE)) {
+             ordiObject,
+             prevalences,
+             detections,
+             min.prevalence,
+             color.opt,
+             shape,
+             Samples = c(TRUE, FALSE)) {
     ordi <-
       spps <-
       OTU_ID <-
@@ -62,12 +65,9 @@ plot_ordiplot_core <-
     # Plot the sample ordination
     p0 <- plot_ordination(x, ordiObject, color = color.opt, shape = NULL)
 
-    if (ordiObject$converged == TRUE){
-
+    if (ordiObject$converged == TRUE) {
       message("Convergence reached in the ordination object provided")
-
     } else {
-
       message("Caution: Convergence was not reached in the ordination object provided")
     }
 
@@ -75,19 +75,20 @@ plot_ordiplot_core <-
 
     # Extract species values
 
-    spps  <- as.data.frame(vegan::scores(ordiObject,
-                                         display = "species"))
+    spps <- as.data.frame(vegan::scores(ordiObject,
+      display = "species"
+    ))
     # Add names
     spps$OTU_ID <- rownames(spps)
 
     # Plot the core
-    p1 <- plot_core( x,
-                     plot.type = "heatmap",
-                     prevalences = prevalences,
-                     detections = detections,
-                     min.prevalence = min.prevalence,
-                     horizontal = TRUE,
-                     colours = rev(brewer.pal(5, "Spectral"))
+    p1 <- plot_core(x,
+      plot.type = "heatmap",
+      prevalences = prevalences,
+      detections = detections,
+      min.prevalence = min.prevalence,
+      horizontal = TRUE,
+      colours = rev(brewer.pal(5, "Spectral"))
     )
 
     # get plot object
@@ -113,62 +114,69 @@ plot_ordiplot_core <-
 
     Genus <- NULL
     Phylum <- NULL
-    tax.unit <-tidyr::unite(tax2,
-                            Taxa_level,
-                            c("Genus"),
-                            sep = "_;",
-                            remove = TRUE)
+    tax.unit <- tidyr::unite(tax2,
+      Taxa_level,
+      c("Genus"),
+      sep = "_;",
+      remove = TRUE
+    )
 
     prevdf0[, 1] <- tax.unit$Taxa_level
-    #p1$data <- prevdf0
+    # p1$data <- prevdf0
 
     min.det <- min(prevdf1[, 2])
 
     min.prev <- min(prevdf1[, 3])
 
-    p1 <- p1 + theme(axis.text.x = element_text(vjust = 0.5,
-                                                hjust = 1,
-                                                face = "italic"
-    )) + ggtitle(paste0("Core taxa at minimum abundance of ",
-                        min.det, " and minimum prevalence ",
-                        min.prevalence))
+    p1 <- p1 + theme(axis.text.x = element_text(
+      vjust = 0.5,
+      hjust = 1,
+      face = "italic"
+    )) + ggtitle(paste0(
+      "Core taxa at minimum abundance of ",
+      min.det, " and minimum prevalence ",
+      min.prevalence
+    ))
 
 
     subprevdf <- subset(prevdf1, prevdf1[, 2] <= min.det)
 
     spps$Core <- match(spps$OTU_ID, subprevdf$Taxa, nomatch = 0)
 
-    spps$Core = as.logical(spps$Core)
+    spps$Core <- as.logical(spps$Core)
     taxdf <- as.data.frame(tax_table(x))
     taxdf$OTU_ID <- rownames(taxdf)
     df1 <- merge(spps, taxdf, by.x = "OTU_ID", by.y = "OTU_ID")
     df2 <- mutate(df1,
-                  Core = ifelse(Core == TRUE, paste(Genus),
-                                df1$Core))
+      Core = ifelse(Core == TRUE, paste(Genus),
+        df1$Core
+      )
+    )
 
-    p2 <- ggplot(df2,
-                 aes(x = NMDS1, y = NMDS2,
-                     label = NA)) + theme_bw() +
+    p2 <- ggplot(
+      df2,
+      aes(
+        x = NMDS1, y = NMDS2,
+        label = NA
+      )
+    ) + theme_bw() +
       geom_point(aes(color = Phylum), alpha = 0.5) +
       geom_text_repel(
-        data = subset(x = df2,
-                      subset =  Core != FALSE),
+        data = subset(
+          x = df2,
+          subset = Core != FALSE
+        ),
         aes(label = Genus),
         alpha = 0.9,
         size = 3,
         fontface = "italic"
       ) + ggtitle("NMDS ordination for taxa")
 
-    if (Samples == TRUE){
-
+    if (Samples == TRUE) {
       p.core <- ggarrange(p1, ggarrange(p0, p2), nrow = 2)
-
     } else {
-
       p.core <- ggarrange(p1, p2, nrow = 2)
-
     }
 
     return(p.core)
-
   }

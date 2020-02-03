@@ -4,7 +4,8 @@
 \alias{plot_taxa_boxplot}
 \title{Taxonomic Composition Plot boxplot}
 \usage{
-plot_taxa_boxplot(x, taxonomic.level, top.otu, VariableA, title, color = NULL)
+plot_taxa_boxplot(x, taxonomic.level, top.otu, VariableA, title,
+  color = NULL)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
@@ -27,17 +28,18 @@ Plot taxon abundance for samples.
 }
 \examples{
 \dontrun{
-  # Example data
-    library(microbiomeutilities)
-    library(RColorBrewer)
-    data("zackular2014")
-    ps1 <- zackular2014
-    pn <- plot_taxa_boxplot(ps1,
-    taxonomic.level = "Phylum",
-    top.otu = 3, VariableA = "DiseaseState",
-    title = "Rel plot", color = "Set2")
-    print(pn)
-    }
+# Example data
+library(microbiomeutilities)
+library(RColorBrewer)
+data("zackular2014")
+ps1 <- zackular2014
+pn <- plot_taxa_boxplot(ps1,
+  taxonomic.level = "Phylum",
+  top.otu = 3, VariableA = "DiseaseState",
+  title = "Rel plot", color = "Set2"
+)
+print(pn)
+}
 
 }
 \keyword{utilities}

@@ -20,33 +20,33 @@
 #' @keywords utilities
 
 taxa_summary <- function(x, level) {
-
+  
   pobj <- taxdf <- pobj.ag <- otudf <- outputdf <- NULL
-
+  
   pobj <- x
-
+  
   taxdf <- as.data.frame(pobj@tax_table)
   taxdf$OTU <- rownames(tax_table(pobj))
   tax_table(pobj) <- tax_table(as.matrix(taxdf, quote = FALSE))
-
+  
   pobj.ag <- microbiome::aggregate_taxa(pobj, level)
   com <- all(sample_sums(pobj.ag) == 1)
-    if(com == TRUE){
-
+  if(com == TRUE){
+    
     message("Data provided is compositional \n will use values directly")
-
-
+    
+    
     otudf2 <- as.data.frame(abundances(pobj.ag))
     rownames(otudf2) <- tax_table(pobj.ag)[,level]
-
+    
   } else {
-
+    
     message("Data provided is not compositional \n will first transform")
     otudf2 <- as.data.frame(abundances(pobj.ag, "compositional"))
-
+    
     rownames(otudf2) <- tax_table(pobj.ag)[,level]
   }
-
+  
   output=NULL
   for(j in 1:nrow(otudf2)){
     x2=as.numeric(otudf2[j,])
@@ -54,13 +54,13 @@ taxa_summary <- function(x, level) {
     mean.rel=mean(x2)
     med.rel=median(x2)
     Std.dev=sd(x2)
-
+    
     output=rbind(output,c(row.names(otudf2)[j],mx.rel, mean.rel,med.rel, Std.dev))
   }
-
+  
   outputdf <- as.data.frame(output)
   colnames(outputdf) <- c("Taxa", "Max.Rel.Ab", "Mean.Rel.Ab", "Median.Rel.Ab", "Std.dev")
   return(outputdf)
-
+  
 }
 

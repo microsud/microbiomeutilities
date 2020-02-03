@@ -6,26 +6,22 @@
 #' @export
 #' @author Contact: Sudarshan A. Shetty \email{sudarshanshetty9@@gmail.com}
 #' @examples
-#'     library(microbiomeutilities)
-#'     data("zackular2014")
-#'     pseq <- zackular2014
-#'     print_ps(pseq)
-#'
+#' library(microbiomeutilities)
+#' data("zackular2014")
+#' pseq <- zackular2014
+#' print_ps(pseq)
 #' @keywords utilities
 
-print_ps <- function(x){
-
-  comp<- NULL
+print_ps <- function(x) {
+  comp <- NULL
 
   message(paste0("object is ", class(x)))
   comp <- length(which(colSums(abundances(x)) > 1))
   if (comp == 0) {
     message("Compositional = Yes")
-
   }
 
   else {
-
     message("Compositional = No")
   }
 
@@ -33,24 +29,4 @@ print_ps <- function(x){
   message(paste0("nsamples = ", nsamples(x)))
   message(paste0("nsamplesvariables = ", length(sample_variables(x))))
   message(paste0("nranks = ", length(colnames((tax_table(x))))))
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

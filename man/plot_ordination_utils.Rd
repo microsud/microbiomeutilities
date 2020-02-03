@@ -4,8 +4,8 @@
 \alias{plot_ordination_utils}
 \title{Plot species loading with ordinations}
 \usage{
-plot_ordination_utils(x, ordiObject, color.opt = NULL, plot.arrow = TRUE,
-  scale.arrow = NULL, top.taxa = 5)
+plot_ordination_utils(x, ordiObject, color.opt = NULL,
+  plot.arrow = TRUE, scale.arrow = NULL, top.taxa = 5)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
@@ -33,17 +33,18 @@ This function is useful for visualizing specifc taxa that could be important in 
 \examples{
 \dontrun{
 
-    library(microbiomeutilities)
-    library(RColorBrewer)
-    data("zackular2014")
-    ps1 <- zackular2014
-    ps2 <- tax_glom(ps1, "Genus")
-    ps2f <- format_to_besthit(ps2)     
-    orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
-    p <- plot_ordination_utils(ps2f, orddi, 
-    color="DiseaseState", plot.arrow = TRUE, 
-    scale.arrow = 1.3, top.taxa = 5)
-    print(p)
+library(microbiomeutilities)
+library(RColorBrewer)
+data("zackular2014")
+ps1 <- zackular2014
+ps2 <- tax_glom(ps1, "Genus")
+ps2f <- format_to_besthit(ps2)
+orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
+p <- plot_ordination_utils(ps2f, orddi,
+  color = "DiseaseState", plot.arrow = TRUE,
+  scale.arrow = 1.3, top.taxa = 5
+)
+print(p)
 }
 }
 \keyword{utilities}

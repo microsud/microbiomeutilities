@@ -19,12 +19,11 @@ An alternative to psmelt function from \code{\link{phyloseq-class}} object.
 }
 \examples{
 \dontrun{
-  # Example data
-    library(microbiomeutilities)
-    data("zackular2014")
-    pseq <- zackular2014
-    pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
-
-          }
+# Example data
+library(microbiomeutilities)
+data("zackular2014")
+pseq <- zackular2014
+pseq_df <- phy_to_ldf(pseq, transform.counts = NULL)
+}
 }
 \keyword{utilities}

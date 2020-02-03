@@ -5,11 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>microbiomeutilities: An R package with utility functions for the microbiome R package • microbiomeutilities</title>
+<title>microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis • microbiomeutilities</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="microbiomeutilities: An R package with utility functions for the microbiome R package">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis">
 <meta property="og:description" content="This is a supporting tool for extending the functionality of both phyloseq and microbiome R packages.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -18,7 +19,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -58,40 +59,137 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
-  <div class="col-md-9 contents">
-    
+  <div class="contents col-md-9">
 
-    
-    
-<p><strong>This package is in experimental stage and should be used with caution</strong> I will keep improving this with time and feedback.</p>
-<div id="microbiomeutilities" class="section level1">
+<p><br></p>
+<p><a href="https://travis-ci.org/microsud/microbiomeutilities"><img src="https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master" alt="Build Status"></a></p>
+<p><br></p>
+<div id="about" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#microbiomeutilities" class="anchor"></a>microbiomeutilities</h1></div>
-<p>This is mainly a <em>wrapper tool R package</em>. Apart for some simple scripts for plotting, this package has a single function <code>microbiome_pipeline</code> for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a <em>HTML</em> report for convenient investigating of the data.</p>
-<p>Example output of the <code>microbiome_pipeline</code>: <a href="reference/Mock_report.html">Mock</a>.</p>
-<p><strong>Install microbiomeutilities</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)
-
-devtools::<span class="kw">install_github</span>(<span class="st">"microsud/microbiomeutilities"</span>)</code></pre></div>
-<p><strong>NOTE:</strong><br>
-The aim of this package is not to replace any of the following tools, instead this package is useful for a quick and (not so) dirty analysis of the OTU tables/biom files generated by tools such as QIIME (the newer QIIME2) (Caporaso, Kuczynski, Stombaugh et al., 2010), Mothur (Schloss, Westcott, Ryabin et al., 2009), DADA2 (Callahan, McMurdie, Rosen et al., 2016). Use the <em>HTML</em> report as a reference guide and not consider it as final results.</p>
-<div id="why-do-this" class="section level2">
+<a href="#about" class="anchor"></a>About</h1></div>
+<p>The <strong>microbiomeutilities</strong> is a supporting R package for the parent <a href="http://microbiome.github.com/microbiome">microbiome</a> R/BioC package. This utility tool includes functions for formatting and visualization of <a href="https://github.com/joey711/phyloseq">phyloseq</a> object. The package has a function <code>microbiome_pipeline</code>, which generates an <em>HTML</em> report with infromation on preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The <em>HTML</em> report can be convenient for having prelimanry insights into the data.</p>
+<p><a href="https://microsud.github.io/microbiomeutilities/">Package website and online documentation</a></p>
+<p>Example output of the <code>microbiome_pipeline</code>: <a href="https://microsud.github.io/microbiomeutilities/index.html">here</a>.</p>
+<p>The package provides access to a subset of studies included in the <a href="https://zenodo.org/record/840333#.WuYuDoiFM2w">MicrobiomeHD</a> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications</a>. These datasets are converted to phyloseq objects and can be directly used in R environment.</p>
+<div id="install-microbiomeutilities" class="section level2">
 <h2 class="hasAnchor">
-<a href="#why-do-this" class="anchor"></a>Why do this?</h2>
-<p>I am a microbiologists and R enthusiast and some times, my free time activity includes combining these two. The learning curve is steep for analyzing microbiome data from scratch. This package includes codes that are used routinely by me and my colleagues and friends. Realizing that the entire process of analyzing microbiome data is iterative and requires investment of time for thorough analysis, it was useful for me to make a package which makes this a little simpler. This helps in planning better the individual analysis such as filtering, normalization, transformation (all three are topics of hot debate and disagreement). The ability to look quickly if the main factor of interest is having an impact on the community diversity, composition, structure can be useful. This will also helps in making better decisions for further in-depth analysis. Immediate use can be for people who are working with enrichment’s and want basic analysis such as microbial composition of different enrichment conditions.</p>
+<a href="#install-microbiomeutilities" class="anchor"></a>Install microbiomeutilities</h2>
+<pre><code>install.packages("devtools")
+devtools::install_github("microsud/microbiomeutilities")
+</code></pre>
+<p><strong>Citation:</strong> Sudarshan A. Shetty, &amp; Leo Lahti. (2018, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 0.99.00). Zenodo. <a href="http://doi.org/10.5281/zenodo.1471685"><img src="https://zenodo.org/badge/99698135.svg" alt="DOI"></a></p>
 </div>
 <div id="direction-for-this-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#direction-for-this-package" class="anchor"></a>Direction for this package</h2>
-<p>Depending on the real world usefulness, practicality and success, we plan to include complete or parts of this package in the <code>microbiome</code> R package.<br>
+<p>Depending on the real world usefulness, practicality and success, we plan to include complete or parts of this package in the Microbiome R package.<br>
 “Leo Lahti, Sudarshan Shetty <a href="https://github.com/microbiome/microbiome/graphs/contributors">et al.</a> (<a href="https://bioconductor.org/packages/devel/bioc/html/microbiome.html">Bioconductor, 2017</a>). Tools for microbiome analysis in R.</p>
 <p>The microbiome R package relies on the independently developed<br><a href="https://github.com/joey711/phyloseq">phyloseq</a> package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.<br><a href="http://ggplot2.org/">ggplot2</a> H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.<br><a href="https://www.tidyverse.org/">tidyverse packages</a>.</p>
-<p><strong>Microbiome package website with easy tutorials</strong>:<br>
+<p><strong>Microbiome package website with step-wise tutorials</strong>:<br>
 URL: <a href="http://microbiome.github.com/microbiome" class="uri">http://microbiome.github.com/microbiome</a>.</p>
-<p><em>OTU or ASVs amplicon sequence variants as suggested recently (Callahan, McMurdie &amp; Holmes, 2017)</em>.</p>
+<p><strong>Tutorials</strong></p>
+<ul>
+<li>
+<a href="http://microbiome.github.io/microbiome/">Microbiome R package tutorials</a><br>
+</li>
+<li>
+<a href="https://mibwurrepo.github.io/Microbial-bioinformatics-introductory-course-Material-2018/introduction.html">Open and reproducible spring school 2018</a><br>
+</li>
+<li><a href="https://microsud.github.io/Tools-Microbiome-Analysis/">Tools Microbiome Anlaysis</a></li>
+</ul>
+<div id="more-useful-resources" class="section level3">
+<h3 class="hasAnchor">
+<a href="#more-useful-resources" class="anchor"></a>More useful resources:</h3>
+<ol>
+<li>
+<a href="https://f1000research.com/articles/5-1492/v2">Ben J. Callahan and Colleagues: Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses</a>.<br>
+</li>
+<li>
+<a href="http://msystems.asm.org/content/2/1/e00127-16">Comeau AM and Colleagues: Microbiome Helper: a Custom and Streamlined Workflow for Microbiome Research</a><br>
+</li>
+<li>MicrobiomeHD <a href="http://www.biorxiv.org/content/early/2017/05/08/134031">A standardized database of human gut microbiome studies in health and disease <em>Case-Control</em></a><br>
+</li>
+<li>Rhea <a href="https://peerj.com/articles/2836/">A pipeline with modular R scripts</a><br>
+</li>
+<li>Phyloseq <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217">Import, share, and analyze microbiome census data using R</a>
+</li>
+</ol>
+</div>
+<div id="about-the-author" class="section level3">
+<h3 class="hasAnchor">
+<a href="#about-the-author" class="anchor"></a>About the Author</h3>
+<ul>
+<li>
+<a href="https://microsud.github.io/gutmicrobe_webpage.io/">Web CV</a><br>
+</li>
+<li>
+<a href="https://twitter.com/gutmicrobe">twitter</a><br>
+</li>
+<li>
+<a href="https://scholar.google.nl/citations?hl=en&amp;user=Vahc6LUAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">googlescholar</a><br>
+</li>
+<li><a href="http://orcid.org/0000-0001-7280-9915">ORCID ID: 0000-0001-7280-9915</a></li>
+</ul>
+</div>
+<div id="references" class="section level3">
+<h3 class="hasAnchor">
+<a href="#references" class="anchor"></a>References:</h3>
+<ol>
+<li>Callahan, B. J., McMurdie, P. J. &amp; Holmes, S. P. (2017). Exact sequence variants should replace operational taxonomic units in marker gene data analysis. bioRxiv, 113597.<br>
+</li>
+<li>Callahan, B. J., McMurdie, P. J., Rosen, M. J., Han, A. W., Johnson, A. J. A. &amp; Holmes, S. P. (2016). DADA2: high-resolution sample inference from Illumina amplicon data. Nature methods 13, 581-583.<br>
+</li>
+<li>Caporaso, J. G., Kuczynski, J., Stombaugh, J., Bittinger, K., Bushman, F. D., Costello, E. K., Fierer, N., Peña, A. G., Goodrich, J. K. &amp; Gordon, J. I. (2010). QIIME allows analysis of high-throughput community sequencing data. Nature methods 7, 335-336.<br>
+</li>
+<li>Schloss, P. D., Westcott, S. L., Ryabin, T., Hall, J. R., Hartmann, M., Hollister, E. B., Lesniewski, R. A., Oakley, B. B., Parks, D. H. &amp; Robinson, C. J. (2009). Introducing mothur: open-source, platform-independent, community-supported software for describing and comparing microbial communities. Applied and environmental microbiology 75, 7537-7541.<br>
+Team, R. C. (2000). R language definition. Vienna, Austria: R foundation for statistical computing.</li>
+</ol>
+</div>
+<div id="datasets-from" class="section level3">
+<h3 class="hasAnchor">
+<a href="#datasets-from" class="anchor"></a>Datasets from:</h3>
+<ul>
+<li>Duvallet, Claire, et al. “Meta-analysis of gut microbiome studies identifies disease-specific and shared responses.” Nature communications 8.1 (2017): 1784.<br>
+</li>
+<li>Son, J. et al. Comparison of fecal microbiota in children with autism spectrum disorders and neurotypical siblings in the simons simplex collection. PLoS ONE 10, e0137725 (2015).<br>
+</li>
+<li>Kang, D. W. et al. Reduced incidence of Prevotella and other fermenters in intestinal microflora of autistic children. PLoS ONE8, e68322 (2013).<br>
+</li>
+<li>Schubert, A. M. et al. Microbiome data distinguish patients with clostridium difficile infection and non-c. difficile-associated diarrhea from healthy controls. mBio 5, e01021–14–e01021–14 (2014).<br>
+</li>
+<li>Youngster, I. et al. Fecal microbiota transplant for relapsing clostridium difficile infection using a frozen inoculum from unrelated donors: a randomized, open-label, controlled pilot study. Clin. Infect. Dis. 58, 1515–1522 (2014).<br>
+</li>
+<li>Baxter, N. T., Ruffin, M. T., Rogers, M. A. &amp; Schloss, P. D. Microbiota-based model improves the sensitivity of fecal immunochemical test for detecting colonic lesions. Genome Med. 8, 37 (2016).<br>
+</li>
+<li>Zackular, Joseph P., et al. “The gut microbiome modulates colon tumorigenesis.” MBio 4.6 (2013): e00692-13.</li>
+<li>Zeller, G. et al. Potential of fecal microbiota for early-stage detection of colorectal cancer. Mol. Syst. Biol. 10, 766–766 (2014).</li>
+<li>Singh, P. et al. Intestinal microbial communities associated with acute enteric infections and disease recovery. Microbiome 3, 45 (2015).<br>
+</li>
+<li>Noguera-Julian, M. et al. Gut microbiota linked to sexual preference and hiv infection. EBioMedicine 5, 135–146 (2016). Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic inflammation in chronic HIV infection. J. Infect. Dis. 211, 19–27 (2014).<br>
+</li>
+<li>Lozupone, C. A. et al. Alterations in the gut microbiota associated with hiv-1 infection. Cell Host Microbe 14, 329–339 (2013).</li>
+<li>Gevers, D. et al. The treatment-naive microbiome in new-onset crohn’s disease. Cell Host Microbe 15, 382–392 (2014).</li>
+<li>Zhang, Z. et al Large-scale survey of gut microbiota associated with MHE via 16s rRNA-based pyrosequencing. Am. J. Gastroenterol. 108, 1601–1611 (2013).<br>
+</li>
+<li>Wong, J. M. W., Souza, R. De, Kendall, C. W. C., Emam, A. &amp; Jenkins, D. J. A. Colonic health: fermentation and short chain fatty acids. J. Clin. Gastroenterol. 40, 235–243 (2006).<br>
+</li>
+<li>Ross, M. C. et al. 16s gut community of the cameron county hispanic cohort. Microbiome 3, 7 (2015).</li>
+<li>Zupancic, M. L. et al. Analysis of the gut microbiota in the old order Amish and its relation to the metabolic syndrome. PLoS ONE 7, e43052 (2012).<br>
+</li>
+<li>Scher, J. U. et al. Expansion of intestinal prevotella copri correlates with enhanced susceptibility to arthritis. eLife 2, e01202 (2013).<br>
+</li>
+<li>Alkanani, A. K. et al. Alterations in intestinal microbiota correlate with susceptibility to type 1 diabetes. Diabetes 64, 3510–3520 (2015).<br>
+</li>
+<li>Scheperjans, F. et al Gut microbiota are related to parkinson’s disease and clinical phenotype. Mov. Disord. 30, 350–358 (2014).</li>
+</ul>
+<p><strong>NOTE:</strong><br>
+The aim of this package is not to replace any of the other tools mentioned on this site. Instead this package is useful for a quick and (not so) dirty analysis of the OTU tables/biom files generated by tools such as QIIME (the newer QIIME2) (Caporaso, Kuczynski, Stombaugh et al., 2010), Mothur (Schloss, Westcott, Ryabin et al., 2009), DADA2 (Callahan, McMurdie, Rosen et al., 2016). Using the <em>HTML</em> report as a reference for more thorough analysis.</p>
 </div>
 </div>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -117,8 +215,7 @@ URL: <a href="http://microbiome.github.com/microbiome" class="uri">http://microb
 </ul>
 </div>
 
-      </div>
-
+  </div>
 </div>
 
 
@@ -127,12 +224,14 @@ URL: <a href="http://microbiome.github.com/microbiome" class="uri">http://microb
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

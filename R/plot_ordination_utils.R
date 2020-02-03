@@ -14,19 +14,21 @@
 #' @import microbiome
 #' @return plot
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' 
-#'     library(microbiomeutilities)
-#'     library(RColorBrewer)
-#'     data("zackular2014")
-#'     ps1 <- zackular2014
-#'     ps2 <- tax_glom(ps1, "Genus")
-#'     ps2f <- format_to_besthit(ps2)     
-#'     orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
-#'     p <- plot_ordination_utils(ps2f, orddi, 
-#'     color="DiseaseState", plot.arrow = TRUE, 
-#'     scale.arrow = 1.3, top.taxa = 5)
-#'     print(p)
+#' library(microbiomeutilities)
+#' library(RColorBrewer)
+#' data("zackular2014")
+#' ps1 <- zackular2014
+#' ps2 <- tax_glom(ps1, "Genus")
+#' ps2f <- format_to_besthit(ps2)
+#' orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
+#' p <- plot_ordination_utils(ps2f, orddi,
+#'   color = "DiseaseState", plot.arrow = TRUE,
+#'   scale.arrow = 1.3, top.taxa = 5
+#' )
+#' print(p)
 #' }
 #' @keywords utilities
 #'
@@ -35,8 +37,7 @@ plot_ordination_utils <- function(x,
                                   color.opt = NULL,
                                   plot.arrow = TRUE,
                                   scale.arrow = NULL,
-                                  top.taxa = 5)
-{
+                                  top.taxa = 5) {
   p.base <-
     y.axis <-
     x.axis <-
@@ -46,8 +47,10 @@ plot_ordination_utils <- function(x,
     id.type <-
     best_hit <-
     select.top <- dif.tax.ord <- pdf.tax3 <- plot.ord.load <- NULL
-  p.base <- plot_ordination(x, ordiObject, color = color.opt,
-                            type = "split")
+  p.base <- plot_ordination(x, ordiObject,
+    color = color.opt,
+    type = "split"
+  )
   y.axis <- p.base$labels$y[1]
   x.axis <- p.base$labels$x[1]
   pdf.base <- p.base$data
@@ -58,17 +61,27 @@ plot_ordination_utils <- function(x,
   pdf.tax2 <- pdf.tax[, 1:2]
   select.top <- min(top.taxa, dim(pdf.tax2)[1])
   diff.taxa.ord <- names(sort(apply(abs(pdf.tax2), 1, max),
-                              decreasing = T))[1:select.top]
+    decreasing = T
+  ))[1:select.top]
   pdf.tax3 <- subset(pdf.tax, best_hit %in% diff.taxa.ord)
   plot.ord.load <-
-    ggplot() + geom_point(data = pdf.sam,
-                          aes(pdf.sam[,
-                                      1], pdf.sam[, 2], color = pdf.sam[, color.opt]))
-  plot.ord.load <- plot.ord.load + geom_text(data = pdf.tax3,
-                                             aes(scale.arrow * pdf.tax3[, 1], scale.arrow * pdf.tax3[,
-                                                                                                     2], label = best_hit)) + ggrepel::geom_text_repel()
-  if (plot.arrow == TRUE)
-  {
+    ggplot() + geom_point(
+      data = pdf.sam,
+      aes(pdf.sam
+      [
+        ,
+        1
+      ], pdf.sam[, 2], color = pdf.sam[, color.opt])
+    )
+  plot.ord.load <- plot.ord.load + geom_text_repel(
+    data = pdf.tax3,
+    aes(scale.arrow * pdf.tax3[, 1], scale.arrow * pdf.tax3
+    [
+      ,
+      2
+    ], label = best_hit)
+  ) + ggrepel::geom_text_repel()
+  if (plot.arrow == TRUE) {
     plot.ord.load <- plot.ord.load + geom_segment(
       data = pdf.tax3,
       aes(
@@ -77,15 +90,16 @@ plot_ordination_utils <- function(x,
         y = 0,
         yend = scale.arrow * pdf.tax3[, 2]
       ),
-      arrow = arrow(length = unit(0.4,
-                                  "cm")),
+      arrow = arrow(length = unit(
+        0.4,
+        "cm"
+      )),
       color = "grey50"
     )
     plot.ord.load <- plot.ord.load + theme_bw() + xlab(x.axis) +
       ylab(y.axis)
     return(plot.ord.load)
-  } else
-  {
+  } else {
     plot.ord.load <- plot.ord.load + theme_bw() + xlab(x.axis) +
       ylab(y.axis)
     return(plot.ord.load)

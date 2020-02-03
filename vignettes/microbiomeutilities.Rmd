@@ -1,23 +1,23 @@
 ---
-title: "microbiomeutilities vignette"
+title: "Getting started"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Introduction to syncomR}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
-
+  
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+collapse = TRUE,
+comment = "#>"
 )
 ```
 
 
-**This package is in experimental stage and should be used only for testing/trial purposes. I will keep improving this with time and feedback.**   
+<font color="red">microbiomeutilities R package is under active development! Store a local copy of the package (download from GitHub) as backup</font>
 
-This is mainly a wrapper tool R package. Apart for some simple scripts for data visualization, this package has a single function called `microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a HTML report for convenient investigating of the data.  
+The microbiomeutilities R package is mainly a wrapper tool with diverse functions for data handling and visualisation. This package has a "`pipeline`" function called `microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a HTML report for convenient first-hand investigating of the microbial profilling datadata.  
 
 ## Install  
 
@@ -25,7 +25,6 @@ This is mainly a wrapper tool R package. Apart for some simple scripts for data 
 
 install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
-
 ```  
 
 
@@ -35,13 +34,12 @@ library(microbiomeutilities)
 library(microbiome)
 library(knitr)
 library(tibble)
-
 ```
 
 
 ## Example data 
 
-Data from pre-print [Zackular et al., 2014: The Gut Microbiome Modulates Colon Tumorigenesis](http://mbio.asm.org/content/4/6/e00692-13).  
+Package data from [Zackular et al., 2014: The Gut Microbiome Modulates Colon Tumorigenesis](http://mbio.asm.org/content/4/6/e00692-13).  
 
 Useful resources:  
 
@@ -56,7 +54,6 @@ data("zackular2014")
 ps0 <- zackular2014
 
 print(ps0)
-
 ```
 
 
@@ -85,7 +82,7 @@ microbiome_pipeline(
   samsize = NA,
   projectname = "Mock",
   author = "Sudarshan"
-  )
+)
 ```
 
 ## Formatting the Phyloseq Object  
@@ -97,20 +94,20 @@ Check the taxonomy in phyloseq object.
 ```{r}
 
 kable(head(tax_table(ps0)))
-
 ```
 
 Some have only g__ of s__ information.  
 
 ```{r, eval=FALSE}
 
+data("zackular2014")
+p0 <- zackular2014
 # reduce size for example
-ps0 <- core(ps0, detection = 10, prevalence = 20/100)
-
-ps0.f <- format_phyloseq(ps0)
+ps0 <- core(ps0, detection = 10, prevalence = 20 / 100)
+p0.f <- format_phyloseq(p0)
+# head(tax_table(p0.f))
 
 kable(head(tax_table(ps0.f))[3:6])
-
 ```
 
 Now the available taxonomy is added.  
@@ -119,12 +116,11 @@ There is a second version which will change the names in both otu table and taxo
 
 ```{r}
 # reduce size for example
-ps0 <- core(ps0, detection = 10, prevalence = 20/100)
+ps0 <- core(ps0, detection = 10, prevalence = 20 / 100)
 
 ps0.f2 <- format_to_besthit(ps0)
 
 kable(head(tax_table(ps0.f2))[3:6])
-
 ```
 
 As can be seen, the rownames have the OTUIDs and available toxonomic name(s).  
@@ -133,19 +129,11 @@ As can be seen, the rownames have the OTUIDs and available toxonomic name(s).
 
 This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
 
-```{r}
+```{r eval=FALSE}
 
 percent_classified(ps0)
 
 ```
-
-
-```{r}
-
-tax_sum <- taxa_summary(ps0, "Phylum")
-kable(tax_sum)
-```
-
 
 
 ## Distribution of reads  
@@ -154,9 +142,9 @@ Useful for QC purposes. Check for siatribution of sequencing depth.
 
 ```{r, eval=FALSE}
 
-p <- plot_read_distribution(ps0, groups="DiseaseState", plot.type= "density")
+p <- plot_read_distribution(ps0, groups = "DiseaseState", 
+                            plot.type = "density")
 print(p)
-
 ```
 
 
@@ -167,41 +155,38 @@ Useful if the user wants to plot specific features.
 ```{r}
 
 # reduce size for example
-ps0 <- core(ps0, detection = 10, prevalence = 20/100)
+ps0 <- core(ps0, detection = 10, prevalence = 20 / 100)
 
 pseq_df <- phy_to_ldf(ps0, transform.counts = NULL)
 
 kable(head(pseq_df))
-
 ```
 
 ## Plot alpha diversities  
 
-Utility plot function for diversity measures calcualted by `microbiome` package.  
+Utility plot function for diversity measures calculated by `microbiome` package.  
 
-```{r, fig.width=8, fig.height=4, message=FALSE}
+```{r, fig.width=8, fig.height=6, message=FALSE}
 
 library(microbiome)
 data("zackular2014")
 ps0 <- zackular2014
 
-ps0 <- core(ps0, detection = 2, prevalence = 20/100)
-p <- plot_alpha_diversities(ps0, 
-                            type = "diversities", 
-                            index.val = "all", 
-                            plot.type = "stripchart", 
-                            variableA = "DiseaseState", 
-                            palette = "jco")
+p <- plot_alpha_diversities(ps0,
+                            type = "evenness",
+                            index.val = "all",
+                            plot.type = "stripchart",
+                            variableA = "DiseaseState",
+                            palette = "Paired"
+)
 
 print(p)
-
-
 ```
 
 
 ## Plot ordination and core  
 
-```{r, fig.height=8, fig.width=12}
+```{r, fig.height=8, fig.width=12, eval=FALSE}
 
 library(microbiomeutilities)
 library(RColorBrewer)
@@ -217,109 +202,32 @@ prev.thres <- seq(.05, 1, .05)
 det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
 pseq.rel <- microbiome::transform(ps1, "compositional")
 # reduce size for example
-pseq.rel <- core(pseq.rel, detection = 0.001, prevalence = 20/100)
+pseq.rel <- core(pseq.rel, detection = 0.001, prevalence = 20 / 100)
 
 ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
 
 p <- plot_ordiplot_core(pseq.rel, ord.bray,
-prev.thres, det.thres, min.prevalence = 0.9,
- color.opt = "DiseaseState", shape = NULL, Sample = TRUE)
+                        prev.thres, det.thres,
+                        min.prevalence = 0.9,
+                        color.opt = "DiseaseState", shape = NULL, Sample = TRUE
+)
 
 print(p)
-
-```
-
-## Plot ordination and species loading  
-
-This functions is a utility function which depend on `vegan` and `phyloseq`. Given a phyloseq object and ordination object, it will plot species loadings with high variation.  
-
-```{r}
-# library(microbiomeutilities)
-
-data("zackular2014")
-ps1 <- zackular2014
-ps2 <- tax_glom(ps1, "Genus")
-ps2f <- format_to_besthit(ps2)     
-orddi <- ordinate(ps2f, method = "CCA", distance = "bray")
-p <- plot_ordination_utils(ps2f, orddi,
-                           color="DiseaseState", 
-                           plot.arrow = TRUE, 
-                           scale.arrow = 1.3, top.taxa = 5)
-
-print(p)
-```
-
-## Visualize abundance of select taxa  
-
-
-```{r, fig.width=8}
-
-ps.f2 <- format_to_besthit(ps0)
-
-psf2.rel <- microbiome::transform(ps.f2, "compositional")
-otu <- abundances(psf2.rel)
-meta <- meta(psf2.rel)
-
-library(vegan)
-permanova <- adonis(t(otu) ~ DiseaseState,
-               data = meta, permutations=99, method = "bray")
-
-# P-value
-print(as.data.frame(permanova$aov.tab)["group", "Pr(>F)"])
-
-coef <- coefficients(permanova)["DiseaseState1",]
-top.coef <- coef[rev(order(abs(coef)))[1:3]]
-
-top.coef.df <- as.data.frame(top.coef)
-
-my_taxa <- c(rownames(top.coef.df))
-
-p <- plot_select_taxa(psf2.rel, my_taxa, "DiseaseState", "Paired", plot.type = "boxplot")
-print(p)
-
 ```
 
 ## Plot taxa boxplot  
 
 Plot relative abundance of top taxa specified by user. 
 
-```{r,fig.width=6, fig.height=4}
+```{r,fig.width=6, fig.height=4, eval=FALSE}
 
 pn <- plot_taxa_boxplot(ps0,
                         taxonomic.level = "Phylum",
                         top.otu = 5, VariableA = "DiseaseState",
-                        title = "Relative abudance plot", color = "Set2")
+                        title = "Relative abudance plot", color = "Set2"
+)
 
 print(pn)
-
-```
-
-## Plot taxa barplot  
-
-```{r, fig.width=6, fig.height=4}
-
-library(RColorBrewer)
-library(dplyr)
-
-# reduce data for egample purposes
-ps.cor <- core(ps0, detection = 10, prevalence = 0.5)
-
-p <- plot_taxa_composition(ps.cor, taxonomic.level = "Phylum", transform = "compositional", average_by = NULL)
-print(p)
-
-```
-
-## Heatmap using phyloseq and pheatmap   
-
-Useful for visualisng differences in top otus between sample groups.  
-
-```{r, fig.width=8}
-
-heat.sample <- plot_taxa_heatmap(ps0, subset.top = 20,
-    VariableA = "DiseaseState",
-    heatcolors =brewer.pal(6, "Blues"),
-    transformation = "compositional")
-
 ```
 
 ## MicrobiomeHD datasets as phyloseq objects  
@@ -333,7 +241,6 @@ The phyloseq objects are stored and accessed from [microbiomedatarepo](https://g
 study <- list_microbiome_data(printtab = FALSE)
 
 knitr::kable(study)
-
 ```
 
 
@@ -343,11 +250,10 @@ Below is the per study reference.
 
 ```{r, eval=FALSE}
 
-file <- system.file("extdata", "microbiomeHD_ref.txt", package="microbiomeutilities")
+file <- system.file("extdata", "microbiomeHD_ref.txt", package = "microbiomeutilities")
 reference <- read.table(file, header = T, sep = "\t")
 
 knitr::kable(reference)
-
 ```
 
 For more tutorials and examples of data anlaysis in R please check:  
@@ -358,34 +264,33 @@ For more tutorials and examples of data anlaysis in R please check:
 ```{r}
 
 sessionInfo()
-
 ```
 
 
 ## Package requirements  
 
 * Depends:
- + [R (>= 3.4.1)](https://www.r-project.org/)
- + [phyloseq](https://joey711.github.io/phyloseq/index.html)
- + [ggplot2](http://ggplot2.org/)
- + [microbiome](https://bioconductor.org/packages/devel/bioc/html/microbiome.html)
++ [R (>= 3.4.1)](https://www.r-project.org/)
++ [phyloseq](https://joey711.github.io/phyloseq/index.html)
++ [ggplot2](http://ggplot2.org/)
++ [microbiome](https://bioconductor.org/packages/devel/bioc/html/microbiome.html)
 
 * Imports:
- + [plyr](https://cran.r-project.org/web/packages/plyr/index.html)
- + [reshape2](https://cran.rstudio.com/web/packages/reshape2/index.html)
- + [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
- + [tidyr](http://tidyr.tidyverse.org/)
- + [utils](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/00Index.html)
- + [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
- + [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html)
- + [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)
- + [viridis](https://cran.r-project.org/web/packages/viridis/index.html)
- + [pheatmap](https://cran.r-project.org/web/packages/pheatmap/index.html)
- + [ggrepel](https://cran.r-project.org/web/packages/ggrepel/index.html)
++ [plyr](https://cran.r-project.org/web/packages/plyr/index.html)
++ [reshape2](https://cran.rstudio.com/web/packages/reshape2/index.html)
++ [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
++ [tidyr](http://tidyr.tidyverse.org/)
++ [utils](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/00Index.html)
++ [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
++ [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html)
++ [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)
++ [viridis](https://cran.r-project.org/web/packages/viridis/index.html)
++ [pheatmap](https://cran.r-project.org/web/packages/pheatmap/index.html)
++ [ggrepel](https://cran.r-project.org/web/packages/ggrepel/index.html)
 
 * Suggests:
- + [BiocGenerics](https://bioconductor.org/packages/release/bioc/html/BiocGenerics.html)
- + [knitr](https://cran.r-project.org/web/packages/knitr/index.html)
- + [rmarkdown](http://rmarkdown.rstudio.com/)
- + [ape](https://cran.r-project.org/web/packages/ape/index.html)
- + [Picante](https://academic.oup.com/bioinformatics/article/26/11/1463/203321)
++ [BiocGenerics](https://bioconductor.org/packages/release/bioc/html/BiocGenerics.html)
++ [knitr](https://cran.r-project.org/web/packages/knitr/index.html)
++ [rmarkdown](http://rmarkdown.rstudio.com/)
++ [ape](https://cran.r-project.org/web/packages/ape/index.html)
++ [Picante](https://academic.oup.com/bioinformatics/article/26/11/1463/203321)

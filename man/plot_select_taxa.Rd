@@ -29,16 +29,15 @@ Useful for instances where user is interested only in some OTUs. For example OTU
 }
 \examples{
 \dontrun{
-  # Example data
-    library(microbiome)
-    library(microbiomeutilities)
-    data("zackular2014")
-    p0 <- zackular2014
-    p0.f <- format_to_besthit(p0)
-    select.taxa <- c("OTU-d__denovo31:Dorea", "OTU-d__denovo24:Blautia")
-    p <- plot_select_taxa(p0.f, select.taxa, "DiseaseState", "Paired", plot.type = "stripchart")
-    print(p)
-    
-    }
+# Example data
+library(microbiome)
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+p0.f <- format_to_besthit(p0)
+select.taxa <- c("OTU-d__denovo31:Dorea", "OTU-d__denovo24:Blautia")
+p <- plot_select_taxa(p0.f, select.taxa, "DiseaseState", "Paired", plot.type = "stripchart")
+print(p)
+}
 }
 \keyword{utilities}

@@ -4,9 +4,10 @@
 \alias{plot_taxa_composition}
 \title{Taxonomic Composition Plot}
 \usage{
-plot_taxa_composition(x, sample.sort = NULL, taxonomic.level = "Phylum",
-  transform = "compositional", otu.sort = NULL, palette = brewer.pal(12,
-  "Paired"), x.label = "sample", plot.type = "barplot", average_by = NULL,
+plot_taxa_composition(x, sample.sort = NULL,
+  taxonomic.level = "Phylum", transform = "compositional",
+  otu.sort = NULL, palette = brewer.pal(12, "Paired"),
+  x.label = "sample", plot.type = "barplot", average_by = NULL,
   verbose = FALSE, mar = c(5, 12, 1, 1), ...)
 }
 \arguments{
@@ -48,12 +49,12 @@ Plot taxon abundance for samples. It is a legacy function from \code{\link{micro
 }
 \examples{
 \dontrun{
-    # Example data
-    library(microbiome)
-    library(microbiomeutilities)
-    data("biogeogut")
-    pseq <- biogeogut
-    plot_taxa_composition(pseq, taxonomic.level = "Phylum")
-          }
+# Example data
+library(microbiome)
+library(microbiomeutilities)
+data("biogeogut")
+pseq <- biogeogut
+plot_taxa_composition(pseq, taxonomic.level = "Phylum")
+}
 }
 \keyword{utilities}

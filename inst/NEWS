@@ -1,11 +1,15 @@
 
 Constant development is in process.  
 
-CHANGES IN VERSION 0.99.1 (2018-04-09)
+CHANGES IN VERSION 0.99.02 (2020-02-02)
+  o diversities to alpha in plot_alpha_diversities function
+  o fix typos in documentation
+  
+CHANGES IN VERSION 0.99.01 (2018-04-09)
   o Cosmetic changes to report generator    
   
 CHANGES IN VERSION 0.99.0 (2018-20-04)
   o Added print_ps (utility and alternative to print(ps))
   o Added taxa_summary, returns table with mean, max, median, standard deviation relative abundance
-  o use of abundance to extract otu_table to avoid bugs
+  o Use of abundance to extract otu_table to avoid bugs
   o Fixes for other bugs in examples and documentation  

@@ -17,10 +17,10 @@ Data for practice, also an example for importing mothur files from Baxtrer et al
 }
 \examples{
 \dontrun{
-    library(microbiomeutilities)
+library(microbiomeutilities)
 
-    df <- list_microbiome_data(printtab = FALSE)
-    }
+df <- list_microbiome_data(printtab = FALSE)
+}
 
 }
 \keyword{utilities}
