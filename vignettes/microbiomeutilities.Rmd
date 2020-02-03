@@ -230,37 +230,6 @@ pn <- plot_taxa_boxplot(ps0,
 print(pn)
 ```
 
-## Plot taxa barplot  
-
-```{r, fig.width=12, fig.height=4}
-
-library(RColorBrewer)
-library(dplyr)
-library(microbiomeutilities)
-
-# reduce data for egample purposes
-ps.cor <- core(ps0, detection = 10, prevalence = 0.5)
-
-p <- plot_taxa_composition(ps.cor, taxonomic.level = "Phylum", 
-                           transform = "compositional", average_by = NULL,
-                           palette = brewer.pal(12, "Set2"))
-print(p)
-```
-
-## Heatmap using phyloseq and pheatmap   
-
-Useful for visualisng differences in top otus between sample groups.  
-
-```{r, fig.width=10, eval=FALSE}
-library(pheatmap)
-heat.sample <- plot_taxa_heatmap(ps0,
-                                 subset.top = 20,
-                                 VariableA = "DiseaseState",
-                                 heatcolors = rev(brewer.pal(6, "Spectral")),
-                                 transformation = "compositional",
-                                 cluster_cols = F)
-```
-
 ## MicrobiomeHD datasets as phyloseq objects  
 
 We provide access to a subset of studies included in the `MicrobiomeHD` database from Duvallet et al 2017: [Meta-analysis of gut microbiome studies identifies disease-specific and shared responses](https://www.nature.com/articles/s41467-017-01973-8#ref-CR33). Nature communications.    
