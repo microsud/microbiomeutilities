@@ -1,9 +1,9 @@
 
-<br> 
 
 [![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)   
+[![HitCount](http://hits.dwyl.com/microsud/microbiomeutilities.svg)](http://hits.dwyl.com/microsud/microbiomeutilities)
 
-<br>  
+-------------------------
 
 # About  
 The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package. This utility tool includes functions for formatting and visualization of [phyloseq](https://github.com/joey711/phyloseq) object. The package has a function `microbiome_pipeline`, which generates an _HTML_ report with infromation on preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The _HTML_ report can be convenient for having prelimanry insights into the data.    
