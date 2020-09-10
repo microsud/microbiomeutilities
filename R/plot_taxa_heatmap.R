@@ -90,8 +90,7 @@ plot_taxa_heatmap <- function(x, subset.top, transformation,
 
   heatmap <- pheatmap(otu.mat,
     annotation_col = select.meta,
-    main = "Heatmap", color = color.heatmap,
-    border_color = "white", ...
+    main = "Heatmap", color = color.heatmap, ...
   )
   return(heatmap)
 }
