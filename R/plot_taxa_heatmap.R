@@ -31,7 +31,7 @@
 #' )
 #' @keywords utilities
 plot_taxa_heatmap <- function(x, subset.top, transformation,
-                              VariableA, heatcolors = NULL, ...) {
+                              VariableA, heatcolors = NULL, title, ...) {
   topOTU <- phyobj1 <- phyobj2 <- otu.mat <- meta.tab <- select.meta <- color.heatmap <- NULL
 
 
@@ -90,7 +90,7 @@ plot_taxa_heatmap <- function(x, subset.top, transformation,
 
   heatmap <- pheatmap(otu.mat,
     annotation_col = select.meta,
-    main = "Heatmap", color = color.heatmap, ...
+    main = title, color = color.heatmap, ...
   )
   return(heatmap)
 }
