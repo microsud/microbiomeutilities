@@ -21,7 +21,7 @@ install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 
 ```  
-**Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2018, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 0.99.00). Zenodo. [![DOI](https://zenodo.org/badge/99698135.svg)](http://doi.org/10.5281/zenodo.1471685)   
+**Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2018, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.00).     
 
 ## Direction for this package   
 Depending on the real world usefulness, practicality and success, we plan to include complete or parts of this package in the Microbiome R package.  

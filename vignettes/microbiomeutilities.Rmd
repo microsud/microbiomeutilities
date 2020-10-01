@@ -1,8 +1,8 @@
 ---
-title: "Getting started"
+title: "Introduction to microbiomeutilities"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to syncomR}
+  %\VignetteIndexEntry{Introduction to microbiomeutilities}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -230,7 +230,7 @@ print(p)
 
 Plot relative abundance of top taxa specified by user. 
 
-```{r,fig.width=7, fig.height=4, eval=FALSE, message=FALSE}
+```{r,fig.width=7, fig.height=4, eval=TRUE, message=FALSE}
 library(microbiomeutilities)
 library(RColorBrewer)
 data("zackular2014")
