@@ -26,7 +26,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' library(microbiomeutilities)
 #' library(microbiome)
 #' microbiome_pipeline(
@@ -69,37 +69,33 @@ microbiome_pipeline <- function(otufile,
                                 filterpseq,
                                 samsize,
                                 projectname,
-                                author) {
-  {
-    rmarkdown::render(
-      input = system.file("microutility_template.rmd", package = "microbiomeutilities"),
-      output_file = paste0(projectname, "_report.html"),
-      output_dir = work_dir,
-      knit_root_dir = work_dir,
-      run_pandoc = TRUE,
-      quiet = FALSE,
-      clean = TRUE,
-      params = list(
-        otufile,
-        mapping,
-        taxonomy,
-        treefilename,
-        type,
-        work_dir,
-        out_dir,
-        VariableA,
-        VariableB,
-        UnConstOrd,
-        heatmap,
-        filterCount,
-        filterPrev,
-        col.palette,
-        filterpseq,
-        samsize,
-        projectname,
-        author
-      )
-    )
-    cat("HTML report created in output directory\n")
-  }
-}
+                                author) {{ rmarkdown::render(
+  input = system.file("microutility_template.rmd", package = "microbiomeutilities"),
+  output_file = paste0(projectname, "_report.html"),
+  output_dir = work_dir,
+  knit_root_dir = work_dir,
+  run_pandoc = TRUE,
+  quiet = FALSE,
+  clean = TRUE,
+  params = list(
+    otufile,
+    mapping,
+    taxonomy,
+    treefilename,
+    type,
+    work_dir,
+    out_dir,
+    VariableA,
+    VariableB,
+    UnConstOrd,
+    heatmap,
+    filterCount,
+    filterPrev,
+    col.palette,
+    filterpseq,
+    samsize,
+    projectname,
+    author
+  )
+)
+cat("HTML report created in output directory\n") }}

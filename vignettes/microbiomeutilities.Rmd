@@ -52,10 +52,12 @@ Tools for microbiome analysis in R. **Microbiome package** URL: [microbiome pack
 
 data("zackular2014")
 ps0 <- zackular2014
-
-print(ps0)
+ps0
 ```
-
+The `print_ps` from `microbiomeutilities` can give additional information.  
+```{r}
+print_ps(ps0)
+```
 
 ## Microbiome analysis pipeline  
 
@@ -89,7 +91,6 @@ microbiome_pipeline(
 
 Most commonly it is observed that the taxonomy file has classification until a given taxonomic level.We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.    
   
-
 Check the taxonomy in phyloseq object.  
 
 ```{r}
@@ -105,7 +106,9 @@ data("zackular2014")
 p0 <- zackular2014
 # reduce size for example
 ps0 <- core(ps0, detection = 10, prevalence = 20 / 100)
-ps0.f2 <- format_to_besthit(ps0)
+# Add a prefix to taxa labels
+ps0.f2 <- format_to_besthit(ps0, prefix = "MyBug-")
+
 kable(head(tax_table(ps0.f2))[3:6])
 ```
 
@@ -116,8 +119,13 @@ As can be seen, the rownames have the OTUIDs and available toxonomic name(s).
 ## Summarize the percent taxa classification for phyloseq  
 
 This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
+This best works with cleaned taxonomy table.  
 
 ```{r eval=FALSE}
+data("zackular2014")
+p0 <- zackular2014
+# reduce size for example
+ps0 <- core(p0, detection = 10, prevalence = 50 / 100)
 
 percent_classified(ps0)
 
@@ -128,9 +136,10 @@ percent_classified(ps0)
 
 Useful for QC purposes. Check for siatribution of sequencing depth.     
 
-```{r, eval=FALSE}
-
-p <- plot_read_distribution(ps0, groups = "DiseaseState", 
+```{r, eval=TRUE}
+data("zackular2014")
+p0 <- zackular2014
+p <- plot_read_distribution(p0, groups = "DiseaseState", 
                             plot.type = "density")
 print(p)
 ```
@@ -141,9 +150,10 @@ print(p)
 Useful if the user wants to plot specific features.  
 
 ```{r}
-
+data("zackular2014")
+p0 <- zackular2014
 # reduce size for example
-ps0 <- core(ps0, detection = 10, prevalence = 20 / 100)
+ps0 <- core(p0, detection = 10, prevalence = 20 / 100)
 
 pseq_df <- phy_to_ldf(ps0, transform.counts = NULL)
 
@@ -161,7 +171,7 @@ data("zackular2014")
 ps0 <- zackular2014
 
 p <- plot_alpha_diversities(ps0,
-                            type = "evenness",
+                            type = "dominance",
                             index.val = "all",
                             plot.type = "stripchart",
                             variableA = "DiseaseState",
@@ -169,6 +179,19 @@ p <- plot_alpha_diversities(ps0,
 )
 
 print(p)
+```
+Alternatively, one can plot one index at a time with pair-wise stats. 
+```{r message=FALSE, fig.width=4, fig.height=4}
+data("zackular2014")
+p0 <- zackular2014
+mycols <- c("brown3", "steelblue","grey50")
+
+p.m <- plot_diversity_stats(p0, group = "DiseaseState", 
+                            index = "diversity_shannon", 
+                            group.order = c("H", "CRC", "nonCRC"), 
+                            group.colors = mycols)
+p.m
+
 ```
 
 
@@ -181,10 +204,9 @@ library(RColorBrewer)
 data("zackular2014")
 p0 <- zackular2014
 
-
 ps1 <- format_to_besthit(p0)
 
-ps1 <- subset_samples(ps1, DiseaseState == "H")
+#ps1 <- subset_samples(ps1, DiseaseState == "H")
 ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
 prev.thres <- seq(.05, 1, .05)
 det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
@@ -197,26 +219,101 @@ ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
 p <- plot_ordiplot_core(pseq.rel, ord.bray,
                         prev.thres, det.thres,
                         min.prevalence = 0.9,
-                        color.opt = "DiseaseState", shape = NULL, Sample = TRUE
-)
+                        color.opt = "DiseaseState", 
+                        shape = NULL, Sample = TRUE)
 
 print(p)
+
 ```
 
 ## Plot taxa boxplot  
 
 Plot relative abundance of top taxa specified by user. 
 
-```{r,fig.width=6, fig.height=4, eval=FALSE}
-
+```{r,fig.width=7, fig.height=4, eval=FALSE, message=FALSE}
+library(microbiomeutilities)
+library(RColorBrewer)
+data("zackular2014")
+ps0 <- zackular2014
 pn <- plot_taxa_boxplot(ps0,
                         taxonomic.level = "Phylum",
-                        top.otu = 5, VariableA = "DiseaseState",
-                        title = "Relative abudance plot", color = "Set2"
-)
+                        top.otu = 6, 
+                        VariableA = "DiseaseState",
+                        title = "Relative abudance plot", 
+                        color = "Set2",
+                        keep.other = FALSE,
+                        group.order = c("H","CRC","nonCRC"))
 
 print(pn)
+
 ```
+
+# Plotting selected taxa  
+
+Using a list of taxa specified by the user for comparisons.  
+```{r fig.height=4}
+library(microbiome)
+library(microbiomeutilities)
+library(ggpubr)
+data("zackular2014")
+p0 <- zackular2014
+p0.f <- format_to_besthit(p0)
+select.taxa <- c("OTU-d__denovo4:Bacteroides", "OTU-d__denovo2:Bacteroides")
+p <- plot_select_taxa(p0.f, select.taxa, 
+                      "DiseaseState", 
+                      "Paired", 
+                      plot.type = "stripchart",
+                      group.order = c("H","CRC","nonCRC"))
+print(p)
+
+
+```
+
+Adding statistical test with `ggpubr::stat_compare_means()`  
+```{r fig.height=4}
+make_pairs <- function(x) {
+    if (is.character(x) == TRUE) {
+      # message("is char")
+      var.lev <- unique(x)
+    } else if (is.factor(x) == TRUE) {
+      # message("is fac")
+      var.lev <- levels(x)
+    }
+    # make a pairwise list that we want to compare.
+    lev.pairs <- combn(seq_along(var.lev), 2, simplify = FALSE, FUN = function(i) var.lev[i])
+    return(lev.pairs)
+}
+
+comps <- make_pairs(sample_data(p0.f)$DiseaseState)
+
+p <- p + stat_compare_means(
+      comparisons = comps,
+      label = "p.format",
+      tip.length = 0.05,
+      method = "wilcox.test")
+p
+
+```
+
+
+## Heatmap using phyloseq and pheatmap  
+Useful for visualisng differences in top otus between sample groups.  
+```{r fig.height=6, fig.width=8}
+library(pheatmap)
+library(RColorBrewer)
+data("zackular2014")
+ps0 <- zackular2014
+
+plot_taxa_heatmap(ps0,
+                  subset.top = 20,
+                  VariableA = "DiseaseState",
+                  heatcolors = rev(brewer.pal(6, "Spectral")),
+                  transformation = "clr",
+                  cluster_rows = F,
+                  cluster_cols = F,
+                  show_colnames = F)
+```
+
 
 ## MicrobiomeHD datasets as phyloseq objects  
 

@@ -23,7 +23,7 @@
 #'   variableA = "DiseaseState",
 #'   palette = "jco"
 #' )
-#' 
+#'
 #' print(p)
 #' @keywords utilities
 #' index.val <- c("shannon, simpson")

@@ -11,7 +11,7 @@
 #' pseq <- zackular2014
 #' percent_classified(pseq)
 #' }
-#' 
+#'
 #' @keywords utilities
 percent_classified <- function(x) {
   ta <- ld <- ldna <- lp <- lpna <- lc <- lcna <- lo <- lona <- lf <- lfna <- lg <- lgna <- ls <- lsna <- df1 <- df2 <- NULL

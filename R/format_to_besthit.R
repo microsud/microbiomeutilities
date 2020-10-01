@@ -21,7 +21,7 @@
 #' }
 #' @keywords utilities
 
-format_to_besthit <- function(x, prefix="OTU-") {
+format_to_besthit <- function(x, prefix = "OTU-") {
   Domain <- Phylum <- Class <- Order <- Family <- Genus <-
     Species <- tax <- tax.merge <-
     best_hit <- y <- NULL
@@ -73,12 +73,12 @@ format_to_besthit <- function(x, prefix="OTU-") {
 
 
   # get the taxonomy table for making changes
-  y <- tax_table(x) %>% 
-    as("matrix") %>% 
+  y <- tax_table(x) %>%
+    as("matrix") %>%
     as.data.frame()
 
-  #y <- as.data.frame(x@tax_table)
-  #y
+  # y <- as.data.frame(x@tax_table)
+  # y
   # head(y)
 
   y$Domain <- gsub("k__", "", y$Domain)

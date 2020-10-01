@@ -1,6 +1,6 @@
 #' @title Aggregate Top Taxa v2
 #' @description Summarize phyloseq: combine other than the most abundant taxa.
-#' @details Backup from microbiome R pkg. This function is replaced by 
+#' @details Backup from microbiome R pkg. This function is replaced by
 #' aggregate_rare function.
 #' @param x \code{\link{phyloseq-class}} object
 #' @param top Keep the top-n taxa, and merge the rest under the category
@@ -10,28 +10,25 @@
 #' @return \code{\link{phyloseq-class}} object
 #' @examples
 #' data(dietswap)
-#' s <- aggregate_top_taxa(dietswap, top = 3, 'Phylum')
+#' s <- aggregate_top_taxa(dietswap, top = 3, "Phylum")
 #' @export
-#' @references See citation('microbiome') 
+#' @references See citation('microbiome')
 #' @author Contact: Leo Lahti \email{microbiome-admin@@googlegroups.com}
 #' @keywords utilities
-aggregate_top_taxa2 <- function (x, top, level) {
-  
+aggregate_top_taxa2 <- function(x, top, level) {
   x <- aggregate_taxa(x, level)
-  
+
   tops <- top_taxa(x, top)
   tax <- tax_table(x)
-  
+
   inds <- which(!rownames(tax) %in% tops)
-  
+
   tax[inds, level] <- "Other"
-  
+
   tax_table(x) <- tax
-  
+
   tt <- tax_table(x)[, level]
   tax_table(x) <- tax_table(tt)
-  
-  aggregate_taxa(x, level)
-  
-}
 
+  aggregate_taxa(x, level)
+}

@@ -6,10 +6,10 @@
 #' @examples
 #' \dontrun{
 #' library(microbiomeutilities)
-#' 
+#'
 #' df <- list_microbiome_data(printtab = FALSE)
 #' }
-#' 
+#'
 #' @keywords utilities
 #'
 

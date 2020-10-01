@@ -11,7 +11,8 @@ plot_taxa_boxplot(
   keep.other = FALSE,
   VariableA,
   title,
-  color = NULL
+  color = NULL,
+  group.order = NULL
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ plot_taxa_boxplot(
 \item{title}{title for the plot}
 
 \item{color}{any of the palette supported by ggpubr/RColorBrewer packages or  user specified as c("red", "blue").}
+
+\item{group.order}{Default is NULL. a list specifing order of x-axis. E.g. c("H","CRC","nonCRC")}
 }
 \value{
 A \code{\link{ggplot}} plot object.

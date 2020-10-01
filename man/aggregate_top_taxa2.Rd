@@ -22,12 +22,12 @@ listing the groups to combine.}
 Summarize phyloseq: combine other than the most abundant taxa.
 }
 \details{
-Backup from microbiome R pkg. This function is replaced by 
+Backup from microbiome R pkg. This function is replaced by
 aggregate_rare function.
 }
 \examples{
 data(dietswap)
-s <- aggregate_top_taxa(dietswap, top = 3, 'Phylum')
+s <- aggregate_top_taxa(dietswap, top = 3, "Phylum")
 }
 \references{
 See citation('microbiome')

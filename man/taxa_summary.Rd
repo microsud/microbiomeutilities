@@ -19,15 +19,15 @@ Data frame with mean, max, median standard deviation of relative abundance.
 }
 \examples{
 \dontrun{
-    # Example data
-    library(microbiomeutilities)
-    data("zackular2014")
-    p0 <- zackular2014
-    p0.rel <- microbiome::transform(p0, "compositional")
-    tx.sum1 <- taxa_summary(p0, "Phylum")
+# Example data
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+p0.rel <- microbiome::transform(p0, "compositional")
+tx.sum1 <- taxa_summary(p0, "Phylum")
 
-    tx.sum2 <- taxa_summary(p0.rel, "Phylum")
-    }
+tx.sum2 <- taxa_summary(p0.rel, "Phylum")
+}
 
 }
 \author{

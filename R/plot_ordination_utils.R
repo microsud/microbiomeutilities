@@ -14,7 +14,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' library(microbiomeutilities)
 #' library(RColorBrewer)
 #' data("zackular2014")
@@ -63,7 +63,8 @@ plot_ordination_utils <- function(x,
   ))[1:select.top]
   pdf.tax3 <- subset(pdf.tax, best_hit %in% diff.taxa.ord)
   plot.ord.load <-
-    ggplot() + geom_point(
+    ggplot() +
+    geom_point(
       data = pdf.sam,
       aes(pdf.sam
       [

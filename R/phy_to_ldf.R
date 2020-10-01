@@ -35,24 +35,24 @@ phy_to_ldf <- function(x, transform.counts) {
   message("An additonal column Sam_rep with sample names is created for reference purpose")
   meta_df <- microbiome::meta(x)
   meta_df$Sam_rep <- rownames(meta_df)
-  #tax_df <- data.frame(tax_table(x)) %>%
+  # tax_df <- data.frame(tax_table(x)) %>%
   #  rownames_to_column("OTUID")
-  tax_df <- tax_table(x) %>% 
-    as("matrix") %>% 
-    as.data.frame %>% 
+  tax_df <- tax_table(x) %>%
+    as("matrix") %>%
+    as.data.frame() %>%
     rownames_to_column("OTUID")
-  
+
   otu_df <- data.frame(abundances(x),
     check.names = FALSE
   ) %>% rownames_to_column("OTUID")
-  suppressWarnings(suppressMessages(otu_df %>% 
-                                      left_join(tax_df) %>% 
-                                      gather_(
-    "Sam_rep",
-    "Abundance", setdiff(
-      colnames(otu_df),
-      "OTUID"
-    )
-  ) %>% 
+  suppressWarnings(suppressMessages(otu_df %>%
+    left_join(tax_df) %>%
+    gather_(
+      "Sam_rep",
+      "Abundance", setdiff(
+        colnames(otu_df),
+        "OTUID"
+      )
+    ) %>%
     left_join(meta_df)))
 }

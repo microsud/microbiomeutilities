@@ -50,21 +50,19 @@ Diversity plot with stats
 Diversity plot with stats
 }
 \examples{
- 
 library(microbiomeutilities)
 library(ggpubr)
 data("zackular2014")
 p0 <- zackular2014
-mycols <- c("brown3", "steelblue","grey50")
-p.m <- plot_diversity_stats(p0, group = "DiseaseState", index="diversity_shannon", group.order = c("H","CRC","nonCRC"), group.colors=mycols)
+mycols <- c("brown3", "steelblue", "grey50")
+p.m <- plot_diversity_stats(p0, group = "DiseaseState", index = "diversity_shannon", group.order = c("H", "CRC", "nonCRC"), group.colors = mycols)
 p.m
- 
 library(microbiomeutilities)
 library(ggpubr)
 data("zackular2014")
 p0 <- zackular2014
-mycols <- c("brown3", "steelblue","grey50")
-p.m <- plot_diversity_stats(p0, group = "DiseaseState", index="diversity_shannon", group.order = c("H","CRC","nonCRC"), group.colors=mycols)
+mycols <- c("brown3", "steelblue", "grey50")
+p.m <- plot_diversity_stats(p0, group = "DiseaseState", index = "diversity_shannon", group.order = c("H", "CRC", "nonCRC"), group.colors = mycols)
 p.m
 }
 \keyword{utilities}

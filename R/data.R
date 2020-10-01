@@ -12,7 +12,7 @@
 #' @keywords datasets
 #' @references
 #' \itemize{
-#' \item{}{Zackular, Joseph P., et al. "The gut microbiome modulates colon 
+#' \item{}{Zackular, Joseph P., et al. "The gut microbiome modulates colon
 #' tumorigenesis." MBio 4.6 (2013): e00692-13.,
 #' \url{https://mbio.asm.org/content/4/6/e00692-13.short}}
 #' }
@@ -23,5 +23,5 @@
 #' pseq <- zackular2014
 #' print(zackular2014)
 #' }
-#' 
+#'
 "zackular2014"
