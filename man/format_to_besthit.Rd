@@ -4,10 +4,12 @@
 \alias{format_to_besthit}
 \title{Formatting the \code{\link{phyloseq-class}} Object advanced}
 \usage{
-format_to_besthit(x)
+format_to_besthit(x, prefix = "OTU-")
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
+
+\item{prefix}{Prefered prefix e.g. OTU-d__denovo161:Roseburia or ASV-d__denovo161:Roseburia}
 }
 \value{
 \code{\link{phyloseq-class}} object.

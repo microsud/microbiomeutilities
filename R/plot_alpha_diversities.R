@@ -9,10 +9,7 @@
 #' @param palette Any of the \code{\link{RColorBrewer}} plettes.
 #' @param plot.type Three optons c("stripchart", "boxplot", "violin")
 #' @return  \code{\link{ggplot}} object. This can be further modified using ggpubr.
-#' @import ggpubr
-#' @import microbiome
-#' @import RColorBrewer
-#' @importFrom reshape2 melt
+#' @importFrom ggpubr ggstripchart ggboxplot ggviolin facet
 #' @export
 #' @examples
 #' library(microbiome)
@@ -20,13 +17,13 @@
 #' data("zackular2014")
 #' p0 <- zackular2014
 #' p <- plot_alpha_diversities(p0,
-#'   type = "diversities",
+#'   type = "dominance",
 #'   index.val = "all",
 #'   plot.type = "stripchart",
 #'   variableA = "DiseaseState",
 #'   palette = "jco"
 #' )
-#' 
+#'
 #' print(p)
 #' @keywords utilities
 #' index.val <- c("shannon, simpson")
@@ -47,12 +44,12 @@ plot_alpha_diversities <- function(x, type, index.val = "all", plot.type, variab
     adiv <- evenness(x, index = index.val)
     adiv$sam_rep_nw <- rownames(adiv)
   } else if (type == "global") {
-    adiv <- global(x, index = index.val)
+    adiv <- microbiome::alpha(x, index = index.val)
     adiv$sam_rep_nw <- rownames(adiv)
   }
-  adiv.nw <- melt(adiv)
+  adiv.nw <- reshape2::melt(adiv)
   colnames(adiv.nw) <- c("sam_rep_nw", "Diversity", "div.val")
-  meta_df_nw <- melt(meta_df)
+  meta_df_nw <- reshape2::melt(meta_df)
   meta_adiv <- merge.data.frame(meta_df_nw, adiv.nw, by = "sam_rep_nw")
 
   if (plot.type == "boxplot") {

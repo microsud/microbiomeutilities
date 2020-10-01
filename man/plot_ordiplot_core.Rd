@@ -4,8 +4,16 @@
 \alias{plot_ordiplot_core}
 \title{Plotting core microbiota on ordinations}
 \usage{
-plot_ordiplot_core(x, ordiObject, prevalences, detections, min.prevalence,
-  color.opt, shape, Samples = c(TRUE, FALSE))
+plot_ordiplot_core(
+  x,
+  ordiObject,
+  prevalences,
+  detections,
+  min.prevalence,
+  color.opt,
+  shape,
+  Samples = c(TRUE, FALSE)
+)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}

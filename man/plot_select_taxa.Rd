@@ -4,7 +4,14 @@
 \alias{plot_select_taxa}
 \title{A boxplot for user specified list of taxa}
 \usage{
-plot_select_taxa(x, select.taxa, variableA, palette, plot.type)
+plot_select_taxa(
+  x,
+  select.taxa,
+  variableA,
+  palette,
+  plot.type,
+  group.order = NULL
+)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object.}
@@ -16,6 +23,8 @@ plot_select_taxa(x, select.taxa, variableA, palette, plot.type)
 \item{palette}{Any of the RColorBrewer plettes.}
 
 \item{plot.type}{Three optons c("stripchart", "boxplot", "violin")}
+
+\item{group.order}{Default is NULL. a list specifing order of x-axis. E.g. c("H","CRC","nonCRC")}
 }
 \value{
 \code{\link{ggplot}} object. This can be further modified using ggpubr.

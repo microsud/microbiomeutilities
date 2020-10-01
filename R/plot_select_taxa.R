@@ -8,10 +8,8 @@
 #' @param variableA Variable of interested to be checked. This will also be used to color the plot.
 #' @param palette Any of the RColorBrewer plettes.
 #' @param plot.type Three optons c("stripchart", "boxplot", "violin")
+#' @param group.order Default is NULL. a list specifing order of x-axis. E.g. c("H","CRC","nonCRC")
 #' @return  \code{\link{ggplot}} object. This can be further modified using ggpubr.
-#' @import ggpubr
-#' @import microbiome
-#' @import RColorBrewer
 #' @export
 #' @examples
 #' \dontrun{
@@ -28,7 +26,9 @@
 #' @keywords utilities
 #'
 
-plot_select_taxa <- function(x, select.taxa, variableA, palette, plot.type) {
+plot_select_taxa <- function(x, select.taxa, variableA, 
+                             palette, plot.type,
+                             group.order = NULL) {
   x.rel <- x.prun <- x.df <- p.box <- p.vio <- p.strp <- NULL
 
   x.rel <- microbiome::transform(x, "compositional")
@@ -36,27 +36,47 @@ plot_select_taxa <- function(x, select.taxa, variableA, palette, plot.type) {
   x.prun <- prune_taxa(select.taxa, x.rel)
 
   x.df <- phy_to_ldf(x.prun, transform.counts = NULL)
-
+  
+  make_pairs <- function(x) {
+    if (is.character(x) == TRUE) {
+      # message("is char")
+      var.lev <- unique(x)
+    } else if (is.factor(x) == TRUE) {
+      # message("is fac")
+      var.lev <- levels(x)
+    }
+    # make a pairwise list that we want to compare.
+    lev.pairs <- combn(seq_along(var.lev), 2, simplify = FALSE, FUN = function(i) var.lev[i])
+    return(lev.pairs)
+  }
+  
+  if (!is.null(group.order)) {
+    x.df[, variableA] <- factor(x.df[, variableA],
+                              levels = group.order
+    )
+  }
+  
+  
   if (plot.type == "boxplot") {
-    p <- ggboxplot(x.df, variableA, "Abundance",
+    p <- ggpubr::ggboxplot(x.df, variableA, "Abundance",
       facet.by = "OTUID",
       color = variableA, palette = palette,
       legend = "right", add = "jitter",
       panel.labs.background = list(fill = "white")
     )
   } else if (plot.type == "violin") {
-    p <- ggviolin(x.df, variableA, "Abundance",
+    p <- ggpubr::ggviolin(x.df, variableA, "Abundance",
       facet.by = "OTUID",
       color = variableA, palette = palette,
       legend = "right", add = "jitter",
       panel.labs.background = list(fill = "white")
     )
   } else if (plot.type == "stripchart") {
-    p <- ggstripchart(x.df, variableA, "Abundance",
+    p <- ggpubr::ggstripchart(x.df, variableA, "Abundance",
       facet.by = "OTUID",
       color = variableA, palette = palette,
       legend = "right", panel.labs.background = list(fill = "white")
-    )
+    ) 
   }
 
   return(p)

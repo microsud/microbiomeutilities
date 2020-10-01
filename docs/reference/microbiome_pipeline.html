@@ -8,23 +8,29 @@
 
 <title>Microbiome analysis pipeline — microbiome_pipeline • microbiomeutilities</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,12 +38,12 @@
 
 
 
-<meta property="og:title" content="Microbiome analysis pipeline — microbiome_pipeline" />
 
+<meta property="og:title" content="Microbiome analysis pipeline — microbiome_pipeline" />
 <meta property="og:description" content="Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and
              Composition analysis of OTU tables. This function save all intermediate files incuding figures and phyloseq
              objects in user specified directory." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -54,7 +60,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -68,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.00</span>
       </span>
     </div>
 
@@ -87,9 +93,13 @@
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/microsud/microbiomeutilities/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -104,23 +114,37 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Microbiome analysis pipeline</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/microbiome_pipeline.R'><code>R/microbiome_pipeline.R</code></a></small>
     <div class="hidden name"><code>microbiome_pipeline.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Function microbiome_pipeline generates an HTML report with preliminary QC, Alpha Diversity, Ordination and
              Composition analysis of OTU tables. This function save all intermediate files incuding figures and phyloseq
              objects in user specified directory.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>microbiome_pipeline</span>(<span class='no'>otufile</span>, <span class='no'>mapping</span>, <span class='no'>taxonomy</span>, <span class='no'>treefilename</span>, <span class='no'>type</span>,
-  <span class='no'>work_dir</span>, <span class='no'>out_dir</span>, <span class='no'>VariableA</span>, <span class='no'>VariableB</span>, <span class='no'>UnConstOrd</span>, <span class='no'>heatmap</span>,
-  <span class='no'>filterCount</span>, <span class='no'>filterPrev</span>, <span class='no'>col.palette</span>, <span class='no'>filterpseq</span>, <span class='no'>samsize</span>, <span class='no'>projectname</span>,
-  <span class='no'>author</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>microbiome_pipeline</span>(
+  <span class='kw'>otufile</span>,
+  <span class='kw'>mapping</span>,
+  <span class='kw'>taxonomy</span>,
+  <span class='kw'>treefilename</span>,
+  <span class='kw'>type</span>,
+  <span class='kw'>work_dir</span>,
+  <span class='kw'>out_dir</span>,
+  <span class='kw'>VariableA</span>,
+  <span class='kw'>VariableB</span>,
+  <span class='kw'>UnConstOrd</span>,
+  <span class='kw'>heatmap</span>,
+  <span class='kw'>filterCount</span>,
+  <span class='kw'>filterPrev</span>,
+  <span class='kw'>col.palette</span>,
+  <span class='kw'>filterpseq</span>,
+  <span class='kw'>samsize</span>,
+  <span class='kw'>projectname</span>,
+  <span class='kw'>author</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -198,51 +222,46 @@ you have in VaraibleA.</p></td>
       <td><p>Name of the author/investigator.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A HTML report with graphs and data stats which can serve as guide for actual analysis.</p>
-    
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Contact: Sudarshan Shetty <a href='mailto:sudarshanshetty9@gmail.com'>sudarshanshetty9@gmail.com</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>microbiomeutilities</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>microbiome</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://microbiome.github.io/microbiome'>microbiome</a></span>)
 <span class='fu'>microbiome_pipeline</span>(
-  <span class='kw'>otufile</span> <span class='kw'>=</span> <span class='st'>"my.biom"</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='st'>"mymap.csv"</span>,
-  <span class='kw'>taxonomy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>treefilename</span> <span class='kw'>=</span> <span class='st'>"myTree.tre"</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"biom"</span>,
-  <span class='kw'>work_dir</span> <span class='kw'>=</span> <span class='st'>"F:/path/my/input/filefolder"</span>,
-  <span class='kw'>out_dir</span> <span class='kw'>=</span> <span class='st'>"F:/path/to/save/my/files/folder"</span>,
-  <span class='kw'>VariableA</span> <span class='kw'>=</span> <span class='st'>"MC_type1"</span>,
-  <span class='kw'>VariableB</span> <span class='kw'>=</span> <span class='st'>"Region"</span>,
-  <span class='kw'>UnConstOrd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>heatmap</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>filterCount</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>filterPrev</span> <span class='kw'>=</span> <span class='fl'>0.01</span>,
-  <span class='kw'>col.palette</span> <span class='kw'>=</span> <span class='st'>"Paired"</span>,
-  <span class='kw'>filterpseq</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>samsize</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>projectname</span> <span class='kw'>=</span> <span class='st'>"Mock"</span>,
-  <span class='kw'>author</span> <span class='kw'>=</span> <span class='st'>"Sudarshan"</span>
+  otufile = <span class='st'>"my.biom"</span>,
+  mapping = <span class='st'>"mymap.csv"</span>,
+  taxonomy = <span class='kw'>NULL</span>,
+  treefilename = <span class='st'>"myTree.tre"</span>,
+  type = <span class='st'>"biom"</span>,
+  work_dir = <span class='st'>"F:/path/my/input/filefolder"</span>,
+  out_dir = <span class='st'>"F:/path/to/save/my/files/folder"</span>,
+  VariableA = <span class='st'>"MC_type1"</span>,
+  VariableB = <span class='st'>"Region"</span>,
+  UnConstOrd = <span class='fl'>TRUE</span>,
+  heatmap = <span class='fl'>TRUE</span>,
+  filterCount = <span class='fl'>4</span>,
+  filterPrev = <span class='fl'>0.01</span>,
+  col.palette = <span class='st'>"Paired"</span>,
+  filterpseq = <span class='fl'>TRUE</span>,
+  samsize = <span class='fl'>NA</span>,
+  projectname = <span class='st'>"Mock"</span>,
+  author = <span class='st'>"Sudarshan"</span>
 )
-}</div></pre>
+}
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Contact: Sudarshan Shetty <a href='mailto:sudarshanshetty9@gmail.com'>sudarshanshetty9@gmail.com</a></p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -253,7 +272,7 @@ you have in VaraibleA.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

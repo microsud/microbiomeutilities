@@ -31,14 +31,18 @@ plot_read_distribution <- function(x, groups, plot.type = c(
 
   if (plot.type == "density") {
     p.dfa <- ggplot(df, aes(x = Reads_per_sample, fill = factor(groups))) +
-      geom_density(alpha = 0.5, fill = "steelblue") + facet_wrap(groups) +
-      theme_bw() + theme(axis.text.x = element_text(
+      geom_density(alpha = 0.5, fill = "steelblue") +
+      facet_wrap(groups) +
+      theme_bw() +
+      theme(axis.text.x = element_text(
         angle = 90,
         hjust = 1
       ))
   } else if (plot.type == "histogram") {
     p.dfa <- ggplot(df, aes(x = Reads_per_sample, fill = factor(groups))) +
-      geom_histogram(alpha = 0.5) + facet_wrap(groups) + theme_bw() +
+      geom_histogram(alpha = 0.5) +
+      facet_wrap(groups) +
+      theme_bw() +
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
   }
   print("Done plotting")

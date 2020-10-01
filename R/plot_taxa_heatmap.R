@@ -8,21 +8,18 @@
 #'        inferno
 #' @param ... Arguments to be passed \code{\link{pheatmap}}.
 #' @return A \code{\link{pheatmap}} plot object.
-#' @import tidyr
-#' @import microbiome
-#' @import phyloseq
-#' @import pheatmap
-#' @import viridis
 #' @export
+#' @importFrom pheatmap pheatmap
+#' @importFrom RColorBrewer brewer.pal
 #' @author Sudarshan A. Shetty (sudarshanshetty9@gmail.com)
 #' @examples
-#' 
+#'
 #' library(microbiomeutilities)
 #' library(viridis)
 #' library(RColorBrewer)
 #' data("zackular2014")
 #' ps0 <- zackular2014
-#' 
+#'
 #' heat.sample <- plot_taxa_heatmap(ps0,
 #'   subset.top = 20,
 #'   VariableA = "DiseaseState",
@@ -83,12 +80,12 @@ plot_taxa_heatmap <- function(x, subset.top, transformation,
   # rownames(otu.mat) <- as.list(tax.lev$Taxa_level)
 
   if (is.null(heatcolors)) {
-    color.heatmap <- inferno(10)
+    color.heatmap <- brewer.pal(6, "Spectral")
   } else {
     color.heatmap <- heatcolors
   }
 
-  heatmap <- pheatmap(otu.mat,
+  heatmap <- pheatmap::pheatmap(otu.mat,
     annotation_col = select.meta,
     color = color.heatmap, ...
   )

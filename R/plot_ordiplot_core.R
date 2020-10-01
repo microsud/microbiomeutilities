@@ -10,14 +10,14 @@
 #' @param color.opt Variable of interest from metadata.
 #' @param shape Variable of interest from metadata.
 #' @param Samples c("TRUE" or "FALSE")
-#' @import ggplot2
-#' @import ggrepel
 #' @importFrom grDevices colorRampPalette
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom ggpubr ggarrange
 #' @return plot
 #' @export
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' library(microbiomeutilities)
 #' library(RColorBrewer)
 #' data("zackular2014")
@@ -29,7 +29,7 @@
 #' det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
 #' pseq.rel <- microbiome::transform(ps1, "compositional")
 #' ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
-#' 
+#'
 #' p <- plot_ordiplot_core(pseq.rel, ord.bray,
 #'   prev.thres, det.thres,
 #'   min.prevalence = 0.9,
@@ -41,13 +41,13 @@
 #'
 plot_ordiplot_core <-
   function(x,
-             ordiObject,
-             prevalences,
-             detections,
-             min.prevalence,
-             color.opt,
-             shape,
-             Samples = c(TRUE, FALSE)) {
+           ordiObject,
+           prevalences,
+           detections,
+           min.prevalence,
+           color.opt,
+           shape,
+           Samples = c(TRUE, FALSE)) {
     ordi <-
       spps <-
       OTU_ID <-
@@ -71,7 +71,9 @@ plot_ordiplot_core <-
       message("Caution: Convergence was not reached in the ordination object provided")
     }
 
-    p0 <- p0 + ggtitle(paste0("Samples NMDS plot ", "Stress: ", round(ordiObject$stress, 5)))
+    p0 <- p0 + 
+      theme_bw() +
+      ggtitle(paste0("Samples NMDS plot ", "Stress: ", round(ordiObject$stress, 5)))
 
     # Extract species values
 
@@ -89,7 +91,7 @@ plot_ordiplot_core <-
       min.prevalence = min.prevalence,
       horizontal = TRUE,
       colours = rev(brewer.pal(5, "Spectral"))
-    )
+    ) + theme_bw()
 
     # get plot object
     prevdf0 <- p1$data
@@ -123,20 +125,21 @@ plot_ordiplot_core <-
 
     prevdf0[, 1] <- tax.unit$Taxa_level
     # p1$data <- prevdf0
-
-    min.det <- min(prevdf1[, 2])
-
-    min.prev <- min(prevdf1[, 3])
+    #as.numeric(as.character(prevdf1[, 2]))
+    min.det <-  min(as.numeric(as.character(prevdf1[, 2])))
+    min.prev <- min(as.numeric(as.character(prevdf1[, 3])))
+    #min.det <-  min(prevdf1[, 2])
+    #min.prev <- min(prevdf1[, 3])
 
     p1 <- p1 + theme(axis.text.x = element_text(
       vjust = 0.5,
       hjust = 1,
       face = "italic"
-    )) + ggtitle(paste0(
+    )) + theme_bw() + ggtitle(paste0(
       "Core taxa at minimum abundance of ",
       min.det, " and minimum prevalence ",
       min.prevalence
-    ))
+    )) + rotate_x_text()
 
 
     subprevdf <- subset(prevdf1, prevdf1[, 2] <= min.det)
@@ -159,7 +162,8 @@ plot_ordiplot_core <-
         x = NMDS1, y = NMDS2,
         label = NA
       )
-    ) + theme_bw() +
+    ) +
+      theme_bw() +
       geom_point(aes(color = Phylum), alpha = 0.5) +
       geom_text_repel(
         data = subset(
@@ -170,7 +174,8 @@ plot_ordiplot_core <-
         alpha = 0.9,
         size = 3,
         fontface = "italic"
-      ) + ggtitle("NMDS ordination for taxa")
+      ) +
+      ggtitle("NMDS ordination for taxa")
 
     if (Samples == TRUE) {
       p.core <- ggarrange(p1, ggarrange(p0, p2), nrow = 2)
