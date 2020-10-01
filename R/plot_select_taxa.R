@@ -9,9 +9,6 @@
 #' @param palette Any of the RColorBrewer plettes.
 #' @param plot.type Three optons c("stripchart", "boxplot", "violin")
 #' @return  \code{\link{ggplot}} object. This can be further modified using ggpubr.
-#' @import ggpubr
-#' @import microbiome
-#' @import RColorBrewer
 #' @export
 #' @examples
 #' \dontrun{
@@ -30,34 +27,34 @@
 
 plot_select_taxa <- function(x, select.taxa, variableA, palette, plot.type) {
   x.rel <- x.prun <- x.df <- p.box <- p.vio <- p.strp <- NULL
-
+  
   x.rel <- microbiome::transform(x, "compositional")
-
+  
   x.prun <- prune_taxa(select.taxa, x.rel)
-
+  
   x.df <- phy_to_ldf(x.prun, transform.counts = NULL)
-
+  
   if (plot.type == "boxplot") {
-    p <- ggboxplot(x.df, variableA, "Abundance",
-      facet.by = "OTUID",
-      color = variableA, palette = palette,
-      legend = "right", add = "jitter",
-      panel.labs.background = list(fill = "white")
+    p <- ggpubr::ggboxplot(x.df, variableA, "Abundance",
+                           facet.by = "OTUID",
+                           color = variableA, palette = palette,
+                           legend = "right", add = "jitter",
+                           panel.labs.background = list(fill = "white")
     )
   } else if (plot.type == "violin") {
-    p <- ggviolin(x.df, variableA, "Abundance",
-      facet.by = "OTUID",
-      color = variableA, palette = palette,
-      legend = "right", add = "jitter",
-      panel.labs.background = list(fill = "white")
+    p <- ggpubr::ggviolin(x.df, variableA, "Abundance",
+                          facet.by = "OTUID",
+                          color = variableA, palette = palette,
+                          legend = "right", add = "jitter",
+                          panel.labs.background = list(fill = "white")
     )
   } else if (plot.type == "stripchart") {
-    p <- ggstripchart(x.df, variableA, "Abundance",
-      facet.by = "OTUID",
-      color = variableA, palette = palette,
-      legend = "right", panel.labs.background = list(fill = "white")
+    p <- ggpubr::ggstripchart(x.df, variableA, "Abundance",
+                              facet.by = "OTUID",
+                              color = variableA, palette = palette,
+                              legend = "right", panel.labs.background = list(fill = "white")
     )
   }
-
+  
   return(p)
 }

@@ -8,12 +8,9 @@
 #'        inferno
 #' @param ... Arguments to be passed \code{\link{pheatmap}}.
 #' @return A \code{\link{pheatmap}} plot object.
-#' @import tidyr
-#' @import microbiome
-#' @import phyloseq
-#' @import pheatmap
-#' @import viridis
 #' @export
+#' @importFrom pheatmap pheatmap
+#' @importFrom RColorBrewer brewer.pal
 #' @author Sudarshan A. Shetty (sudarshanshetty9@gmail.com)
 #' @examples
 #' 
@@ -33,20 +30,20 @@
 plot_taxa_heatmap <- function(x, subset.top, transformation,
                               VariableA, heatcolors = NULL, ...) {
   topOTU <- phyobj1 <- phyobj2 <- otu.mat <- meta.tab <- select.meta <- color.heatmap <- NULL
-
-
-
+  
+  
+  
   if (!is.null(subset.top)) {
     message(paste0("Top ", subset.top, " OTUs selected",
-      sep = " "
+                   sep = " "
     ))
     topOTU <- top_taxa(x, n = subset.top)
   } else {
     stop("specify a number/value for subset.top")
   }
-
-
-
+  
+  
+  
   if (transformation == "log10") {
     message("log10, if zeros in data then log10(1+x) will be used")
     phyobj1 <- prune_taxa(topOTU, x)
@@ -67,30 +64,30 @@ plot_taxa_heatmap <- function(x, subset.top, transformation,
   } else if (!is.null(transformation)) {
     stop("specify a number for transformation, log10, compositional, Z-OTU, clr")
   }
-
-
+  
+  
   # format the taxonomy to incluse unique names
   # phyobj2 <- format_phyloseq(phyobj2)
   phyobj2 <- suppressWarnings(suppressMessages(format_to_besthit(phyobj2)))
-
+  
   otu.mat <- abundances(phyobj2)
   meta.tab <- meta(phyobj2)
-
+  
   # choose which variables of interest to include in
   # the heatmap
   select.meta <- subset(meta.tab, select = c(VariableA))
-
+  
   # rownames(otu.mat) <- as.list(tax.lev$Taxa_level)
-
+  
   if (is.null(heatcolors)) {
-    color.heatmap <- inferno(10)
+    color.heatmap <- brewer.pal(6,"Spectral")
   } else {
     color.heatmap <- heatcolors
   }
-
-  heatmap <- pheatmap(otu.mat,
-    annotation_col = select.meta,
-    color = color.heatmap, ...
+  
+  heatmap <- pheatmap::pheatmap(otu.mat,
+                      annotation_col = select.meta,
+                      color = color.heatmap, ...
   )
   return(heatmap)
 }

@@ -6,11 +6,8 @@
 #'          Here, we directly take the phyloseq object as input and make the necessary formatting.
 #'
 #' @param x \code{\link{phyloseq-class}} object
+#' @param prefix Prefered prefix e.g. OTU-d__denovo161:Roseburia or ASV-d__denovo161:Roseburia
 #' @return  \code{\link{phyloseq-class}} object.
-#' @import tidyr
-#' @import dplyr
-#' @import microbiome
-#' @import phyloseq
 #' @export
 #' @examples
 #' \dontrun{
@@ -24,7 +21,7 @@
 #' }
 #' @keywords utilities
 
-format_to_besthit <- function(x) {
+format_to_besthit <- function(x, prefix="OTU-") {
   Domain <- Phylum <- Class <- Order <- Family <- Genus <-
     Species <- tax <- tax.merge <-
     best_hit <- y <- NULL
@@ -76,8 +73,12 @@ format_to_besthit <- function(x) {
 
 
   # get the taxonomy table for making changes
+  y <- tax_table(x) %>% 
+    as("matrix") %>% 
+    as.data.frame()
 
-  y <- as.data.frame(x@tax_table)
+  #y <- as.data.frame(x@tax_table)
+  #y
   # head(y)
 
   y$Domain <- gsub("k__", "", y$Domain)
@@ -169,7 +170,7 @@ format_to_besthit <- function(x) {
   rownames(tax) <- rownames(y)
 
   #
-  rownames(tax) <- paste("OTU-", rownames(tax), sep = "")
+  rownames(tax) <- paste(prefix, rownames(tax), sep = "")
 
   tax$col1 <- tax$Genus
 

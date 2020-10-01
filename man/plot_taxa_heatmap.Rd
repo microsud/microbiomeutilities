@@ -4,8 +4,14 @@
 \alias{plot_taxa_heatmap}
 \title{Heatmap using \code{\link{phyloseq-class}} and \code{\link{pheatmap}}}
 \usage{
-plot_taxa_heatmap(x, subset.top, transformation, VariableA,
-  heatcolors = NULL, ...)
+plot_taxa_heatmap(
+  x,
+  subset.top,
+  transformation,
+  VariableA,
+  heatcolors = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object.}

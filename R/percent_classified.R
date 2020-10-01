@@ -2,36 +2,6 @@
 #' @description Summarize the percent taxa classification for \code{\link{phyloseq-class}}.
 #' @param x \code{\link{phyloseq-class}} object
 #' @return table with information on percent OTUs classified.
-#' @import utils
-#' @importFrom stats TukeyHSD
-#' @importFrom stats aov
-#' @importFrom stats terms
-#' @importFrom stats wilcox.test
-#' @importFrom stats aggregate
-#' @importFrom stats as.dist
-#' @importFrom stats coef
-#' @importFrom stats cor
-#' @importFrom stats cor.test
-#' @importFrom stats density
-#' @importFrom stats dist
-#' @importFrom stats dnorm
-#' @importFrom stats hclust
-#' @importFrom stats kernel
-#' @importFrom stats lm
-#' @importFrom stats loess
-#' @importFrom stats loess.control
-#' @importFrom stats median
-#' @importFrom stats na.fail
-#' @importFrom stats na.omit
-#' @importFrom stats p.adjust
-#' @importFrom stats pnorm
-#' @importFrom stats predict
-#' @importFrom stats quantile
-#' @importFrom stats rnorm
-#' @importFrom stats sd
-#' @importFrom stats time
-#' @importFrom stats var
-#' @importFrom stats frequency
 #' @export
 #' @author Contact: Sudarshan A. Shetty \email{sudarshanshetty9@@gmail.com}
 #' @examples

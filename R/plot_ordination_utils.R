@@ -8,11 +8,9 @@
 #' @param scale.arrow If arrow is plotted a constant to multiply axis values for clearing visualisations.
 #' @param top.taxa Top varying taxa to plot, default is 5.
 #' @param color.opt Variable of interest from metadata.
-#' @import ggplot2
-#' @import ggrepel
-#' @import phyloseq
-#' @import microbiome
 #' @return plot
+#' @importFrom ggrepel geom_text_repel
+#' @import ggplot2
 #' @export
 #' @examples
 #' \dontrun{
@@ -73,7 +71,7 @@ plot_ordination_utils <- function(x,
         1
       ], pdf.sam[, 2], color = pdf.sam[, color.opt])
     )
-  plot.ord.load <- plot.ord.load + geom_text_repel(
+  plot.ord.load <- plot.ord.load + ggrepel::geom_text_repel(
     data = pdf.tax3,
     aes(scale.arrow * pdf.tax3[, 1], scale.arrow * pdf.tax3
     [

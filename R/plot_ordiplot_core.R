@@ -10,9 +10,9 @@
 #' @param color.opt Variable of interest from metadata.
 #' @param shape Variable of interest from metadata.
 #' @param Samples c("TRUE" or "FALSE")
-#' @import ggplot2
-#' @import ggrepel
 #' @importFrom grDevices colorRampPalette
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom ggpubr ggarrange
 #' @return plot
 #' @export
 #' @examples
@@ -89,7 +89,7 @@ plot_ordiplot_core <-
       min.prevalence = min.prevalence,
       horizontal = TRUE,
       colours = rev(brewer.pal(5, "Spectral"))
-    )
+    )+ theme_bw()
 
     # get plot object
     prevdf0 <- p1$data
@@ -132,11 +132,11 @@ plot_ordiplot_core <-
       vjust = 0.5,
       hjust = 1,
       face = "italic"
-    )) + ggtitle(paste0(
+    )) + theme_bw() + ggtitle(paste0(
       "Core taxa at minimum abundance of ",
       min.det, " and minimum prevalence ",
       min.prevalence
-    ))
+    )) 
 
 
     subprevdf <- subset(prevdf1, prevdf1[, 2] <= min.det)

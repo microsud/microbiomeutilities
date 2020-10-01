@@ -4,10 +4,26 @@
 \alias{microbiome_pipeline}
 \title{Microbiome analysis pipeline}
 \usage{
-microbiome_pipeline(otufile, mapping, taxonomy, treefilename, type,
-  work_dir, out_dir, VariableA, VariableB, UnConstOrd, heatmap,
-  filterCount, filterPrev, col.palette, filterpseq, samsize, projectname,
-  author)
+microbiome_pipeline(
+  otufile,
+  mapping,
+  taxonomy,
+  treefilename,
+  type,
+  work_dir,
+  out_dir,
+  VariableA,
+  VariableB,
+  UnConstOrd,
+  heatmap,
+  filterCount,
+  filterPrev,
+  col.palette,
+  filterpseq,
+  samsize,
+  projectname,
+  author
+)
 }
 \arguments{
 \item{otufile}{biom object, otu_table in csv format or mothur shared files.}

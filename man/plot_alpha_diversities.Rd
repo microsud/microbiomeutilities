@@ -4,8 +4,14 @@
 \alias{plot_alpha_diversities}
 \title{Creat a plot for alpha diversities calculated using the \code{\link{microbiome}} package}
 \usage{
-plot_alpha_diversities(x, type, index.val = "all", plot.type, variableA,
-  palette)
+plot_alpha_diversities(
+  x,
+  type,
+  index.val = "all",
+  plot.type,
+  variableA,
+  palette
+)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object.}
@@ -36,7 +42,7 @@ library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 p <- plot_alpha_diversities(p0,
-  type = "diversities",
+  type = "dominance",
   index.val = "all",
   plot.type = "stripchart",
   variableA = "DiseaseState",

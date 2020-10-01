@@ -25,7 +25,10 @@ taxa_summary <- function(x, level) {
   
   pobj <- x
   
-  taxdf <- as.data.frame(pobj@tax_table)
+  #taxdf <- as.data.frame(pobj@tax_table)
+  taxdf <- tax_table(pobj) %>% 
+    as("matrix") %>% 
+    as.data.frame()
   taxdf$OTU <- rownames(tax_table(pobj))
   tax_table(pobj) <- tax_table(as.matrix(taxdf, quote = FALSE))
   

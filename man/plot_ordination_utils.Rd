@@ -4,8 +4,14 @@
 \alias{plot_ordination_utils}
 \title{Plot species loading with ordinations}
 \usage{
-plot_ordination_utils(x, ordiObject, color.opt = NULL,
-  plot.arrow = TRUE, scale.arrow = NULL, top.taxa = 5)
+plot_ordination_utils(
+  x,
+  ordiObject,
+  color.opt = NULL,
+  plot.arrow = TRUE,
+  scale.arrow = NULL,
+  top.taxa = 5
+)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}

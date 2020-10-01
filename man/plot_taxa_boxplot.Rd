@@ -4,8 +4,15 @@
 \alias{plot_taxa_boxplot}
 \title{Taxonomic Composition Plot boxplot}
 \usage{
-plot_taxa_boxplot(x, taxonomic.level, top.otu, VariableA, title,
-  color = NULL)
+plot_taxa_boxplot(
+  x,
+  taxonomic.level,
+  top.otu,
+  keep.other = FALSE,
+  VariableA,
+  title,
+  color = NULL
+)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
@@ -13,6 +20,8 @@ plot_taxa_boxplot(x, taxonomic.level, top.otu, VariableA, title,
 \item{taxonomic.level}{Merge the OTUs (for phyloseq object) into a higher taxonomic level. This has to be one from colnames(tax_table(x)).}
 
 \item{top.otu}{Top number of taxa to plot.}
+
+\item{keep.other}{TRUE or FALSE. Default is FALSE. This will not plot taxa group as Other}
 
 \item{VariableA}{Specify main variable of interest. This should be one of the variables in sample_variables(x).}
 

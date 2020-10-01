@@ -23,11 +23,6 @@
 #' @param author Name of the author/investigator.
 #' @author Contact: Sudarshan Shetty \email{sudarshanshetty9@@gmail.com}
 #' @return A HTML report with graphs and data stats which can serve as guide for actual analysis.
-#' @import tidyr
-#' @import dplyr
-#' @import microbiome
-#' @import phyloseq
-#' @import ggplot2
 #' @export
 #' @examples
 #' \dontrun{

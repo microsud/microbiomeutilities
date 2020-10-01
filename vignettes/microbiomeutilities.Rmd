@@ -87,7 +87,8 @@ microbiome_pipeline(
 
 ## Formatting the Phyloseq Object  
 
-Most commonly it is observed that the taxonomy file has classification until a given taxonomic level. We will fill the empty cells with the maximum classification available along with the OTU number.  
+Most commonly it is observed that the taxonomy file has classification until a given taxonomic level.We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.    
+  
 
 Check the taxonomy in phyloseq object.  
 
@@ -104,24 +105,11 @@ data("zackular2014")
 p0 <- zackular2014
 # reduce size for example
 ps0 <- core(ps0, detection = 10, prevalence = 20 / 100)
-p0.f <- format_phyloseq(p0)
-# head(tax_table(p0.f))
-
-kable(head(tax_table(ps0.f))[3:6])
+ps0.f2 <- format_to_besthit(ps0)
+kable(head(tax_table(ps0.f2))[3:6])
 ```
 
 Now the available taxonomy is added.  
-There is a second version which will change the names in both otu table and taxonomy table. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.    
-
-
-```{r}
-# reduce size for example
-ps0 <- core(ps0, detection = 10, prevalence = 20 / 100)
-
-ps0.f2 <- format_to_besthit(ps0)
-
-kable(head(tax_table(ps0.f2))[3:6])
-```
 
 As can be seen, the rownames have the OTUIDs and available toxonomic name(s).  
 

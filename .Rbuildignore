@@ -1,0 +1,18 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.Rproj\.user$
+
+# Home page
+docs
+index.html
+index.Rmd
+
+# Extras
+inst/extras/*
+
+R/.RData
+R/*~
+
+# Travis scripts
+README.Rmd
+.travis.yml
