@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="Diversity plot with stats — plot_diversity_stats" />
-<meta property="og:description" content="Diversity plot with stats
-Diversity plot with stats" />
+<meta property="og:description" content="Diversity plot with stats" />
 
 
 
@@ -73,7 +72,7 @@ Diversity plot with stats" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.00</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.01</span>
       </span>
     </div>
 
@@ -113,13 +112,12 @@ Diversity plot with stats" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Diversity plot with stats</h1>
-    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/diversity_plot_stats.R'><code>R/diversity_plot_stats.R</code></a>, <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/plot_diversity_stats.R'><code>R/plot_diversity_stats.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/plot_diversity_stats.R'><code>R/plot_diversity_stats.R</code></a></small>
     <div class="hidden name"><code>plot_diversity_stats.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Diversity plot with stats</p>
-<p>Diversity plot with stats</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_diversity_stats</span>(
@@ -129,17 +127,7 @@ Diversity plot with stats" />
   group.colors = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>),
   dot.opacity = <span class='fl'>0.25</span>,
   box.opacity = <span class='fl'>0.25</span>,
-  group.order = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='fu'>plot_diversity_stats</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>index</span>,
-  group = <span class='kw'>NULL</span>,
-  group.colors = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>),
-  dot.opacity = <span class='fl'>0.25</span>,
-  box.opacity = <span class='fl'>0.25</span>,
+  violin.opacity = <span class='fl'>0.5</span>,
   group.order = <span class='kw'>NULL</span>,
   <span class='kw'>...</span>
 )</pre>
@@ -172,8 +160,13 @@ Diversity plot with stats" />
       <td><p>for ggplot alpha to determine opacity for box</p></td>
     </tr>
     <tr>
+      <th>violin.opacity</th>
+      <td><p>for ggplot alpha to determine opacity for violin</p></td>
+    </tr>
+    <tr>
       <th>group.order</th>
-      <td><p>Default is NULL. a list specifing order of x-axis. E.g. c("H","CRC","nonCRC")</p></td>
+      <td><p>Default is NULL. a list specifing order of x-axis. 
+E.g. c("H","CRC","nonCRC")</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -188,16 +181,11 @@ Diversity plot with stats" />
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
 <span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
 <span class='kw'>mycols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>, <span class='st'>"grey50"</span>)
-<span class='kw'>p.m</span> <span class='op'>&lt;-</span> <span class='fu'>plot_diversity_stats</span>(<span class='kw'>p0</span>, group = <span class='st'>"DiseaseState"</span>, index = <span class='st'>"diversity_shannon"</span>, group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span>), group.colors = <span class='kw'>mycols</span>)
+<span class='kw'>p.m</span> <span class='op'>&lt;-</span> <span class='fu'>plot_diversity_stats</span>(<span class='kw'>p0</span>, group = <span class='st'>"DiseaseState"</span>, 
+index = <span class='st'>"diversity_shannon"</span>, group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span>), 
+group.colors = <span class='kw'>mycols</span>)
 </div><div class='output co'>#&gt; <span class='message'>Observed richness</span></div><div class='output co'>#&gt; <span class='message'>Other forms of richness</span></div><div class='output co'>#&gt; <span class='message'>Diversity</span></div><div class='output co'>#&gt; <span class='message'>Evenness</span></div><div class='output co'>#&gt; <span class='message'>Dominance</span></div><div class='output co'>#&gt; <span class='message'>Rarity</span></div><div class='input'><span class='kw'>p.m</span>
-</div><div class='img'><img src='plot_diversity_stats-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://rpkgs.datanovia.com/ggpubr'>ggpubr</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
-<span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='kw'>mycols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>, <span class='st'>"grey50"</span>)
-<span class='kw'>p.m</span> <span class='op'>&lt;-</span> <span class='fu'>plot_diversity_stats</span>(<span class='kw'>p0</span>, group = <span class='st'>"DiseaseState"</span>, index = <span class='st'>"diversity_shannon"</span>, group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span>), group.colors = <span class='kw'>mycols</span>)
-</div><div class='output co'>#&gt; <span class='message'>Observed richness</span></div><div class='output co'>#&gt; <span class='message'>Other forms of richness</span></div><div class='output co'>#&gt; <span class='message'>Diversity</span></div><div class='output co'>#&gt; <span class='message'>Evenness</span></div><div class='output co'>#&gt; <span class='message'>Dominance</span></div><div class='output co'>#&gt; <span class='message'>Rarity</span></div><div class='input'><span class='kw'>p.m</span>
-</div><div class='img'><img src='plot_diversity_stats-2.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='plot_diversity_stats-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

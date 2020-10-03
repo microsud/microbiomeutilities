@@ -1,6 +1,13 @@
 
 Constant development is in process.  
-
+CHANGES IN VERSION 1.00.01 (2020-10-03)
+  o Added new function plot_abund_prev
+  o Added new function simple_heatmap
+  o Added new function taxa_distribution
+  o Added a custom theme theme_biome_utils
+  o Added gghalves to imports
+  o Fixed microbiome_pipeline report
+  
 CHANGES IN VERSION 1.00.00 (2020-10-01)
   o Version tested with R version 4.0.2 (2020-06-22)     
   o Fix typos in documentation  

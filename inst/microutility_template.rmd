@@ -148,7 +148,7 @@ This code chunk reads the input files and creates a phyloseq object.
 ps0 <- read_phyloseq(otu.file = otufile, 
                      metadata.file = mapping,
                      taxonomy.file = taxonomy, 
-                     type = "biom")
+                     type = type)
 
 if (!is.na(treefilename)){
   tree <- read.tree(treefilename)
@@ -195,7 +195,7 @@ DT::datatable(taxa_summary(ps0, "Phylum"))
 
 print("Below is the summary of the phyloseq object")
 
-summarize_phyloseq(ps0)
+print_ps(ps0)
 
 ```
 
