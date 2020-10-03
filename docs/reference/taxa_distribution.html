@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aggregate Top Taxa v2 — aggregate_top_taxa2 • microbiomeutilities</title>
+<title>Distribution of taxa — taxa_distribution • microbiomeutilities</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Aggregate Top Taxa v2 — aggregate_top_taxa2" />
-<meta property="og:description" content="Summarize phyloseq: combine other than the most abundant taxa." />
+<meta property="og:title" content="Distribution of taxa — taxa_distribution" />
+<meta property="og:description" content="Plots distribution of taxa." />
 
 
 
@@ -111,56 +111,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Aggregate Top Taxa v2</h1>
-    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/aggregate_top_taxa2.R'><code>R/aggregate_top_taxa2.R</code></a></small>
-    <div class="hidden name"><code>aggregate_top_taxa2.Rd</code></div>
+    <h1>Distribution of taxa</h1>
+    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/pkg_utils.R'><code>R/pkg_utils.R</code></a></small>
+    <div class="hidden name"><code>taxa_distribution.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Summarize phyloseq: combine other than the most abundant taxa.</p>
+    <p>Plots distribution of taxa.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>aggregate_top_taxa2</span>(<span class='kw'>x</span>, <span class='kw'>top</span>, <span class='kw'>level</span>)</pre>
+    <pre class="usage"><span class='fu'>taxa_distribution</span>(
+  <span class='kw'>x</span>,
+  color.level = <span class='st'>"Phylum"</span>,
+  color.taxa = <span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span>(<span class='fl'>12</span>, <span class='st'>"Paired"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>phyloseq-class</code> object</p></td>
+      <td><p>Phyloseq object.</p></td>
     </tr>
     <tr>
-      <th>top</th>
-      <td><p>Keep the top-n taxa, and merge the rest under the category
-'Other'. Instead of top-n numeric this can also be a character vector
-listing the groups to combine.</p></td>
+      <th>color.level</th>
+      <td><p>Taxonomic level to color.</p></td>
     </tr>
     <tr>
-      <th>level</th>
-      <td><p>Summarization level (from <code>rank_names(pseq)</code>)</p></td>
+      <th>color.taxa</th>
+      <td><p>vector of colors specified by user. 
+Default is brewer.pal(12,"Paired")</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>phyloseq-class</code> object</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Backup from microbiome R pkg. This function is replaced by
-aggregate_rare function.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>See citation('microbiome')</p>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Contact: Leo Lahti <a href='mailto:microbiome-admin@googlegroups.com'>microbiome-admin@googlegroups.com</a></p>
+    <p>ggplot2 object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>dietswap</span>)
-<span class='kw'>s</span> <span class='op'>&lt;-</span> <span class='fu'>aggregate_top_taxa</span>(<span class='kw'>dietswap</span>, top = <span class='fl'>3</span>, <span class='st'>"Phylum"</span>)
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'aggregate_top_taxa' is deprecated.</span>
-#&gt; <span class='warning'>Use 'aggregate_rare' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated") and help("The microbiome::aggregate_top_taxa function is deprecated.-deprecated").</span></div></pre>
+    <pre class="examples"><div class='input'> 
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
+<span class='kw'>pseq</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>taxa_distribution</span>(<span class='kw'>pseq</span>)
+<span class='kw'>p</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Groups with fewer than two data points have been dropped.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 row(s) containing missing values (geom_path).</span></div><div class='img'><img src='taxa_distribution-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

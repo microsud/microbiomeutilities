@@ -8,9 +8,7 @@ author: "Sudarshan A. Shetty"
 I will keep improving this with time and feedback.  
 
 # microbiomeutilities
-This is mainly a _wrapper tool R package_. Apart for some simple scripts for plotting, this package has a single function `microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a _HTML_ report for convenient investigating of the data.     
-
-Example output of the `microbiome_pipeline`: [Mock](reference/Mock_report.html).   
+This is mainly a _wrapper tool R package_.  
 
 **Install microbiomeutilities**   
 
@@ -27,7 +25,7 @@ The aim of this package is not to replace any of the following tools, instead th
 
 ## Why do this?  
 I am a microbiologists and R enthusiast and some times, my free time activity includes combining these two. The learning curve is steep for analyzing microbiome data from scratch. This package includes codes that are used routinely by me and my colleagues and friends. Realizing that the entire process of analyzing microbiome data is iterative and requires investment of time for thorough analysis, it was useful for me to make a package which makes this a little simpler. This helps in planning better the individual analysis such as filtering, normalization, transformation (all three are topics of hot debate and disagreement). The ability to look quickly if the main factor of interest is having an impact on the community diversity, composition, structure can be useful. This will also helps in making better decisions for further in-depth analysis. 
-Immediate use can be for people who are working with enrichment's and want basic analysis such as microbial composition of different enrichment conditions.     
+
 
 ## Direction for this package   
 Depending on the real world usefulness, practicality and success, we plan to include complete or parts of this package in the `microbiome` R package.  

@@ -14,10 +14,9 @@ comment = "#>"
 )
 ```
 
+# microbiomeutilties R package  
 
-<font color="red">microbiomeutilities R package is under active development! Store a local copy of the package (download from GitHub) as backup</font>
-
-The microbiomeutilities R package is mainly a wrapper tool with diverse functions for data handling and visualisation. This package has a "`pipeline`" function called `microbiome_pipeline` for carrying out preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The output is a HTML report for convenient first-hand investigating of the microbial profilling datadata.  
+The microbiomeutilities R package is mainly a wrapper tool with diverse functions for data handling and visualisation. 
 
 ## Install  
 
@@ -34,6 +33,7 @@ library(microbiomeutilities)
 library(microbiome)
 library(knitr)
 library(tibble)
+library(dplyr)
 ```
 
 
@@ -160,6 +160,27 @@ pseq_df <- phy_to_ldf(ps0, transform.counts = NULL)
 kable(head(pseq_df))
 ```
 
+## Check distirbution   
+
+A quick check to see how different taxa are distributed in your data.  
+```{r message=FALSE, fig.height=6, fig.width=8}
+library(microbiomeutilities)
+library(ggpubr)
+data("zackular2014")
+pseq <- zackular2014
+
+# check healthy
+health_ps <- subset_samples(pseq, DiseaseState="H")
+p_hc <- taxa_distribution(health_ps)
+
+# check CRC
+crc_ps <- subset_samples(pseq, DiseaseState="CRC")
+p_crc <- taxa_distribution(crc_ps)
+ggarrange(p_hc, p_crc, nrow=2, ncol=1)
+```
+
+There are Cyanobacteria/Chloroplast related sequences which can be removed if not expected in the samples.  
+
 ## Plot alpha diversities  
 
 Utility plot function for diversity measures calculated by `microbiome` package.  
@@ -180,8 +201,11 @@ p <- plot_alpha_diversities(ps0,
 
 print(p)
 ```
+
 Alternatively, one can plot one index at a time with pair-wise stats. 
 ```{r message=FALSE, fig.width=4, fig.height=4}
+
+library(gghalves)
 data("zackular2014")
 p0 <- zackular2014
 mycols <- c("brown3", "steelblue","grey50")
@@ -190,7 +214,7 @@ p.m <- plot_diversity_stats(p0, group = "DiseaseState",
                             index = "diversity_shannon", 
                             group.order = c("H", "CRC", "nonCRC"), 
                             group.colors = mycols)
-p.m
+p.m + ylab("Shannon Diversity") + xlab("")
 
 ```
 
@@ -244,11 +268,11 @@ pn <- plot_taxa_boxplot(ps0,
                         keep.other = FALSE,
                         group.order = c("H","CRC","nonCRC"))
 
-print(pn)
+print(pn + theme_biome_utils())
 
 ```
 
-# Plotting selected taxa  
+## Plotting selected taxa  
 
 Using a list of taxa specified by the user for comparisons.  
 ```{r fig.height=4}
@@ -264,7 +288,7 @@ p <- plot_select_taxa(p0.f, select.taxa,
                       "Paired", 
                       plot.type = "stripchart",
                       group.order = c("H","CRC","nonCRC"))
-print(p)
+print(p + theme_biome_utils())
 
 
 ```
@@ -295,8 +319,34 @@ p
 
 ```
 
+## Abundance-Prevalence relationship  
+Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random subsampling.  
+This can be useful in identifying highly prevalent taxa and thier mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.
 
-## Heatmap using phyloseq and pheatmap  
+```{r fig.height=4, fig.width=6}
+library(microbiomeutilities)
+library(dplyr)
+library(ggrepel)
+asv_ps <- zackular2014
+asv_ps <- microbiome::transform(asv_ps, "compositional")
+# Select healthy samples
+asv_ps <- subset_samples(asv_ps, DiseaseState=="H")
+asv_ps <- core(asv_ps,detection = 0.0001, prevalence = 0.50) # reduce size for example
+asv_ps <- format_to_besthit(asv_ps)
+
+set.seed(14285)
+p_v <- plot_abund_prev(asv_ps) + 
+  geom_vline(xintercept = 0.95, lty="dashed", alpha=0.7) + 
+  geom_hline(yintercept = 0.01,lty="dashed", alpha=0.7) +
+  scale_color_brewer(palette = "Paired") 
+p_v + scale_x_log10() + scale_y_log10() + theme_biome_utils()
+#p <- p_v + ggrepel::geom_text_repel(data= subset(selctdf, meanPrev >=0.95) ,
+#                                    aes(meanPrev,MeanAbun,label=Taxa), size=3)
+#p + scale_x_log10() + scale_y_log10()
+```
+
+## Heatmaps    
+### Heatmap using phyloseq and pheatmap  
 Useful for visualisng differences in top otus between sample groups.  
 ```{r fig.height=6, fig.width=8}
 library(pheatmap)
@@ -314,6 +364,28 @@ plot_taxa_heatmap(ps0,
                   show_colnames = F)
 ```
 
+### Elegant option with ggplot2    
+
+```{r fig.width=10, fig.height=6, message=FALSE}
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+p0.rel <- transform(p0, "compositional")
+simple_heatmap(p0.rel,
+               group.facet = "DiseaseState",
+               group.order = c("H", "CRC", "nonCRC"),
+               abund.thres = 0.01,
+               prev.thres = 0.1,
+               level = "Genus",
+               scale.color = "log10",
+               na.fill = "white",
+               color.fill = NULL,
+               taxa.arrange=NULL,
+               remove.other=TRUE,
+               panel.arrange="grid",
+               ncol=NULL,
+               nrow=NULL)
+```
 
 ## MicrobiomeHD datasets as phyloseq objects  
 

@@ -6,7 +6,7 @@
 <br>  
 
 # About  
-The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package. This utility tool includes functions for formatting and visualization of [phyloseq](https://github.com/joey711/phyloseq) object. The package has a function `microbiome_pipeline`, which generates an _HTML_ report with infromation on preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. The _HTML_ report can be convenient for having prelimanry insights into the data.    
+The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package.   
 
 [Package website and online documentation](https://microsud.github.io/microbiomeutilities/)  
  
@@ -22,11 +22,6 @@ devtools::install_github("microsud/microbiomeutilities")
 
 ```  
 **Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2018, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.00).     
-
-## Direction for this package   
-Depending on the real world usefulness, practicality and success, we plan to include complete or parts of this package in the Microbiome R package.  
-"Leo Lahti, Sudarshan Shetty [et al.](https://github.com/microbiome/microbiome/graphs/contributors) ([Bioconductor, 2017](https://bioconductor.org/packages/devel/bioc/html/microbiome.html)). Tools for microbiome analysis in R.   
-
 The microbiome R package relies on the independently developed   
 [phyloseq](https://github.com/joey711/phyloseq) package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.  
 [ggplot2](http://ggplot2.org/) H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.  

@@ -95,5 +95,5 @@ plot_taxa_boxplot <- function(x, taxonomic.level, top.otu,
       palette = color
     )
 
-  return(p)
+  return(p + xlab(""))
 }

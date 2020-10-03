@@ -5,16 +5,21 @@
 #' @param group.colors Colors for plotting groups
 #' @param dot.opacity for ggplot alpha to determine opacity for points
 #' @param box.opacity for ggplot alpha to determine opacity for box
-#' @param group.order Default is NULL. a list specifing order of x-axis. E.g. c("H","CRC","nonCRC")
+#' @param violin.opacity for ggplot alpha to determine opacity for violin
+#' @param group.order Default is NULL. a list specifing order of x-axis. 
+#' E.g. c("H","CRC","nonCRC")
 #' @param ... params for ggpubr::stat_compare_means
 #' @importFrom ggpubr stat_compare_means rotate_x_text
+#' @importFrom gghalves geom_half_violin
 #' @examples
 #' library(microbiomeutilities)
 #' library(ggpubr)
 #' data("zackular2014")
 #' p0 <- zackular2014
 #' mycols <- c("brown3", "steelblue", "grey50")
-#' p.m <- plot_diversity_stats(p0, group = "DiseaseState", index = "diversity_shannon", group.order = c("H", "CRC", "nonCRC"), group.colors = mycols)
+#' p.m <- plot_diversity_stats(p0, group = "DiseaseState", 
+#' index = "diversity_shannon", group.order = c("H", "CRC", "nonCRC"), 
+#' group.colors = mycols)
 #' p.m
 #' @keywords utilities
 #' @export
@@ -23,6 +28,7 @@ plot_diversity_stats <- function(x, index,
                                  group.colors = c("brown3", "steelblue"),
                                  dot.opacity = 0.25,
                                  box.opacity = 0.25,
+                                 violin.opacity = 0.5,
                                  group.order = NULL, ...) {
   make_pairs <- function(x) {
     if (is.character(x) == TRUE) {
@@ -46,11 +52,19 @@ plot_diversity_stats <- function(x, index,
       levels = group.order
     )
   }
-
-  plt <- ggplot(df_met, aes_string(group, index)) +
-    geom_boxplot(aes_string(fill = group), alpha = box.opacity) +
-    geom_jitter(alpha = dot.opacity) +
-    scale_fill_manual("Index", values = group.colors)
+  
+  plt <- ggplot(data = df_met, 
+         aes_string(group, index,fill = group)) +
+    geom_half_violin(position = position_nudge(x = 0.15, y = 0), 
+                     alpha = violin.opacity, side = "r") +
+    geom_point(aes_string(y = index, color = group), 
+               position = position_jitter(width = 0.15), 
+               size = 1, alpha = dot.opacity) +
+    geom_boxplot(width = 0.2, outlier.shape = NA, 
+                 alpha = box.opacity) +
+    guides(fill = FALSE, color = FALSE) +
+    scale_fill_manual(values = group.colors) +
+    scale_colour_manual(values = group.colors) 
 
   if (length(unique(df_met[, group])) == 2) {
     plt <- plt + stat_compare_means(
@@ -68,5 +82,5 @@ plot_diversity_stats <- function(x, index,
     )
   }
 
-  plt + theme_bw() + rotate_x_text()
+  plt + theme_biome_utils() + rotate_x_text()
 }
