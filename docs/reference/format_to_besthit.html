@@ -120,7 +120,7 @@
     <p>Format the phyloseq object to add the best taxonomy in phyloseq object (tax_table and otu_table).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>format_to_besthit</span>(<span class='kw'>x</span>, prefix = <span class='st'>"OTU-"</span>)</pre>
+    <pre class="usage"><span class='fu'>format_to_besthit</span>(<span class='kw'>x</span>, prefix = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,11 +149,11 @@
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Example data</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://microbiome.github.io/microbiome'>microbiome</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeUtilities</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://tibble.tidyverse.org'>tibble</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
 <span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='kw'>p0.f</span> <span class='op'>&lt;-</span> <span class='fu'>format_to_besthit</span>(<span class='kw'>p0</span>)
+<span class='kw'>p0.f</span> <span class='op'>&lt;-</span> <span class='fu'>format_to_besthit</span>(<span class='kw'>p0</span>, prefix=<span class='st'>"OTU-"</span>)
 }
 </div></pre>
   </div>
