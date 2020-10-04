@@ -4,7 +4,7 @@
 \alias{format_to_besthit}
 \title{Formatting the \code{\link{phyloseq-class}} Object advanced}
 \usage{
-format_to_besthit(x, prefix = "OTU-")
+format_to_besthit(x, prefix = NULL)
 }
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
@@ -27,11 +27,11 @@ Most commonly it is observed that the taxonomy file has classification until a g
 \dontrun{
 # Example data
 library(microbiome)
-library(microbiomeUtilities)
-library(tibble)
+library(microbiomeutilities)
+library(dplyr)
 data("zackular2014")
 p0 <- zackular2014
-p0.f <- format_to_besthit(p0)
+p0.f <- format_to_besthit(p0, prefix="OTU-")
 }
 }
 \keyword{utilities}

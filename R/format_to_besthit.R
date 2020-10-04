@@ -13,15 +13,15 @@
 #' \dontrun{
 #' # Example data
 #' library(microbiome)
-#' library(microbiomeUtilities)
-#' library(tibble)
+#' library(microbiomeutilities)
+#' library(dplyr)
 #' data("zackular2014")
 #' p0 <- zackular2014
-#' p0.f <- format_to_besthit(p0)
+#' p0.f <- format_to_besthit(p0, prefix="OTU-")
 #' }
 #' @keywords utilities
 
-format_to_besthit <- function(x, prefix = "OTU-") {
+format_to_besthit <- function(x, prefix = NULL) {
   Domain <- Phylum <- Class <- Order <- Family <- Genus <-
     Species <- tax <- tax.merge <-
     best_hit <- y <- NULL
@@ -169,8 +169,10 @@ format_to_besthit <- function(x, prefix = "OTU-") {
 
   rownames(tax) <- rownames(y)
 
-  #
-  rownames(tax) <- paste(prefix, rownames(tax), sep = "")
+  if(!is.null(prefix)){
+    rownames(tax) <- paste(prefix, rownames(tax), sep = "")
+  }
+  
 
   tax$col1 <- tax$Genus
 

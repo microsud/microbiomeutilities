@@ -170,11 +170,11 @@ data("zackular2014")
 pseq <- zackular2014
 
 # check healthy
-health_ps <- subset_samples(pseq, DiseaseState="H")
+health_ps <- subset_samples(pseq, DiseaseState=="H")
 p_hc <- taxa_distribution(health_ps)
 
 # check CRC
-crc_ps <- subset_samples(pseq, DiseaseState="CRC")
+crc_ps <- subset_samples(pseq, DiseaseState=="CRC")
 p_crc <- taxa_distribution(crc_ps)
 ggarrange(p_hc, p_crc, nrow=2, ncol=1)
 ```
@@ -297,7 +297,7 @@ library(ggpubr)
 data("zackular2014")
 p0 <- zackular2014
 p0.f <- format_to_besthit(p0)
-select.taxa <- c("OTU-d__denovo4:Bacteroides", "OTU-d__denovo2:Bacteroides")
+select.taxa <- c("d__denovo4:Bacteroides", "d__denovo2:Bacteroides")
 
 mycols <- c("brown3", "steelblue", "grey50")
 
