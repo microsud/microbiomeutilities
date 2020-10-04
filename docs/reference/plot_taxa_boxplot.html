@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.01</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.02</span>
       </span>
     </div>
 
@@ -125,10 +125,15 @@
   <span class='kw'>taxonomic.level</span>,
   <span class='kw'>top.otu</span>,
   keep.other = <span class='fl'>FALSE</span>,
-  <span class='kw'>VariableA</span>,
+  <span class='kw'>group</span>,
   <span class='kw'>title</span>,
-  color = <span class='kw'>NULL</span>,
-  group.order = <span class='kw'>NULL</span>
+  group.colors = <span class='kw'>NULL</span>,
+  group.order = <span class='kw'>NULL</span>,
+  add.violin = <span class='fl'>TRUE</span>,
+  violin.opacity = <span class='fl'>0.25</span>,
+  box.opacity = <span class='fl'>0.25</span>,
+  dot.opacity = <span class='fl'>0.25</span>,
+  dot.size = <span class='fl'>2</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -151,7 +156,7 @@
       <td><p>TRUE or FALSE. Default is FALSE. This will not plot taxa group as Other</p></td>
     </tr>
     <tr>
-      <th>VariableA</th>
+      <th>group</th>
       <td><p>Specify main variable of interest. This should be one of the variables in sample_variables(x).</p></td>
     </tr>
     <tr>
@@ -159,12 +164,32 @@
       <td><p>title for the plot</p></td>
     </tr>
     <tr>
-      <th>color</th>
-      <td><p>any of the palette supported by ggpubr/RColorBrewer packages or  user specified as c("red", "blue").</p></td>
+      <th>group.colors</th>
+      <td><p>Colors for plotting groups</p></td>
     </tr>
     <tr>
       <th>group.order</th>
       <td><p>Default is NULL. a list specifing order of x-axis. E.g. c("H","CRC","nonCRC")</p></td>
+    </tr>
+    <tr>
+      <th>add.violin</th>
+      <td><p>Loical. If half violoin to the added. Default=TRUE</p></td>
+    </tr>
+    <tr>
+      <th>violin.opacity</th>
+      <td><p>If add.violin=TRUE, opacity for violin.</p></td>
+    </tr>
+    <tr>
+      <th>box.opacity</th>
+      <td><p>For ggplot alpha to determine opacity for box</p></td>
+    </tr>
+    <tr>
+      <th>dot.opacity</th>
+      <td><p>For ggplot alpha to determine opacity for points</p></td>
+    </tr>
+    <tr>
+      <th>dot.size</th>
+      <td><p>For ggplot alpha to determine size for points</p></td>
     </tr>
     </table>
 
@@ -178,13 +203,17 @@
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>RColorBrewer</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
-<span class='kw'>ps1</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='kw'>pn</span> <span class='op'>&lt;-</span> <span class='fu'>plot_taxa_boxplot</span>(<span class='kw'>ps1</span>,
-  taxonomic.level = <span class='st'>"Phylum"</span>,
-  top.otu = <span class='fl'>3</span>, VariableA = <span class='st'>"DiseaseState"</span>,
-  title = <span class='st'>"Rel plot"</span>, color = <span class='st'>"Set2"</span>
-)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>pn</span>)
+<span class='kw'>ps0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
+<span class='kw'>mycols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>, <span class='st'>"grey50"</span>)
+<span class='kw'>pn</span> <span class='op'>&lt;-</span> <span class='fu'>plot_taxa_boxplot</span>(<span class='kw'>ps0</span>,
+                        taxonomic.level = <span class='st'>"Phylum"</span>,
+                        top.otu = <span class='fl'>6</span>, 
+                        group = <span class='st'>"DiseaseState"</span>,
+                        title = <span class='st'>"Relative abudance plot"</span>,
+                        keep.other = <span class='fl'>FALSE</span>,
+                        group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>,<span class='st'>"CRC"</span>,<span class='st'>"nonCRC"</span>),
+                        group.colors = <span class='kw'>mycols</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>pn</span> <span class='op'>+</span> <span class='fu'><a href='theme_biome_utils.html'>theme_biome_utils</a></span>())
 }
 
 </div></pre>

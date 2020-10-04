@@ -7,8 +7,22 @@
 #' @param upper.conf Upper confidence interval =0.975
 #' @param bs.iter Number of bootstrap iterations =99
 #' @param color taxa level to color. preferablly at phylum 
+#' @param point.opacity  Numeric for ggplot alpha. Defualt is 0.5
+#' @param label.core Logical default is FALSE 
+#' @param label.size If label_core is TRUE specify text size.
+#' Default is NULL
+#' @param label.opacity Numeric for ggplot alpha. Defualt is NULL
+#' @param nudge.label Argument to pass to ggrepel::geom_text_repel Default is NULL
+#' @param mean.abund.thres If label_core is TRUE specify mean 
+#' abundance threshold. Default is NULL 
+#' @param mean.prev.thres If label_core is TRUE specify mean 
+#' prevalence threshold. Default is NULL 
+#' @param log.scale Plot log10 scale. Default is TRUE
+#' abundance criteria. Default is NULL
+#' @param ... Arguments to pass to sample() function. 
 #' @return A \code{\link{ggplot}} plot object.
 #' @importFrom stats quantile
+#' @importFrom ggrepel geom_text_repel
 #' @export
 #' @examples
 #' \dontrun{
@@ -19,7 +33,7 @@
 #'  asv_ps <- core(asv_ps,detection = 0.0001, prevalence = 0.5)
 #'  asv_ps <- format_to_besthit(asv_ps)
 #'  set.seed(2349)
-#'  p_v <- plot_abund_prev(asv_ps) + 
+#'  p_v <- plot_abund_prev(asv_ps, size = 20, replace = TRUE) + 
 #'       geom_vline(xintercept = 0.75, lty="dashed", alpha=0.7) + 
 #'       geom_hline(yintercept = 0.01,lty="dashed", alpha=0.7) +
 #'       scale_color_brewer(palette = "Paired")
@@ -31,19 +45,28 @@
 plot_abund_prev <- function(x, lower.conf=0.025, 
                             upper.conf=0.975,
                             bs.iter=99,
-                            color="Phylum") {
+                            color="Phylum",
+                            point.opacity= 0.5,
+                            label.core=FALSE,
+                            label.size= NULL,
+                            label.opacity = NULL,
+                            mean.abund.thres = NULL,
+                            mean.prev.thres = NULL,
+                            log.scale=TRUE,
+                            nudge.label=NULL,
+                            ...) {
   psx <- rand_sams <- ps.sub <- sub.sum <-txvp <- sxi <- NULL
   s <- ab <- sx <- cis <- taxsp_lc <- taxsp_uc <- cis_df <- NULL
   abx <- cis_ab <- tax_list <- cis_ab_df <- abx_abun <- NULL
   Mean.Rel.Ab <- MeanAbun <- Taxa <- NULL
   
-  ci_ab_prev_tax <- tax_df <- NULL
+  ci_ab_prev_tax <- tax_df <- core_df <- NULL
   message("Make sure to set.seed")
   psx <- x
   s <- c()
   ab <- c()
   for (i in seq_len(bs.iter)) {
-    rand_sams <- sample(sample_names(psx), replace = TRUE)
+    rand_sams <- sample(sample_names(psx), ...)
     ps.sub <- prune_samples(sample_names(psx) %in% rand_sams, psx)
     sub.sum <- abun_summary(ps.sub)
     #ps.sub <- prune_taxa(taxa_sums(ps.sub) > 0, ps.sub)
@@ -117,42 +140,36 @@ plot_abund_prev <- function(x, lower.conf=0.025,
   
   p <- ggplot(ci_ab_prev_tax, aes(meanPrev,MeanAbun)) + 
     geom_point(aes_string(color=color),alpha=0.5, size=2) + 
-    xlab("Prevalance")+ 
-    ylab("Mean abundance (log10)") + 
-    geom_linerange(aes_string(ymin = "MeanAbunLowerCI", ymax = "MeanAbunUpperCI", color=color)) +
-    geom_linerange(aes_string(xmin = "PrevLowerCI", xmax = "PrevUpperCI", color=color)) +
-    #ggrepel::geom_text_repel(data=subset(ci_ab_prev_tax, 
-    # meanPrev >= 0.75 & MeanAbun >= 0.01), aes(label=best_hit))+
-    theme_bw()  
-  #scale_y_log10() + 
-  #scale_x_log10() + scale_color_brewer(palette = "Paired")
-  return(p)
-}
-
-
-abun_summary <- function(x){
-  Max.Rel.Ab <- Mean.Rel.Ab <- MeanAbun <- Median.Rel.Ab <- Std.dev <- Taxa <- NULL
-  otudf2 <- as.data.frame(abundances(x))
+    geom_linerange(aes_string(ymin = "MeanAbunLowerCI", 
+                              ymax = "MeanAbunUpperCI", 
+                              color=color),alpha= point.opacity) +
+    geom_linerange(aes_string(xmin = "PrevLowerCI", 
+                              xmax = "PrevUpperCI", 
+                              color=color),alpha= point.opacity) 
   
-  output=NULL
-  for(j in 1:nrow(otudf2)){
-    x2=as.numeric(otudf2[j,])
-    mx.rel=max(x2)
-    mean.rel=mean(x2)
-    med.rel=median(x2)
-    std.dev=sd(x2)
+  if(label.core ==TRUE){
     
-    output=rbind(output,c(row.names(otudf2)[j], 
-                          as.numeric(mx.rel), 
-                          as.numeric(mean.rel),
-                          as.numeric(med.rel), 
-                          as.numeric(std.dev)))
+    core_df <- subset(ci_ab_prev_tax, 
+                      meanPrev >= mean.prev.thres & MeanAbun >= mean.abund.thres)
+    p <- p + ggrepel::geom_text_repel(data= core_df, 
+                                      aes(label=Taxa),
+                                      size=label.size,
+                                      alpha=label.opacity,
+                                      force        = 0.5,
+                                      nudge_x      = nudge.label,
+                                      direction    = "y",
+                                      hjust        = 1,
+                                      segment.size = 0.2)
   }
   
-  #head(output)
-  outputdf <- as.data.frame(output, stringsAsFactors = F)
-  colnames(outputdf) <- c("Taxa", "Max.Rel.Ab", "Mean.Rel.Ab", "Median.Rel.Ab", "Std.dev")
-  outputdf <- outputdf %>% 
-    mutate_at(vars(Max.Rel.Ab, Mean.Rel.Ab, Median.Rel.Ab, Std.dev ), as.numeric)
+  if (log.scale==TRUE) {
+    p <- p +scale_y_log10() + scale_x_log10() + 
+      xlab("Prevalance (log10)")+ 
+      ylab("Mean abundance (log10)") 
+    return(p + theme_biome_utils())
+  } else {
+    p <- p + xlab("Prevalance") + ylab("Mean abundance")
+    return(p + theme_biome_utils())
+  }
 }
 

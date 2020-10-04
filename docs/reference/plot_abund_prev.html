@@ -73,7 +73,7 @@ and upper and lower confidence interval for each taxa is calculated by random su
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.01</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.02</span>
       </span>
     </div>
 
@@ -127,7 +127,16 @@ and upper and lower confidence interval for each taxa is calculated by random su
   lower.conf = <span class='fl'>0.025</span>,
   upper.conf = <span class='fl'>0.975</span>,
   bs.iter = <span class='fl'>99</span>,
-  color = <span class='st'>"Phylum"</span>
+  color = <span class='st'>"Phylum"</span>,
+  point.opacity = <span class='fl'>0.5</span>,
+  label.core = <span class='fl'>FALSE</span>,
+  label.size = <span class='kw'>NULL</span>,
+  label.opacity = <span class='kw'>NULL</span>,
+  mean.abund.thres = <span class='kw'>NULL</span>,
+  mean.prev.thres = <span class='kw'>NULL</span>,
+  log.scale = <span class='fl'>TRUE</span>,
+  nudge.label = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -153,6 +162,46 @@ and upper and lower confidence interval for each taxa is calculated by random su
       <th>color</th>
       <td><p>taxa level to color. preferablly at phylum</p></td>
     </tr>
+    <tr>
+      <th>point.opacity</th>
+      <td><p>Numeric for ggplot alpha. Defualt is 0.5</p></td>
+    </tr>
+    <tr>
+      <th>label.core</th>
+      <td><p>Logical default is FALSE</p></td>
+    </tr>
+    <tr>
+      <th>label.size</th>
+      <td><p>If label_core is TRUE specify text size.
+Default is NULL</p></td>
+    </tr>
+    <tr>
+      <th>label.opacity</th>
+      <td><p>Numeric for ggplot alpha. Defualt is NULL</p></td>
+    </tr>
+    <tr>
+      <th>mean.abund.thres</th>
+      <td><p>If label_core is TRUE specify mean 
+abundance threshold. Default is NULL</p></td>
+    </tr>
+    <tr>
+      <th>mean.prev.thres</th>
+      <td><p>If label_core is TRUE specify mean 
+prevalence threshold. Default is NULL</p></td>
+    </tr>
+    <tr>
+      <th>log.scale</th>
+      <td><p>Plot log10 scale. Default is TRUE
+abundance criteria. Default is NULL</p></td>
+    </tr>
+    <tr>
+      <th>nudge.label</th>
+      <td><p>Argument to pass to ggrepel::geom_text_repel Default is NULL</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments to pass to sample() function.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -171,7 +220,7 @@ and upper and lower confidence interval for each taxa is calculated by random su
  <span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/core.html'>core</a></span>(<span class='kw'>asv_ps</span>,detection = <span class='fl'>0.0001</span>, prevalence = <span class='fl'>0.5</span>)
  <span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='kw'>asv_ps</span>)
  <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2349</span>)
- <span class='kw'>p_v</span> <span class='op'>&lt;-</span> <span class='fu'>plot_abund_prev</span>(<span class='kw'>asv_ps</span>) <span class='op'>+</span> 
+ <span class='kw'>p_v</span> <span class='op'>&lt;-</span> <span class='fu'>plot_abund_prev</span>(<span class='kw'>asv_ps</span>, size = <span class='fl'>20</span>, replace = <span class='fl'>TRUE</span>) <span class='op'>+</span> 
       <span class='fu'>geom_vline</span>(xintercept = <span class='fl'>0.75</span>, lty=<span class='st'>"dashed"</span>, alpha=<span class='fl'>0.7</span>) <span class='op'>+</span> 
       <span class='fu'>geom_hline</span>(yintercept = <span class='fl'>0.01</span>,lty=<span class='st'>"dashed"</span>, alpha=<span class='fl'>0.7</span>) <span class='op'>+</span>
       <span class='fu'>scale_color_brewer</span>(palette = <span class='st'>"Paired"</span>)

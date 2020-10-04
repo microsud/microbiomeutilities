@@ -9,7 +9,16 @@ plot_abund_prev(
   lower.conf = 0.025,
   upper.conf = 0.975,
   bs.iter = 99,
-  color = "Phylum"
+  color = "Phylum",
+  point.opacity = 0.5,
+  label.core = FALSE,
+  label.size = NULL,
+  label.opacity = NULL,
+  mean.abund.thres = NULL,
+  mean.prev.thres = NULL,
+  log.scale = TRUE,
+  nudge.label = NULL,
+  ...
 )
 }
 \arguments{
@@ -22,6 +31,28 @@ plot_abund_prev(
 \item{bs.iter}{Number of bootstrap iterations =99}
 
 \item{color}{taxa level to color. preferablly at phylum}
+
+\item{point.opacity}{Numeric for ggplot alpha. Defualt is 0.5}
+
+\item{label.core}{Logical default is FALSE}
+
+\item{label.size}{If label_core is TRUE specify text size.
+Default is NULL}
+
+\item{label.opacity}{Numeric for ggplot alpha. Defualt is NULL}
+
+\item{mean.abund.thres}{If label_core is TRUE specify mean 
+abundance threshold. Default is NULL}
+
+\item{mean.prev.thres}{If label_core is TRUE specify mean 
+prevalence threshold. Default is NULL}
+
+\item{log.scale}{Plot log10 scale. Default is TRUE
+abundance criteria. Default is NULL}
+
+\item{nudge.label}{Argument to pass to ggrepel::geom_text_repel Default is NULL}
+
+\item{...}{Arguments to pass to sample() function.}
 }
 \value{
 A \code{\link{ggplot}} plot object.
@@ -42,7 +73,7 @@ Check if there are spurious OTUs/ASVs.
  asv_ps <- core(asv_ps,detection = 0.0001, prevalence = 0.5)
  asv_ps <- format_to_besthit(asv_ps)
  set.seed(2349)
- p_v <- plot_abund_prev(asv_ps) + 
+ p_v <- plot_abund_prev(asv_ps, size = 20, replace = TRUE) + 
       geom_vline(xintercept = 0.75, lty="dashed", alpha=0.7) + 
       geom_hline(yintercept = 0.01,lty="dashed", alpha=0.7) +
       scale_color_brewer(palette = "Paired")

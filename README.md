@@ -63,13 +63,20 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
+Constant development is in process.  
+CHANGES IN VERSION 1.00.02 (2020-10-04)
+  o Version tested with R version 4.0.2 (2020-10-04)       
+  o Added new function `plot_listed_taxa`  
+  o Deprecated `plot_select_taxa`  
+  o Added option for half violin in boxplots     
+  
 CHANGES IN VERSION 1.00.01 (2020-10-03)
-  o Added new function `plot_abund_prev`
-  o Added new function `simple_heatmap`
-  o Added new function `taxa_distribution`
-  o Added a custom theme `theme_biome_utils`
-  o Added gghalves to imports
-  o Fixed `microbiome_pipeline` report
+  o Added new function `plot_abund_prev`  
+  o Added new function `simple_heatmap`  
+  o Added new function `taxa_distribution`    
+  o Added a custom theme `theme_biome_utils`    
+  o Added `gghalves` to imports   
+  o Fixed `microbiome_pipeline` report   
   
 CHANGES IN VERSION 1.00.00 (2020-10-01)
   o Version tested with R version 4.0.2 (2020-06-22)     
@@ -78,8 +85,8 @@ CHANGES IN VERSION 1.00.00 (2020-10-01)
   o Edited `phy_to_ldf` to speed up conversion  
   o Removed `format_phyloseq` function as it is redundant   
   o Speedup `taxa_summary` function  
-  o Free up `pheatmap` options in `plot_taxa_heatmap`  
-  o Updated for more info from print_ps output  
+  o Free up `pheatmap` option in `plot_taxa_heatmap`  
+  o Updated for more info from `print_ps` output  
   o `plot_taxa_boxplot` now returns a faceted plot  
   o Added new function `plot_diversity_stats`  
   o R code styling `styler::tidyverse_style()` 

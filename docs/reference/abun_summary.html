@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Distribution of taxa — taxa_distribution • microbiomeutilities</title>
+<title>Summarize abundance — abun_summary • microbiomeutilities</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Distribution of taxa — taxa_distribution" />
-<meta property="og:description" content="Plots distribution of taxa." />
+<meta property="og:title" content="Summarize abundance — abun_summary" />
+<meta property="og:description" content="Summarize abundance" />
 
 
 
@@ -111,51 +111,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Distribution of taxa</h1>
+    <h1>Summarize abundance</h1>
     <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/pkg_utils.R'><code>R/pkg_utils.R</code></a></small>
-    <div class="hidden name"><code>taxa_distribution.Rd</code></div>
+    <div class="hidden name"><code>abun_summary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plots distribution of taxa.</p>
+    <p>Summarize abundance</p>
     </div>
 
-    <pre class="usage"><span class='fu'>taxa_distribution</span>(
-  <span class='kw'>x</span>,
-  color.level = <span class='st'>"Phylum"</span>,
-  color.taxa = <span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span>(<span class='fl'>12</span>, <span class='st'>"Paired"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>abun_summary</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>color.level</th>
-      <td><p>Taxonomic level to color</p></td>
-    </tr>
-    <tr>
-      <th>color.taxa</th>
-      <td><p>vector of colors specified by user 
-Default is brewer.pal(12,"Paired")</p></td>
-    </tr>
-    <tr>
-      <th><code>phyloseq-class</code></th>
-      <td><p>object</p></td>
+      <th>x</th>
+      <td><p><code>phyloseq-class</code> object</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>ggplot2 object</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
-<span class='kw'>pseq</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>taxa_distribution</span>(<span class='kw'>pseq</span>)
-<span class='kw'>p</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Groups with fewer than two data points have been dropped.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 row(s) containing missing values (geom_path).</span></div><div class='img'><img src='taxa_distribution-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

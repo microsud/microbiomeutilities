@@ -190,17 +190,29 @@ Utility plot function for diversity measures calculated by `microbiome` package.
 library(microbiome)
 data("zackular2014")
 ps0 <- zackular2014
-
+mycols <- c("brown3", "steelblue","grey50")
 p <- plot_alpha_diversities(ps0,
                             type = "dominance",
                             index.val = "all",
                             plot.type = "stripchart",
                             variableA = "DiseaseState",
-                            palette = "Paired"
-)
+                            palette = mycols)
 
 print(p)
+
 ```
+
+```{r fig.width=8, fig.height=6, message=FALSE}
+comps <- make_pairs(sample_data(ps0)$DiseaseState)
+
+p <- p + stat_compare_means(
+      comparisons = comps,
+      label = "p.format",
+      tip.length = 0.05,
+      method = "wilcox.test")
+p
+```
+
 
 Alternatively, one can plot one index at a time with pair-wise stats. 
 ```{r message=FALSE, fig.width=4, fig.height=4}
@@ -254,19 +266,22 @@ print(p)
 
 Plot relative abundance of top taxa specified by user. 
 
-```{r,fig.width=7, fig.height=4, eval=TRUE, message=FALSE}
+```{r,fig.width=7, fig.height=3, eval=TRUE, message=FALSE}
 library(microbiomeutilities)
 library(RColorBrewer)
 data("zackular2014")
 ps0 <- zackular2014
+mycols <- c("brown3", "steelblue", "grey50")
 pn <- plot_taxa_boxplot(ps0,
-                        taxonomic.level = "Phylum",
-                        top.otu = 6, 
-                        VariableA = "DiseaseState",
-                        title = "Relative abudance plot", 
-                        color = "Set2",
+                        taxonomic.level = "Family",
+                        top.otu = 3, 
+                        group = "DiseaseState",
+                        add.violin= FALSE,
+                        title = "Top three family", 
                         keep.other = FALSE,
-                        group.order = c("H","CRC","nonCRC"))
+                        group.order = c("H","CRC","nonCRC"),
+                        group.colors = mycols,
+                        dot.size = 1)
 
 print(pn + theme_biome_utils())
 
@@ -283,33 +298,29 @@ data("zackular2014")
 p0 <- zackular2014
 p0.f <- format_to_besthit(p0)
 select.taxa <- c("OTU-d__denovo4:Bacteroides", "OTU-d__denovo2:Bacteroides")
-p <- plot_select_taxa(p0.f, select.taxa, 
-                      "DiseaseState", 
-                      "Paired", 
-                      plot.type = "stripchart",
-                      group.order = c("H","CRC","nonCRC"))
-print(p + theme_biome_utils())
+
+mycols <- c("brown3", "steelblue", "grey50")
+
+p <- plot_listed_taxa(p0.f, select.taxa, 
+                      group= "DiseaseState",
+                      group.order = c("H","CRC","nonCRC"),
+                      group.colors = mycols,
+                      add.violin = TRUE,
+                      violin.opacity = 0.3,
+                      dot.opacity = 0.25,
+                      box.opacity = 0.25,
+                      panel.arrange= "grid")
+print(p + ylab("Relative abundance") + scale_y_continuous(labels = scales::percent))
 
 
 ```
 
 Adding statistical test with `ggpubr::stat_compare_means()`  
 ```{r fig.height=4}
-make_pairs <- function(x) {
-    if (is.character(x) == TRUE) {
-      # message("is char")
-      var.lev <- unique(x)
-    } else if (is.factor(x) == TRUE) {
-      # message("is fac")
-      var.lev <- levels(x)
-    }
-    # make a pairwise list that we want to compare.
-    lev.pairs <- combn(seq_along(var.lev), 2, simplify = FALSE, FUN = function(i) var.lev[i])
-    return(lev.pairs)
-}
 
+# If more than two variables
 comps <- make_pairs(sample_data(p0.f)$DiseaseState)
-
+print(comps)
 p <- p + stat_compare_means(
       comparisons = comps,
       label = "p.format",
@@ -318,6 +329,39 @@ p <- p + stat_compare_means(
 p
 
 ```
+
+Plot top four Genera    
+```{r fig.width=6, fig.height=6, eval=TRUE, message=FALSE}
+library(microbiome)
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+p0.f <- aggregate_taxa(p0, "Genus")
+top_four <- top_taxa(p0.f, 4)
+top_four
+
+mycols <- c("brown3", "steelblue", "grey50")
+
+p <- plot_listed_taxa(p0.f, top_four, 
+                      group= "DiseaseState",
+                      group.order = c("H","CRC","nonCRC"),
+                      group.colors = mycols,
+                      add.violin = TRUE,
+                      violin.opacity = 0.3,
+                      dot.opacity = 0.25,
+                      box.opacity = 0.25,
+                      panel.arrange= "wrap")
+
+comps <- make_pairs(sample_data(p0.f)$DiseaseState)
+p <- p + stat_compare_means(
+      comparisons = comps,
+      label = "p.format",
+      tip.length = 0.05,
+      method = "wilcox.test")
+
+print(p + ylab("Relative abundance") + scale_y_continuous(labels = scales::percent))
+```
+
 
 ## Abundance-Prevalence relationship  
 Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random subsampling.  
@@ -335,14 +379,23 @@ asv_ps <- core(asv_ps,detection = 0.0001, prevalence = 0.50) # reduce size for e
 asv_ps <- format_to_besthit(asv_ps)
 
 set.seed(14285)
-p_v <- plot_abund_prev(asv_ps) + 
+p_v <- plot_abund_prev(asv_ps, 
+                       label.core = TRUE,
+                       color = NULL,
+                       mean.abund.thres = 0.01,
+                       mean.prev.thres = 0.99,
+                       point.opacity = 0.1,
+                       label.size = 3,
+                       label.opacity = 1.0,
+                       nudge.label=-0.15,
+                       bs.iter=9,
+                       size = 20, 
+                       replace = TRUE)  
+p_v <- p_v + 
   geom_vline(xintercept = 0.95, lty="dashed", alpha=0.7) + 
   geom_hline(yintercept = 0.01,lty="dashed", alpha=0.7) +
-  scale_color_brewer(palette = "Paired") 
-p_v + scale_x_log10() + scale_y_log10() + theme_biome_utils()
-#p <- p_v + ggrepel::geom_text_repel(data= subset(selctdf, meanPrev >=0.95) ,
-#                                    aes(meanPrev,MeanAbun,label=Taxa), size=3)
-#p + scale_x_log10() + scale_y_log10()
+  scale_color_brewer(palette = "Dark2")
+p_v
 ```
 
 ## Heatmaps    

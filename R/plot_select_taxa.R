@@ -30,32 +30,18 @@ plot_select_taxa <- function(x, select.taxa, variableA,
                              palette, plot.type,
                              group.order = NULL) {
   x.rel <- x.prun <- x.df <- p.box <- p.vio <- p.strp <- NULL
-
+  .Deprecated("plot_listed_taxa", "The microbiomeutilties::plot_select_taxa function is deprecated.")
   x.rel <- microbiome::transform(x, "compositional")
 
   x.prun <- prune_taxa(select.taxa, x.rel)
 
   x.df <- phy_to_ldf(x.prun, transform.counts = NULL)
   
-  make_pairs <- function(x) {
-    if (is.character(x) == TRUE) {
-      # message("is char")
-      var.lev <- unique(x)
-    } else if (is.factor(x) == TRUE) {
-      # message("is fac")
-      var.lev <- levels(x)
-    }
-    # make a pairwise list that we want to compare.
-    lev.pairs <- combn(seq_along(var.lev), 2, simplify = FALSE, FUN = function(i) var.lev[i])
-    return(lev.pairs)
-  }
-  
   if (!is.null(group.order)) {
     x.df[, variableA] <- factor(x.df[, variableA],
                               levels = group.order
     )
   }
-  
   
   if (plot.type == "boxplot") {
     p <- ggpubr::ggboxplot(x.df, variableA, "Abundance",
