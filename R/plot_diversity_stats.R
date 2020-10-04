@@ -1,5 +1,5 @@
 #' @title Diversity plot with stats
-#' @param x phyloseq object
+#' @param x \code{\link{phyloseq-class}} object
 #' @param index diversity index. Calculated using microbiome::alpha
 #' @param group Grouping variable to compare
 #' @param group.colors Colors for plotting groups
@@ -18,9 +18,10 @@
 #' p0 <- zackular2014
 #' mycols <- c("brown3", "steelblue", "grey50")
 #' p.m <- plot_diversity_stats(p0, group = "DiseaseState", 
-#' index = "diversity_shannon", group.order = c("H", "CRC", "nonCRC"), 
-#' group.colors = mycols)
-#' p.m
+#'                             index = "diversity_shannon", 
+#'                             group.order = c("H", "CRC", "nonCRC"), 
+#'                             group.colors = mycols)
+#' print(p.m)
 #' @keywords utilities
 #' @export
 plot_diversity_stats <- function(x, index,

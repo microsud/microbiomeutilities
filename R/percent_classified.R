@@ -1,7 +1,7 @@
 #' @title Summarize the percent taxa classification for \code{\link{phyloseq-class}}
 #' @description Summarize the percent taxa classification for \code{\link{phyloseq-class}}.
 #' @param x \code{\link{phyloseq-class}} object
-#' @return table with information on percent OTUs classified.
+#' @return Table with information on percent OTUs classified.
 #' @export
 #' @author Contact: Sudarshan A. Shetty \email{sudarshanshetty9@@gmail.com}
 #' @examples

@@ -17,7 +17,7 @@ plot_diversity_stats(
 )
 }
 \arguments{
-\item{x}{phyloseq object}
+\item{x}{\code{\link{phyloseq-class}} object}
 
 \item{index}{diversity index. Calculated using microbiome::alpha}
 
@@ -46,8 +46,9 @@ data("zackular2014")
 p0 <- zackular2014
 mycols <- c("brown3", "steelblue", "grey50")
 p.m <- plot_diversity_stats(p0, group = "DiseaseState", 
-index = "diversity_shannon", group.order = c("H", "CRC", "nonCRC"), 
-group.colors = mycols)
-p.m
+                            index = "diversity_shannon", 
+                            group.order = c("H", "CRC", "nonCRC"), 
+                            group.colors = mycols)
+print(p.m)
 }
 \keyword{utilities}

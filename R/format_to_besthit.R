@@ -7,7 +7,7 @@
 #'
 #' @param x \code{\link{phyloseq-class}} object
 #' @param prefix Prefered prefix e.g. OTU-d__denovo161:Roseburia or ASV-d__denovo161:Roseburia
-#' @return  \code{\link{phyloseq-class}} object.
+#' @return  \code{\link{phyloseq-class}} object
 #' @export
 #' @examples
 #' \dontrun{

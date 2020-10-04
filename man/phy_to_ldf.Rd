@@ -9,10 +9,12 @@ phy_to_ldf(x, transform.counts)
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
 
-\item{transform.counts}{Data transform to be used in plotting (but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample', 'log10' and 'compositional'. See the \code{\link{transform}} function.}
+\item{transform.counts}{Data transform to be used in plotting 
+(but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample', 
+'log10' and 'compositional'. See the \code{\link{transform}} function}
 }
 \value{
-A data frame in long format with appropriate transfomation if requested.
+A data frame in long format with appropriate transfomation if requested
 }
 \description{
 An alternative to psmelt function from \code{\link{phyloseq-class}} object.

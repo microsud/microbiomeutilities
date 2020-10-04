@@ -27,7 +27,7 @@ aggregate_rare function.
 }
 \examples{
 data(dietswap)
-s <- aggregate_top_taxa(dietswap, top = 3, "Phylum")
+s <- aggregate_top_taxa2(dietswap, top = 3, "Phylum")
 }
 \references{
 See citation('microbiome')

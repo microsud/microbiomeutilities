@@ -18,7 +18,7 @@ CHANGES IN VERSION 1.00.00 (2020-10-01)
   o Free up pheatmap option in plot_taxa_heatmap  
   o Updated for more info from print_ps output  
   o plot_taxa_boxplot now returns a faceted plot  
-  o Added new function diversity_plot_stats  
+  o Added new function plot_diversity_stats  
   o R code styling styler::tidyverse_style() 
   
 CHANGES IN VERSION 0.99.02 (2020-02-02)

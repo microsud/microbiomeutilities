@@ -10,7 +10,7 @@ percent_classified(x)
 \item{x}{\code{\link{phyloseq-class}} object}
 }
 \value{
-table with information on percent OTUs classified.
+Table with information on percent OTUs classified.
 }
 \description{
 Summarize the percent taxa classification for \code{\link{phyloseq-class}}.
