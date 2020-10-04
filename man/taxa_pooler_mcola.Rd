@@ -7,7 +7,7 @@
 taxa_pooler_mcola(x)
 }
 \arguments{
-\item{x}{phyloseq object.}
+\item{x}{\code{\link{phyloseq-class}} object}
 }
 \description{
 Creates a list of dataframes at different taxonomic levels.

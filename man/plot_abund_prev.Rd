@@ -13,7 +13,7 @@ plot_abund_prev(
 )
 }
 \arguments{
-\item{x}{\code{\link{phyloseq-class}} object.}
+\item{x}{\code{\link{phyloseq-class}} object}
 
 \item{lower.conf}{Lower confidence interval =0.025}
 

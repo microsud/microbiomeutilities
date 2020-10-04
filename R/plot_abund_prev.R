@@ -2,7 +2,7 @@
 #' @description Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence,
 #' and upper and lower confidence interval for each taxa is calculated by random subsampling.
 #' @details Check if there are spurious OTUs/ASVs.
-#' @param x \code{\link{phyloseq-class}} object.
+#' @param x \code{\link{phyloseq-class}} object
 #' @param lower.conf Lower confidence interval =0.025 
 #' @param upper.conf Upper confidence interval =0.975
 #' @param bs.iter Number of bootstrap iterations =99

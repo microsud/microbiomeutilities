@@ -137,7 +137,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>phyloseq object</p></td>
+      <td><p><code>phyloseq-class</code> object</p></td>
     </tr>
     <tr>
       <th>index</th>
@@ -182,9 +182,10 @@ E.g. c("H","CRC","nonCRC")</p></td>
 <span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
 <span class='kw'>mycols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>, <span class='st'>"grey50"</span>)
 <span class='kw'>p.m</span> <span class='op'>&lt;-</span> <span class='fu'>plot_diversity_stats</span>(<span class='kw'>p0</span>, group = <span class='st'>"DiseaseState"</span>, 
-index = <span class='st'>"diversity_shannon"</span>, group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span>), 
-group.colors = <span class='kw'>mycols</span>)
-</div><div class='output co'>#&gt; <span class='message'>Observed richness</span></div><div class='output co'>#&gt; <span class='message'>Other forms of richness</span></div><div class='output co'>#&gt; <span class='message'>Diversity</span></div><div class='output co'>#&gt; <span class='message'>Evenness</span></div><div class='output co'>#&gt; <span class='message'>Dominance</span></div><div class='output co'>#&gt; <span class='message'>Rarity</span></div><div class='input'><span class='kw'>p.m</span>
+                            index = <span class='st'>"diversity_shannon"</span>, 
+                            group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span>), 
+                            group.colors = <span class='kw'>mycols</span>)
+</div><div class='output co'>#&gt; <span class='message'>Observed richness</span></div><div class='output co'>#&gt; <span class='message'>Other forms of richness</span></div><div class='output co'>#&gt; <span class='message'>Diversity</span></div><div class='output co'>#&gt; <span class='message'>Evenness</span></div><div class='output co'>#&gt; <span class='message'>Dominance</span></div><div class='output co'>#&gt; <span class='message'>Rarity</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>p.m</span>)
 </div><div class='img'><img src='plot_diversity_stats-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

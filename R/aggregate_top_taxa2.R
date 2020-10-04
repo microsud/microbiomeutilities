@@ -10,7 +10,7 @@
 #' @return \code{\link{phyloseq-class}} object
 #' @examples
 #' data(dietswap)
-#' s <- aggregate_top_taxa(dietswap, top = 3, "Phylum")
+#' s <- aggregate_top_taxa2(dietswap, top = 3, "Phylum")
 #' @export
 #' @references See citation('microbiome')
 #' @author Contact: Leo Lahti \email{microbiome-admin@@googlegroups.com}

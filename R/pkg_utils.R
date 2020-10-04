@@ -27,7 +27,7 @@ theme_biome_utils <- function(){
 
 #' @title Pool Taxa
 #' @description Creates a list of dataframes at different taxonomic levels.
-#' @param x phyloseq object.
+#' @param x \code{\link{phyloseq-class}} object
 #' @examples 
 #' # library(phyloseq)
 #' # library(microbiome)
@@ -58,11 +58,11 @@ taxa_pooler_mcola <- function(x) {
 
 #' @title Distribution of taxa
 #' @description Plots distribution of taxa.
-#' @param x Phyloseq object.
-#' @param color.level Taxonomic level to color.
-#' @param color.taxa vector of colors specified by user. 
+#' @param \code{\link{phyloseq-class}} object
+#' @param color.level Taxonomic level to color
+#' @param color.taxa vector of colors specified by user 
 #' Default is brewer.pal(12,"Paired")
-#' @return ggplot2 object.
+#' @return ggplot2 object
 #' @importFrom RColorBrewer brewer.pal
 #' @examples  
 #' library(microbiomeutilities)

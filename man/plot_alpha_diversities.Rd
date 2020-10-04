@@ -16,24 +16,24 @@ plot_alpha_diversities(
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object.}
 
-\item{type}{Either alpha (Diversity Index) or dominance    (Dominance Index) or evenness    (Evenness Index).}
+\item{type}{Either alpha (Diversity Index) or dominance    (Dominance Index) or evenness    (Evenness Index)}
 
-\item{index.val}{see global function in \code{\link{microbiome}} package.}
+\item{index.val}{see global function in \code{\link{microbiome}} package}
 
 \item{plot.type}{Three optons c("stripchart", "boxplot", "violin")}
 
 \item{variableA}{Variable of interested to be checked. This will also be used to color the plot}
 
-\item{palette}{Any of the \code{\link{RColorBrewer}} plettes.}
+\item{palette}{Any of the \code{\link{RColorBrewer}} plettes}
 }
 \value{
-\code{\link{ggplot}} object. This can be further modified using ggpubr.
+\code{\link{ggplot}} object. This can be further modified using ggpubr
 }
 \description{
 Utility plot function for diversity measures calcualted by \code{\link{microbiome}} package.
 }
 \details{
-Uses the \code{\link{microbiome}} package global function to calcualte diversities and then returns
+Uses the \code{\link{microbiome}} package global function to calculate diversities and then returns
 a plot.
 }
 \examples{

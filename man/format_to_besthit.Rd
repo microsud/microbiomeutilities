@@ -12,7 +12,7 @@ format_to_besthit(x, prefix = "OTU-")
 \item{prefix}{Prefered prefix e.g. OTU-d__denovo161:Roseburia or ASV-d__denovo161:Roseburia}
 }
 \value{
-\code{\link{phyloseq-class}} object.
+\code{\link{phyloseq-class}} object
 }
 \description{
 Format the phyloseq object to add the best taxonomy in phyloseq object (tax_table and otu_table).

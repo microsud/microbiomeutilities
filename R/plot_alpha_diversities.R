@@ -1,14 +1,14 @@
 #' @title Creat a plot for alpha diversities calculated using the \code{\link{microbiome}} package
 #' @description Utility plot function for diversity measures calcualted by \code{\link{microbiome}} package.
-#' @details Uses the \code{\link{microbiome}} package global function to calcualte diversities and then returns
+#' @details Uses the \code{\link{microbiome}} package global function to calculate diversities and then returns
 #' a plot.
 #' @param x \code{\link{phyloseq-class}} object.
-#' @param type Either alpha (Diversity Index) or dominance	(Dominance Index) or evenness	(Evenness Index).
-#' @param index.val see global function in \code{\link{microbiome}} package.
+#' @param type Either alpha (Diversity Index) or dominance	(Dominance Index) or evenness	(Evenness Index)
+#' @param index.val see global function in \code{\link{microbiome}} package
 #' @param variableA Variable of interested to be checked. This will also be used to color the plot
-#' @param palette Any of the \code{\link{RColorBrewer}} plettes.
+#' @param palette Any of the \code{\link{RColorBrewer}} plettes
 #' @param plot.type Three optons c("stripchart", "boxplot", "violin")
-#' @return  \code{\link{ggplot}} object. This can be further modified using ggpubr.
+#' @return  \code{\link{ggplot}} object. This can be further modified using ggpubr
 #' @importFrom ggpubr ggstripchart ggboxplot ggviolin facet
 #' @export
 #' @examples

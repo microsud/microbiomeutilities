@@ -1,17 +1,13 @@
 
-<br> 
 
 [![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)   
 
-<br>  
 
 # About  
 The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package.   
 
 [Package website and online documentation](https://microsud.github.io/microbiomeutilities/)  
  
-Example output of the `microbiome_pipeline`: [here](https://microsud.github.io/microbiomeutilities/index.html).  
-
 The package provides access to a subset of studies included in the [MicrobiomeHD](https://zenodo.org/record/840333#.WuYuDoiFM2w) database from Duvallet et al 2017: [Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications](https://www.nature.com/articles/s41467-017-01973-8). These datasets are converted to phyloseq objects and can be directly used in R environment.  
 
 ## Install microbiomeutilities    
@@ -21,7 +17,7 @@ install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 
 ```  
-**Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2018, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.00).     
+**Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2020, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.01).     
 The microbiome R package relies on the independently developed   
 [phyloseq](https://github.com/joey711/phyloseq) package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.  
 [ggplot2](http://ggplot2.org/) H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.  
@@ -35,25 +31,11 @@ URL: [http://microbiome.github.com/microbiome](http://microbiome.github.com/micr
 * [Open and reproducible spring school 2018](https://mibwurrepo.github.io/Microbial-bioinformatics-introductory-course-Material-2018/introduction.html)   
 * [Tools Microbiome Anlaysis](https://microsud.github.io/Tools-Microbiome-Analysis/)   
  
-### More useful resources:  
-1. [Ben J. Callahan and Colleagues: Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses](https://f1000research.com/articles/5-1492/v2).   
-2. [Comeau AM and Colleagues: Microbiome Helper: a Custom and Streamlined Workflow for Microbiome Research](http://msystems.asm.org/content/2/1/e00127-16)  
-3.	MicrobiomeHD	[A standardized database of human gut microbiome studies in health and disease *Case-Control*](http://www.biorxiv.org/content/early/2017/05/08/134031)   
-4.	Rhea	[A pipeline with modular R scripts](https://peerj.com/articles/2836/)  
-5.	Phyloseq	[Import, share, and analyze microbiome census data using R](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217) 
-
 ### About the Author   
 * [Web CV](https://microsud.github.io/gutmicrobe_webpage.io/)  
 * [twitter](https://twitter.com/gutmicrobe)   
 * [googlescholar](https://scholar.google.nl/citations?hl=en&user=Vahc6LUAAAAJ&view_op=list_works&sortby=pubdate)  
 * [ORCID ID: 0000-0001-7280-9915](http://orcid.org/0000-0001-7280-9915)   
-
-### References:
-1. Callahan, B. J., McMurdie, P. J. & Holmes, S. P. (2017). Exact sequence variants should replace operational taxonomic units in marker gene data analysis. bioRxiv, 113597.  
-2. Callahan, B. J., McMurdie, P. J., Rosen, M. J., Han, A. W., Johnson, A. J. A. & Holmes, S. P. (2016). DADA2: high-resolution sample inference from Illumina amplicon data. Nature methods 13, 581-583.  
-3. Caporaso, J. G., Kuczynski, J., Stombaugh, J., Bittinger, K., Bushman, F. D., Costello, E. K., Fierer, N., Peña, A. G., Goodrich, J. K. & Gordon, J. I. (2010). QIIME allows analysis of high-throughput community sequencing data. Nature methods 7, 335-336.  
-4. Schloss, P. D., Westcott, S. L., Ryabin, T., Hall, J. R., Hartmann, M., Hollister, E. B., Lesniewski, R. A., Oakley, B. B., Parks, D. H. & Robinson, C. J. (2009). Introducing mothur: open-source, platform-independent, community-supported software for describing and comparing microbial communities. Applied and environmental microbiology 75, 7537-7541.  
-Team, R. C. (2000). R language definition. Vienna, Austria: R foundation for statistical computing.  
 
 ### Datasets from:  
 * Duvallet, Claire, et al. "Meta-analysis of gut microbiome studies identifies disease-specific and shared responses." Nature communications 8.1 (2017): 1784.   
@@ -78,18 +60,40 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 * Scheperjans, F. et al Gut microbiota are related to parkinson’s disease and clinical phenotype. Mov. Disord. 30, 350–358 (2014).
 
 **NOTE:**  
-The aim of this package is not to replace any of the other tools mentioned on this site. Instead this package is useful for a quick and (not so) dirty analysis of the OTU tables/biom files generated by tools such as QIIME (the newer QIIME2) (Caporaso, Kuczynski, Stombaugh et al., 2010), Mothur (Schloss, Westcott, Ryabin et al., 2009), DADA2 (Callahan, McMurdie, Rosen et al., 2016). Using the _HTML_ report as a reference for more thorough analysis.  
+The aim of this package is not to replace any of the other tools mentioned on this site.  
+## Change log  
 
-CHANGES IN VERSION 1.00.00 (2020-10-01)  
+CHANGES IN VERSION 1.00.01 (2020-10-03)
+  o Added new function `plot_abund_prev`
+  o Added new function `simple_heatmap`
+  o Added new function `taxa_distribution`
+  o Added a custom theme `theme_biome_utils`
+  o Added gghalves to imports
+  o Fixed `microbiome_pipeline` report
+  
+CHANGES IN VERSION 1.00.00 (2020-10-01)
   o Version tested with R version 4.0.2 (2020-06-22)     
   o Fix typos in documentation  
   o Add prefix option to `format_to_besthit`  
   o Edited `phy_to_ldf` to speed up conversion  
   o Removed `format_phyloseq` function as it is redundant   
   o Speedup `taxa_summary` function  
-  o Free up `pheatmap` option in `plot_taxa_heatmap`  
-  o Updated for more info from `print_ps` output  
+  o Free up `pheatmap` options in `plot_taxa_heatmap`  
+  o Updated for more info from print_ps output  
   o `plot_taxa_boxplot` now returns a faceted plot  
   o Added new function `plot_diversity_stats`  
   o R code styling `styler::tidyverse_style()` 
   
+### References:
+1. Callahan, B. J., McMurdie, P. J. & Holmes, S. P. (2017). Exact sequence variants should replace operational taxonomic units in marker gene data analysis. bioRxiv, 113597.  
+2. Callahan, B. J., McMurdie, P. J., Rosen, M. J., Han, A. W., Johnson, A. J. A. & Holmes, S. P. (2016). DADA2: high-resolution sample inference from Illumina amplicon data. Nature methods 13, 581-583.  
+3. Caporaso, J. G., Kuczynski, J., Stombaugh, J., Bittinger, K., Bushman, F. D., Costello, E. K., Fierer, N., Peña, A. G., Goodrich, J. K. & Gordon, J. I. (2010). QIIME allows analysis of high-throughput community sequencing data. Nature methods 7, 335-336.  
+4. Schloss, P. D., Westcott, S. L., Ryabin, T., Hall, J. R., Hartmann, M., Hollister, E. B., Lesniewski, R. A., Oakley, B. B., Parks, D. H. & Robinson, C. J. (2009). Introducing mothur: open-source, platform-independent, community-supported software for describing and comparing microbial communities. Applied and environmental microbiology 75, 7537-7541.  
+Team, R. C. (2000). R language definition. Vienna, Austria: R foundation for statistical computing.  
+ 
+### More useful resources:  
+1. [Ben J. Callahan and Colleagues: Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses](https://f1000research.com/articles/5-1492/v2).   
+2. [Comeau AM and Colleagues: Microbiome Helper: a Custom and Streamlined Workflow for Microbiome Research](http://msystems.asm.org/content/2/1/e00127-16)  
+3.	MicrobiomeHD	[A standardized database of human gut microbiome studies in health and disease *Case-Control*](http://www.biorxiv.org/content/early/2017/05/08/134031)   
+4.	Rhea	[A pipeline with modular R scripts](https://peerj.com/articles/2836/)  
+5.	Phyloseq	[Import, share, and analyze microbiome census data using R](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217) 
