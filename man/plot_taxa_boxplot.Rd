@@ -9,10 +9,15 @@ plot_taxa_boxplot(
   taxonomic.level,
   top.otu,
   keep.other = FALSE,
-  VariableA,
+  group,
   title,
-  color = NULL,
-  group.order = NULL
+  group.colors = NULL,
+  group.order = NULL,
+  add.violin = TRUE,
+  violin.opacity = 0.25,
+  box.opacity = 0.25,
+  dot.opacity = 0.25,
+  dot.size = 2
 )
 }
 \arguments{
@@ -24,13 +29,23 @@ plot_taxa_boxplot(
 
 \item{keep.other}{TRUE or FALSE. Default is FALSE. This will not plot taxa group as Other}
 
-\item{VariableA}{Specify main variable of interest. This should be one of the variables in sample_variables(x).}
+\item{group}{Specify main variable of interest. This should be one of the variables in sample_variables(x).}
 
 \item{title}{title for the plot}
 
-\item{color}{any of the palette supported by ggpubr/RColorBrewer packages or  user specified as c("red", "blue").}
+\item{group.colors}{Colors for plotting groups}
 
 \item{group.order}{Default is NULL. a list specifing order of x-axis. E.g. c("H","CRC","nonCRC")}
+
+\item{add.violin}{Loical. If half violoin to the added. Default=TRUE}
+
+\item{violin.opacity}{If add.violin=TRUE, opacity for violin.}
+
+\item{box.opacity}{For ggplot alpha to determine opacity for box}
+
+\item{dot.opacity}{For ggplot alpha to determine opacity for points}
+
+\item{dot.size}{For ggplot alpha to determine size for points}
 }
 \value{
 A \code{\link{ggplot}} plot object.
@@ -44,13 +59,17 @@ Plot taxon abundance for samples.
 library(microbiomeutilities)
 library(RColorBrewer)
 data("zackular2014")
-ps1 <- zackular2014
-pn <- plot_taxa_boxplot(ps1,
-  taxonomic.level = "Phylum",
-  top.otu = 3, VariableA = "DiseaseState",
-  title = "Rel plot", color = "Set2"
-)
-print(pn)
+ps0 <- zackular2014
+mycols <- c("brown3", "steelblue", "grey50")
+pn <- plot_taxa_boxplot(ps0,
+                        taxonomic.level = "Phylum",
+                        top.otu = 6, 
+                        group = "DiseaseState",
+                        title = "Relative abudance plot",
+                        keep.other = FALSE,
+                        group.order = c("H","CRC","nonCRC"),
+                        group.colors = mycols)
+print(pn + theme_biome_utils())
 }
 
 }

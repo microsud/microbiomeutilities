@@ -90,3 +90,57 @@ taxa_distribution <- function(x, color.level="Phylum",
   return(tax_plot1)
 }
 
+#' @title Summarize abundance
+#' @param x \code{\link{phyloseq-class}} object
+#' @keywords utilties
+#' 
+abun_summary <- function(x){
+  Max.Rel.Ab <- Mean.Rel.Ab <- MeanAbun <- Median.Rel.Ab <- Std.dev <- Taxa <- NULL
+  otudf2 <- as.data.frame(abundances(x))
+  
+  output=NULL
+  for(j in 1:nrow(otudf2)){
+    x2=as.numeric(otudf2[j,])
+    mx.rel=max(x2)
+    mean.rel=mean(x2)
+    med.rel=median(x2)
+    std.dev=sd(x2)
+    
+    output=rbind(output,c(row.names(otudf2)[j], 
+                          as.numeric(mx.rel), 
+                          as.numeric(mean.rel),
+                          as.numeric(med.rel), 
+                          as.numeric(std.dev)))
+  }
+  
+  #head(output)
+  outputdf <- as.data.frame(output, stringsAsFactors = F)
+  colnames(outputdf) <- c("Taxa", "Max.Rel.Ab", "Mean.Rel.Ab", "Median.Rel.Ab", "Std.dev")
+  outputdf <- outputdf %>% 
+    mutate_at(vars(Max.Rel.Ab, Mean.Rel.Ab, Median.Rel.Ab, Std.dev ), as.numeric)
+}
+
+
+#' @title Make pairs
+#' @description Creates a combination of variables
+#' for use with ggpubr::stat_compare_means.
+#' @param x list of vector to compare
+#' @examples 
+#' # library(microbiomeutilities)
+#' # data("zackular2014")
+#' # pseq <- zackular2014
+#' # comps <- make_pairs(meta(pseq)$DiseaseState)
+#' @keywords utilities
+#' @export
+make_pairs <- function(x) {
+  if (is.character(x) == TRUE) {
+    # message("is char")
+    var.lev <- unique(x)
+  } else if (is.factor(x) == TRUE) {
+    # message("is fac")
+    var.lev <- levels(x)
+  }
+  # make a pairwise list that we want to compare.
+  lev.pairs <- combn(seq_along(var.lev), 2, simplify = FALSE, FUN = function(i) var.lev[i])
+  return(lev.pairs)
+}
