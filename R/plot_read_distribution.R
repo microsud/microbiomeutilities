@@ -12,7 +12,7 @@
 #' ps0 <- zackular2014
 #' p <- plot_read_distribution(ps0, groups = "DiseaseState", plot.type = "density")
 #' print(p)
-#' @keywords utilities
+#' @keywords visualization utilities
 
 plot_read_distribution <- function(x, groups, plot.type = c(
                                      "density",

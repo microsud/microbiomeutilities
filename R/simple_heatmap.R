@@ -34,14 +34,14 @@
 #'                    scale.color = "log10",
 #'                    na.fill = "white",
 #'                    color.fill = NULL,
-#'                    taxa.arrange=NULL,
+#'                    taxa.arrange=TRUE,
 #'                    remove.other=TRUE,
 #'                    panel.arrange="wrap",
 #'                    ncol=2,
 #'                    nrow=2)
 #'
 #' print(p)
-#' @keywords utilities
+#' @keywords visualization
 simple_heatmap <- function(x, group.facet = "DiseaseState",
                            group.order = c("H", "CRC", "nonCRC"),
                            abund.thres = 0.01,
@@ -50,7 +50,7 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
                            scale.color = "log10",
                            na.fill = "white",
                            color.fill = NULL,
-                           taxa.arrange=NULL,
+                           taxa.arrange=TRUE,
                            panel.arrange=NULL,
                            remove.other=TRUE,
                            ncol=NULL,
@@ -59,17 +59,17 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
   ps0.gen <- ps_df <- sum.ab <- ord.tx <- NULL
   vec_colors <- p.heat <- Abundance <- NULL
   
+  tax_table(x)[,colnames(tax_table(x))] <- 
+    gsub(tax_table(x)[,colnames(tax_table(x))],
+         pattern="[a-z]__",replacement="")
+  
+  tax_table(x)[is.na(tax_table(x)[,level]),level] <- "Other"
+  tax_table(x)[tax_table(x)[,level]=="",level] <- "Other"
+  
   ps0.gen <- aggregate_rare(x, 
                             detection = abund.thres, 
                             prevalence = prev.thres, 
                             level = level)
-  
-  tax_table(ps0.gen)[,colnames(tax_table(ps0.gen))] <- 
-    gsub(tax_table(ps0.gen)[,colnames(tax_table(ps0.gen))],
-         pattern="[a-z]__",replacement="")
-  
-  tax_table(ps0.gen)[is.na(tax_table(ps0.gen)[,level]),level] <- "Other"
-  tax_table(ps0.gen)[tax_table(ps0.gen)[,level]=="",level] <- "Other"
   
   ps_df <- phy_to_ldf(ps0.gen, NULL) 
   if (!is.null(group.order)) {
@@ -80,7 +80,7 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
   
   ps_df$group_plx <- ps_df[,group.facet]
   ps_df$taxa <- ps_df[,level]
-  if (is.null(taxa.arrange)) {
+  if (taxa.arrange== TRUE) {
     sum.ab <- ps_df %>% 
       group_by(taxa) %>% 
       summarise(sum.ab = sum(Abundance)) %>% 
@@ -108,12 +108,8 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
   
   p.heat <- ggplot(ps_df, 
                    aes_string(x = "Sam_rep", y = "taxa")) + 
-    geom_tile(aes(fill = Abundance)) + 
-    theme_bw() +
-    # Make bacterial names italics
-    theme(axis.text.y = element_text(colour = 'black',
-                                     size = 10, 
-                                     face = 'italic')) 
+    geom_tile(aes(fill = Abundance)) 
+  
   if(is.null(panel.arrange)){
     p.heat <- p.heat
   } else if(panel.arrange == "grid"){
@@ -126,22 +122,22 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
   }
   # Make seperate samples based on main varaible 
   p.heat <- p.heat + 
-    ylab("Taxa") + 
-    #Clean the x-axis
-    theme(axis.title.x=element_blank(),
-          axis.text.x=element_blank(),
-          axis.ticks.x=element_blank(),
-          panel.grid = element_blank(),
-          strip.background = element_rect(fill="white")) +
-    # Clean the facet label box
-    theme(legend.key = element_blank(),
-          strip.background = element_rect(colour="black", fill="white"))
+    ylab("Taxa") 
   
   p.heat <- p.heat + scale_fill_gradientn(colours = vec_colors, 
                                           trans = scale.color, 
-                                          na.value = na.fill)
-  p.heat
-  #scale_fill_distiller("Rel. Abundance (log10 + 1)", palette = "RdYlBu") + rremove("x.text")
-  return(p.heat)
+                                          na.value = na.fill) + 
+    #Clean the x-axis
+    theme_bw() +
+    theme(axis.text.y = element_text(colour = 'black',
+                                     size = 10, 
+                                     face = 'italic'),
+          axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          panel.grid = element_blank(),
+          legend.key = element_blank(),
+          strip.background = element_rect(colour="black", fill="white"))
+   return(p.heat)
 }
 

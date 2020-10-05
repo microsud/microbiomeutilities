@@ -81,4 +81,5 @@ Check if there are spurious OTUs/ASVs.
 }
 
 }
-\keyword{utilities}
+\keyword{analysis}
+\keyword{visualization}

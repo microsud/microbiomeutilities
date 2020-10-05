@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.02</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.03</span>
       </span>
     </div>
 
@@ -130,7 +130,7 @@
   scale.color = <span class='st'>"log10"</span>,
   na.fill = <span class='st'>"white"</span>,
   color.fill = <span class='kw'>NULL</span>,
-  taxa.arrange = <span class='kw'>NULL</span>,
+  taxa.arrange = <span class='fl'>TRUE</span>,
   panel.arrange = <span class='kw'>NULL</span>,
   remove.other = <span class='fl'>TRUE</span>,
   ncol = <span class='kw'>NULL</span>,
@@ -211,12 +211,7 @@ and generates a heatmap.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://microbiome.github.io/microbiome'>microbiome</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
-</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
 <span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
 <span class='kw'>p0.rel</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>p0</span>, <span class='st'>"compositional"</span>)
 <span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>simple_heatmap</span>(<span class='kw'>p0.rel</span>, group.facet = <span class='st'>"DiseaseState"</span>,
@@ -227,7 +222,7 @@ and generates a heatmap.</p>
                    scale.color = <span class='st'>"log10"</span>,
                    na.fill = <span class='st'>"white"</span>,
                    color.fill = <span class='kw'>NULL</span>,
-                   taxa.arrange=<span class='kw'>NULL</span>,
+                   taxa.arrange=<span class='fl'>TRUE</span>,
                    remove.other=<span class='fl'>TRUE</span>,
                    panel.arrange=<span class='st'>"wrap"</span>,
                    ncol=<span class='fl'>2</span>,

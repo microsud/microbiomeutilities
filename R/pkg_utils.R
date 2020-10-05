@@ -58,7 +58,7 @@ taxa_pooler_mcola <- function(x) {
 
 #' @title Distribution of taxa
 #' @description Plots distribution of taxa.
-#' @param \code{\link{phyloseq-class}} object
+#' @param x \code{\link{phyloseq-class}} object
 #' @param color.level Taxonomic level to color
 #' @param color.taxa vector of colors specified by user 
 #' Default is brewer.pal(12,"Paired")
@@ -144,3 +144,4 @@ make_pairs <- function(x) {
   lev.pairs <- combn(seq_along(var.lev), 2, simplify = FALSE, FUN = function(i) var.lev[i])
   return(lev.pairs)
 }
+
