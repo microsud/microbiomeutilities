@@ -66,4 +66,4 @@ pseq <- biogeogut
 plot_taxa_composition(pseq, taxonomic.level = "Phylum")
 }
 }
-\keyword{utilities}
+\keyword{visualization}

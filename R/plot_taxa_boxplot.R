@@ -35,7 +35,7 @@
 #' print(pn + theme_biome_utils())
 #' }
 #'
-#' @keywords utilities
+#' @keywords visualization
 
 plot_taxa_boxplot <- function(x, taxonomic.level, 
                               top.otu, 

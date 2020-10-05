@@ -218,6 +218,7 @@ Alternatively, one can plot one index at a time with pair-wise stats.
 ```{r message=FALSE, fig.width=4, fig.height=4}
 
 library(gghalves)
+library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 mycols <- c("brown3", "steelblue","grey50")
@@ -225,7 +226,9 @@ mycols <- c("brown3", "steelblue","grey50")
 p.m <- plot_diversity_stats(p0, group = "DiseaseState", 
                             index = "diversity_shannon", 
                             group.order = c("H", "CRC", "nonCRC"), 
-                            group.colors = mycols)
+                            group.colors = mycols,
+                            label.format="p.format",
+                            stats = TRUE)
 p.m + ylab("Shannon Diversity") + xlab("")
 
 ```
@@ -261,6 +264,19 @@ p <- plot_ordiplot_core(pseq.rel, ord.bray,
 print(p)
 
 ```
+
+
+```{r}
+library(microbiome)
+library(microbiomeutilities)
+library(dplyr)
+data("zackular2014")
+p0 <- zackular2014
+p <- plot_ternary(p0, group="DiseaseState", 
+             abund.thres=0.000001, level= "Class", prev.thres=0.01)
+p
+```
+
 
 ## Plot taxa boxplot  
 
@@ -424,20 +440,23 @@ library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 p0.rel <- transform(p0, "compositional")
+heat.cols <- c("#1d3557","#457b9d","#a8dadc")
 simple_heatmap(p0.rel,
                group.facet = "DiseaseState",
-               group.order = c("H", "CRC", "nonCRC"),
+               group.order = NULL,
                abund.thres = 0.01,
                prev.thres = 0.1,
                level = "Genus",
                scale.color = "log10",
                na.fill = "white",
-               color.fill = NULL,
-               taxa.arrange=NULL,
+               color.fill = heat.cols,
+               taxa.arrange=TRUE,
                remove.other=TRUE,
                panel.arrange="grid",
                ncol=NULL,
                nrow=NULL)
+
+
 ```
 
 ## MicrobiomeHD datasets as phyloseq objects  

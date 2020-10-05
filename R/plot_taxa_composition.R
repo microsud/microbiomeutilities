@@ -29,7 +29,7 @@
 #' pseq <- biogeogut
 #' plot_taxa_composition(pseq, taxonomic.level = "Phylum")
 #' }
-#' @keywords utilities
+#' @keywords visualization
 plot_taxa_composition <- function(x, sample.sort = NULL,
                                   taxonomic.level = "Phylum",
                                   transform = "compositional",

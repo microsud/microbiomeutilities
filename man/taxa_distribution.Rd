@@ -11,12 +11,12 @@ taxa_distribution(
 )
 }
 \arguments{
+\item{x}{\code{\link{phyloseq-class}} object}
+
 \item{color.level}{Taxonomic level to color}
 
 \item{color.taxa}{vector of colors specified by user 
 Default is brewer.pal(12,"Paired")}
-
-\item{\code{\link{phyloseq-class}}}{object}
 }
 \value{
 ggplot2 object

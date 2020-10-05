@@ -51,4 +51,4 @@ heat.sample <- plot_taxa_heatmap(ps0,
 \author{
 Sudarshan A. Shetty (sudarshanshetty9@gmail.com)
 }
-\keyword{utilities}
+\keyword{visualization}

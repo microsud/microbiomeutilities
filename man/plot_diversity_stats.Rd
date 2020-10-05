@@ -13,6 +13,8 @@ plot_diversity_stats(
   box.opacity = 0.25,
   violin.opacity = 0.5,
   group.order = NULL,
+  stats = TRUE,
+  label.format = "p.format",
   ...
 )
 }
@@ -34,6 +36,8 @@ plot_diversity_stats(
 \item{group.order}{Default is NULL. a list specifing order of x-axis. 
 E.g. c("H","CRC","nonCRC")}
 
+\item{stats}{Logical TRUE or FALSE. Calls ggpubr::stat_compare_means.}
+
 \item{...}{params for ggpubr::stat_compare_means}
 }
 \description{
@@ -51,4 +55,5 @@ p.m <- plot_diversity_stats(p0, group = "DiseaseState",
                             group.colors = mycols)
 print(p.m)
 }
-\keyword{utilities}
+\keyword{analysis}
+\keyword{visualization}

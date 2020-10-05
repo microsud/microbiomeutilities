@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.02</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.03</span>
       </span>
     </div>
 
@@ -129,6 +129,8 @@
   box.opacity = <span class='fl'>0.25</span>,
   violin.opacity = <span class='fl'>0.5</span>,
   group.order = <span class='kw'>NULL</span>,
+  stats = <span class='fl'>TRUE</span>,
+  label.format = <span class='st'>"p.format"</span>,
   <span class='kw'>...</span>
 )</pre>
 
@@ -167,6 +169,10 @@
       <th>group.order</th>
       <td><p>Default is NULL. a list specifing order of x-axis. 
 E.g. c("H","CRC","nonCRC")</p></td>
+    </tr>
+    <tr>
+      <th>stats</th>
+      <td><p>Logical TRUE or FALSE. Calls ggpubr::stat_compare_means.</p></td>
     </tr>
     <tr>
       <th>...</th>

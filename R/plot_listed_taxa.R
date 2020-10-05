@@ -34,13 +34,12 @@
 #' group.colors=mycols)
 #' print(p)
 #' }
-#' @keywords utilities
+#' @keywords visualization
 #'
 
 plot_listed_taxa <- function(x, 
                              select.taxa, 
                              group, 
-                             plot.type,
                              group.colors,
                              dot.opacity= 0.25,
                              box.opacity = 0.25,

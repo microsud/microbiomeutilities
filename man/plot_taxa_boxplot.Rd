@@ -73,4 +73,4 @@ print(pn + theme_biome_utils())
 }
 
 }
-\keyword{utilities}
+\keyword{visualization}

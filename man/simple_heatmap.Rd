@@ -84,4 +84,4 @@ p <- simple_heatmap(p0.rel, group.facet = "DiseaseState",
 
 print(p)
 }
-\keyword{utilities}
+\keyword{visualization}

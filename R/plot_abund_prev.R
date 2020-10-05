@@ -40,7 +40,7 @@
 #'  p_v
 #' }
 #'
-#' @keywords utilities
+#' @keywords visualization analysis
 
 plot_abund_prev <- function(x, lower.conf=0.025, 
                             upper.conf=0.975,

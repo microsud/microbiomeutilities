@@ -52,7 +52,8 @@ p <- plot_alpha_diversities(p0,
 print(p)
 }
 \keyword{<-}
+\keyword{analysis}
 \keyword{c("shannon,}
 \keyword{index.val}
 \keyword{simpson")}
-\keyword{utilities}
+\keyword{visualization}

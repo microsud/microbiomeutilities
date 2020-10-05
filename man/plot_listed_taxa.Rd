@@ -8,7 +8,6 @@ plot_listed_taxa(
   x,
   select.taxa,
   group,
-  plot.type,
   group.colors,
   dot.opacity = 0.25,
   box.opacity = 0.25,
@@ -73,4 +72,4 @@ group.colors=mycols)
 print(p)
 }
 }
-\keyword{utilities}
+\keyword{visualization}

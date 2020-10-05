@@ -26,7 +26,7 @@
 #'   heatcolors = brewer.pal(100, "Blues"),
 #'   transformation = "log10"
 #' )
-#' @keywords utilities
+#' @keywords visualization
 plot_taxa_heatmap <- function(x, subset.top, transformation,
                               VariableA, heatcolors = NULL, ...) {
   topOTU <- phyobj1 <- phyobj2 <- otu.mat <- meta.tab <- select.meta <- color.heatmap <- NULL

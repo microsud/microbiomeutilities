@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.02</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.03</span>
       </span>
     </div>
 
@@ -211,12 +211,7 @@ and generates a heatmap.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://microbiome.github.io/microbiome'>microbiome</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
-</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
 <span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
 <span class='kw'>p0.rel</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>p0</span>, <span class='st'>"compositional"</span>)
 <span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>simple_heatmap</span>(<span class='kw'>p0.rel</span>, group.facet = <span class='st'>"DiseaseState"</span>,
@@ -232,9 +227,9 @@ and generates a heatmap.</p>
                    panel.arrange=<span class='st'>"wrap"</span>,
                    ncol=<span class='fl'>2</span>,
                    nrow=<span class='fl'>2</span>)
-</div><div class='output co'>#&gt; <span class='message'>An additonal column Sam_rep with sample names is created for reference purpose</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='message'>An additonal column Sam_rep with sample names is created for reference purpose</span></div><div class='output co'>#&gt; <span class='error'>Error in if (taxa.arrange == TRUE) {    sum.ab &lt;- ps_df %&gt;% group_by(taxa) %&gt;% summarise(sum.ab = sum(Abundance)) %&gt;%         arrange(sum.ab)    ord.tx &lt;- sum.ab$taxa} else {    ord.tx &lt;- taxa.arrange}: argument is of length zero</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>p</span>)
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Transformation introduced infinite values in discrete y-axis</span></div><div class='img'><img src='simple_heatmap-1.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in print(p): object 'p' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

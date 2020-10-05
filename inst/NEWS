@@ -1,5 +1,9 @@
 
 Constant development is in process.  
+CHANGES IN VERSION 1.00.03 (2020-10-04)
+  o Added new function plot_ternary  
+  o Deprecated plot_select_taxa  
+  
 CHANGES IN VERSION 1.00.02 (2020-10-04)
   o Added new function plot_listed_taxa  
   o Deprecated plot_select_taxa  

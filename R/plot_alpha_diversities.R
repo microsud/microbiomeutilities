@@ -25,7 +25,7 @@
 #' )
 #'
 #' print(p)
-#' @keywords utilities
+#' @keywords visualization analysis
 #' index.val <- c("shannon, simpson")
 plot_alpha_diversities <- function(x, type, index.val = "all", plot.type, variableA, palette) {
   x1 <- x
