@@ -60,7 +60,7 @@ plot_tern_otu <- function(x,
   tax_table(p0.mr.cr)[is.na(tax_table(p0.mr.cr)[,level.color]),level.color] <- "Other"
   tax_table(p0.mr.cr)[tax_table(p0.mr.cr)[,level.color]=="",level.color] <- "Other"
   
-  p0.mr <- merge_samples(p0.mr.cr, group = "DiseaseState")
+  p0.mr <- merge_samples(p0.mr.cr, group = group)
   
   df <- phy_to_ldf(p0.mr, NULL)
   

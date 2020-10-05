@@ -34,7 +34,7 @@
 #'                    scale.color = "log10",
 #'                    na.fill = "white",
 #'                    color.fill = NULL,
-#'                    taxa.arrange=NULL,
+#'                    taxa.arrange=TRUE,
 #'                    remove.other=TRUE,
 #'                    panel.arrange="wrap",
 #'                    ncol=2,
@@ -50,7 +50,7 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
                            scale.color = "log10",
                            na.fill = "white",
                            color.fill = NULL,
-                           taxa.arrange=NULL,
+                           taxa.arrange=TRUE,
                            panel.arrange=NULL,
                            remove.other=TRUE,
                            ncol=NULL,
@@ -138,9 +138,6 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
           panel.grid = element_blank(),
           legend.key = element_blank(),
           strip.background = element_rect(colour="black", fill="white"))
-    
-
-  #scale_fill_distiller("Rel. Abundance (log10 + 1)", palette = "RdYlBu") + rremove("x.text")
-  return(p.heat)
+   return(p.heat)
 }
 

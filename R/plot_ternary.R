@@ -69,7 +69,7 @@ plot_ternary <- function(x,
     tax_table(p0.mr.cr)[tax_table(p0.mr.cr)[,level]=="",level] <- "Other"
     #tax_table(p0.mr.cr)[tax_table(p0.mr.cr)[,level]=="",level] <- "Other"
     
-    p0.mr <- merge_samples(p0.mr.cr, group = "DiseaseState")
+    p0.mr <- merge_samples(p0.mr.cr, group = group)
     
     # extract taxonomy 
     taxa_df <- tax_table(p0.mr) %>% 

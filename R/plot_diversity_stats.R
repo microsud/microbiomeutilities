@@ -6,7 +6,8 @@
 #' @param dot.opacity for ggplot alpha to determine opacity for points
 #' @param box.opacity for ggplot alpha to determine opacity for box
 #' @param violin.opacity for ggplot alpha to determine opacity for violin
-#' @param group.order Default is NULL. a list specifing order of x-axis. 
+#' @param group.order Default is NULL. a list specifing order of x-axis.
+#' @param label.format For ggpubr::stat_compare_means "p.signif"
 #' E.g. c("H","CRC","nonCRC")
 #' @param stats Logical TRUE or FALSE. Calls ggpubr::stat_compare_means. 
 #' @param ... params for ggpubr::stat_compare_means

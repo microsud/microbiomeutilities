@@ -33,10 +33,12 @@ plot_diversity_stats(
 
 \item{violin.opacity}{for ggplot alpha to determine opacity for violin}
 
-\item{group.order}{Default is NULL. a list specifing order of x-axis. 
-E.g. c("H","CRC","nonCRC")}
+\item{group.order}{Default is NULL. a list specifing order of x-axis.}
 
 \item{stats}{Logical TRUE or FALSE. Calls ggpubr::stat_compare_means.}
+
+\item{label.format}{For ggpubr::stat_compare_means "p.signif"
+E.g. c("H","CRC","nonCRC")}
 
 \item{...}{params for ggpubr::stat_compare_means}
 }
