@@ -1,5 +1,10 @@
 
 Constant development is in process.  
+
+CHANGES IN VERSION 1.00.04 (2020-10-11)
+  o Added new function plasticity  
+  o modified theme_biome_utils  
+  
 CHANGES IN VERSION 1.00.03 (2020-10-04)
   o Added new function plot_ternary  
   o Deprecated plot_select_taxa  

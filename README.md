@@ -63,9 +63,16 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
-Constant development is in process.  
-CHANGES IN VERSION 1.00.02 (2020-10-04)
-  o Version tested with R version 4.0.2 (2020-10-04)       
+CHANGES IN VERSION 1.00.04 (2020-10-11)   
+  o Added new function plasticity    
+  o modified theme_biome_utils    
+  
+CHANGES IN VERSION 1.00.03 (2020-10-04)   
+  o Added new function plot_ternary    
+  o Deprecated plot_select_taxa    
+  
+CHANGES IN VERSION 1.00.02 (2020-10-04)   
+  o Version tested with R version 4.0.2 (2020-10-04)         
   o Added new function `plot_listed_taxa`  
   o Deprecated `plot_select_taxa`  
   o Added option for half violin in boxplots     

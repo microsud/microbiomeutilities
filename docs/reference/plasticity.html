@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ternary plot OTU — plot_ternary • microbiomeutilities</title>
+<title>Plasticity — plasticity • microbiomeutilities</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Ternary plot OTU — plot_ternary" />
-<meta property="og:description" content="Create a ternary plot ggtern package." />
+<meta property="og:title" content="Plasticity — plasticity" />
+<meta property="og:description" content="Calculated difference in microbiota composition for each individual between 
+two timepoints." />
 
 
 
@@ -111,26 +112,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Ternary plot OTU</h1>
-    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/plot_ternary.R'><code>R/plot_ternary.R</code></a></small>
-    <div class="hidden name"><code>plot_ternary.Rd</code></div>
+    <h1>Plasticity</h1>
+    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/plasticity.R'><code>R/plasticity.R</code></a></small>
+    <div class="hidden name"><code>plasticity.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a ternary plot <code>ggtern</code> package.</p>
+    <p>Calculated difference in microbiota composition for each individual between 
+two timepoints.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_ternary</span>(
-  <span class='kw'>x</span>,
-  abund.thres = <span class='fl'>1e-04</span>,
-  prev.thres = <span class='fl'>0.1</span>,
-  group = <span class='kw'>NULL</span>,
-  level = <span class='st'>"lowest"</span>,
-  level.color = <span class='st'>"Phylum"</span>,
-  dot.size = <span class='fl'>3</span>,
-  dot.opacity = <span class='fl'>0.25</span>,
-  level.palette = <span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span>(<span class='fl'>12</span>, <span class='st'>"Paired"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>plasticity</span>(<span class='kw'>x</span>, dist.method = <span class='st'>"bray"</span>, <span class='kw'>participant.col</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,58 +132,47 @@
       <td><p><code>phyloseq-class</code> object</p></td>
     </tr>
     <tr>
-      <th>abund.thres</th>
-      <td><p>= 0.0001 check <code><a href='https://rdrr.io/pkg/microbiome/man/microbiome-package.html'>microbiome</a></code> package core function
-remove taxa that are dectected at 0.0001 in less than prev.thres of samples</p></td>
+      <th>dist.method</th>
+      <td><p>Any of the methods supported by phyloseq::distance or correlation method cor()</p></td>
     </tr>
     <tr>
-      <th>prev.thres</th>
-      <td><p>= 0.1 check <code><a href='https://rdrr.io/pkg/microbiome/man/microbiome-package.html'>microbiome</a></code> package core function</p></td>
-    </tr>
-    <tr>
-      <th>group</th>
-      <td><p>Grouping variable to compare, for this plot there has to be three 
-groups in the data</p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>= "Genus" Taxonomic level. If OTU/ASV level specify="lowest"
-Does not support phylum level aggregation</p></td>
-    </tr>
-    <tr>
-      <th>level.color</th>
-      <td><p>= "Phylum" Taxonomic level to color</p></td>
-    </tr>
-    <tr>
-      <th>dot.size</th>
-      <td><p>for ggplot alpha to determine size for points</p></td>
-    </tr>
-    <tr>
-      <th>dot.opacity</th>
-      <td><p>for ggplot alpha to determine opacity for points</p></td>
-    </tr>
-    <tr>
-      <th>level.palette</th>
-      <td><p>color for level.color</p></td>
+      <th>participant.col</th>
+      <td><p>Column name with participant IDs</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>ggplot</code> object.</p>
+    <p>plot</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Plots the mean relative abundance of taxa in 3 groups being compared.</p>
+    <p>Using a beta diversity metrics or correlation matrix to identify variability in 
+microbiota of an individual. The code is slight modification from Grembi et. al. see ref below.
+This is useful for instance if one wants to quantiify changes in microbiota before and after 
+a treatment, dietary modulation, antibiotic treatment, etc. The choice of index is important. 
+For example, Bray-Curtis dissimilarity, the higher values mean higher plasticity/variability. 
+On the contrary, higer spearman correlation values mean lower plasticity.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    
+<ul>
+<li><p>Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is 
+correlated with sustained weight loss on a low-carb or low-fat dietary intervention. 
+Sci Rep 10, 1405 (2020).https://www.nature.com/articles/s41598-020-58000-y</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://microbiome.github.io/microbiome'>microbiome</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
-<span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='fu'>plot_ternary</span>(<span class='kw'>p0</span>, group=<span class='st'>"DiseaseState"</span>, 
-abund.thres=<span class='fl'>0.0001</span>, level= <span class='st'>"Genus"</span>, prev.thres=<span class='fl'>0.25</span>)
-</div><div class='output co'>#&gt; <span class='message'>An additonal column Sam_rep with sample names is created for reference purpose</span></div><div class='img'><img src='plot_ternary-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://rpkgs.datanovia.com/ggpubr'>ggpubr</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>peerj32</span>)
+<span class='kw'>pseq</span> <span class='op'>&lt;-</span> <span class='kw'>peerj32</span><span class='op'>$</span><span class='kw'>phyloseq</span>
+<span class='kw'>pseq.rel</span> <span class='op'>&lt;-</span> <span class='kw'>microbiome</span>::<span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>pseq</span>, <span class='st'>"compositional"</span>)
+<span class='kw'>pl</span> <span class='op'>&lt;-</span> <span class='fu'>plasticity</span>(<span class='kw'>pseq.rel</span>, participant.col=<span class='st'>"subject"</span>)
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -1,7 +1,7 @@
 Package: microbiomeutilities
 Type: Package
 Title: microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis
-Version: 1.00.03
+Version: 1.00.04
 Authors@R: c(
     person("Sudarshan", "Shetty", email = "sudarshan.shetty@wur.nl", role = c("aut", "cre")),
     person("Leo", "Lahti", role = "aut"))
@@ -11,12 +11,12 @@ License: BSD_2_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.5.0),
+    R (>= 3.6.0),
     phyloseq,
     microbiome,
-    ggplot2
+    ggplot2,
+    dplyr
 Imports:
-    dplyr,
     reshape2,
     stats,
     tidyr,
@@ -28,7 +28,6 @@ Imports:
     plyr,
     ggpubr,
     RColorBrewer,
-    viridis,
     pheatmap,
     ggrepel,
     tibble,
@@ -37,7 +36,8 @@ Suggests:
     BiocGenerics,
     knitr,
     rmarkdown,	
-    ape
+    ape,
+    viridis
 BugReports: https://github.com/microsud/microbiomeutilities/issues
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
