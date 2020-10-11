@@ -59,34 +59,6 @@ The `print_ps` from `microbiomeutilities` can give additional information.
 print_ps(ps0)
 ```
 
-## Microbiome analysis pipeline  
-
-Function `microbiome_pipeline` generates an `HTML` report with preliminary QC, Alpha Diversity, Ordination and Composition analysis of OTU tables. This function saves all intermediate files incuding figures and phyloseq objects in user specified directory.
-
-```{r, eval=FALSE}
-
-microbiome_pipeline(
-  otufile = "my.biom",
-  mapping = "mymap.csv",
-  taxonomy = NULL,
-  treefilename = "myTree.tre",
-  type = "biom",
-  work_dir = "F:/path/my/input/filefolder",
-  out_dir = "F:/path/to/save/my/files/folder",
-  VariableA = "MC_type1",
-  VariableB = "Region",
-  UnConstOrd = TRUE,
-  heatmap = TRUE,
-  filterCount = 4,
-  filterPrev = 0.01,
-  col.palette = "Paired",
-  filterpseq = TRUE,
-  samsize = NA,
-  projectname = "Mock",
-  author = "Sudarshan"
-)
-```
-
 ## Formatting the Phyloseq Object  
 
 Most commonly it is observed that the taxonomy file has classification until a given taxonomic level.We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.    
@@ -100,12 +72,12 @@ kable(head(tax_table(ps0)))
 
 Some have only g__ of s__ information.  
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 
 data("zackular2014")
 p0 <- zackular2014
 # reduce size for example
-ps0 <- core(ps0, detection = 10, prevalence = 20 / 100)
+ps0 <- core(p0, detection = 10, prevalence = 20 / 100)
 # Add a prefix to taxa labels
 ps0.f2 <- format_to_besthit(ps0, prefix = "MyBug-")
 
@@ -273,7 +245,7 @@ library(dplyr)
 data("zackular2014")
 p0 <- zackular2014
 p <- plot_ternary(p0, group="DiseaseState", 
-             abund.thres=0.000001, level= "Class", prev.thres=0.01)
+             abund.thres=0.000001, level= "Genus", prev.thres=0.01)
 p
 ```
 
@@ -414,6 +386,41 @@ p_v <- p_v +
 p_v
 ```
 
+## Microbiota plasticity  
+
+### Calculate plasticity  
+```{r}
+library(microbiome)
+library(microbiomeutilities)
+library(dplyr)
+library(ggpubr)
+data(peerj32)
+pseq <- peerj32$phyloseq
+pseq.rel <- microbiome::transform(pseq, "compositional")
+pl <- plasticity(pseq.rel, dist.method = "bray", participant.col="subject")
+head(pl)
+```
+
+### Plot plasticity  
+```{r}
+
+ggplot(pl, aes(group_2,bray)) + 
+  geom_boxplot(aes(fill=group_2), 
+               alpha=0.5, 
+               na.rm = TRUE, 
+               width=0.5) +
+  geom_jitter(aes(color=group_2), 
+              alpha=0.5, 
+              size=3, 
+              na.rm = TRUE) +
+  scale_fill_manual(values = c("#457b9d", "#e63946"))+
+  scale_color_manual(values = c("#457b9d", "#e63946"))+
+  stat_compare_means() + 
+  theme_biome_utils()
+
+
+```
+
 ## Heatmaps    
 ### Heatmap using phyloseq and pheatmap  
 Useful for visualisng differences in top otus between sample groups.  
@@ -426,7 +433,7 @@ ps0 <- zackular2014
 plot_taxa_heatmap(ps0,
                   subset.top = 20,
                   VariableA = "DiseaseState",
-                  heatcolors = rev(brewer.pal(6, "Spectral")),
+                  heatcolors = rev(brewer.pal(3, "RdPu")),
                   transformation = "clr",
                   cluster_rows = F,
                   cluster_cols = F,
@@ -440,7 +447,7 @@ library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 p0.rel <- transform(p0, "compositional")
-heat.cols <- c("#1d3557","#457b9d","#a8dadc")
+heat.cols <- c("#a8dadc","#457b9d", "#1d3557")
 simple_heatmap(p0.rel,
                group.facet = "DiseaseState",
                group.order = NULL,
@@ -499,7 +506,7 @@ sessionInfo()
 ## Package requirements  
 
 * Depends:
-+ [R (>= 3.4.1)](https://www.r-project.org/)
++ [R (>= 3.6.0)](https://www.r-project.org/)
 + [phyloseq](https://joey711.github.io/phyloseq/index.html)
 + [ggplot2](http://ggplot2.org/)
 + [microbiome](https://bioconductor.org/packages/devel/bioc/html/microbiome.html)
