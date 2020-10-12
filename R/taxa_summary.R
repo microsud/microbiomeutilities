@@ -50,10 +50,10 @@ taxa_summary <- function(x, level) {
   output <- NULL
   for (j in 1:nrow(otudf2)) {
     x2 <- as.numeric(otudf2[j, ])
-    mx.rel <- max(x2)
-    mean.rel <- mean(x2)
-    med.rel <- median(x2)
-    Std.dev <- sd(x2)
+    mx.rel <- max(x2, na.rm = TRUE)
+    mean.rel <- mean(x2, na.rm = TRUE)
+    med.rel <- median(x2, na.rm = TRUE)
+    Std.dev <- sd(x2, na.rm = TRUE)
 
     output <- rbind(output, c(row.names(otudf2)[j], mx.rel, mean.rel, med.rel, Std.dev))
   }

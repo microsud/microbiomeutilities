@@ -54,7 +54,8 @@ data("zackular2014")
 ps0 <- zackular2014
 ps0
 ```
-The `print_ps` from `microbiomeutilities` can give additional information.  
+
+The `print_ps` from `microbiomeutilities` can give additional information.    
 ```{r}
 print_ps(ps0)
 ```
@@ -249,6 +250,39 @@ p <- plot_ternary(p0, group="DiseaseState",
 p
 ```
 
+## Dominant taxa  
+
+Sometimes, we are interested in identify the most dominant taxa in each sample. We may also wish to check what percent of samples within a given group are these taxa dominating.  
+```{r}
+library(microbiomeutilities)
+library(dplyr)
+data("zackular2014")
+p0 <- zackular2014
+p0.gen <- aggregate_taxa(p0,"Genus")
+x.d <- dominant_taxa(p0,level = "Genus", group="DiseaseState")
+head(x.d$dominant_overview)
+
+```
+As seen in the table above, 50% of the samples in `H` group are dominated by *g__Bacteroides* and so on...
+
+## Get taxa summary   
+This can be used for entire dataset.  
+```{r}
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+tx.sum1 <- taxa_summary(p0, "Phylum")
+
+```
+## Get taxa summary by group(s)  
+For group specific abundances of taxa `get_group_abundances`.    
+```{r}
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+get_group_abundances(p0, level = "Phylum", group="DiseaseState")
+```
+
 
 ## Plot taxa boxplot  
 
@@ -389,6 +423,8 @@ p_v
 ## Microbiota plasticity  
 
 ### Calculate plasticity  
+
+See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. [Sci Rep 10, 1405 (2020).](https://www.nature.com/articles/s41598-020-58000-y)
 ```{r}
 library(microbiome)
 library(microbiomeutilities)
@@ -400,6 +436,8 @@ pseq.rel <- microbiome::transform(pseq, "compositional")
 pl <- plasticity(pseq.rel, dist.method = "bray", participant.col="subject")
 head(pl)
 ```
+
+Alternatively, using correlation methods for `plasticity`, one can check for similarity between technical replicates (2X sequenced same sample) for quality check.  
 
 ### Plot plasticity  
 ```{r}

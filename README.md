@@ -63,9 +63,14 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
+CHANGES IN VERSION 1.00.05 (2020-10-11)  
+  o Added new function `dominant_taxa`  
+  o Added new function `get_group_abundances`    
+  o removed `microbiome_pipeline`   
+  
 CHANGES IN VERSION 1.00.04 (2020-10-11)   
-  o Added new function plasticity    
-  o modified theme_biome_utils    
+  o Added new function `plasticity`    
+  o modified `theme_biome_utils`    
   
 CHANGES IN VERSION 1.00.03 (2020-10-04)   
   o Added new function plot_ternary    

@@ -12,6 +12,7 @@ plot_diversity_with_stats(
   dot.opacity = 0.25,
   box.opacity = 0.25,
   violin.opacity = 0.5,
+  dot.size = 2,
   group.order = NULL,
   ...
 )
@@ -31,8 +32,10 @@ plot_diversity_with_stats(
 
 \item{violin.opacity}{for ggplot alpha to determine opacity for violin}
 
-\item{group.order}{Default is NULL. a list specifing order of x-axis. 
+\item{dot.size}{size of point 
 E.g. c("H","CRC","nonCRC")}
+
+\item{group.order}{Default is NULL. a list specifing order of x-axis.}
 
 \item{...}{params for ggpubr::stat_compare_means}
 }

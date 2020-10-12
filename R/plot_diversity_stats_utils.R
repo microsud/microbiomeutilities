@@ -6,7 +6,8 @@
 #' @param dot.opacity for ggplot alpha to determine opacity for points
 #' @param box.opacity for ggplot alpha to determine opacity for box
 #' @param violin.opacity for ggplot alpha to determine opacity for violin
-#' @param group.order Default is NULL. a list specifing order of x-axis. 
+#' @param group.order Default is NULL. a list specifing order of x-axis.
+#' @param dot.size size of point 
 #' E.g. c("H","CRC","nonCRC")
 #' @param ... params for ggpubr::stat_compare_means
 #' @importFrom ggpubr stat_compare_means rotate_x_text
@@ -18,6 +19,7 @@ plot_diversity_with_stats <- function(x, index,
                                       dot.opacity = 0.25,
                                       box.opacity = 0.25,
                                       violin.opacity = 0.5,
+                                      dot.size = 2,
                                       group.order = NULL, ...) {
   
   # x <- ps.c
@@ -36,7 +38,7 @@ plot_diversity_with_stats <- function(x, index,
                      alpha = violin.opacity, side = "r") +
     geom_point(aes_string(y = index, color = group), 
                position = position_jitter(width = 0.15), 
-               size = 1, alpha = dot.opacity) +
+               size = dot.size, alpha = dot.opacity) +
     geom_boxplot(width = 0.2, outlier.shape = NA, 
                  alpha = box.opacity) +
     guides(fill = FALSE, color = FALSE) +
@@ -72,6 +74,7 @@ plot_diversity_with_stats <- function(x, index,
 #' @param group.colors Colors for plotting groups
 #' @param dot.opacity for ggplot alpha to determine opacity for points
 #' @param box.opacity for ggplot alpha to determine opacity for box
+#' @param dot.size size of point
 #' @param violin.opacity for ggplot alpha to determine opacity for violin
 #' @param group.order Default is NULL. a list specifing order of x-axis. 
 #' E.g. c("H","CRC","nonCRC")
@@ -84,6 +87,7 @@ plot_diversity_without_stats <- function(x, index,
                                          dot.opacity = 0.25,
                                          box.opacity = 0.25,
                                          violin.opacity = 0.5,
+                                         dot.size= 2,
                                          group.order = NULL, ...) {
   
   # x <- ps.c
@@ -102,7 +106,7 @@ plot_diversity_without_stats <- function(x, index,
                      alpha = violin.opacity, side = "r") +
     geom_point(aes_string(y = index, color = group), 
                position = position_jitter(width = 0.15), 
-               size = 1, alpha = dot.opacity) +
+               size = dot.size, alpha = dot.opacity) +
     geom_boxplot(width = 0.2, outlier.shape = NA, 
                  alpha = box.opacity) +
     guides(fill = FALSE, color = FALSE) +
