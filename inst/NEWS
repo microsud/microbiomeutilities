@@ -1,6 +1,10 @@
 
 Constant development is in process.  
-
+CHANGES IN VERSION 1.00.05 (2020-10-11)
+  o Added new function dominant_taxa  
+  o Added new function get_group_abundances  
+  o removed microbiome_pipeline  
+  
 CHANGES IN VERSION 1.00.04 (2020-10-11)
   o Added new function plasticity  
   o modified theme_biome_utils  

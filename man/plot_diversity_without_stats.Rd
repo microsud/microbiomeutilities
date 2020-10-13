@@ -12,6 +12,7 @@ plot_diversity_without_stats(
   dot.opacity = 0.25,
   box.opacity = 0.25,
   violin.opacity = 0.5,
+  dot.size = 2,
   group.order = NULL,
   ...
 )
@@ -30,6 +31,8 @@ plot_diversity_without_stats(
 \item{box.opacity}{for ggplot alpha to determine opacity for box}
 
 \item{violin.opacity}{for ggplot alpha to determine opacity for violin}
+
+\item{dot.size}{size of point}
 
 \item{group.order}{Default is NULL. a list specifing order of x-axis. 
 E.g. c("H","CRC","nonCRC")}

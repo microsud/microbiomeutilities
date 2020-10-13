@@ -1,7 +1,7 @@
-pandoc: 2.7.2
+pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   microbiomeutilities: microbiomeutilities.html
-last_built: 2020-10-10T23:26Z
+last_built: 2020-10-12T23:22Z
 
