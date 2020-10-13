@@ -32,7 +32,7 @@ plot_diversity_with_stats(
 
 \item{violin.opacity}{for ggplot alpha to determine opacity for violin}
 
-\item{dot.size}{size of point 
+\item{dot.size}{size of point
 E.g. c("H","CRC","nonCRC")}
 
 \item{group.order}{Default is NULL. a list specifing order of x-axis.}

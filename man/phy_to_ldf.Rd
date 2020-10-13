@@ -9,8 +9,8 @@ phy_to_ldf(x, transform.counts)
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
 
-\item{transform.counts}{Data transform to be used in plotting 
-(but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample', 
+\item{transform.counts}{Data transform to be used in plotting
+(but not in sample/taxon ordering). The options are 'Z-OTU', 'Z-Sample',
 'log10' and 'compositional'. See the \code{\link{transform}} function}
 }
 \value{

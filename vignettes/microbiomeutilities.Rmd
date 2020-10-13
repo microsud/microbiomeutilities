@@ -14,9 +14,8 @@ comment = "#>"
 )
 ```
 
-# microbiomeutilties R package  
 
-The microbiomeutilities R package is mainly a wrapper tool with diverse functions for data handling and visualisation. 
+The `microbiomeutilities` R package is mainly a wrapper tool with diverse functions for data handling and visualization. 
 
 ## Install  
 
@@ -109,7 +108,7 @@ percent_classified(ps0)
 
 Useful for QC purposes. Check for siatribution of sequencing depth.     
 
-```{r, eval=TRUE}
+```{r, eval=TRUE, fig.height=3, fig.width=5}
 data("zackular2014")
 p0 <- zackular2014
 p <- plot_read_distribution(p0, groups = "DiseaseState", 
@@ -138,17 +137,18 @@ kable(head(pseq_df))
 A quick check to see how different taxa are distributed in your data.  
 ```{r message=FALSE, fig.height=6, fig.width=8}
 library(microbiomeutilities)
+library(RColorBrewer)
 library(ggpubr)
 data("zackular2014")
 pseq <- zackular2014
 
 # check healthy
 health_ps <- subset_samples(pseq, DiseaseState=="H")
-p_hc <- taxa_distribution(health_ps)
+p_hc <- taxa_distribution(health_ps) + theme_biome_utils()
 
 # check CRC
 crc_ps <- subset_samples(pseq, DiseaseState=="CRC")
-p_crc <- taxa_distribution(crc_ps)
+p_crc <- taxa_distribution(crc_ps) + theme_biome_utils()
 ggarrange(p_hc, p_crc, nrow=2, ncol=1)
 ```
 
@@ -158,7 +158,7 @@ There are Cyanobacteria/Chloroplast related sequences which can be removed if no
 
 Utility plot function for diversity measures calculated by `microbiome` package.  
 
-```{r, fig.width=8, fig.height=6, message=FALSE}
+```{r, fig.width=6, fig.height=6, message=FALSE}
 
 library(microbiome)
 data("zackular2014")
@@ -171,7 +171,8 @@ p <- plot_alpha_diversities(ps0,
                             variableA = "DiseaseState",
                             palette = mycols)
 
-print(p)
+print(p + theme_biome_utils() + 
+        ggplot2::theme(legend.position = "top",                                               text = element_text(size=14)))
 
 ```
 
@@ -239,16 +240,41 @@ print(p)
 ```
 
 
-```{r}
+```{r message=FALSE}
 library(microbiome)
 library(microbiomeutilities)
 library(dplyr)
 data("zackular2014")
 p0 <- zackular2014
-p <- plot_ternary(p0, group="DiseaseState", 
-             abund.thres=0.000001, level= "Genus", prev.thres=0.01)
-p
+tern_df <- prep_ternary(p0, group="DiseaseState", 
+               abund.thres=0.000001, level= "Genus", prev.thres=0.01)
+head(tern_df)
 ```
+
+
+```{r eval=FALSE}
+
+# install.packages("ggtern")
+require(ggtern)
+
+# Replace empty with Other
+tern_df$Phylum[tern_df$Phylum==""] <- "Other"
+
+ggtern(data=tern_df, aes(x=CRC, y=H, z=nonCRC)) + 
+  geom_point(aes(color= Phylum), 
+             alpha=0.25, 
+             show.legend=T, 
+             size=3) +
+  #scale_size(range=c(0, 6)) + 
+  geom_mask() + 
+  scale_colour_brewer(palette = "Paired") +
+  theme_biome_utils()
+
+detach("package:ggtern", unload=TRUE)
+
+```
+
+
 
 ## Dominant taxa  
 
@@ -274,6 +300,7 @@ p0 <- zackular2014
 tx.sum1 <- taxa_summary(p0, "Phylum")
 
 ```
+
 ## Get taxa summary by group(s)  
 For group specific abundances of taxa `get_group_abundances`.    
 ```{r}
@@ -281,6 +308,24 @@ library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 get_group_abundances(p0, level = "Phylum", group="DiseaseState")
+```
+
+## Find samples dominated by specific taxa   
+Finding samples dominated by user provided taxa in a phyloseq object.
+This is useful especially if user suspects a taxa to be contaminant and wishes to identify which samples are dominated by the contaminant taxa.   
+
+```{r}
+
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+p0.f <- aggregate_taxa(p0, "Genus")
+bac_dom <- find_samples_taxa(p0.f, taxa = "g__Bacteroides")
+bac_dom
+
+#get samples dominated by g__Bacteroides
+ps.sub <- prune_samples(sample_names(p0.f) %in% bac_dom, p0.f)
+
 ```
 
 

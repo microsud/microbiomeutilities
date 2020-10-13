@@ -34,7 +34,7 @@ plot_diversity_without_stats(
 
 \item{dot.size}{size of point}
 
-\item{group.order}{Default is NULL. a list specifing order of x-axis. 
+\item{group.order}{Default is NULL. a list specifing order of x-axis.
 E.g. c("H","CRC","nonCRC")}
 
 \item{...}{params for ggpubr::stat_compare_means}

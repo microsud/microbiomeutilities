@@ -28,7 +28,7 @@ library(microbiomeutilities)
 library(dplyr)
 data("zackular2014")
 p0 <- zackular2014
-x.d <- dominant_taxa(p0,level = "Genus", group="DiseaseState")
+x.d <- dominant_taxa(p0, level = "Genus", group = "DiseaseState")
 head(x.d$dominant_overview)
 }
 \keyword{utilities}

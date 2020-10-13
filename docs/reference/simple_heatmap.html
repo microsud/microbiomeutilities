@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.05</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.06</span>
       </span>
     </div>
 
@@ -150,7 +150,7 @@
     </tr>
     <tr>
       <th>group.order</th>
-      <td><p>Default is NULL. a list specifing order of x-axis. 
+      <td><p>Default is NULL. a list specifing order of x-axis.
 E.g. c("H","CRC","nonCRC")</p></td>
     </tr>
     <tr>
@@ -214,19 +214,21 @@ and generates a heatmap.</p>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
 <span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
 <span class='kw'>p0.rel</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>p0</span>, <span class='st'>"compositional"</span>)
-<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>simple_heatmap</span>(<span class='kw'>p0.rel</span>, group.facet = <span class='st'>"DiseaseState"</span>,
-                   group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span>),
-                   abund.thres = <span class='fl'>0.01</span>,
-                   prev.thres = <span class='fl'>0.1</span>,
-                   level = <span class='st'>"Genus"</span>,
-                   scale.color = <span class='st'>"log10"</span>,
-                   na.fill = <span class='st'>"white"</span>,
-                   color.fill = <span class='kw'>NULL</span>,
-                   taxa.arrange=<span class='fl'>TRUE</span>,
-                   remove.other=<span class='fl'>TRUE</span>,
-                   panel.arrange=<span class='st'>"wrap"</span>,
-                   ncol=<span class='fl'>2</span>,
-                   nrow=<span class='fl'>2</span>)
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>simple_heatmap</span>(<span class='kw'>p0.rel</span>,
+  group.facet = <span class='st'>"DiseaseState"</span>,
+  group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span>),
+  abund.thres = <span class='fl'>0.01</span>,
+  prev.thres = <span class='fl'>0.1</span>,
+  level = <span class='st'>"Genus"</span>,
+  scale.color = <span class='st'>"log10"</span>,
+  na.fill = <span class='st'>"white"</span>,
+  color.fill = <span class='kw'>NULL</span>,
+  taxa.arrange = <span class='fl'>TRUE</span>,
+  remove.other = <span class='fl'>TRUE</span>,
+  panel.arrange = <span class='st'>"wrap"</span>,
+  ncol = <span class='fl'>2</span>,
+  nrow = <span class='fl'>2</span>
+)
 </div><div class='output co'>#&gt; <span class='message'>An additonal column Sam_rep with sample names is created for reference purpose</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>p</span>)
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Transformation introduced infinite values in discrete y-axis</span></div><div class='img'><img src='simple_heatmap-1.png' alt='' width='700' height='433' /></div></pre>

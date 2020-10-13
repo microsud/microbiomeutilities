@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.05</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.06</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@ and percent sample that are dominated by each taxon. Can be group wise or overal
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
 <span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='kw'>x.d</span> <span class='op'>&lt;-</span> <span class='fu'>dominant_taxa</span>(<span class='kw'>p0</span>,level = <span class='st'>"Genus"</span>, group=<span class='st'>"DiseaseState"</span>)
+<span class='kw'>x.d</span> <span class='op'>&lt;-</span> <span class='fu'>dominant_taxa</span>(<span class='kw'>p0</span>, level = <span class='st'>"Genus"</span>, group = <span class='st'>"DiseaseState"</span>)
 </div><div class='output co'>#&gt; <span class='message'>Joining, by = "sample_id"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>x.d</span><span class='op'>$</span><span class='kw'>dominant_overview</span>)
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   DiseaseState [3]</span><span>

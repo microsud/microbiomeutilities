@@ -26,7 +26,7 @@
 #' @keywords utilities
 #'
 
-plot_select_taxa <- function(x, select.taxa, variableA, 
+plot_select_taxa <- function(x, select.taxa, variableA,
                              palette, plot.type,
                              group.order = NULL) {
   x.rel <- x.prun <- x.df <- p.box <- p.vio <- p.strp <- NULL
@@ -36,13 +36,13 @@ plot_select_taxa <- function(x, select.taxa, variableA,
   x.prun <- prune_taxa(select.taxa, x.rel)
 
   x.df <- phy_to_ldf(x.prun, transform.counts = NULL)
-  
+
   if (!is.null(group.order)) {
     x.df[, variableA] <- factor(x.df[, variableA],
-                              levels = group.order
+      levels = group.order
     )
   }
-  
+
   if (plot.type == "boxplot") {
     p <- ggpubr::ggboxplot(x.df, variableA, "Abundance",
       facet.by = "OTUID",
@@ -62,7 +62,7 @@ plot_select_taxa <- function(x, select.taxa, variableA,
       facet.by = "OTUID",
       color = variableA, palette = palette,
       legend = "right", panel.labs.background = list(fill = "white")
-    ) 
+    )
   }
 
   return(p)
