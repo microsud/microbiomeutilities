@@ -15,7 +15,7 @@ taxa_distribution(
 
 \item{color.level}{Taxonomic level to color}
 
-\item{color.taxa}{vector of colors specified by user 
+\item{color.taxa}{vector of colors specified by user
 Default is brewer.pal(12,"Paired")}
 }
 \value{
@@ -25,7 +25,6 @@ ggplot2 object
 Plots distribution of taxa.
 }
 \examples{
- 
 library(microbiomeutilities)
 data("zackular2014")
 pseq <- zackular2014

@@ -26,7 +26,7 @@ simple_heatmap(
 
 \item{group.facet}{Variable to make facet/panel the plot.}
 
-\item{group.order}{Default is NULL. a list specifing order of x-axis. 
+\item{group.order}{Default is NULL. a list specifing order of x-axis.
 E.g. c("H","CRC","nonCRC")}
 
 \item{abund.thres}{= 0.01 check \code{\link{microbiome}} package aggregate_rare function.}
@@ -68,19 +68,21 @@ library(dplyr)
 data("zackular2014")
 p0 <- zackular2014
 p0.rel <- transform(p0, "compositional")
-p <- simple_heatmap(p0.rel, group.facet = "DiseaseState",
-                   group.order = c("H", "CRC", "nonCRC"),
-                   abund.thres = 0.01,
-                   prev.thres = 0.1,
-                   level = "Genus",
-                   scale.color = "log10",
-                   na.fill = "white",
-                   color.fill = NULL,
-                   taxa.arrange=TRUE,
-                   remove.other=TRUE,
-                   panel.arrange="wrap",
-                   ncol=2,
-                   nrow=2)
+p <- simple_heatmap(p0.rel,
+  group.facet = "DiseaseState",
+  group.order = c("H", "CRC", "nonCRC"),
+  abund.thres = 0.01,
+  prev.thres = 0.1,
+  level = "Genus",
+  scale.color = "log10",
+  na.fill = "white",
+  color.fill = NULL,
+  taxa.arrange = TRUE,
+  remove.other = TRUE,
+  panel.arrange = "wrap",
+  ncol = 2,
+  nrow = 2
+)
 
 print(p)
 }

@@ -31,7 +31,7 @@ library(microbiomeutilities)
 library(dplyr)
 data("zackular2014")
 p0 <- zackular2014
-p0.f <- format_to_besthit(p0, prefix="OTU-")
+p0.f <- format_to_besthit(p0, prefix = "OTU-")
 }
 }
 \keyword{utilities}

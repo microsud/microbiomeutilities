@@ -63,6 +63,11 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
+CHANGES IN VERSION 1.00.06 (2020-10-13)  
+  o Added new function dominant_taxa  
+  o Removed plot_ternary due to clash between ggplot2 and ggtern    
+  o Added new function find_samples_taxa    
+  
 CHANGES IN VERSION 1.00.05 (2020-10-11)  
   o Added new function `dominant_taxa`  
   o Added new function `get_group_abundances`    

@@ -17,7 +17,7 @@
 #' library(dplyr)
 #' data("zackular2014")
 #' p0 <- zackular2014
-#' p0.f <- format_to_besthit(p0, prefix="OTU-")
+#' p0.f <- format_to_besthit(p0, prefix = "OTU-")
 #' }
 #' @keywords utilities
 
@@ -169,10 +169,10 @@ format_to_besthit <- function(x, prefix = NULL) {
 
   rownames(tax) <- rownames(y)
 
-  if(!is.null(prefix)){
+  if (!is.null(prefix)) {
     rownames(tax) <- paste(prefix, rownames(tax), sep = "")
   }
-  
+
 
   tax$col1 <- tax$Genus
 

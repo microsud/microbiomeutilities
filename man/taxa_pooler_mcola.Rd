@@ -15,8 +15,8 @@ Creates a list of dataframes at different taxonomic levels.
 \examples{
 # library(phyloseq)
 # library(microbiome)
-#data("zackular2014")
-#sub.sm <- sample(sample_names(zackular2014), 20)
+# data("zackular2014")
+# sub.sm <- sample(sample_names(zackular2014), 20)
 # pseq <- prune_samples(sub.sm,zackular2014)
 # taxa_pooler_mcola(pseq)
 }

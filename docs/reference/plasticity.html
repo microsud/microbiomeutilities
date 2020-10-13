@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Plasticity — plasticity" />
-<meta property="og:description" content="Calculated difference in microbiota composition for each individual between 
+<meta property="og:description" content="Calculated difference in microbiota composition for each individual between
 two timepoints." />
 
 
@@ -73,7 +73,7 @@ two timepoints." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.05</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.06</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@ two timepoints." />
     </div>
 
     <div class="ref-description">
-    <p>Calculated difference in microbiota composition for each individual between 
+    <p>Calculated difference in microbiota composition for each individual between
 two timepoints.</p>
     </div>
 
@@ -146,18 +146,18 @@ two timepoints.</p>
     <p>plot</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Using a beta diversity metrics or correlation matrix to identify variability in 
+    <p>Using a beta diversity metrics or correlation matrix to identify variability in
 microbiota of an individual. The code is slight modification from Grembi et. al. see ref below.
-This is useful for instance if one wants to quantiify changes in microbiota before and after 
-a treatment, dietary modulation, antibiotic treatment, etc. The choice of index is important. 
-For example, Bray-Curtis dissimilarity, the higher values mean higher plasticity/variability. 
+This is useful for instance if one wants to quantiify changes in microbiota before and after
+a treatment, dietary modulation, antibiotic treatment, etc. The choice of index is important.
+For example, Bray-Curtis dissimilarity, the higher values mean higher plasticity/variability.
 On the contrary, higer spearman correlation values mean lower plasticity.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
 <ul>
-<li><p>Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is 
-correlated with sustained weight loss on a low-carb or low-fat dietary intervention. 
+<li><p>Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is
+correlated with sustained weight loss on a low-carb or low-fat dietary intervention.
 Sci Rep 10, 1405 (2020).https://www.nature.com/articles/s41598-020-58000-y</p></li>
 </ul>
 
@@ -170,8 +170,7 @@ Sci Rep 10, 1405 (2020).https://www.nature.com/articles/s41598-020-58000-y</p></
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>peerj32</span>)
 <span class='kw'>pseq</span> <span class='op'>&lt;-</span> <span class='kw'>peerj32</span><span class='op'>$</span><span class='kw'>phyloseq</span>
 <span class='kw'>pseq.rel</span> <span class='op'>&lt;-</span> <span class='kw'>microbiome</span>::<span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>pseq</span>, <span class='st'>"compositional"</span>)
-<span class='kw'>pl</span> <span class='op'>&lt;-</span> <span class='fu'>plasticity</span>(<span class='kw'>pseq.rel</span>, participant.col=<span class='st'>"subject"</span>)
-
+<span class='kw'>pl</span> <span class='op'>&lt;-</span> <span class='fu'>plasticity</span>(<span class='kw'>pseq.rel</span>, participant.col = <span class='st'>"subject"</span>)
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

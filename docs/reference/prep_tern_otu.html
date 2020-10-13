@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A boxplot for user specified list of taxa — plot_listed_taxa • microbiomeutilities</title>
+<title>Create table for ternary plot OTU — prep_tern_otu • microbiomeutilities</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="A boxplot for user specified list of taxa — plot_listed_taxa" />
-<meta property="og:description" content="User specifed OTUs are plotted." />
+<meta property="og:title" content="Create table for ternary plot OTU — prep_tern_otu" />
+<meta property="og:description" content="Create a table for ternary plot ggtern package." />
 
 
 
@@ -111,29 +111,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A boxplot for user specified list of taxa</h1>
-    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/plot_listed_taxa.R'><code>R/plot_listed_taxa.R</code></a></small>
-    <div class="hidden name"><code>plot_listed_taxa.Rd</code></div>
+    <h1>Create table for ternary plot OTU</h1>
+    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/prep_tern_otu.R'><code>R/prep_tern_otu.R</code></a></small>
+    <div class="hidden name"><code>prep_tern_otu.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>User specifed OTUs are plotted.</p>
+    <p>Create a table for ternary plot ggtern package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_listed_taxa</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>select.taxa</span>,
-  <span class='kw'>group</span>,
-  <span class='kw'>group.colors</span>,
-  dot.opacity = <span class='fl'>0.25</span>,
-  box.opacity = <span class='fl'>0.25</span>,
-  group.order = <span class='kw'>NULL</span>,
-  add.violin = <span class='fl'>TRUE</span>,
-  violin.opacity = <span class='fl'>0.25</span>,
-  panel.arrange = <span class='st'>"grid"</span>,
-  ncol = <span class='kw'>NULL</span>,
-  nrow = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>prep_tern_otu</span>(<span class='kw'>x</span>, abund.thres = <span class='fl'>1e-04</span>, prev.thres = <span class='fl'>0.1</span>, group = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,77 +130,36 @@
       <td><p><code>phyloseq-class</code> object.</p></td>
     </tr>
     <tr>
-      <th>select.taxa</th>
-      <td><p>a character list of taxa to be plotted. eg. select.taxa &lt;- c("OTU-370251", "OTU-311173", "OTU-341024").</p></td>
+      <th>abund.thres</th>
+      <td><p>= 0.0001 check <code><a href='https://rdrr.io/pkg/microbiome/man/microbiome-package.html'>microbiome</a></code> package core function.
+remove taxa that are detected at 0.0001 in less than prev.thres of samples.</p></td>
+    </tr>
+    <tr>
+      <th>prev.thres</th>
+      <td><p>= 0.1 check <code><a href='https://rdrr.io/pkg/microbiome/man/microbiome-package.html'>microbiome</a></code> package core function.</p></td>
     </tr>
     <tr>
       <th>group</th>
-      <td><p>Grouping variable to compare</p></td>
-    </tr>
-    <tr>
-      <th>group.colors</th>
-      <td><p>Colors for plotting groups</p></td>
-    </tr>
-    <tr>
-      <th>dot.opacity</th>
-      <td><p>For ggplot alpha to determine opacity for points</p></td>
-    </tr>
-    <tr>
-      <th>box.opacity</th>
-      <td><p>For ggplot alpha to determine opacity for box</p></td>
-    </tr>
-    <tr>
-      <th>group.order</th>
-      <td><p>Default is NULL. a list specifing order of x-axis.</p></td>
-    </tr>
-    <tr>
-      <th>add.violin</th>
-      <td><p>Loical. If half violoin to the added. Default=TRUE</p></td>
-    </tr>
-    <tr>
-      <th>violin.opacity</th>
-      <td><p>If add.violin=TRUE, opacity for violin.</p></td>
-    </tr>
-    <tr>
-      <th>panel.arrange</th>
-      <td><p>panels "grid" or "wrap" ggplot's facet_XXX</p></td>
-    </tr>
-    <tr>
-      <th>ncol</th>
-      <td><p>if wrap, specify number of columns.</p></td>
-    </tr>
-    <tr>
-      <th>nrow</th>
-      <td><p>if wrap, specify number of rows.</p></td>
+      <td><p>Grouping variable to compare, for this plot there has to be three
+groups in the data</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>ggplot</code> object. This can be further modified using ggpubr.</p>
+    <p>tibble object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Useful for instances where user is interested only in some OTUs. For example OTUs
-         reported to be significantly diferent. This can also be used at higher taxonomic
-         levels, output from phyloseq::tax_glom or microbiome::aggregate_taxa.</p>
+    <p>Plots the mean relative abundance of taxa in 3 groups being compared.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Example data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://microbiome.github.io/microbiome'>microbiome</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
-<span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='kw'>p0.f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='kw'>p0</span>)
-<span class='kw'>select.taxa</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"OTU-d__denovo31:Dorea"</span>, <span class='st'>"OTU-d__denovo24:Blautia"</span>)
-<span class='kw'>mycols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>, <span class='st'>"grey50"</span>)
-<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_listed_taxa</span>(<span class='kw'>p0.f</span>, <span class='kw'>select.taxa</span>,
-  group = <span class='st'>"DiseaseState"</span>,
-  add.violin = <span class='fl'>TRUE</span>,
-  group.colors = <span class='kw'>mycols</span>
-)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>p</span>)
-}
+    <pre class="examples"><div class='input'><span class='co'># library(microbiome)</span>
+<span class='co'># library(microbiomeutilities)</span>
+<span class='co'># library(dplyr)</span>
+<span class='co'># data("zackular2014")</span>
+<span class='co'># p0 &lt;- zackular2014</span>
+<span class='co'># prep_tern_otu(p0, group="DiseaseState",</span>
+<span class='co'># abund.thres=0.0001, prev.thres=0.25)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

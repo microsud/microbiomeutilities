@@ -71,7 +71,7 @@ plot_ordiplot_core <-
       message("Caution: Convergence was not reached in the ordination object provided")
     }
 
-    p0 <- p0 + 
+    p0 <- p0 +
       theme_bw() +
       ggtitle(paste0("Samples NMDS plot ", "Stress: ", round(ordiObject$stress, 5)))
 
@@ -125,11 +125,11 @@ plot_ordiplot_core <-
 
     prevdf0[, 1] <- tax.unit$Taxa_level
     # p1$data <- prevdf0
-    #as.numeric(as.character(prevdf1[, 2]))
-    min.det <-  min(as.numeric(as.character(prevdf1[, 2])))
+    # as.numeric(as.character(prevdf1[, 2]))
+    min.det <- min(as.numeric(as.character(prevdf1[, 2])))
     min.prev <- min(as.numeric(as.character(prevdf1[, 3])))
-    #min.det <-  min(prevdf1[, 2])
-    #min.prev <- min(prevdf1[, 3])
+    # min.det <-  min(prevdf1[, 2])
+    # min.prev <- min(prevdf1[, 3])
 
     p1 <- p1 + theme(axis.text.x = element_text(
       vjust = 0.5,

@@ -62,13 +62,14 @@ data("zackular2014")
 ps0 <- zackular2014
 mycols <- c("brown3", "steelblue", "grey50")
 pn <- plot_taxa_boxplot(ps0,
-                        taxonomic.level = "Phylum",
-                        top.otu = 6, 
-                        group = "DiseaseState",
-                        title = "Relative abudance plot",
-                        keep.other = FALSE,
-                        group.order = c("H","CRC","nonCRC"),
-                        group.colors = mycols)
+  taxonomic.level = "Phylum",
+  top.otu = 6,
+  group = "DiseaseState",
+  title = "Relative abudance plot",
+  keep.other = FALSE,
+  group.order = c("H", "CRC", "nonCRC"),
+  group.colors = mycols
+)
 print(pn + theme_biome_utils())
 }
 

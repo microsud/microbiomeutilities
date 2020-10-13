@@ -65,10 +65,11 @@ p0 <- zackular2014
 p0.f <- format_to_besthit(p0)
 select.taxa <- c("OTU-d__denovo31:Dorea", "OTU-d__denovo24:Blautia")
 mycols <- c("brown3", "steelblue", "grey50")
-p <- plot_listed_taxa(p0.f, select.taxa, 
-group="DiseaseState", 
-add.violin=TRUE, 
-group.colors=mycols)
+p <- plot_listed_taxa(p0.f, select.taxa,
+  group = "DiseaseState",
+  add.violin = TRUE,
+  group.colors = mycols
+)
 print(p)
 }
 }

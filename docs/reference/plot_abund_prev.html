@@ -73,7 +73,7 @@ and upper and lower confidence interval for each taxa is calculated by random su
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.05</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.06</span>
       </span>
     </div>
 
@@ -181,12 +181,12 @@ Default is NULL</p></td>
     </tr>
     <tr>
       <th>mean.abund.thres</th>
-      <td><p>If label_core is TRUE specify mean 
+      <td><p>If label_core is TRUE specify mean
 abundance threshold. Default is NULL</p></td>
     </tr>
     <tr>
       <th>mean.prev.thres</th>
-      <td><p>If label_core is TRUE specify mean 
+      <td><p>If label_core is TRUE specify mean
 prevalence threshold. Default is NULL</p></td>
     </tr>
     <tr>
@@ -214,17 +214,17 @@ abundance criteria. Default is NULL</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Example data</span>
- <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
- <span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
- <span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='kw'>microbiome</span>::<span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>asv_ps</span>, <span class='st'>"compositional"</span>)
- <span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/core.html'>core</a></span>(<span class='kw'>asv_ps</span>,detection = <span class='fl'>0.0001</span>, prevalence = <span class='fl'>0.5</span>)
- <span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='kw'>asv_ps</span>)
- <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2349</span>)
- <span class='kw'>p_v</span> <span class='op'>&lt;-</span> <span class='fu'>plot_abund_prev</span>(<span class='kw'>asv_ps</span>, size = <span class='fl'>20</span>, replace = <span class='fl'>TRUE</span>) <span class='op'>+</span> 
-      <span class='fu'>geom_vline</span>(xintercept = <span class='fl'>0.75</span>, lty=<span class='st'>"dashed"</span>, alpha=<span class='fl'>0.7</span>) <span class='op'>+</span> 
-      <span class='fu'>geom_hline</span>(yintercept = <span class='fl'>0.01</span>,lty=<span class='st'>"dashed"</span>, alpha=<span class='fl'>0.7</span>) <span class='op'>+</span>
-      <span class='fu'>scale_color_brewer</span>(palette = <span class='st'>"Paired"</span>)
- <span class='kw'>p_v</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
+<span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
+<span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='kw'>microbiome</span>::<span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>asv_ps</span>, <span class='st'>"compositional"</span>)
+<span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/core.html'>core</a></span>(<span class='kw'>asv_ps</span>, detection = <span class='fl'>0.0001</span>, prevalence = <span class='fl'>0.5</span>)
+<span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='kw'>asv_ps</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2349</span>)
+<span class='kw'>p_v</span> <span class='op'>&lt;-</span> <span class='fu'>plot_abund_prev</span>(<span class='kw'>asv_ps</span>, size = <span class='fl'>20</span>, replace = <span class='fl'>TRUE</span>) <span class='op'>+</span>
+  <span class='fu'>geom_vline</span>(xintercept = <span class='fl'>0.75</span>, lty = <span class='st'>"dashed"</span>, alpha = <span class='fl'>0.7</span>) <span class='op'>+</span>
+  <span class='fu'>geom_hline</span>(yintercept = <span class='fl'>0.01</span>, lty = <span class='st'>"dashed"</span>, alpha = <span class='fl'>0.7</span>) <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span>(palette = <span class='st'>"Paired"</span>)
+<span class='kw'>p_v</span>
 }
 
 </div></pre>

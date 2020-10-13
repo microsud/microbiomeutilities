@@ -17,15 +17,15 @@ plasticity(x, dist.method = "bray", participant.col)
 plot
 }
 \description{
-Calculated difference in microbiota composition for each individual between 
+Calculated difference in microbiota composition for each individual between
 two timepoints.
 }
 \details{
-Using a beta diversity metrics or correlation matrix to identify variability in 
+Using a beta diversity metrics or correlation matrix to identify variability in
 microbiota of an individual. The code is slight modification from Grembi et. al. see ref below.
-This is useful for instance if one wants to quantiify changes in microbiota before and after 
-a treatment, dietary modulation, antibiotic treatment, etc. The choice of index is important. 
-For example, Bray-Curtis dissimilarity, the higher values mean higher plasticity/variability. 
+This is useful for instance if one wants to quantiify changes in microbiota before and after
+a treatment, dietary modulation, antibiotic treatment, etc. The choice of index is important.
+For example, Bray-Curtis dissimilarity, the higher values mean higher plasticity/variability.
 On the contrary, higer spearman correlation values mean lower plasticity.
 }
 \examples{
@@ -36,13 +36,12 @@ library(ggpubr)
 data(peerj32)
 pseq <- peerj32$phyloseq
 pseq.rel <- microbiome::transform(pseq, "compositional")
-pl <- plasticity(pseq.rel, participant.col="subject")
-
+pl <- plasticity(pseq.rel, participant.col = "subject")
 }
 \references{
 \itemize{
-\item{}{Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is 
-correlated with sustained weight loss on a low-carb or low-fat dietary intervention. 
+\item{}{Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is
+correlated with sustained weight loss on a low-carb or low-fat dietary intervention.
 Sci Rep 10, 1405 (2020).https://www.nature.com/articles/s41598-020-58000-y
 }
 }

@@ -41,10 +41,10 @@ Default is NULL}
 
 \item{label.opacity}{Numeric for ggplot alpha. Defualt is NULL}
 
-\item{mean.abund.thres}{If label_core is TRUE specify mean 
+\item{mean.abund.thres}{If label_core is TRUE specify mean
 abundance threshold. Default is NULL}
 
-\item{mean.prev.thres}{If label_core is TRUE specify mean 
+\item{mean.prev.thres}{If label_core is TRUE specify mean
 prevalence threshold. Default is NULL}
 
 \item{log.scale}{Plot log10 scale. Default is TRUE
@@ -67,17 +67,17 @@ Check if there are spurious OTUs/ASVs.
 \examples{
 \dontrun{
 # Example data
- library(microbiomeutilities)
- asv_ps <- zackular2014
- asv_ps <- microbiome::transform(asv_ps, "compositional")
- asv_ps <- core(asv_ps,detection = 0.0001, prevalence = 0.5)
- asv_ps <- format_to_besthit(asv_ps)
- set.seed(2349)
- p_v <- plot_abund_prev(asv_ps, size = 20, replace = TRUE) + 
-      geom_vline(xintercept = 0.75, lty="dashed", alpha=0.7) + 
-      geom_hline(yintercept = 0.01,lty="dashed", alpha=0.7) +
-      scale_color_brewer(palette = "Paired")
- p_v
+library(microbiomeutilities)
+asv_ps <- zackular2014
+asv_ps <- microbiome::transform(asv_ps, "compositional")
+asv_ps <- core(asv_ps, detection = 0.0001, prevalence = 0.5)
+asv_ps <- format_to_besthit(asv_ps)
+set.seed(2349)
+p_v <- plot_abund_prev(asv_ps, size = 20, replace = TRUE) +
+  geom_vline(xintercept = 0.75, lty = "dashed", alpha = 0.7) +
+  geom_hline(yintercept = 0.01, lty = "dashed", alpha = 0.7) +
+  scale_color_brewer(palette = "Paired")
+p_v
 }
 
 }
