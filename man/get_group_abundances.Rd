@@ -22,9 +22,11 @@ A data frames/ grouped tibble
 Taxa abundance summary by group. Useful for description of microbiome.
 }
 \examples{
+\dontrun{
 library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 get_group_abundances(p0, level = "Phylum", group = "DiseaseState")
+}
 }
 \keyword{utilities}

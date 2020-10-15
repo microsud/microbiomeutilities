@@ -73,7 +73,7 @@ two timepoints." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.06</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.07</span>
       </span>
     </div>
 
@@ -163,7 +163,8 @@ Sci Rep 10, 1405 (2020).https://www.nature.com/articles/s41598-020-58000-y</p></
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://microbiome.github.io/microbiome'>microbiome</a></span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://microbiome.github.io/microbiome'>microbiome</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://rpkgs.datanovia.com/ggpubr'>ggpubr</a></span>)
@@ -171,6 +172,7 @@ Sci Rep 10, 1405 (2020).https://www.nature.com/articles/s41598-020-58000-y</p></
 <span class='kw'>pseq</span> <span class='op'>&lt;-</span> <span class='kw'>peerj32</span><span class='op'>$</span><span class='kw'>phyloseq</span>
 <span class='kw'>pseq.rel</span> <span class='op'>&lt;-</span> <span class='kw'>microbiome</span>::<span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>pseq</span>, <span class='st'>"compositional"</span>)
 <span class='kw'>pl</span> <span class='op'>&lt;-</span> <span class='fu'>plasticity</span>(<span class='kw'>pseq.rel</span>, participant.col = <span class='st'>"subject"</span>)
+}
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

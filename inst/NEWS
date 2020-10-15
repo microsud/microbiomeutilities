@@ -1,11 +1,15 @@
 
 Constant development is in process.  
 
+CHANGES IN VERSION 1.00.07 (2020-10-15)
+  o Update to `plot_taxa_heatmap`   
+  o Fixed `plot_abund_prev` options  
+  o Added `plot_alpha_rcurve`   
+  
 CHANGES IN VERSION 1.00.06 (2020-10-11)
   o Added new function dominant_taxa  
   o Removed plot_ternary due to clash between ggplot2 and ggtern  
   o Added new function find_samples_taxa    
-  
   
 CHANGES IN VERSION 1.00.05 (2020-10-11)
   o Added new function dominant_taxa  

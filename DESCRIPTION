@@ -1,7 +1,7 @@
 Package: microbiomeutilities
 Type: Package
 Title: microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis
-Version: 1.00.06
+Version: 1.00.07
 Authors@R: c(
     person("Sudarshan", "Shetty", email = "sudarshan.shetty@wur.nl", role = c("aut", "cre")),
     person("Leo", "Lahti", role = "aut"))
@@ -25,6 +25,7 @@ Imports:
     gghalves,
     vegan,
     plyr,
+    patchwork,
     ggpubr,
     RColorBrewer,
     pheatmap,

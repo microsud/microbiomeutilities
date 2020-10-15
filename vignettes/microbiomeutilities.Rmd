@@ -36,7 +36,8 @@ library(dplyr)
 ```
 
 
-## Example data 
+## Basics   
+### Example data 
 
 Package data from [Zackular et al., 2014: The Gut Microbiome Modulates Colon Tumorigenesis](http://mbio.asm.org/content/4/6/e00692-13).  
 
@@ -59,7 +60,7 @@ The `print_ps` from `microbiomeutilities` can give additional information.
 print_ps(ps0)
 ```
 
-## Formatting the Phyloseq Object  
+### Formatting the Phyloseq Object  
 
 Most commonly it is observed that the taxonomy file has classification until a given taxonomic level.We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.    
   
@@ -88,7 +89,7 @@ Now the available taxonomy is added.
 
 As can be seen, the rownames have the OTUIDs and available toxonomic name(s).  
 
-## Summarize the percent taxa classification for phyloseq  
+### Summarize the percent taxa classification for phyloseq  
 
 This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
 This best works with cleaned taxonomy table.  
@@ -104,7 +105,7 @@ percent_classified(ps0)
 ```
 
 
-## Distribution of reads  
+### Distribution of reads  
 
 Useful for QC purposes. Check for siatribution of sequencing depth.     
 
@@ -117,7 +118,7 @@ print(p)
 ```
 
 
-## Convert phyloseq object to long data format  
+### Convert phyloseq object to long data format  
 
 Useful if the user wants to plot specific features.  
 
@@ -132,7 +133,9 @@ pseq_df <- phy_to_ldf(ps0, transform.counts = NULL)
 kable(head(pseq_df))
 ```
 
-## Check distirbution   
+
+## Taxa overviews  
+### Check distirbution   
 
 A quick check to see how different taxa are distributed in your data.  
 ```{r message=FALSE, fig.height=6, fig.width=8}
@@ -154,10 +157,90 @@ ggarrange(p_hc, p_crc, nrow=2, ncol=1)
 
 There are Cyanobacteria/Chloroplast related sequences which can be removed if not expected in the samples.  
 
-## Plot alpha diversities  
+### Dominant taxa  
+
+Sometimes, we are interested in identify the most dominant taxa in each sample. We may also wish to check what percent of samples within a given group are these taxa dominating.  
+```{r}
+library(microbiomeutilities)
+library(dplyr)
+data("zackular2014")
+p0 <- zackular2014
+p0.gen <- aggregate_taxa(p0,"Genus")
+x.d <- dominant_taxa(p0,level = "Genus", group="DiseaseState")
+head(x.d$dominant_overview)
+
+```
+As seen in the table above, 50% of the samples in `H` group are dominated by *g__Bacteroides* and so on...
+
+### Get taxa summary   
+This can be used for entire dataset.  
+```{r}
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+tx.sum1 <- taxa_summary(p0, "Phylum")
+
+```
+
+### Get taxa summary by group(s)  
+For group specific abundances of taxa `get_group_abundances`.    
+```{r}
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+get_group_abundances(p0, level = "Phylum", group="DiseaseState")
+```
+
+### Find samples dominated by specific taxa   
+Finding samples dominated by user provided taxa in a phyloseq object.
+This is useful especially if user suspects a taxa to be contaminant and wishes to identify which samples are dominated by the contaminant taxa.   
+
+```{r}
+
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+p0.f <- aggregate_taxa(p0, "Genus")
+bac_dom <- find_samples_taxa(p0.f, taxa = "g__Bacteroides")
+bac_dom
+
+#get samples dominated by g__Bacteroides
+ps.sub <- prune_samples(sample_names(p0.f) %in% bac_dom, p0.f)
+
+```
+
+## Alpha diversity  
+### Rarefaction curves for alpha diversity indices  
+
+A common approach to check for sequencing depth and diversity measures.  
+
+```{r message=FALSE, warning=FALSE}
+library(microbiomeutilities)
+data("zackular2014")
+p0 <- zackular2014
+# set seed
+set.seed(1)
+
+subsamples = c(10, 5000, 10000, 20000, 30000)
+
+p <- plot_alpha_rcurve(p0, index="observed", 
+                       subsamples = subsamples,
+                       lower.conf = 0.025, 
+                       upper.conf = 0.975,
+                       group="DiseaseState") 
+# change color of line 
+mycols <- c("brown3", "steelblue","grey50")
+
+p <- p + scale_color_manual(values = mycols) + 
+  scale_fill_manual(values = mycols)
+print(p)
+
+```
+
+
+### Plot alpha diversities  
 
 Utility plot function for diversity measures calculated by `microbiome` package.  
-
 ```{r, fig.width=6, fig.height=6, message=FALSE}
 
 library(microbiome)
@@ -208,36 +291,6 @@ p.m + ylab("Shannon Diversity") + xlab("")
 ```
 
 
-## Plot ordination and core  
-
-```{r, fig.height=8, fig.width=12, eval=FALSE}
-
-library(microbiomeutilities)
-library(RColorBrewer)
-data("zackular2014")
-p0 <- zackular2014
-
-ps1 <- format_to_besthit(p0)
-
-#ps1 <- subset_samples(ps1, DiseaseState == "H")
-ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
-prev.thres <- seq(.05, 1, .05)
-det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
-pseq.rel <- microbiome::transform(ps1, "compositional")
-# reduce size for example
-pseq.rel <- core(pseq.rel, detection = 0.001, prevalence = 20 / 100)
-
-ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
-
-p <- plot_ordiplot_core(pseq.rel, ord.bray,
-                        prev.thres, det.thres,
-                        min.prevalence = 0.9,
-                        color.opt = "DiseaseState", 
-                        shape = NULL, Sample = TRUE)
-
-print(p)
-
-```
 
 
 ```{r message=FALSE}
@@ -251,7 +304,9 @@ tern_df <- prep_ternary(p0, group="DiseaseState",
 head(tern_df)
 ```
 
+## Composition plots   
 
+### Ternary plot  
 ```{r eval=FALSE}
 
 # install.packages("ggtern")
@@ -274,62 +329,7 @@ detach("package:ggtern", unload=TRUE)
 
 ```
 
-
-
-## Dominant taxa  
-
-Sometimes, we are interested in identify the most dominant taxa in each sample. We may also wish to check what percent of samples within a given group are these taxa dominating.  
-```{r}
-library(microbiomeutilities)
-library(dplyr)
-data("zackular2014")
-p0 <- zackular2014
-p0.gen <- aggregate_taxa(p0,"Genus")
-x.d <- dominant_taxa(p0,level = "Genus", group="DiseaseState")
-head(x.d$dominant_overview)
-
-```
-As seen in the table above, 50% of the samples in `H` group are dominated by *g__Bacteroides* and so on...
-
-## Get taxa summary   
-This can be used for entire dataset.  
-```{r}
-library(microbiomeutilities)
-data("zackular2014")
-p0 <- zackular2014
-tx.sum1 <- taxa_summary(p0, "Phylum")
-
-```
-
-## Get taxa summary by group(s)  
-For group specific abundances of taxa `get_group_abundances`.    
-```{r}
-library(microbiomeutilities)
-data("zackular2014")
-p0 <- zackular2014
-get_group_abundances(p0, level = "Phylum", group="DiseaseState")
-```
-
-## Find samples dominated by specific taxa   
-Finding samples dominated by user provided taxa in a phyloseq object.
-This is useful especially if user suspects a taxa to be contaminant and wishes to identify which samples are dominated by the contaminant taxa.   
-
-```{r}
-
-library(microbiomeutilities)
-data("zackular2014")
-p0 <- zackular2014
-p0.f <- aggregate_taxa(p0, "Genus")
-bac_dom <- find_samples_taxa(p0.f, taxa = "g__Bacteroides")
-bac_dom
-
-#get samples dominated by g__Bacteroides
-ps.sub <- prune_samples(sample_names(p0.f) %in% bac_dom, p0.f)
-
-```
-
-
-## Plot taxa boxplot  
+### Plot taxa boxplot  
 
 Plot relative abundance of top taxa specified by user. 
 
@@ -354,7 +354,7 @@ print(pn + theme_biome_utils())
 
 ```
 
-## Plotting selected taxa  
+### Plotting selected taxa  
 
 Using a list of taxa specified by the user for comparisons.  
 ```{r fig.height=4}
@@ -429,8 +429,7 @@ p <- p + stat_compare_means(
 print(p + ylab("Relative abundance") + scale_y_continuous(labels = scales::percent))
 ```
 
-
-## Abundance-Prevalence relationship  
+### Abundance-Prevalence relationship  
 Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random subsampling.  
 This can be useful in identifying highly prevalent taxa and thier mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.
 
@@ -448,16 +447,17 @@ asv_ps <- format_to_besthit(asv_ps)
 set.seed(14285)
 p_v <- plot_abund_prev(asv_ps, 
                        label.core = TRUE,
-                       color = NULL,
+                       color = "Phylum", # NA or "blue"
                        mean.abund.thres = 0.01,
                        mean.prev.thres = 0.99,
-                       point.opacity = 0.1,
+                       dot.opacity = 0.7,
                        label.size = 3,
                        label.opacity = 1.0,
                        nudge.label=-0.15,
                        bs.iter=9,
                        size = 20, 
-                       replace = TRUE)  
+                       replace = TRUE,
+                       label.color="#5f0f40")  
 p_v <- p_v + 
   geom_vline(xintercept = 0.95, lty="dashed", alpha=0.7) + 
   geom_hline(yintercept = 0.01,lty="dashed", alpha=0.7) +
@@ -506,21 +506,51 @@ ggplot(pl, aes(group_2,bray)) +
 
 ## Heatmaps    
 ### Heatmap using phyloseq and pheatmap  
-Useful for visualisng differences in top otus between sample groups.  
-```{r fig.height=6, fig.width=8}
+Useful for visualizing differences in top otus between sample groups.  
+```{r fig.height=8, fig.width=8}
 library(pheatmap)
 library(RColorBrewer)
 data("zackular2014")
 ps0 <- zackular2014
+taxa_names(ps0) <- gsub("d__denovo", "OTU:", taxa_names(ps0))
 
-plot_taxa_heatmap(ps0,
-                  subset.top = 20,
-                  VariableA = "DiseaseState",
-                  heatcolors = rev(brewer.pal(3, "RdPu")),
-                  transformation = "clr",
-                  cluster_rows = F,
-                  cluster_cols = F,
-                  show_colnames = F)
+# create a gradient color palette for abundance
+grad_ab <- colorRampPalette(c("#faf3dd","#f7d486" ,"#5e6472"))
+grad_ab_pal <- grad_ab(10)
+
+# create a gradient color palette for prevalence
+gray_grad <- colorRampPalette(c("white", "steelblue"))
+gray_grad_cols <- gray_grad(10)
+
+# create a color palette for varaibles of interest
+meta_colors <- list(c("positive" = "#FFC857", 
+                      "negative" = "#05B083"), 
+                    c("CRC" = "steelblue", 
+                      "nonCRC" = "grey50", 
+                      "H"="brown3"),
+                    gray_grad_cols)
+# add labels for pheatmap to detect
+names(meta_colors) <- c("FOBT.result", "DiseaseState","Prevalence")
+
+p <- plot_taxa_heatmap(ps0,
+                       subset.top = 25,
+                       VariableA = c("DiseaseState","FOBT.result"),
+                       heatcolors = grad_ab_pal, #rev(brewer.pal(6, "RdPu")),
+                       transformation = "log10",
+                       cluster_rows = T,
+                       cluster_cols = F,
+                       show_colnames = F,
+                       annotation_colors=meta_colors)
+
+```
+
+
+```{r, eval=FALSE}
+#the plot is stored here
+p$plot
+
+# table used for plot is here
+p$tax_tab[1:3,1:3]
 ```
 
 ### Elegant option with ggplot2    
@@ -574,6 +604,39 @@ reference <- read.table(file, header = T, sep = "\t")
 
 knitr::kable(reference)
 ```
+
+## Experimental    
+### Plot ordination and core  
+
+```{r, fig.height=8, fig.width=12, eval=FALSE}
+
+library(microbiomeutilities)
+library(RColorBrewer)
+data("zackular2014")
+p0 <- zackular2014
+
+ps1 <- format_to_besthit(p0)
+
+#ps1 <- subset_samples(ps1, DiseaseState == "H")
+ps1 <- prune_taxa(taxa_sums(ps1) > 0, ps1)
+prev.thres <- seq(.05, 1, .05)
+det.thres <- 10^seq(log10(1e-4), log10(.2), length = 10)
+pseq.rel <- microbiome::transform(ps1, "compositional")
+# reduce size for example
+pseq.rel <- core(pseq.rel, detection = 0.001, prevalence = 20 / 100)
+
+ord.bray <- ordinate(pseq.rel, "NMDS", "bray")
+
+p <- plot_ordiplot_core(pseq.rel, ord.bray,
+                        prev.thres, det.thres,
+                        min.prevalence = 0.9,
+                        color.opt = "DiseaseState", 
+                        shape = NULL, Sample = TRUE)
+
+print(p)
+
+```
+
 
 For more tutorials and examples of data anlaysis in R please check:  
 

@@ -73,6 +73,8 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
     prevalence = prev.thres,
     level = level
   )
+  
+  #prevalance.tax <- prevalance.tax(ps0.gen)
 
   ps_df <- phy_to_ldf(ps0.gen, NULL)
   if (!is.null(group.order)) {

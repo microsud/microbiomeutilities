@@ -29,6 +29,7 @@ For example, Bray-Curtis dissimilarity, the higher values mean higher plasticity
 On the contrary, higer spearman correlation values mean lower plasticity.
 }
 \examples{
+\dontrun{
 library(microbiome)
 library(microbiomeutilities)
 library(dplyr)
@@ -37,6 +38,7 @@ data(peerj32)
 pseq <- peerj32$phyloseq
 pseq.rel <- microbiome::transform(pseq, "compositional")
 pl <- plasticity(pseq.rel, participant.col = "subject")
+}
 }
 \references{
 \itemize{

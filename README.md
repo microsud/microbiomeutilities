@@ -63,6 +63,10 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
+CHANGES IN VERSION 1.00.07 (2020-10-15)  
+  o Update to `plot_taxa_heatmap`    
+  o Fixed `plot_abund_prev` options   
+  o Added `plot_alpha_rcurve`   
 CHANGES IN VERSION 1.00.06 (2020-10-13)  
   o Added new function dominant_taxa  
   o Removed plot_ternary due to clash between ggplot2 and ggtern    

@@ -73,7 +73,7 @@ and upper and lower confidence interval for each taxa is calculated by random su
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.06</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.07</span>
       </span>
     </div>
 
@@ -127,11 +127,13 @@ and upper and lower confidence interval for each taxa is calculated by random su
   lower.conf = <span class='fl'>0.025</span>,
   upper.conf = <span class='fl'>0.975</span>,
   bs.iter = <span class='fl'>99</span>,
-  color = <span class='st'>"Phylum"</span>,
-  point.opacity = <span class='fl'>0.5</span>,
+  color = <span class='st'>"steelblue"</span>,
+  dot.opacity = <span class='fl'>0.5</span>,
+  dot.size = <span class='fl'>2</span>,
   label.core = <span class='fl'>FALSE</span>,
   label.size = <span class='kw'>NULL</span>,
   label.opacity = <span class='kw'>NULL</span>,
+  label.color = <span class='st'>"grey70"</span>,
   mean.abund.thres = <span class='kw'>NULL</span>,
   mean.prev.thres = <span class='kw'>NULL</span>,
   log.scale = <span class='fl'>TRUE</span>,
@@ -160,11 +162,15 @@ and upper and lower confidence interval for each taxa is calculated by random su
     </tr>
     <tr>
       <th>color</th>
-      <td><p>taxa level to color. preferablly at phylum</p></td>
+      <td><p>taxa level to color. Preferably at phylum or just a single color</p></td>
     </tr>
     <tr>
-      <th>point.opacity</th>
-      <td><p>Numeric for ggplot alpha. Defualt is 0.5</p></td>
+      <th>dot.opacity</th>
+      <td><p>Numeric for ggplot alpha. Default is 0.5</p></td>
+    </tr>
+    <tr>
+      <th>dot.size</th>
+      <td><p>Numeric size of point</p></td>
     </tr>
     <tr>
       <th>label.core</th>
@@ -178,6 +184,10 @@ Default is NULL</p></td>
     <tr>
       <th>label.opacity</th>
       <td><p>Numeric for ggplot alpha. Defualt is NULL</p></td>
+    </tr>
+    <tr>
+      <th>label.color</th>
+      <td><p>Color for labels. Default="grey70"</p></td>
     </tr>
     <tr>
       <th>mean.abund.thres</th>

@@ -6,11 +6,13 @@
 #' @param lower.conf Lower confidence interval =0.025
 #' @param upper.conf Upper confidence interval =0.975
 #' @param bs.iter Number of bootstrap iterations =99
-#' @param color taxa level to color. preferablly at phylum
-#' @param point.opacity  Numeric for ggplot alpha. Defualt is 0.5
+#' @param color taxa level to color. Preferably at phylum or just a single color
+#' @param dot.opacity  Numeric for ggplot alpha. Default is 0.5
+#' @param dot.size Numeric size of point
 #' @param label.core Logical default is FALSE
 #' @param label.size If label_core is TRUE specify text size.
 #' Default is NULL
+#' @param label.color Color for labels. Default="grey70"
 #' @param label.opacity Numeric for ggplot alpha. Defualt is NULL
 #' @param nudge.label Argument to pass to ggrepel::geom_text_repel Default is NULL
 #' @param mean.abund.thres If label_core is TRUE specify mean
@@ -45,11 +47,13 @@
 plot_abund_prev <- function(x, lower.conf = 0.025,
                             upper.conf = 0.975,
                             bs.iter = 99,
-                            color = "Phylum",
-                            point.opacity = 0.5,
+                            color = "steelblue",
+                            dot.opacity = 0.5,
+                            dot.size=2,
                             label.core = FALSE,
                             label.size = NULL,
                             label.opacity = NULL,
+                            label.color= "grey70",
                             mean.abund.thres = NULL,
                             mean.prev.thres = NULL,
                             log.scale = TRUE,
@@ -59,7 +63,7 @@ plot_abund_prev <- function(x, lower.conf = 0.025,
   s <- ab <- sx <- cis <- taxsp_lc <- taxsp_uc <- cis_df <- NULL
   abx <- cis_ab <- tax_list <- cis_ab_df <- abx_abun <- NULL
   Mean.Rel.Ab <- MeanAbun <- Taxa <- NULL
-
+  
   ci_ab_prev_tax <- tax_df <- core_df <- NULL
   message("Make sure to set.seed")
   psx <- x
@@ -73,7 +77,7 @@ plot_abund_prev <- function(x, lower.conf = 0.025,
     txvp <- prevalence(ps.sub, detection = 0, sort = TRUE, count = F)
     # rownames(txvp) <- txvp$Taxa
     s[[i]] <- txvp
-
+    
     ab[[i]] <- sub.sum
   }
   sx <- dplyr::bind_rows(s)
@@ -91,64 +95,85 @@ plot_abund_prev <- function(x, lower.conf = 0.025,
   meanPrev <- sx[, "meanPrev"]
   sxi <- cbind(meanPrev, cis_df)
   # head(sxi)
-
+  
   abx <- dplyr::bind_rows(ab) %>%
     as.data.frame() %>%
     group_by(Taxa)
-
+  
   cis_ab <- NULL
   tax_list <- unique(abx$Taxa)
   for (taxa_ls in tax_list) {
     abx.sub <- subset(abx, Taxa == taxa_ls)
     taxsp_ab_lc <- quantile(abx.sub[, "Mean.Rel.Ab"], lower.conf, na.rm = TRUE)
-
+    
     taxsp_ab_uc <- quantile(abx.sub[, "Mean.Rel.Ab"], upper.conf, na.rm = TRUE)
-
+    
     cis_ab <- rbind(cis_ab, c(taxa_ls, taxsp_ab_lc, taxsp_ab_uc))
   }
   cis_ab_df <- as.data.frame(cis_ab)
-
+  
   colnames(cis_ab_df) <- c("Taxa", "MeanAbunLowerCI", "MeanAbunUpperCI")
-
+  
   abx_abun <- abx %>%
     group_by(Taxa) %>%
     summarise(MeanAbun = mean(Mean.Rel.Ab))
-
+  
   ci_ab_prev <- cis_ab_df %>%
     left_join(sxi) %>%
     right_join(abx_abun)
-
+  
   tax_df <- tax_table(psx) %>%
     as("matrix") %>%
     as.data.frame()
   tax_df$Taxa <- rownames(tax_df)
-
+  
   ci_ab_prev_tax <- ci_ab_prev %>%
     left_join(tax_df)
   # head(ci_ab_prev)
-
+  
   ci_ab_prev_tax$MeanAbunLowerCI <- as.numeric(ci_ab_prev_tax$MeanAbunLowerCI)
   ci_ab_prev_tax$MeanAbunUpperCI <- as.numeric(ci_ab_prev_tax$MeanAbunUpperCI)
   ci_ab_prev_tax$PrevLowerCI <- as.numeric(ci_ab_prev_tax$PrevLowerCI)
   ci_ab_prev_tax$PrevUpperCI <- as.numeric(ci_ab_prev_tax$PrevUpperCI)
-
+  
   # hist(ci_ab_prev_tax$meanPrev)
   # hist(ci_ab_prev_tax$MeanAbun)
-
-
-  p <- ggplot(ci_ab_prev_tax, aes(meanPrev, MeanAbun)) +
-    geom_point(aes_string(color = color), alpha = 0.5, size = 2) +
-    geom_linerange(aes_string(
-      ymin = "MeanAbunLowerCI",
-      ymax = "MeanAbunUpperCI",
-      color = color
-    ), alpha = point.opacity) +
-    geom_linerange(aes_string(
-      xmin = "PrevLowerCI",
-      xmax = "PrevUpperCI",
-      color = color
-    ), alpha = point.opacity)
-
+  
+  
+  p <- ggplot(ci_ab_prev_tax, aes(meanPrev, MeanAbun)) 
+  
+  if(color %in% rank_names(ps.sub)==TRUE){
+    p <- p + geom_point(aes_string(color = color), 
+                        alpha = dot.opacity, 
+                        size = dot.size)  
+    p <- p +
+      geom_linerange(aes_string(
+        ymin = "MeanAbunLowerCI",
+        ymax = "MeanAbunUpperCI",
+        color = color
+      ), alpha = dot.opacity) +
+      geom_linerange(aes_string(
+        xmin = "PrevLowerCI",
+        xmax = "PrevUpperCI",
+        color = color
+      ), alpha = dot.opacity)
+  } else{
+    p <- p + geom_point(fill = color, 
+                        alpha = dot.opacity, 
+                        size = dot.size,
+                        shape=21) 
+    p <- p +
+      geom_linerange(aes_string(
+        ymin = "MeanAbunLowerCI",
+        ymax = "MeanAbunUpperCI"), 
+        color = color, alpha = dot.opacity) +
+      geom_linerange(aes_string(
+        xmin = "PrevLowerCI",
+        xmax = "PrevUpperCI"), 
+        color = color, alpha = dot.opacity)
+  }
+  
+  
   if (label.core == TRUE) {
     core_df <- subset(
       ci_ab_prev_tax,
@@ -159,6 +184,7 @@ plot_abund_prev <- function(x, lower.conf = 0.025,
       aes(label = Taxa),
       size = label.size,
       alpha = label.opacity,
+      color = label.color,
       force = 0.5,
       nudge_x = nudge.label,
       direction = "y",
@@ -166,7 +192,7 @@ plot_abund_prev <- function(x, lower.conf = 0.025,
       segment.size = 0.2
     )
   }
-
+  
   if (log.scale == TRUE) {
     p <- p + scale_y_log10() + scale_x_log10() +
       xlab("Prevalance (log10)") +

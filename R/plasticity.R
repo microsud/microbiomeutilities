@@ -13,6 +13,7 @@
 #' @importFrom stats cor
 #' @return plot
 #' @examples
+#' \dontrun{
 #' library(microbiome)
 #' library(microbiomeutilities)
 #' library(dplyr)
@@ -21,6 +22,7 @@
 #' pseq <- peerj32$phyloseq
 #' pseq.rel <- microbiome::transform(pseq, "compositional")
 #' pl <- plasticity(pseq.rel, participant.col = "subject")
+#' }
 #' @references
 #' \itemize{
 #' \item{}{Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is
