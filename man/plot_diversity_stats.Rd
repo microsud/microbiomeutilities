@@ -46,6 +46,7 @@ E.g. c("H","CRC","nonCRC")}
 Diversity plot with stats
 }
 \examples{
+\dontrun{
 library(microbiomeutilities)
 library(ggpubr)
 data("zackular2014")
@@ -58,6 +59,7 @@ p.m <- plot_diversity_stats(p0,
   group.colors = mycols
 )
 print(p.m)
+}
 }
 \keyword{analysis}
 \keyword{visualization}

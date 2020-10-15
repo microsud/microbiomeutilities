@@ -150,3 +150,32 @@ make_pairs <- function(x) {
   lev.pairs <- combn(seq_along(var.lev), 2, simplify = FALSE, FUN = function(i) var.lev[i])
   return(lev.pairs)
 }
+
+
+#   NOT WORKING
+# mat: the matrix passed to pheatmap
+#   names_fun: either rownames or colnames
+#   list_names: vector of names that should appear in boldface
+#' #@param mat otu table rows as taxa names
+#' #@param names_fun either rownames or colnames
+#' #@param list_names vector of names that should appear in boldface
+#make_font_face <- function(mat, names_fun, list_names, bold=TRUE) {
+#  #names.tx <- names_fun(mat)
+#  names.tx <- NULL
+#  names.tx <- lapply(
+#    rownames(mat),
+#    function(x) bquote(italic(.(x))))
+  
+#  ids <- list_names %>% match(names_fun(mat))
+#  if(bold==TRUE){
+#    ids %>%
+#      lapply(
+#        function(i)
+#          list_names[i] <<-
+#          bquote(bold(.(names_fun(mat)[i]))) %>%
+#          as.expression()
+#      )
+#    names.tx
+#  }
+#}
+

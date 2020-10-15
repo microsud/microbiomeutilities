@@ -74,7 +74,7 @@ which samples are dominated by the contaminant taxa." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.06</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.07</span>
       </span>
     </div>
 
@@ -153,9 +153,9 @@ which samples are dominated by the contaminant taxa.</p>
 <span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
 <span class='kw'>p0.f</span> <span class='op'>&lt;-</span> <span class='fu'>aggregate_taxa</span>(<span class='kw'>p0</span>, <span class='st'>"Genus"</span>)
 <span class='kw'>bac_dom</span> <span class='op'>&lt;-</span> <span class='fu'>find_samples_taxa</span>(<span class='kw'>p0.f</span>, taxa = <span class='st'>"g__Bacteroides"</span>)
-</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'physeq' in selecting a method for function 'taxa_names': object 'p0.f' not found</span></div><div class='input'><span class='co'># get samples dominated by g__Bacteroides</span>
+<span class='co'># get samples dominated by g__Bacteroides</span>
 <span class='kw'>ps.sub</span> <span class='op'>&lt;-</span> <span class='fu'>prune_samples</span>(<span class='fu'>sample_names</span>(<span class='kw'>p0.f</span>) <span class='op'>%in%</span> <span class='kw'>bac_dom</span>, <span class='kw'>p0.f</span>)
-</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'samples' in selecting a method for function 'prune_samples': object 'bac_dom' not found</span></div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

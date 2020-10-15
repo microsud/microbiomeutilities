@@ -9,11 +9,13 @@ plot_abund_prev(
   lower.conf = 0.025,
   upper.conf = 0.975,
   bs.iter = 99,
-  color = "Phylum",
-  point.opacity = 0.5,
+  color = "steelblue",
+  dot.opacity = 0.5,
+  dot.size = 2,
   label.core = FALSE,
   label.size = NULL,
   label.opacity = NULL,
+  label.color = "grey70",
   mean.abund.thres = NULL,
   mean.prev.thres = NULL,
   log.scale = TRUE,
@@ -30,9 +32,11 @@ plot_abund_prev(
 
 \item{bs.iter}{Number of bootstrap iterations =99}
 
-\item{color}{taxa level to color. preferablly at phylum}
+\item{color}{taxa level to color. Preferably at phylum or just a single color}
 
-\item{point.opacity}{Numeric for ggplot alpha. Defualt is 0.5}
+\item{dot.opacity}{Numeric for ggplot alpha. Default is 0.5}
+
+\item{dot.size}{Numeric size of point}
 
 \item{label.core}{Logical default is FALSE}
 
@@ -40,6 +44,8 @@ plot_abund_prev(
 Default is NULL}
 
 \item{label.opacity}{Numeric for ggplot alpha. Defualt is NULL}
+
+\item{label.color}{Color for labels. Default="grey70"}
 
 \item{mean.abund.thres}{If label_core is TRUE specify mean
 abundance threshold. Default is NULL}

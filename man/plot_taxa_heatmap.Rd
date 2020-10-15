@@ -22,8 +22,7 @@ plot_taxa_heatmap(
 
 \item{VariableA}{main variable of Interest.}
 
-\item{heatcolors}{is the option for colors in \code{\link{pheatmap}}. Default is to use viridis
-inferno}
+\item{heatcolors}{is the option for colors in \code{\link{pheatmap}}. Default is to use Spectral}
 
 \item{...}{Arguments to be passed \code{\link{pheatmap}}.}
 }
@@ -44,7 +43,7 @@ ps0 <- zackular2014
 heat.sample <- plot_taxa_heatmap(ps0,
   subset.top = 20,
   VariableA = "DiseaseState",
-  heatcolors = brewer.pal(100, "Blues"),
+  heatcolors = colorRampPalette(rev(brewer.pal(n = 7, name = "RdYlBu")))(100),
   transformation = "log10"
 )
 }

@@ -14,6 +14,7 @@
 #' @importFrom ggpubr stat_compare_means rotate_x_text
 #' @importFrom gghalves geom_half_violin
 #' @examples
+#' \dontrun{
 #' library(microbiomeutilities)
 #' library(ggpubr)
 #' data("zackular2014")
@@ -26,6 +27,7 @@
 #'   group.colors = mycols
 #' )
 #' print(p.m)
+#' }
 #' @keywords visualization analysis
 #' @export
 plot_diversity_stats <- function(x, index,

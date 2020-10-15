@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.06</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.07</span>
       </span>
     </div>
 
@@ -150,8 +150,7 @@
     </tr>
     <tr>
       <th>heatcolors</th>
-      <td><p>is the option for colors in <code>pheatmap</code>. Default is to use viridis
-inferno</p></td>
+      <td><p>is the option for colors in <code>pheatmap</code>. Default is to use Spectral</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -177,12 +176,11 @@ inferno</p></td>
 <span class='kw'>heat.sample</span> <span class='op'>&lt;-</span> <span class='fu'>plot_taxa_heatmap</span>(<span class='kw'>ps0</span>,
   subset.top = <span class='fl'>20</span>,
   VariableA = <span class='st'>"DiseaseState"</span>,
-  heatcolors = <span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span>(<span class='fl'>100</span>, <span class='st'>"Blues"</span>),
+  heatcolors = <span class='fu'><a href='https://rdrr.io/r/grDevices/colorRamp.html'>colorRampPalette</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span>(n = <span class='fl'>7</span>, name = <span class='st'>"RdYlBu"</span>)))(<span class='fl'>100</span>),
   transformation = <span class='st'>"log10"</span>
 )
 </div><div class='output co'>#&gt; <span class='message'>Top 20 OTUs selected </span></div><div class='output co'>#&gt; <span class='message'>log10, if zeros in data then log10(1+x) will be used</span></div><div class='output co'>#&gt; <span class='message'>First top taxa were selected and </span>
-#&gt; <span class='message'>then abundances tranformed to log10(1+X)</span></div><div class='output co'>#&gt; <span class='warning'>Warning: OTU table contains zeroes. Using log10(1 + x) transform.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: n too large, allowed maximum for palette Blues is 9</span>
-#&gt; <span class='warning'>Returning the palette you asked for with that many colors</span></div><div class='img'><img src='plot_taxa_heatmap-1.png' alt='' width='700' height='433' /></div></pre>
+#&gt; <span class='message'>then abundances tranformed to log10(1+X)</span></div><div class='output co'>#&gt; <span class='warning'>Warning: OTU table contains zeroes. Using log10(1 + x) transform.</span></div><div class='img'><img src='plot_taxa_heatmap-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
