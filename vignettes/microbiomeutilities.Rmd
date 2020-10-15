@@ -213,8 +213,9 @@ ps.sub <- prune_samples(sample_names(p0.f) %in% bac_dom, p0.f)
 ### Rarefaction curves for alpha diversity indices  
 
 A common approach to check for sequencing depth and diversity measures.  
-
-```{r message=FALSE, warning=FALSE}
+ 
+*NOTE:* This can take sometime to complete.  
+```{r message=FALSE, warning=FALSE, fig.height=3, fig.width=6, fig.align='center'}
 library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
@@ -241,7 +242,7 @@ print(p)
 ### Plot alpha diversities  
 
 Utility plot function for diversity measures calculated by `microbiome` package.  
-```{r, fig.width=6, fig.height=6, message=FALSE}
+```{r, fig.width=6, fig.height=6, message=FALSE, fig.align='center'}
 
 library(microbiome)
 data("zackular2014")
@@ -259,7 +260,7 @@ print(p + theme_biome_utils() +
 
 ```
 
-```{r fig.width=8, fig.height=6, message=FALSE}
+```{r fig.width=8, fig.height=6, message=FALSE, fig.align='center'}
 comps <- make_pairs(sample_data(ps0)$DiseaseState)
 
 p <- p + stat_compare_means(
@@ -272,7 +273,7 @@ p
 
 
 Alternatively, one can plot one index at a time with pair-wise stats. 
-```{r message=FALSE, fig.width=4, fig.height=4}
+```{r message=FALSE, fig.width=4, fig.height=4, fig.align='center'}
 
 library(gghalves)
 library(microbiomeutilities)
@@ -333,7 +334,7 @@ detach("package:ggtern", unload=TRUE)
 
 Plot relative abundance of top taxa specified by user. 
 
-```{r,fig.width=7, fig.height=3, eval=TRUE, message=FALSE}
+```{r,fig.width=7, fig.height=3, eval=TRUE, message=FALSE, fig.align='center'}
 library(microbiomeutilities)
 library(RColorBrewer)
 data("zackular2014")
@@ -357,7 +358,7 @@ print(pn + theme_biome_utils())
 ### Plotting selected taxa  
 
 Using a list of taxa specified by the user for comparisons.  
-```{r fig.height=4}
+```{r fig.height=4, fig.align='center'}
 library(microbiome)
 library(microbiomeutilities)
 library(ggpubr)
@@ -383,7 +384,7 @@ print(p + ylab("Relative abundance") + scale_y_continuous(labels = scales::perce
 ```
 
 Adding statistical test with `ggpubr::stat_compare_means()`  
-```{r fig.height=4}
+```{r fig.height=4, fig.align='center'}
 
 # If more than two variables
 comps <- make_pairs(sample_data(p0.f)$DiseaseState)
@@ -398,7 +399,7 @@ p
 ```
 
 Plot top four Genera    
-```{r fig.width=6, fig.height=6, eval=TRUE, message=FALSE}
+```{r fig.width=6, fig.height=6, eval=TRUE, message=FALSE, fig.align='center'}
 library(microbiome)
 library(microbiomeutilities)
 data("zackular2014")
@@ -433,7 +434,7 @@ print(p + ylab("Relative abundance") + scale_y_continuous(labels = scales::perce
 Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random subsampling.  
 This can be useful in identifying highly prevalent taxa and thier mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.
 
-```{r fig.height=4, fig.width=6}
+```{r message=FALSE, fig.height=4, fig.width=6, fig.align='center'}
 library(microbiomeutilities)
 library(dplyr)
 library(ggrepel)
@@ -470,7 +471,7 @@ p_v
 ### Calculate plasticity  
 
 See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. [Sci Rep 10, 1405 (2020).](https://www.nature.com/articles/s41598-020-58000-y)
-```{r}
+```{r, fig.align='center'}
 library(microbiome)
 library(microbiomeutilities)
 library(dplyr)
@@ -485,7 +486,7 @@ head(pl)
 Alternatively, using correlation methods for `plasticity`, one can check for similarity between technical replicates (2X sequenced same sample) for quality check.  
 
 ### Plot plasticity  
-```{r}
+```{r fig.height=3, fig.width=4, fig.align='center'}
 
 ggplot(pl, aes(group_2,bray)) + 
   geom_boxplot(aes(fill=group_2), 
@@ -507,7 +508,7 @@ ggplot(pl, aes(group_2,bray)) +
 ## Heatmaps    
 ### Heatmap using phyloseq and pheatmap  
 Useful for visualizing differences in top otus between sample groups.  
-```{r fig.height=8, fig.width=8}
+```{r fig.height=8, fig.width=8, fig.align='center'}
 library(pheatmap)
 library(RColorBrewer)
 data("zackular2014")
@@ -555,12 +556,15 @@ p$tax_tab[1:3,1:3]
 
 ### Elegant option with ggplot2    
 
-```{r fig.width=10, fig.height=6, message=FALSE}
+```{r fig.width=10, fig.height=6, message=FALSE, fig.align='center'}
 library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 p0.rel <- transform(p0, "compositional")
-heat.cols <- c("#a8dadc","#457b9d", "#1d3557")
+#heat.cols <- c("#a8dadc","#457b9d", "#1d3557")
+# create a gradient color palette for abundance
+grad_ab <- colorRampPalette(c("#96d4ca","#d3f3f1", "#7c65a9"))
+heat.cols <- grad_ab(10)
 simple_heatmap(p0.rel,
                group.facet = "DiseaseState",
                group.order = NULL,
