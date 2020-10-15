@@ -82,6 +82,14 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
       levels = group.order
     )
   }
+  
+  #prev.tx <- prevalence(ps0.gen)
+  #row_df <- as.data.frame(round(prev.tx*100, 2))
+  #colnames(row_df) <- c("Prevalence")
+  #row_df$taxa <- rownames(row_df)
+  #row_df$Pr <- "prev"
+  
+  
 
   ps_df$group_plx <- ps_df[, group.facet]
   ps_df$taxa <- ps_df[, level]
@@ -96,6 +104,8 @@ simple_heatmap <- function(x, group.facet = "DiseaseState",
   }
 
   ps_df$taxa <- factor(ps_df$taxa, levels = ord.tx)
+  
+  #row_df$taxa <- factor(row_df$taxa, levels = ord.tx)
 
   ## Get colorpalette for colorscale or set default
   if (!is.null(color.fill)) {
