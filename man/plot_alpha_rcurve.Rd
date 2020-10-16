@@ -15,7 +15,10 @@ plot_alpha_rcurve(
   line.opacity.main = 0.5,
   linetype.type = 2,
   line.opacity.type = 0.25,
-  type = "CI"
+  type = "CI",
+  label.min = TRUE,
+  label.size = 3,
+  label.color = "grey70"
 )
 }
 \arguments{
@@ -40,6 +43,12 @@ plot_alpha_rcurve(
 \item{line.opacity.type}{For ggplot line type to determine opacity for line CI or SD. Default: 0.25}
 
 \item{type}{Either CI (confidence interval) or SD (Standard deviation) Default: CI}
+
+\item{label.min}{TRUE or FALSE. Default: TRUE}
+
+\item{label.size}{Label min size}
+
+\item{label.color}{Label min color}
 }
 \description{
 Calculates alpha diversity idenx at varying sampling units (sequencing depth).
@@ -49,6 +58,8 @@ Calculates alpha diversity idenx at varying sampling units (sequencing depth).
 library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
+# e.g. to make range of 
+# subsamples <- seq(0, 5000, by=100)[-1]
 p <- plot_alpha_rcurve(p0, index="observed", 
 lower.conf = 0.025, upper.conf = 0.975, 
 group="DiseaseState") + 

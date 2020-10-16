@@ -10,12 +10,17 @@
 #' @param line.opacity.main For ggplot alpha to determine opacity for line by group. Default: 0.5 
 #' @param linetype.type For ggplot line type for line CI or SD. Default: 2
 #' @param line.opacity.type For ggplot line type to determine opacity for line CI or SD. Default: 0.25
+#' @param label.min TRUE or FALSE. Default: TRUE
+#' @param label.size Label min size 
+#' @param label.color Label min color
 #' @param type Either CI (confidence interval) or SD (Standard deviation) Default: CI
 #' @examples
 #' \dontrun{
 #' library(microbiomeutilities)
 #' data("zackular2014")
 #' p0 <- zackular2014
+#' # e.g. to make range of 
+#' # subsamples <- seq(0, 5000, by=100)[-1]
 #' p <- plot_alpha_rcurve(p0, index="observed", 
 #' lower.conf = 0.025, upper.conf = 0.975, 
 #' group="DiseaseState") + 
@@ -35,21 +40,28 @@ plot_alpha_rcurve <- function(x,
                               line.opacity.main = 0.5,
                               linetype.type = 2,
                               line.opacity.type = 0.25,
-                              type = "CI"){
+                              type = "CI",
+                              label.min=TRUE,
+                              label.size = 3,
+                              label.color="grey70"){
   
   depth_df <- ps.rar <- adiv <- adiv_nw <- depth_dfx <- NULL
-  mean.measure <-  sd.measure  <- sub_sample <- NULL
+  mean.measure <-  sd.measure  <- sub_sample <- d <- NULL
+  
+  
+  
   depth_df <- c()
   for (d in subsamples) {
-    ps.rar <- rarefy_even_depth(x, sample.size = d, verbose = FALSE)
-    adiv <- suppressMessages(alpha(ps.rar, index=index))
-    adiv <- as.data.frame(adiv)
-    colnames(adiv) <- index
-    adiv_nw <- cbind(adiv, meta(ps.rar))
+    #ps.rar <- rarefy_even_depth(x, sample.size = d, verbose = FALSE)
+    #adiv <- suppressMessages(alpha(ps.rar, index=index))
+    #adiv <- as.data.frame(adiv)
+    #colnames(adiv) <- index
+    #adiv_nw <- cbind(adiv, meta(ps.rar))
     #print(colnames(adiv_nw) )
-    adiv_nw$sub_sample <- d
-    rownames(adiv_nw) < seq(1:nrow(adiv_nw))
-    depth_df <- rbind(depth_df,adiv_nw)
+    #adiv_nw$sub_sample <- d
+    #rownames(adiv_nw) < seq(1:nrow(adiv_nw))
+    xd <- rarefy_util(x, d, index=index)
+    depth_df <- rbind(depth_df,xd)
   }
   
   #unique(depth_df$DiseaseState)
@@ -69,7 +81,18 @@ plot_alpha_rcurve <- function(x,
   
   
   p <- ggplot(depth_dfx, aes(sub_sample, mean.measure)) + 
-    geom_line(aes_string(color=group), linetype=linetype.main, alpha=line.opacity.main) 
+    geom_line(aes_string(color=group), 
+              linetype=linetype.main, 
+              alpha=line.opacity.main) 
+  if (label.min==TRUE){
+    p <- p + geom_vline(xintercept = min(subsamples), linetype= linetype.type) +
+      geom_text(aes(x=min(subsamples), 
+                    label= paste0("Min. depth- ", min(subsamples), " reads/sample"), 
+                    y=mean(mean.measure)), 
+                colour=label.color, angle=90, vjust = 1.2, size=label.size)
+  }
+   
+  
   if (type=="CI"){
     p <- p + geom_ribbon(aes_string(ymin="lower.ci", 
                                     ymax="upper.ci",

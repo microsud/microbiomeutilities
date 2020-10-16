@@ -221,14 +221,17 @@ data("zackular2014")
 p0 <- zackular2014
 # set seed
 set.seed(1)
-
-subsamples = c(10, 5000, 10000, 20000, 30000)
+subsamples <- seq(0, 5000, by=100)[-1]
+#subsamples = c(10, 5000, 10000, 20000, 30000)
 
 p <- plot_alpha_rcurve(p0, index="observed", 
                        subsamples = subsamples,
                        lower.conf = 0.025, 
                        upper.conf = 0.975,
-                       group="DiseaseState") 
+                       group="DiseaseState",
+                       label.color = "brown3",
+                       label.size = 3,
+                       label.min = TRUE) 
 # change color of line 
 mycols <- c("brown3", "steelblue","grey50")
 
