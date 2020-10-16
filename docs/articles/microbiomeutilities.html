@@ -658,14 +658,17 @@ This best works with cleaned taxonomy table.</empty></p>
 <span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
 <span class="co"># set seed</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1</span>)
-
-<span class="kw">subsamples</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">5000</span>, <span class="fl">10000</span>, <span class="fl">20000</span>, <span class="fl">30000</span>)
+<span class="kw">subsamples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">5000</span>, by=<span class="fl">100</span>)[<span class="op">-</span><span class="fl">1</span>]
+<span class="co">#subsamples = c(10, 5000, 10000, 20000, 30000)</span>
 
 <span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_alpha_rcurve.html">plot_alpha_rcurve</a></span>(<span class="kw">p0</span>, index=<span class="st">"observed"</span>, 
                        subsamples = <span class="kw">subsamples</span>,
                        lower.conf = <span class="fl">0.025</span>, 
                        upper.conf = <span class="fl">0.975</span>,
-                       group=<span class="st">"DiseaseState"</span>) 
+                       group=<span class="st">"DiseaseState"</span>,
+                       label.color = <span class="st">"brown3"</span>,
+                       label.size = <span class="fl">3</span>,
+                       label.min = <span class="fl">TRUE</span>) 
 <span class="co"># change color of line </span>
 <span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span>)
 

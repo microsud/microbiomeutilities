@@ -179,3 +179,23 @@ make_pairs <- function(x) {
 #  }
 #}
 
+
+#' @keywords internal 
+rarefy_util <- function(ps, sample.size, index){
+  
+  ps.rar <- vegan::rrarefy(t(abundances(ps)),sample.size)
+  
+  adiv <- suppressMessages(alpha(t(ps.rar), index=index))
+  
+  adiv <- as.data.frame(adiv)
+  
+  colnames(adiv) <- index
+  
+  adiv_nw <- cbind(adiv, meta(ps))
+  
+  adiv_nw$sub_sample <- sample.size
+  
+  rownames(adiv_nw) < seq(1:nrow(adiv_nw))
+  
+  return(adiv_nw)
+}
