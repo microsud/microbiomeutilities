@@ -6,10 +6,10 @@
 # About  
 The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package.   
 
+Philosophy: *Seemingly simple tasks for experienced R users can always be further simplified for novice users*  
+
 [Package website and online documentation](https://microsud.github.io/microbiomeutilities/)  
  
-The package provides access to a subset of studies included in the [MicrobiomeHD](https://zenodo.org/record/840333#.WuYuDoiFM2w) database from Duvallet et al 2017: [Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications](https://www.nature.com/articles/s41467-017-01973-8). These datasets are converted to phyloseq objects and can be directly used in R environment.  
-
 ## Install microbiomeutilities    
 
 ```
@@ -17,7 +17,7 @@ install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 
 ```  
-**Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2020, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.01).     
+**Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2020, October). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.08).     
 The microbiome R package relies on the independently developed   
 [phyloseq](https://github.com/joey711/phyloseq) package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.  
 [ggplot2](http://ggplot2.org/) H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.  
@@ -36,6 +36,10 @@ URL: [http://microbiome.github.com/microbiome](http://microbiome.github.com/micr
 * [twitter](https://twitter.com/gutmicrobe)   
 * [googlescholar](https://scholar.google.nl/citations?hl=en&user=Vahc6LUAAAAJ&view_op=list_works&sortby=pubdate)  
 * [ORCID ID: 0000-0001-7280-9915](http://orcid.org/0000-0001-7280-9915)   
+
+
+**MicrobiomeHD**   
+The package provides access to a subset of studies included in the [MicrobiomeHD](https://zenodo.org/record/840333#.WuYuDoiFM2w) database from Duvallet et al 2017: [Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications](https://www.nature.com/articles/s41467-017-01973-8). These datasets are converted to phyloseq objects and can be directly used in R environment.  
 
 ### Datasets from:  
 * Duvallet, Claire, et al. "Meta-analysis of gut microbiome studies identifies disease-specific and shared responses." Nature communications 8.1 (2017): 1784.   
@@ -62,6 +66,9 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 **NOTE:**  
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
+
+CHANGES IN VERSION 1.00.08 (2020-10-17)  
+  o Cosmetic updates   
 
 CHANGES IN VERSION 1.00.07 (2020-10-15)  
   o Update to `plot_taxa_heatmap`    

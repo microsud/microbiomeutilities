@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.07</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.08</span>
       </span>
     </div>
 
@@ -75,15 +75,15 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#about" class="anchor"></a>About</h1></div>
 <p>The <strong>microbiomeutilities</strong> is a supporting R package for the parent <a href="http://microbiome.github.com/microbiome">microbiome</a> R/BioC package.</p>
+<p>Philosophy: <em>Seemingly simple tasks for experienced R users can always be further simplified for novice users</em></p>
 <p><a href="https://microsud.github.io/microbiomeutilities/">Package website and online documentation</a></p>
-<p>The package provides access to a subset of studies included in the <a href="https://zenodo.org/record/840333#.WuYuDoiFM2w">MicrobiomeHD</a> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications</a>. These datasets are converted to phyloseq objects and can be directly used in R environment.</p>
 <div id="install-microbiomeutilities" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install-microbiomeutilities" class="anchor"></a>Install microbiomeutilities</h2>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 </a></code></pre>
-<p><strong>Citation:</strong> Sudarshan A. Shetty, &amp; Leo Lahti. (2020, October 25). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.01).<br>
+<p><strong>Citation:</strong> Sudarshan A. Shetty, &amp; Leo Lahti. (2020, October). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.08).<br>
 The microbiome R package relies on the independently developed<br><a href="https://github.com/joey711/phyloseq">phyloseq</a> package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.<br><a href="http://ggplot2.org/">ggplot2</a> H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.<br><a href="https://www.tidyverse.org/">tidyverse packages</a>.</p>
 <p><strong>Microbiome package website with step-wise tutorials</strong>:<br>
 URL: <a href="http://microbiome.github.com/microbiome">http://microbiome.github.com/microbiome</a>.</p>
@@ -112,6 +112,8 @@ URL: <a href="http://microbiome.github.com/microbiome">http://microbiome.github.
 </li>
 <li><a href="http://orcid.org/0000-0001-7280-9915">ORCID ID: 0000-0001-7280-9915</a></li>
 </ul>
+<p><strong>MicrobiomeHD</strong><br>
+The package provides access to a subset of studies included in the <a href="https://zenodo.org/record/840333#.WuYuDoiFM2w">MicrobiomeHD</a> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications</a>. These datasets are converted to phyloseq objects and can be directly used in R environment.</p>
 </div>
 <div id="datasets-from" class="section level3">
 <h3 class="hasAnchor">
@@ -157,6 +159,8 @@ The aim of this package is not to replace any of the other tools mentioned on th
 <div id="change-log" class="section level2">
 <h2 class="hasAnchor">
 <a href="#change-log" class="anchor"></a>Change log</h2>
+<p>CHANGES IN VERSION 1.00.08 (2020-10-17)<br>
+o Cosmetic updates</p>
 <p>CHANGES IN VERSION 1.00.07 (2020-10-15)<br>
 o Update to <code>plot_taxa_heatmap</code><br>
 o Fixed <code>plot_abund_prev</code> options<br>

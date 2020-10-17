@@ -15,7 +15,9 @@ comment = "#>"
 ```
 
 
-The `microbiomeutilities` R package is mainly a wrapper tool with diverse functions for data handling and visualization. 
+The `microbiomeutilities` R package is mainly a wrapper tool with diverse functions for data handling and visualization.   
+
+Philosophy: *Seemingly simple tasks for experienced R users can always be further simplified for novice users*  
 
 ## Install  
 
@@ -25,7 +27,7 @@ install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 ```  
 
-
+Load libraries  
 ```{r, message=FALSE, warning=FALSE}
 
 library(microbiomeutilities)
@@ -47,7 +49,7 @@ For more information on phyloseq data structure and uses you can have a look at 
 
 Tools for microbiome analysis in R. **Microbiome package** URL: [microbiome package](http://microbiome.github.com/microbiome).  
 
-
+Import test data.  
 ```{r}
 
 data("zackular2014")
@@ -55,20 +57,21 @@ ps0 <- zackular2014
 ps0
 ```
 
-The `print_ps` from `microbiomeutilities` can give additional information.    
+The `print_ps` from `microbiomeutilities` can give additional information. See also `microbiome::summarize_phyloseq`.     
 ```{r}
 print_ps(ps0)
 ```
 
 ### Formatting the Phyloseq Object  
 
-Most commonly it is observed that the taxonomy file has classification until a given taxonomic level.We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.    
+Most commonly it is observed that the taxonomy file has classification until a given taxonomic level. We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU/ASVs level. Only ID are less useful.    
   
 Check the taxonomy in phyloseq object.  
 
 ```{r}
 
 kable(head(tax_table(ps0)))
+
 ```
 
 Some have only g__ of s__ information.  
@@ -87,41 +90,27 @@ kable(head(tax_table(ps0.f2))[3:6])
 
 Now the available taxonomy is added.  
 
-As can be seen, the rownames have the OTUIDs and available toxonomic name(s).  
-
-### Summarize the percent taxa classification for phyloseq  
-
-This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
-This best works with cleaned taxonomy table.  
-
-```{r eval=FALSE}
-data("zackular2014")
-p0 <- zackular2014
-# reduce size for example
-ps0 <- core(p0, detection = 10, prevalence = 50 / 100)
-
-percent_classified(ps0)
-
-```
-
+As can be seen, the rownames have the OTUIDs and available taxonomic name(s).  
 
 ### Distribution of reads  
 
-Useful for QC purposes. Check for siatribution of sequencing depth.     
+Useful for QC purposes. Check for distribution of sequencing depth.     
 
 ```{r, eval=TRUE, fig.height=3, fig.width=5}
 data("zackular2014")
 p0 <- zackular2014
 p <- plot_read_distribution(p0, groups = "DiseaseState", 
                             plot.type = "density")
-print(p)
+print(p + theme_biome_utils())
 ```
-
+   
+This is a diagnostic step. Key to check if there is variation between groups that will be compared for downstream analysis.  
 
 ### Convert phyloseq object to long data format  
 
 Useful if the user wants to plot specific features.  
-
+Converting to long data format opens several opportunities to work with [Tidyverse](https://www.tidyverse.org/).  
+ 
 ```{r}
 data("zackular2014")
 p0 <- zackular2014
@@ -133,33 +122,42 @@ pseq_df <- phy_to_ldf(ps0, transform.counts = NULL)
 kable(head(pseq_df))
 ```
 
+## Taxa overview    
+One of the first questions arise regarding which taxa are present , how they are distributed in the data. This can be done with following functionality.  
 
-## Taxa overviews  
-### Check distirbution   
+### Check distribution   
 
 A quick check to see how different taxa are distributed in your data.  
-```{r message=FALSE, fig.height=6, fig.width=8}
+```{r message=FALSE, warning= FALSE, fig.height=6, fig.width=8}
 library(microbiomeutilities)
 library(RColorBrewer)
+library(patchwork)
 library(ggpubr)
 data("zackular2014")
 pseq <- zackular2014
 
 # check healthy
 health_ps <- subset_samples(pseq, DiseaseState=="H")
-p_hc <- taxa_distribution(health_ps) + theme_biome_utils()
+p_hc <- taxa_distribution(health_ps) + 
+  theme_biome_utils() + 
+  labs(title = "Healthy")
 
 # check CRC
 crc_ps <- subset_samples(pseq, DiseaseState=="CRC")
-p_crc <- taxa_distribution(crc_ps) + theme_biome_utils()
-ggarrange(p_hc, p_crc, nrow=2, ncol=1)
+p_crc <- taxa_distribution(crc_ps) + 
+  theme_biome_utils() + 
+  labs(title = "CRC")
+
+# harnessing the power of patchwork
+p_hc / p_crc + plot_layout(guides = "collect") + 
+  plot_annotation(tag_levels = "A")
 ```
 
 There are Cyanobacteria/Chloroplast related sequences which can be removed if not expected in the samples.  
 
 ### Dominant taxa  
 
-Sometimes, we are interested in identify the most dominant taxa in each sample. We may also wish to check what percent of samples within a given group are these taxa dominating.  
+Sometimes, we are interested in identifying the most dominant taxa in each sample. We may also wish to check what percent of samples within a given group are these taxa dominating.  
 ```{r}
 library(microbiomeutilities)
 library(dplyr)
@@ -170,7 +168,7 @@ x.d <- dominant_taxa(p0,level = "Genus", group="DiseaseState")
 head(x.d$dominant_overview)
 
 ```
-As seen in the table above, 50% of the samples in `H` group are dominated by *g__Bacteroides* and so on...
+As seen in the table above, 50% of the samples in `H` group are dominated by *g__Bacteroides* and so on...   
 
 ### Get taxa summary   
 This can be used for entire dataset.  
@@ -179,7 +177,7 @@ library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 tx.sum1 <- taxa_summary(p0, "Phylum")
-
+tx.sum1
 ```
 
 ### Get taxa summary by group(s)  
@@ -188,7 +186,23 @@ For group specific abundances of taxa `get_group_abundances`.
 library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
-get_group_abundances(p0, level = "Phylum", group="DiseaseState")
+grp_abund <- get_group_abundances(p0, level = "Phylum", group="DiseaseState")
+```
+
+How to visusalize these data?  
+```{r fig.height=4, fig.width=6, fig.align='center'}
+mycols <- c("brown3", "steelblue","grey50")
+
+grp_abund %>% # input data
+  ggplot(aes(OTUID, mean_abundance)) + # x and y axis 
+  geom_bar(aes(fill=DiseaseState), # fill by Group
+           stat = "identity", 
+           position="dodge") +
+  scale_fill_manual("DiseaseState", values=mycols) + # manually specify colors
+  theme_bw() + # add a widely used ggplot2 theme
+  ylab("Mean Relative Abundance") + # label y axis
+  xlab("Phylum") + # label x axis
+  coord_flip() # rotate plot 
 ```
 
 ### Find samples dominated by specific taxa   
@@ -213,6 +227,7 @@ ps.sub <- prune_samples(sample_names(p0.f) %in% bac_dom, p0.f)
 ### Rarefaction curves for alpha diversity indices  
 
 A common approach to check for sequencing depth and diversity measures.  
+Here, we can access the numerous alpha diversity measures supported by [microbiome R package](https://microbiome.github.io/tutorials/Alphadiversity.html).   
  
 *NOTE:* This can take sometime to complete.  
 ```{r message=FALSE, warning=FALSE, fig.height=3, fig.width=6, fig.align='center'}
@@ -294,7 +309,9 @@ p.m + ylab("Shannon Diversity") + xlab("")
 
 ```
 
+## Composition plots   
 
+### Ternary plot  
 
 
 ```{r message=FALSE}
@@ -308,9 +325,7 @@ tern_df <- prep_ternary(p0, group="DiseaseState",
 head(tern_df)
 ```
 
-## Composition plots   
 
-### Ternary plot  
 ```{r eval=FALSE}
 
 # install.packages("ggtern")
@@ -361,7 +376,7 @@ print(pn + theme_biome_utils())
 ### Plotting selected taxa  
 
 Using a list of taxa specified by the user for comparisons.  
-```{r fig.height=4, fig.align='center'}
+```{r fig.height=3, fig.width=5, fig.align='center'}
 library(microbiome)
 library(microbiomeutilities)
 library(ggpubr)
@@ -397,7 +412,7 @@ p <- p + stat_compare_means(
       label = "p.format",
       tip.length = 0.05,
       method = "wilcox.test")
-p
+p + scale_y_continuous(labels = scales::percent)
 
 ```
 
@@ -434,8 +449,10 @@ print(p + ylab("Relative abundance") + scale_y_continuous(labels = scales::perce
 ```
 
 ### Abundance-Prevalence relationship  
-Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random subsampling.  
-This can be useful in identifying highly prevalent taxa and thier mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.
+Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random sub-sampling.  
+This can be useful in identifying highly prevalent taxa and their mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.  
+
+See [core microbiota analysis in microbiome R package](https://microbiome.github.io/tutorials/Core.html)    
 
 ```{r message=FALSE, fig.height=4, fig.width=6, fig.align='center'}
 library(microbiomeutilities)
@@ -458,8 +475,8 @@ p_v <- plot_abund_prev(asv_ps,
                        label.size = 3,
                        label.opacity = 1.0,
                        nudge.label=-0.15,
-                       bs.iter=9,
-                       size = 20, 
+                       bs.iter=9, # increase for actual analysis e.g. 999
+                       size = 20, # increase to match your nsamples(asv_ps)
                        replace = TRUE,
                        label.color="#5f0f40")  
 p_v <- p_v + 
@@ -473,8 +490,10 @@ p_v
 
 ### Calculate plasticity  
 
-See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. [Sci Rep 10, 1405 (2020).](https://www.nature.com/articles/s41598-020-58000-y)
-```{r, fig.align='center'}
+See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. [Sci Rep 10, 1405 (2020).](https://www.nature.com/articles/s41598-020-58000-y)  
+
+Data from `microbiome` package is used here for example.  
+```{r, message=FALSE, warning=FALSE, fig.align='center'}
 library(microbiome)
 library(microbiomeutilities)
 library(dplyr)
@@ -505,12 +524,13 @@ ggplot(pl, aes(group_2,bray)) +
   stat_compare_means() + 
   theme_biome_utils()
 
-
 ```
 
 ## Heatmaps    
-### Heatmap using phyloseq and pheatmap  
-Useful for visualizing differences in top otus between sample groups.  
+### Heatmap using phyloseq and pheatmap   
+
+Useful for visualizing differences in top OTUs between sample groups.  
+By default this function internally calculated Prevalence, but purposely  doesn't plot by default. This is to give access to powerful `pheatmap` annotation options.  
 ```{r fig.height=8, fig.width=8, fig.align='center'}
 library(pheatmap)
 library(RColorBrewer)
@@ -586,6 +606,8 @@ simple_heatmap(p0.rel,
 
 ```
 
+For heatmap options see [microbiome::heat()](https://microbiome.github.io/tutorials/Heatmap.html) and [ampvis2](https://madsalbertsen.github.io/ampvis2/reference/amp_heatmap.html)  
+
 ## MicrobiomeHD datasets as phyloseq objects  
 
 We provide access to a subset of studies included in the `MicrobiomeHD` database from Duvallet et al 2017: [Meta-analysis of gut microbiome studies identifies disease-specific and shared responses](https://www.nature.com/articles/s41467-017-01973-8#ref-CR33). Nature communications.    
@@ -644,6 +666,20 @@ print(p)
 
 ```
 
+### Summarize the percent taxa classification for phyloseq  
+
+This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
+This best works with cleaned taxonomy table.  
+
+```{r eval=FALSE}
+data("zackular2014")
+p0 <- zackular2014
+# reduce size for example
+ps0 <- core(p0, detection = 10, prevalence = 50 / 100)
+
+percent_classified(ps0)
+
+```
 
 For more tutorials and examples of data anlaysis in R please check:  
 
