@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.07</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.08</span>
       </span>
     </div>
 
@@ -81,6 +81,7 @@
     
     
 <p>The <code>microbiomeutilities</code> R package is mainly a wrapper tool with diverse functions for data handling and visualization.</p>
+<p>Philosophy: <em>Seemingly simple tasks for experienced R users can always be further simplified for novice users</em></p>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
@@ -89,6 +90,7 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
 <span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"microsud/microbiomeutilities"</span>)
 </pre></div>
+<p>Load libraries</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
@@ -108,6 +110,7 @@
 <p>Useful resources:</p>
 <p>For more information on phyloseq data structure and uses you can have a look at <a href="http://joey711.github.io/phyloseq/">Phyloseq</a></p>
 <p>Tools for microbiome analysis in R. <strong>Microbiome package</strong> URL: <a href="http://microbiome.github.com/microbiome">microbiome package</a>.</p>
+<p>Import test data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
@@ -118,29 +121,28 @@
 <span class="co">#&gt; sample_data() Sample Data:       [ 88 samples by 7 sample variables ]</span>
 <span class="co">#&gt; tax_table()   Taxonomy Table:    [ 2078 taxa by 7 taxonomic ranks ]</span>
 </pre></div>
-<p>The <code>print_ps</code> from <code>microbiomeutilities</code> can give additional information.</p>
+<p>The <code>print_ps</code> from <code>microbiomeutilities</code> can give additional information. See also <code><a href="https://rdrr.io/pkg/microbiome/man/summarize_phyloseq.html">microbiome::summarize_phyloseq</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="fu"><a href="../reference/print_ps.html">print_ps</a></span>(<span class="kw">ps0</span>)
-<span class="co">#&gt; 01] object is phyloseq</span>
-<span class="co">#&gt; 02] ntaxa = 2078</span>
-<span class="co">#&gt; 03] nsamples = 88</span>
-<span class="co">#&gt; 04] nsamplesvariables = 7</span>
-<span class="co">#&gt; 05] nranks = 7</span>
-<span class="co">#&gt; 06] Min. number of reads = 15704</span>
-<span class="co">#&gt; 07] Max. number of reads = 216888</span>
-<span class="co">#&gt; 08] Total number of reads = 4594626</span>
-<span class="co">#&gt; 09] Average number of reads = 52211.66</span>
-<span class="co">#&gt; 10] Median number of reads = 49415.5</span>
-<span class="co">#&gt; 11] Sparsity = 0.728426590252865</span>
-<span class="co">#&gt; 12] Number of singletons = 0</span>
-<span class="co">#&gt; 13] % of taxa that are singletons </span>
+<span class="co">#&gt; 01] ntaxa = 2078</span>
+<span class="co">#&gt; 02] nsamples = 88</span>
+<span class="co">#&gt; 03] nsamplesvariables = 7</span>
+<span class="co">#&gt; 04] nranks = 7</span>
+<span class="co">#&gt; 05] Min. number of reads = 15704</span>
+<span class="co">#&gt; 06] Max. number of reads = 216888</span>
+<span class="co">#&gt; 07] Total number of reads = 4594626</span>
+<span class="co">#&gt; 08] Average number of reads = 52211.66</span>
+<span class="co">#&gt; 09] Median number of reads = 49415.5</span>
+<span class="co">#&gt; 10] Sparsity = 0.728426590252865</span>
+<span class="co">#&gt; 11] Number of singletons = 0</span>
+<span class="co">#&gt; 12] % of taxa that are singletons </span>
 <span class="co">#&gt;   (i.e. exactly one read detected across all samples) = 0</span>
 </pre></div>
 </div>
 <div id="formatting-the-phyloseq-object" class="section level3">
 <h3 class="hasAnchor">
 <a href="#formatting-the-phyloseq-object" class="anchor"></a>Formatting the Phyloseq Object</h3>
-<p>Most commonly it is observed that the taxonomy file has classification until a given taxonomic level.We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU level. Only ID are less useful.</p>
+<p>Most commonly it is observed that the taxonomy file has classification until a given taxonomic level. We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU/ASVs level. Only ID are less useful.</p>
 <p>Check the taxonomy in phyloseq object.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 
@@ -313,41 +315,29 @@
 </tbody>
 </table>
 <p>Now the available taxonomy is added.</p>
-<p>As can be seen, the rownames have the OTUIDs and available toxonomic name(s).</p>
-</div>
-<div id="summarize-the-percent-taxa-classification-for-phyloseq" class="section level3">
-<h3 class="hasAnchor">
-<a href="#summarize-the-percent-taxa-classification-for-phyloseq" class="anchor"></a>Summarize the percent taxa classification for phyloseq</h3>
-<p>This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or <code>NA</code> is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply <code>NA</code>.<br>
-This best works with cleaned taxonomy table.</empty></p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="co"># reduce size for example</span>
-<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span>(<span class="kw">p0</span>, detection = <span class="fl">10</span>, prevalence = <span class="fl">50</span> <span class="op">/</span> <span class="fl">100</span>)
-
-<span class="fu"><a href="../reference/percent_classified.html">percent_classified</a></span>(<span class="kw">ps0</span>)
-</pre></div>
+<p>As can be seen, the rownames have the OTUIDs and available taxonomic name(s).</p>
 </div>
 <div id="distribution-of-reads" class="section level3">
 <h3 class="hasAnchor">
 <a href="#distribution-of-reads" class="anchor"></a>Distribution of reads</h3>
-<p>Useful for QC purposes. Check for siatribution of sequencing depth.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<p>Useful for QC purposes. Check for distribution of sequencing depth.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
 <span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
 <span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_read_distribution.html">plot_read_distribution</a></span>(<span class="kw">p0</span>, groups = <span class="st">"DiseaseState"</span>, 
                             plot.type = <span class="st">"density"</span>)
 <span class="co">#&gt; [1] "Done plotting"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>())
 </pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-8-1.png" width="480"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
+<p>This is a diagnostic step. Key to check if there is variation between groups that will be compared for downstream analysis.</p>
 </div>
 <div id="convert-phyloseq-object-to-long-data-format" class="section level3">
 <h3 class="hasAnchor">
 <a href="#convert-phyloseq-object-to-long-data-format" class="anchor"></a>Convert phyloseq object to long data format</h3>
-<p>Useful if the user wants to plot specific features.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<p>Useful if the user wants to plot specific features.<br>
+Converting to long data format opens several opportunities to work with <a href="https://www.tidyverse.org/">Tidyverse</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
 <span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
 <span class="co"># reduce size for example</span>
@@ -516,45 +506,46 @@ This best works with cleaned taxonomy table.</empty></p>
 </table>
 </div>
 </div>
-<div id="taxa-overviews" class="section level2">
+<div id="taxa-overview" class="section level2">
 <h2 class="hasAnchor">
-<a href="#taxa-overviews" class="anchor"></a>Taxa overviews</h2>
-<div id="check-distirbution" class="section level3">
+<a href="#taxa-overview" class="anchor"></a>Taxa overview</h2>
+<p>One of the first questions arise regarding which taxa are present , how they are distributed in the data. This can be done with following functionality.</p>
+<div id="check-distribution" class="section level3">
 <h3 class="hasAnchor">
-<a href="#check-distirbution" class="anchor"></a>Check distirbution</h3>
+<a href="#check-distribution" class="anchor"></a>Check distribution</h3>
 <p>A quick check to see how different taxa are distributed in your data.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://patchwork.data-imaginist.com">patchwork</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://rpkgs.datanovia.com/ggpubr">ggpubr</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
 <span class="kw">pseq</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
 
 <span class="co"># check healthy</span>
 <span class="kw">health_ps</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span>(<span class="kw">pseq</span>, <span class="kw">DiseaseState</span><span class="op">==</span><span class="st">"H"</span>)
-<span class="kw">p_hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_distribution.html">taxa_distribution</a></span>(<span class="kw">health_ps</span>) <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>()
+<span class="kw">p_hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_distribution.html">taxa_distribution</a></span>(<span class="kw">health_ps</span>) <span class="op">+</span> 
+  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>() <span class="op">+</span> 
+  <span class="fu">labs</span>(title = <span class="st">"Healthy"</span>)
 
 <span class="co"># check CRC</span>
 <span class="kw">crc_ps</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span>(<span class="kw">pseq</span>, <span class="kw">DiseaseState</span><span class="op">==</span><span class="st">"CRC"</span>)
-<span class="kw">p_crc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_distribution.html">taxa_distribution</a></span>(<span class="kw">crc_ps</span>) <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>()
-<span class="fu"><a href="https://rdrr.io/pkg/ggpubr/man/ggarrange.html">ggarrange</a></span>(<span class="kw">p_hc</span>, <span class="kw">p_crc</span>, nrow=<span class="fl">2</span>, ncol=<span class="fl">1</span>)
-<span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span>
-<span class="co">#&gt; Warning: Removed 8 rows containing non-finite values (stat_density).</span>
-<span class="co">#&gt; Warning: Groups with fewer than two data points have been dropped.</span>
-<span class="co">#&gt; Warning: Removed 1 row(s) containing missing values (geom_path).</span>
-<span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span>
-<span class="co">#&gt; Warning: Removed 15 rows containing non-finite values (stat_density).</span>
-<span class="co">#&gt; Warning: Groups with fewer than two data points have been dropped.</span>
-<span class="co">#&gt; Warning: Removed 1 row(s) containing missing values (geom_path).</span>
+<span class="kw">p_crc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_distribution.html">taxa_distribution</a></span>(<span class="kw">crc_ps</span>) <span class="op">+</span> 
+  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>() <span class="op">+</span> 
+  <span class="fu">labs</span>(title = <span class="st">"CRC"</span>)
+
+<span class="co"># harnessing the power of patchwork</span>
+<span class="kw">p_hc</span> <span class="op">/</span> <span class="kw">p_crc</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span>(guides = <span class="st">"collect"</span>) <span class="op">+</span> 
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span>(tag_levels = <span class="st">"A"</span>)
 </pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-10-1.png" width="768"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-9-1.png" width="768"></p>
 <p>There are Cyanobacteria/Chloroplast related sequences which can be removed if not expected in the samples.</p>
 </div>
 <div id="dominant-taxa" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dominant-taxa" class="anchor"></a>Dominant taxa</h3>
-<p>Sometimes, we are interested in identify the most dominant taxa in each sample. We may also wish to check what percent of samples within a given group are these taxa dominating.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
+<p>Sometimes, we are interested in identifying the most dominant taxa in each sample. We may also wish to check what percent of samples within a given group are these taxa dominating.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
@@ -580,41 +571,67 @@ This best works with cleaned taxonomy table.</empty></p>
 <h3 class="hasAnchor">
 <a href="#get-taxa-summary" class="anchor"></a>Get taxa summary</h3>
 <p>This can be used for entire dataset.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
 <span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
 <span class="kw">tx.sum1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_summary.html">taxa_summary</a></span>(<span class="kw">p0</span>, <span class="st">"Phylum"</span>)
 <span class="co">#&gt; Data provided is not compositional </span>
 <span class="co">#&gt;  will first transform</span>
+<span class="kw">tx.sum1</span>
+<span class="co">#&gt;                            Taxa          Max.Rel.Ab          Mean.Rel.Ab</span>
+<span class="co">#&gt; 1              p__Euryarchaeota   0.218508035656191   0.0200267274400673</span>
+<span class="co">#&gt; 2                           p__  0.0359956743395643  0.00213630393381328</span>
+<span class="co">#&gt; 3             p__Actinobacteria   0.189937172231165   0.0294096453288836</span>
+<span class="co">#&gt; 4              p__Bacteroidetes   0.703769740193581    0.244709411770076</span>
+<span class="co">#&gt; 5  p__Cyanobacteria/Chloroplast 0.00391786546652736 0.000248991452140149</span>
+<span class="co">#&gt; 6        p__Deinococcus-Thermus  0.0306807689079157  0.00136619388828292</span>
+<span class="co">#&gt; 7                 p__Firmicutes   0.935779308307329    0.609116019352896</span>
+<span class="co">#&gt; 8               p__Fusobacteria   0.390135934239562   0.0079458294240542</span>
+<span class="co">#&gt; 9             p__Proteobacteria   0.403932082216265     0.04116346455827</span>
+<span class="co">#&gt; 10             p__Synergistetes  0.0106576610162058 0.000207008030950549</span>
+<span class="co">#&gt; 11           p__Verrucomicrobia   0.320077232101149   0.0436704048205656</span>
+<span class="co">#&gt;           Median.Rel.Ab             Std.dev</span>
+<span class="co">#&gt; 1  4.08341966447163e-05  0.0445500008069431</span>
+<span class="co">#&gt; 2  0.000335981950200747 0.00577447214134393</span>
+<span class="co">#&gt; 3    0.0152970058974793  0.0361457627428506</span>
+<span class="co">#&gt; 4     0.193736718210234   0.183986562646175</span>
+<span class="co">#&gt; 5  2.58996131628288e-05 0.00070384339925814</span>
+<span class="co">#&gt; 6                     0 0.00449398785197828</span>
+<span class="co">#&gt; 7     0.598709982286244   0.182320763133074</span>
+<span class="co">#&gt; 8                     0  0.0514603201611758</span>
+<span class="co">#&gt; 9    0.0130121759294526  0.0774502267516943</span>
+<span class="co">#&gt; 10                    0 0.00119199461324549</span>
+<span class="co">#&gt; 11  0.00665688163392832  0.0679829229763011</span>
 </pre></div>
 </div>
 <div id="get-taxa-summary-by-groups" class="section level3">
 <h3 class="hasAnchor">
 <a href="#get-taxa-summary-by-groups" class="anchor"></a>Get taxa summary by group(s)</h3>
 <p>For group specific abundances of taxa <code>get_group_abundances</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
+<div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
 <span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="fu"><a href="../reference/get_group_abundances.html">get_group_abundances</a></span>(<span class="kw">p0</span>, level = <span class="st">"Phylum"</span>, group=<span class="st">"DiseaseState"</span>)
+<span class="kw">grp_abund</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_group_abundances.html">get_group_abundances</a></span>(<span class="kw">p0</span>, level = <span class="st">"Phylum"</span>, group=<span class="st">"DiseaseState"</span>)
 <span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
-<span class="co">#&gt; # A tibble: 33 x 4</span>
-<span class="co">#&gt; # Groups:   DiseaseState [3]</span>
-<span class="co">#&gt;    DiseaseState OTUID                        mean_abundance sd_abundance</span>
-<span class="co">#&gt;    &lt;fct&gt;        &lt;chr&gt;                                 &lt;dbl&gt;        &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 CRC          p__                               0.00132       0.00201 </span>
-<span class="co">#&gt;  2 CRC          p__Actinobacteria                 0.0235        0.0286  </span>
-<span class="co">#&gt;  3 CRC          p__Bacteroidetes                  0.254         0.181   </span>
-<span class="co">#&gt;  4 CRC          p__Cyanobacteria/Chloroplast      0.0000918     0.000193</span>
-<span class="co">#&gt;  5 CRC          p__Deinococcus-Thermus            0.000919      0.00315 </span>
-<span class="co">#&gt;  6 CRC          p__Euryarchaeota                  0.0227        0.0437  </span>
-<span class="co">#&gt;  7 CRC          p__Firmicutes                     0.570         0.171   </span>
-<span class="co">#&gt;  8 CRC          p__Fusobacteria                   0.0233        0.0870  </span>
-<span class="co">#&gt;  9 CRC          p__Proteobacteria                 0.0623        0.0991  </span>
-<span class="co">#&gt; 10 CRC          p__Synergistetes                  0.000445      0.00197 </span>
-<span class="co">#&gt; # ... with 23 more rows</span>
 </pre></div>
+<p>How to visusalize these data?</p>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span>)
+
+<span class="kw">grp_abund</span> <span class="op">%&gt;%</span> <span class="co"># input data</span>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">OTUID</span>, <span class="kw">mean_abundance</span>)) <span class="op">+</span> <span class="co"># x and y axis </span>
+  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(fill=<span class="kw">DiseaseState</span>), <span class="co"># fill by Group</span>
+           stat = <span class="st">"identity"</span>, 
+           position=<span class="st">"dodge"</span>) <span class="op">+</span>
+  <span class="fu">scale_fill_manual</span>(<span class="st">"DiseaseState"</span>, values=<span class="kw">mycols</span>) <span class="op">+</span> <span class="co"># manually specify colors</span>
+  <span class="fu">theme_bw</span>() <span class="op">+</span> <span class="co"># add a widely used ggplot2 theme</span>
+  <span class="fu">ylab</span>(<span class="st">"Mean Relative Abundance"</span>) <span class="op">+</span> <span class="co"># label y axis</span>
+  <span class="fu">xlab</span>(<span class="st">"Phylum"</span>) <span class="op">+</span> <span class="co"># label x axis</span>
+  <span class="fu">coord_flip</span>() <span class="co"># rotate plot </span>
+</pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="find-samples-dominated-by-specific-taxa" class="section level3">
 <h3 class="hasAnchor">
@@ -650,7 +667,8 @@ This best works with cleaned taxonomy table.</empty></p>
 <div id="rarefaction-curves-for-alpha-diversity-indices" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rarefaction-curves-for-alpha-diversity-indices" class="anchor"></a>Rarefaction curves for alpha diversity indices</h3>
-<p>A common approach to check for sequencing depth and diversity measures.</p>
+<p>A common approach to check for sequencing depth and diversity measures.<br>
+Here, we can access the numerous alpha diversity measures supported by <a href="https://microbiome.github.io/tutorials/Alphadiversity.html">microbiome R package</a>.</p>
 <p><em>NOTE:</em> This can take sometime to complete.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
@@ -730,6 +748,14 @@ This best works with cleaned taxonomy table.</empty></p>
 <span class="kw">p.m</span> <span class="op">+</span> <span class="fu">ylab</span>(<span class="st">"Shannon Diversity"</span>) <span class="op">+</span> <span class="fu">xlab</span>(<span class="st">""</span>)
 </pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-18-1.png" width="384" style="display: block; margin: auto;"></p>
+</div>
+</div>
+<div id="composition-plots" class="section level2">
+<h2 class="hasAnchor">
+<a href="#composition-plots" class="anchor"></a>Composition plots</h2>
+<div id="ternary-plot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ternary-plot" class="anchor"></a>Ternary plot</h3>
 <div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://microbiome.github.io/microbiome">microbiome</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
@@ -750,14 +776,6 @@ This best works with cleaned taxonomy table.</empty></p>
 <span class="co">#&gt; 5 Akkerm~ 1.26    1.05   1.53    Bacter~ Verruc~ Verru~ Verr~ Verru~ Akke~ Akke~</span>
 <span class="co">#&gt; 6 Alisti~ 0.929   0.894  0.654   Bacter~ Bacter~ Bacte~ Bact~ Riken~ Alis~ Alis~</span>
 </pre></div>
-</div>
-</div>
-<div id="composition-plots" class="section level2">
-<h2 class="hasAnchor">
-<a href="#composition-plots" class="anchor"></a>Composition plots</h2>
-<div id="ternary-plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ternary-plot" class="anchor"></a>Ternary plot</h3>
 <div class="sourceCode" id="cb20"><pre class="downlit">
 
 <span class="co"># install.packages("ggtern")</span>
@@ -831,7 +849,7 @@ This best works with cleaned taxonomy table.</empty></p>
 <span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span> <span class="op">+</span> <span class="fu">ylab</span>(<span class="st">"Relative abundance"</span>) <span class="op">+</span> <span class="fu">scale_y_continuous</span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>))
 </pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-22-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-22-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>Adding statistical test with <code><a href="https://rdrr.io/pkg/ggpubr/man/stat_compare_means.html">ggpubr::stat_compare_means()</a></code></p>
 <div class="sourceCode" id="cb23"><pre class="downlit">
 
@@ -851,7 +869,7 @@ This best works with cleaned taxonomy table.</empty></p>
       label = <span class="st">"p.format"</span>,
       tip.length = <span class="fl">0.05</span>,
       method = <span class="st">"wilcox.test"</span>)
-<span class="kw">p</span>
+<span class="kw">p</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>)
 </pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-23-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>Plot top four Genera</p>
@@ -894,8 +912,9 @@ This best works with cleaned taxonomy table.</empty></p>
 <div id="abundance-prevalence-relationship" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abundance-prevalence-relationship" class="anchor"></a>Abundance-Prevalence relationship</h3>
-<p>Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random subsampling.<br>
-This can be useful in identifying highly prevalent taxa and thier mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.</p>
+<p>Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random sub-sampling.<br>
+This can be useful in identifying highly prevalent taxa and their mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.</p>
+<p>See <a href="https://microbiome.github.io/tutorials/Core.html">core microbiota analysis in microbiome R package</a></p>
 <div class="sourceCode" id="cb25"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
@@ -917,8 +936,8 @@ This can be useful in identifying highly prevalent taxa and thier mean relative 
                        label.size = <span class="fl">3</span>,
                        label.opacity = <span class="fl">1.0</span>,
                        nudge.label=<span class="op">-</span><span class="fl">0.15</span>,
-                       bs.iter=<span class="fl">9</span>,
-                       size = <span class="fl">20</span>, 
+                       bs.iter=<span class="fl">9</span>, <span class="co"># increase for actual analysis e.g. 999</span>
+                       size = <span class="fl">20</span>, <span class="co"># increase to match your nsamples(asv_ps)</span>
                        replace = <span class="fl">TRUE</span>,
                        label.color=<span class="st">"#5f0f40"</span>)  
 <span class="kw">p_v</span> <span class="op">&lt;-</span> <span class="kw">p_v</span> <span class="op">+</span> 
@@ -937,6 +956,7 @@ This can be useful in identifying highly prevalent taxa and thier mean relative 
 <h3 class="hasAnchor">
 <a href="#calculate-plasticity" class="anchor"></a>Calculate plasticity</h3>
 <p>See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. <a href="https://www.nature.com/articles/s41598-020-58000-y">Sci Rep 10, 1405 (2020).</a></p>
+<p>Data from <code>microbiome</code> package is used here for example.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://microbiome.github.io/microbiome">microbiome</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
@@ -992,7 +1012,8 @@ This can be useful in identifying highly prevalent taxa and thier mean relative 
 <div id="heatmap-using-phyloseq-and-pheatmap" class="section level3">
 <h3 class="hasAnchor">
 <a href="#heatmap-using-phyloseq-and-pheatmap" class="anchor"></a>Heatmap using phyloseq and pheatmap</h3>
-<p>Useful for visualizing differences in top otus between sample groups.</p>
+<p>Useful for visualizing differences in top OTUs between sample groups.<br>
+By default this function internally calculated Prevalence, but purposely doesn’t plot by default. This is to give access to powerful <code>pheatmap</code> annotation options.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">pheatmap</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
@@ -1072,6 +1093,7 @@ This can be useful in identifying highly prevalent taxa and thier mean relative 
 <span class="co">#&gt; Warning: Transformation introduced infinite values in discrete y-axis</span>
 </pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-30-1.png" width="960" style="display: block; margin: auto;"></p>
+<p>For heatmap options see <a href="https://microbiome.github.io/tutorials/Heatmap.html">microbiome::heat()</a> and <a href="https://madsalbertsen.github.io/ampvis2/reference/amp_heatmap.html">ampvis2</a></p>
 </div>
 </div>
 <div id="microbiomehd-datasets-as-phyloseq-objects" class="section level2">
@@ -1216,6 +1238,20 @@ This can be useful in identifying highly prevalent taxa and thier mean relative 
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span>)
 </pre></div>
+</div>
+<div id="summarize-the-percent-taxa-classification-for-phyloseq" class="section level3">
+<h3 class="hasAnchor">
+<a href="#summarize-the-percent-taxa-classification-for-phyloseq" class="anchor"></a>Summarize the percent taxa classification for phyloseq</h3>
+<p>This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or <code>NA</code> is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply <code>NA</code>.<br>
+This best works with cleaned taxonomy table.</empty></p>
+<div class="sourceCode" id="cb34"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
+<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
+<span class="co"># reduce size for example</span>
+<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span>(<span class="kw">p0</span>, detection = <span class="fl">10</span>, prevalence = <span class="fl">50</span> <span class="op">/</span> <span class="fl">100</span>)
+
+<span class="fu"><a href="../reference/percent_classified.html">percent_classified</a></span>(<span class="kw">ps0</span>)
+</pre></div>
 <p>For more tutorials and examples of data anlaysis in R please check:</p>
 <ul>
 <li>
@@ -1223,7 +1259,7 @@ This can be useful in identifying highly prevalent taxa and thier mean relative 
 </li>
 <li><a href="http://microbiome.github.io/microbiome/">Microbiome R package tutorials</a></li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="downlit">
+<div class="sourceCode" id="cb35"><pre class="downlit">
 
 <span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
 <span class="co">#&gt; R version 4.0.2 (2020-06-22)</span>
@@ -1243,46 +1279,46 @@ This can be useful in identifying highly prevalent taxa and thier mean relative 
 <span class="co">#&gt; other attached packages:</span>
 <span class="co">#&gt;  [1] pheatmap_1.0.12             ggrepel_0.8.2              </span>
 <span class="co">#&gt;  [3] gghalves_0.1.0              ggpubr_0.4.0               </span>
-<span class="co">#&gt;  [5] RColorBrewer_1.1-2          tibble_3.0.3               </span>
-<span class="co">#&gt;  [7] knitr_1.29                  microbiomeutilities_1.00.07</span>
-<span class="co">#&gt;  [9] dplyr_1.0.2                 microbiome_2.1.28          </span>
-<span class="co">#&gt; [11] ggplot2_3.3.2               phyloseq_1.33.0            </span>
+<span class="co">#&gt;  [5] patchwork_1.0.1             RColorBrewer_1.1-2         </span>
+<span class="co">#&gt;  [7] tibble_3.0.3                knitr_1.29                 </span>
+<span class="co">#&gt;  [9] microbiomeutilities_1.00.08 dplyr_1.0.2                </span>
+<span class="co">#&gt; [11] microbiome_2.1.28           ggplot2_3.3.2              </span>
+<span class="co">#&gt; [13] phyloseq_1.33.0            </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;   [1] nlme_3.1-148        fs_1.5.0            rprojroot_1.3-2    </span>
-<span class="co">#&gt;   [4] tools_4.0.2         backports_1.1.10    utf8_1.1.4         </span>
-<span class="co">#&gt;   [7] R6_2.4.1            vegan_2.5-6         BiocGenerics_0.35.4</span>
-<span class="co">#&gt;  [10] mgcv_1.8-31         colorspace_1.4-1    permute_0.9-5      </span>
-<span class="co">#&gt;  [13] rhdf5filters_1.1.2  ade4_1.7-15         withr_2.3.0        </span>
-<span class="co">#&gt;  [16] tidyselect_1.1.0    curl_4.3            compiler_4.0.2     </span>
-<span class="co">#&gt;  [19] cli_2.0.2           Biobase_2.49.1      desc_1.2.0         </span>
-<span class="co">#&gt;  [22] labeling_0.3        scales_1.1.1        pkgdown_1.6.1      </span>
-<span class="co">#&gt;  [25] systemfonts_0.3.1   stringr_1.4.0       digest_0.6.25      </span>
-<span class="co">#&gt;  [28] foreign_0.8-80      rmarkdown_2.3       rio_0.5.16         </span>
-<span class="co">#&gt;  [31] XVector_0.29.3      pkgconfig_2.0.3     htmltools_0.5.0    </span>
-<span class="co">#&gt;  [34] highr_0.8           rlang_0.4.7         readxl_1.3.1       </span>
-<span class="co">#&gt;  [37] rstudioapi_0.11     farver_2.0.3        generics_0.0.2     </span>
-<span class="co">#&gt;  [40] jsonlite_1.7.1      zip_2.1.1           car_3.0-10         </span>
-<span class="co">#&gt;  [43] magrittr_1.5        biomformat_1.17.0   Matrix_1.2-18      </span>
-<span class="co">#&gt;  [46] fansi_0.4.1         Rcpp_1.0.5          munsell_0.5.0      </span>
-<span class="co">#&gt;  [49] S4Vectors_0.27.12   Rhdf5lib_1.11.3     abind_1.4-5        </span>
-<span class="co">#&gt;  [52] ape_5.4-1           lifecycle_0.2.0     stringi_1.5.3      </span>
-<span class="co">#&gt;  [55] yaml_2.2.1          carData_3.0-4       MASS_7.3-51.6      </span>
-<span class="co">#&gt;  [58] zlibbioc_1.35.0     rhdf5_2.33.7        Rtsne_0.15         </span>
-<span class="co">#&gt;  [61] plyr_1.8.6          grid_4.0.2          parallel_4.0.2     </span>
-<span class="co">#&gt;  [64] forcats_0.5.0       crayon_1.3.4        lattice_0.20-41    </span>
-<span class="co">#&gt;  [67] cowplot_1.1.0       Biostrings_2.57.2   haven_2.3.1        </span>
-<span class="co">#&gt;  [70] splines_4.0.2       multtest_2.45.0     hms_0.5.3          </span>
-<span class="co">#&gt;  [73] pillar_1.4.6        igraph_1.2.5        ggsignif_0.6.0     </span>
-<span class="co">#&gt;  [76] reshape2_1.4.4      codetools_0.2-16    stats4_4.0.2       </span>
-<span class="co">#&gt;  [79] glue_1.4.2          evaluate_0.14       data.table_1.13.0  </span>
-<span class="co">#&gt;  [82] vctrs_0.3.4         foreach_1.5.0       cellranger_1.1.0   </span>
-<span class="co">#&gt;  [85] gtable_0.3.0        purrr_0.3.4         tidyr_1.1.2        </span>
-<span class="co">#&gt;  [88] assertthat_0.2.1    cpp11_0.2.2         xfun_0.17          </span>
-<span class="co">#&gt;  [91] openxlsx_4.2.2      broom_0.7.1         rstatix_0.6.0      </span>
-<span class="co">#&gt;  [94] ragg_0.3.1          survival_3.1-12     iterators_1.0.12   </span>
-<span class="co">#&gt;  [97] memoise_1.1.0       IRanges_2.23.10     cluster_2.1.0      </span>
-<span class="co">#&gt; [100] ellipsis_0.3.1</span>
+<span class="co">#&gt;  [1] nlme_3.1-148        fs_1.5.0            rprojroot_1.3-2    </span>
+<span class="co">#&gt;  [4] tools_4.0.2         backports_1.1.10    utf8_1.1.4         </span>
+<span class="co">#&gt;  [7] R6_2.4.1            vegan_2.5-6         BiocGenerics_0.35.4</span>
+<span class="co">#&gt; [10] mgcv_1.8-31         colorspace_1.4-1    permute_0.9-5      </span>
+<span class="co">#&gt; [13] rhdf5filters_1.1.2  ade4_1.7-15         withr_2.3.0        </span>
+<span class="co">#&gt; [16] tidyselect_1.1.0    curl_4.3            compiler_4.0.2     </span>
+<span class="co">#&gt; [19] cli_2.0.2           Biobase_2.49.1      desc_1.2.0         </span>
+<span class="co">#&gt; [22] labeling_0.3        scales_1.1.1        pkgdown_1.6.1      </span>
+<span class="co">#&gt; [25] systemfonts_0.3.1   stringr_1.4.0       digest_0.6.25      </span>
+<span class="co">#&gt; [28] foreign_0.8-80      rmarkdown_2.3       rio_0.5.16         </span>
+<span class="co">#&gt; [31] XVector_0.29.3      pkgconfig_2.0.3     htmltools_0.5.0    </span>
+<span class="co">#&gt; [34] highr_0.8           rlang_0.4.7         readxl_1.3.1       </span>
+<span class="co">#&gt; [37] rstudioapi_0.11     farver_2.0.3        generics_0.0.2     </span>
+<span class="co">#&gt; [40] jsonlite_1.7.1      zip_2.1.1           car_3.0-10         </span>
+<span class="co">#&gt; [43] magrittr_1.5        biomformat_1.17.0   Matrix_1.2-18      </span>
+<span class="co">#&gt; [46] fansi_0.4.1         Rcpp_1.0.5          munsell_0.5.0      </span>
+<span class="co">#&gt; [49] S4Vectors_0.27.12   Rhdf5lib_1.11.3     abind_1.4-5        </span>
+<span class="co">#&gt; [52] ape_5.4-1           lifecycle_0.2.0     stringi_1.5.3      </span>
+<span class="co">#&gt; [55] yaml_2.2.1          carData_3.0-4       MASS_7.3-51.6      </span>
+<span class="co">#&gt; [58] zlibbioc_1.35.0     rhdf5_2.33.7        Rtsne_0.15         </span>
+<span class="co">#&gt; [61] plyr_1.8.6          grid_4.0.2          parallel_4.0.2     </span>
+<span class="co">#&gt; [64] forcats_0.5.0       crayon_1.3.4        lattice_0.20-41    </span>
+<span class="co">#&gt; [67] Biostrings_2.57.2   haven_2.3.1         splines_4.0.2      </span>
+<span class="co">#&gt; [70] multtest_2.45.0     hms_0.5.3           pillar_1.4.6       </span>
+<span class="co">#&gt; [73] igraph_1.2.5        ggsignif_0.6.0      reshape2_1.4.4     </span>
+<span class="co">#&gt; [76] codetools_0.2-16    stats4_4.0.2        glue_1.4.2         </span>
+<span class="co">#&gt; [79] evaluate_0.14       data.table_1.13.0   vctrs_0.3.4        </span>
+<span class="co">#&gt; [82] foreach_1.5.0       cellranger_1.1.0    gtable_0.3.0       </span>
+<span class="co">#&gt; [85] purrr_0.3.4         tidyr_1.1.2         assertthat_0.2.1   </span>
+<span class="co">#&gt; [88] cpp11_0.2.2         xfun_0.17           openxlsx_4.2.2     </span>
+<span class="co">#&gt; [91] broom_0.7.1         rstatix_0.6.0       ragg_0.3.1         </span>
+<span class="co">#&gt; [94] survival_3.1-12     iterators_1.0.12    memoise_1.1.0      </span>
+<span class="co">#&gt; [97] IRanges_2.23.10     cluster_2.1.0       ellipsis_0.3.1</span>
 </pre></div>
 </div>
 </div>

@@ -1,7 +1,10 @@
 
 Constant development is in process.  
 
-CHANGES IN VERSION 1.00.07 (2020-10-15)
+CHANGES IN VERSION 1.00.08 (2020-10-17)  
+  o Cosmetic updates      
+  
+CHANGES IN VERSION 1.00.07 (2020-10-15)  
   o Update to `plot_taxa_heatmap`   
   o Fixed `plot_abund_prev` options  
   o Added `plot_alpha_rcurve`   
