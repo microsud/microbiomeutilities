@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.08</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.09</span>
       </span>
     </div>
 
@@ -48,6 +48,18 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/microbiomeutilities_ts.html">Longitudidal data analysis and visualization</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -75,7 +87,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#about" class="anchor"></a>About</h1></div>
 <p>The <strong>microbiomeutilities</strong> is a supporting R package for the parent <a href="http://microbiome.github.com/microbiome">microbiome</a> R/BioC package.</p>
-<p>Philosophy: <em>Seemingly simple tasks for experienced R users can always be further simplified for novice users</em></p>
+<p>Philosophy: “<em>Seemingly simple tasks for experienced R users can always be further simplified for novice users</em>”</p>
 <p><a href="https://microsud.github.io/microbiomeutilities/">Package website and online documentation</a></p>
 <div id="install-microbiomeutilities" class="section level2">
 <h2 class="hasAnchor">
@@ -83,8 +95,12 @@
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 </a></code></pre>
-<p><strong>Citation:</strong> Sudarshan A. Shetty, &amp; Leo Lahti. (2020, October). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.08).<br>
-The microbiome R package relies on the independently developed<br><a href="https://github.com/joey711/phyloseq">phyloseq</a> package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.<br><a href="http://ggplot2.org/">ggplot2</a> H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.<br><a href="https://www.tidyverse.org/">tidyverse packages</a>.</p>
+<p><strong>Citation:</strong><br>
+o Leo Lahti, Sudarshan Shetty et al. (2017). Tools for microbiome analysis in R. Version 2.1.28. URL: <a href="http://microbiome.github.com/microbiome" class="uri">http://microbiome.github.com/microbiome</a> o Sudarshan A. Shetty, &amp; Leo Lahti. (2020, October). <code>microbiomeutilities</code>: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.08).</p>
+<p>The microbiome R package relies on the independently developed<br>
+o <a href="https://github.com/joey711/phyloseq">phyloseq</a> package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.<br>
+o <a href="http://ggplot2.org/">ggplot2</a> H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.<br>
+o <a href="https://www.tidyverse.org/">tidyverse packages</a>.</p>
 <p><strong>Microbiome package website with step-wise tutorials</strong>:<br>
 URL: <a href="http://microbiome.github.com/microbiome">http://microbiome.github.com/microbiome</a>.</p>
 <p><strong>Tutorials</strong></p>
@@ -146,7 +162,7 @@ The package provides access to a subset of studies included in the <a href="http
 <li>Ross, M. C. et al. 16s gut community of the cameron county hispanic cohort. Microbiome 3, 7 (2015).</li>
 <li>Zupancic, M. L. et al. Analysis of the gut microbiota in the old order Amish and its relation to the metabolic syndrome. PLoS ONE 7, e43052 (2012).<br>
 </li>
-<li>Scher, J. U. et al. Expansion of intestinal prevotella copri correlates with enhanced susceptibility to arthritis. eLife 2, e01202 (2013).<br>
+<li>Scher, J. U. et al. Expansion of intestinal Prevotella copri correlates with enhanced susceptibility to arthritis. eLife 2, e01202 (2013).<br>
 </li>
 <li>Alkanani, A. K. et al. Alterations in intestinal microbiota correlate with susceptibility to type 1 diabetes. Diabetes 64, 3510–3520 (2015).<br>
 </li>
@@ -159,6 +175,11 @@ The aim of this package is not to replace any of the other tools mentioned on th
 <div id="change-log" class="section level2">
 <h2 class="hasAnchor">
 <a href="#change-log" class="anchor"></a>Change log</h2>
+<p>CHANGES IN VERSION 1.00.09 (2020-10-21)<br>
+o Added longitudinal page to website<br>
+o Added new function <code>plot_area</code><br>
+o Added new function <code>plot_paired_abundances</code><br>
+o Added new function <code>plot_spaghetti</code></p>
 <p>CHANGES IN VERSION 1.00.08 (2020-10-17)<br>
 o Cosmetic updates</p>
 <p>CHANGES IN VERSION 1.00.07 (2020-10-15)<br>

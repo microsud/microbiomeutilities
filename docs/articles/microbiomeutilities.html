@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.08</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.09</span>
       </span>
     </div>
 
@@ -48,6 +48,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/microbiomeutilities_ts.html">Longitudidal data analysis and visualization</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -81,24 +93,20 @@
     
     
 <p>The <code>microbiomeutilities</code> R package is mainly a wrapper tool with diverse functions for data handling and visualization.</p>
-<p>Philosophy: <em>Seemingly simple tasks for experienced R users can always be further simplified for novice users</em></p>
+<p>Philosophy: “<em>Seemingly simple tasks for experienced R users can always be further simplified for novice users</em>”</p>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"microsud/microbiomeutilities"</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"microsud/microbiomeutilities"</span><span class="op">)</span></pre></div>
 <p>Load libraries</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://microbiome.github.io/microbiome">microbiome</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://yihui.org/knitr">knitr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tibble.tidyverse.org">tibble</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></pre></div>
 </div>
 <div id="basics" class="section level2">
 <h2 class="hasAnchor">
@@ -112,18 +120,16 @@
 <p>Tools for microbiome analysis in R. <strong>Microbiome package</strong> URL: <a href="http://microbiome.github.com/microbiome">microbiome package</a>.</p>
 <p>Import test data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">ps0</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">ps0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">ps0</span>
 <span class="co">#&gt; phyloseq-class experiment-level object</span>
 <span class="co">#&gt; otu_table()   OTU Table:         [ 2078 taxa and 88 samples ]</span>
 <span class="co">#&gt; sample_data() Sample Data:       [ 88 samples by 7 sample variables ]</span>
-<span class="co">#&gt; tax_table()   Taxonomy Table:    [ 2078 taxa by 7 taxonomic ranks ]</span>
-</pre></div>
+<span class="co">#&gt; tax_table()   Taxonomy Table:    [ 2078 taxa by 7 taxonomic ranks ]</span></pre></div>
 <p>The <code>print_ps</code> from <code>microbiomeutilities</code> can give additional information. See also <code><a href="https://rdrr.io/pkg/microbiome/man/summarize_phyloseq.html">microbiome::summarize_phyloseq</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/print_ps.html">print_ps</a></span>(<span class="kw">ps0</span>)
+<span class="fu"><a href="../reference/print_ps.html">print_ps</a></span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span>
 <span class="co">#&gt; 01] ntaxa = 2078</span>
 <span class="co">#&gt; 02] nsamples = 88</span>
 <span class="co">#&gt; 03] nsamplesvariables = 7</span>
@@ -136,8 +142,7 @@
 <span class="co">#&gt; 10] Sparsity = 0.728426590252865</span>
 <span class="co">#&gt; 11] Number of singletons = 0</span>
 <span class="co">#&gt; 12] % of taxa that are singletons </span>
-<span class="co">#&gt;   (i.e. exactly one read detected across all samples) = 0</span>
-</pre></div>
+<span class="co">#&gt;   (i.e. exactly one read detected across all samples) = 0</span></pre></div>
 </div>
 <div id="formatting-the-phyloseq-object" class="section level3">
 <h3 class="hasAnchor">
@@ -145,9 +150,7 @@
 <p>Most commonly it is observed that the taxonomy file has classification until a given taxonomic level. We can change the names in both otu table and taxonomy table with the best taxonomic classification available. This can be useful if the analysis has to be done at OTU/ASVs level. Only ID are less useful.</p>
 <p>Check the taxonomy in phyloseq object.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-
-<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu">tax_table</span>(<span class="kw">ps0</span>)))
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">tax_table</span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table">
 <colgroup>
 <col width="11%">
@@ -234,16 +237,14 @@
 </table>
 <p>Some have only g__ of s__ information.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 <span class="co"># reduce size for example</span>
-<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span>(<span class="kw">p0</span>, detection = <span class="fl">10</span>, prevalence = <span class="fl">20</span> <span class="op">/</span> <span class="fl">100</span>)
+<span class="va">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span><span class="op">(</span><span class="va">p0</span>, detection <span class="op">=</span> <span class="fl">10</span>, prevalence <span class="op">=</span> <span class="fl">20</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span>
 <span class="co"># Add a prefix to taxa labels</span>
-<span class="kw">ps0.f2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(<span class="kw">ps0</span>, prefix = <span class="st">"MyBug-"</span>)
+<span class="va">ps0.f2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">ps0</span>, prefix <span class="op">=</span> <span class="st">"MyBug-"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu">tax_table</span>(<span class="kw">ps0.f2</span>))[<span class="fl">3</span><span class="op">:</span><span class="fl">6</span>])
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">tax_table</span><span class="op">(</span><span class="va">ps0.f2</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span></pre></div>
 <table class="table">
 <colgroup>
 <col width="21%">
@@ -322,14 +323,13 @@
 <a href="#distribution-of-reads" class="anchor"></a>Distribution of reads</h3>
 <p>Useful for QC purposes. Check for distribution of sequencing depth.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_read_distribution.html">plot_read_distribution</a></span>(<span class="kw">p0</span>, groups = <span class="st">"DiseaseState"</span>, 
-                            plot.type = <span class="st">"density"</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_read_distribution.html">plot_read_distribution</a></span><span class="op">(</span><span class="va">p0</span>, groups <span class="op">=</span> <span class="st">"DiseaseState"</span>, 
+                            plot.type <span class="op">=</span> <span class="st">"density"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Done plotting"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>())
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
 <p>This is a diagnostic step. Key to check if there is variation between groups that will be compared for downstream analysis.</p>
 </div>
 <div id="convert-phyloseq-object-to-long-data-format" class="section level3">
@@ -338,16 +338,15 @@
 <p>Useful if the user wants to plot specific features.<br>
 Converting to long data format opens several opportunities to work with <a href="https://www.tidyverse.org/">Tidyverse</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 <span class="co"># reduce size for example</span>
-<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span>(<span class="kw">p0</span>, detection = <span class="fl">10</span>, prevalence = <span class="fl">20</span> <span class="op">/</span> <span class="fl">100</span>)
+<span class="va">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span><span class="op">(</span><span class="va">p0</span>, detection <span class="op">=</span> <span class="fl">10</span>, prevalence <span class="op">=</span> <span class="fl">20</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span>
 
-<span class="kw">pseq_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/phy_to_ldf.html">phy_to_ldf</a></span>(<span class="kw">ps0</span>, transform.counts = <span class="kw">NULL</span>)
+<span class="va">pseq_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/phy_to_ldf.html">phy_to_ldf</a></span><span class="op">(</span><span class="va">ps0</span>, transform.counts <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 <span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">pseq_df</span>))
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pseq_df</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table">
 <colgroup>
 <col width="4%">
@@ -515,29 +514,28 @@ Converting to long data format opens several opportunities to work with <a href=
 <a href="#check-distribution" class="anchor"></a>Check distribution</h3>
 <p>A quick check to see how different taxa are distributed in your data.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://patchwork.data-imaginist.com">patchwork</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://rpkgs.datanovia.com/ggpubr">ggpubr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">pseq</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">pseq</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 
 <span class="co"># check healthy</span>
-<span class="kw">health_ps</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span>(<span class="kw">pseq</span>, <span class="kw">DiseaseState</span><span class="op">==</span><span class="st">"H"</span>)
-<span class="kw">p_hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_distribution.html">taxa_distribution</a></span>(<span class="kw">health_ps</span>) <span class="op">+</span> 
-  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>() <span class="op">+</span> 
-  <span class="fu">labs</span>(title = <span class="st">"Healthy"</span>)
+<span class="va">health_ps</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span><span class="op">(</span><span class="va">pseq</span>, <span class="va">DiseaseState</span><span class="op">==</span><span class="st">"H"</span><span class="op">)</span>
+<span class="va">p_hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_distribution.html">taxa_distribution</a></span><span class="op">(</span><span class="va">health_ps</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Healthy"</span><span class="op">)</span>
 
 <span class="co"># check CRC</span>
-<span class="kw">crc_ps</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span>(<span class="kw">pseq</span>, <span class="kw">DiseaseState</span><span class="op">==</span><span class="st">"CRC"</span>)
-<span class="kw">p_crc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_distribution.html">taxa_distribution</a></span>(<span class="kw">crc_ps</span>) <span class="op">+</span> 
-  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>() <span class="op">+</span> 
-  <span class="fu">labs</span>(title = <span class="st">"CRC"</span>)
+<span class="va">crc_ps</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span><span class="op">(</span><span class="va">pseq</span>, <span class="va">DiseaseState</span><span class="op">==</span><span class="st">"CRC"</span><span class="op">)</span>
+<span class="va">p_crc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_distribution.html">taxa_distribution</a></span><span class="op">(</span><span class="va">crc_ps</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"CRC"</span><span class="op">)</span>
 
 <span class="co"># harnessing the power of patchwork</span>
-<span class="kw">p_hc</span> <span class="op">/</span> <span class="kw">p_crc</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span>(guides = <span class="st">"collect"</span>) <span class="op">+</span> 
-  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span>(tag_levels = <span class="st">"A"</span>)
-</pre></div>
+<span class="va">p_hc</span> <span class="op">/</span> <span class="va">p_crc</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-9-1.png" width="768"></p>
 <p>There are Cyanobacteria/Chloroplast related sequences which can be removed if not expected in the samples.</p>
 </div>
@@ -546,14 +544,14 @@ Converting to long data format opens several opportunities to work with <a href=
 <a href="#dominant-taxa" class="anchor"></a>Dominant taxa</h3>
 <p>Sometimes, we are interested in identifying the most dominant taxa in each sample. We may also wish to check what percent of samples within a given group are these taxa dominating.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">p0.gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/aggregate_taxa.html">aggregate_taxa</a></span>(<span class="kw">p0</span>,<span class="st">"Genus"</span>)
-<span class="kw">x.d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dominant_taxa.html">dominant_taxa</a></span>(<span class="kw">p0</span>,level = <span class="st">"Genus"</span>, group=<span class="st">"DiseaseState"</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">p0.gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/aggregate_taxa.html">aggregate_taxa</a></span><span class="op">(</span><span class="va">p0</span>,<span class="st">"Genus"</span><span class="op">)</span>
+<span class="va">x.d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dominant_taxa.html">dominant_taxa</a></span><span class="op">(</span><span class="va">p0</span>,level <span class="op">=</span> <span class="st">"Genus"</span>, group<span class="op">=</span><span class="st">"DiseaseState"</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "sample_id"</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">x.d</span><span class="op">$</span><span class="kw">dominant_overview</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">x.d</span><span class="op">$</span><span class="va">dominant_overview</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 5</span>
 <span class="co">#&gt; # Groups:   DiseaseState [3]</span>
 <span class="co">#&gt;   DiseaseState dominant_taxa      n rel.freq rel.freq.pct</span>
@@ -563,8 +561,7 @@ Converting to long data format opens several opportunities to work with <a href=
 <span class="co">#&gt; 3 CRC          g__Bacteroides     9     30   30%         </span>
 <span class="co">#&gt; 4 CRC          g__Blautia         9     30   30%         </span>
 <span class="co">#&gt; 5 H            g__Blautia         7     23.3 23%         </span>
-<span class="co">#&gt; 6 nonCRC       g__Bacteroides     6     21.4 21%</span>
-</pre></div>
+<span class="co">#&gt; 6 nonCRC       g__Bacteroides     6     21.4 21%</span></pre></div>
 <p>As seen in the table above, 50% of the samples in <code>H</code> group are dominated by *g__Bacteroides* and so on…</p>
 </div>
 <div id="get-taxa-summary" class="section level3">
@@ -572,13 +569,13 @@ Converting to long data format opens several opportunities to work with <a href=
 <a href="#get-taxa-summary" class="anchor"></a>Get taxa summary</h3>
 <p>This can be used for entire dataset.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">tx.sum1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_summary.html">taxa_summary</a></span>(<span class="kw">p0</span>, <span class="st">"Phylum"</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">tx.sum1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_summary.html">taxa_summary</a></span><span class="op">(</span><span class="va">p0</span>, <span class="st">"Phylum"</span><span class="op">)</span>
 <span class="co">#&gt; Data provided is not compositional </span>
 <span class="co">#&gt;  will first transform</span>
-<span class="kw">tx.sum1</span>
+<span class="va">tx.sum1</span>
 <span class="co">#&gt;                            Taxa          Max.Rel.Ab          Mean.Rel.Ab</span>
 <span class="co">#&gt; 1              p__Euryarchaeota   0.218508035656191   0.0200267274400673</span>
 <span class="co">#&gt; 2                           p__  0.0359956743395643  0.00213630393381328</span>
@@ -602,36 +599,42 @@ Converting to long data format opens several opportunities to work with <a href=
 <span class="co">#&gt; 8                     0  0.0514603201611758</span>
 <span class="co">#&gt; 9    0.0130121759294526  0.0774502267516943</span>
 <span class="co">#&gt; 10                    0 0.00119199461324549</span>
-<span class="co">#&gt; 11  0.00665688163392832  0.0679829229763011</span>
-</pre></div>
+<span class="co">#&gt; 11  0.00665688163392832  0.0679829229763011</span></pre></div>
 </div>
 <div id="get-taxa-summary-by-groups" class="section level3">
 <h3 class="hasAnchor">
 <a href="#get-taxa-summary-by-groups" class="anchor"></a>Get taxa summary by group(s)</h3>
 <p>For group specific abundances of taxa <code>get_group_abundances</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">grp_abund</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_group_abundances.html">get_group_abundances</a></span>(<span class="kw">p0</span>, level = <span class="st">"Phylum"</span>, group=<span class="st">"DiseaseState"</span>)
-<span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
-</pre></div>
-<p>How to visusalize these data?</p>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">grp_abund</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_group_abundances.html">get_group_abundances</a></span><span class="op">(</span><span class="va">p0</span>, level <span class="op">=</span> <span class="st">"Phylum"</span>, group<span class="op">=</span><span class="st">"DiseaseState"</span><span class="op">)</span></pre></div>
+<p>How to visualize these data?</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span>)
+<span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span><span class="op">)</span>
 
-<span class="kw">grp_abund</span> <span class="op">%&gt;%</span> <span class="co"># input data</span>
-  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">OTUID</span>, <span class="kw">mean_abundance</span>)) <span class="op">+</span> <span class="co"># x and y axis </span>
-  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(fill=<span class="kw">DiseaseState</span>), <span class="co"># fill by Group</span>
-           stat = <span class="st">"identity"</span>, 
-           position=<span class="st">"dodge"</span>) <span class="op">+</span>
-  <span class="fu">scale_fill_manual</span>(<span class="st">"DiseaseState"</span>, values=<span class="kw">mycols</span>) <span class="op">+</span> <span class="co"># manually specify colors</span>
-  <span class="fu">theme_bw</span>() <span class="op">+</span> <span class="co"># add a widely used ggplot2 theme</span>
-  <span class="fu">ylab</span>(<span class="st">"Mean Relative Abundance"</span>) <span class="op">+</span> <span class="co"># label y axis</span>
-  <span class="fu">xlab</span>(<span class="st">"Phylum"</span>) <span class="op">+</span> <span class="co"># label x axis</span>
-  <span class="fu">coord_flip</span>() <span class="co"># rotate plot </span>
-</pre></div>
+<span class="co"># clean names </span>
+<span class="va">grp_abund</span><span class="op">$</span><span class="va">OTUID</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"p__"</span>, <span class="st">""</span>,<span class="va">grp_abund</span><span class="op">$</span><span class="va">OTUID</span><span class="op">)</span>
+<span class="va">grp_abund</span><span class="op">$</span><span class="va">OTUID</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">grp_abund</span><span class="op">$</span><span class="va">OTUID</span> <span class="op">==</span> <span class="st">""</span>, 
+                          <span class="st">"Unclassified"</span>, <span class="va">grp_abund</span><span class="op">$</span><span class="va">OTUID</span><span class="op">)</span>
+
+
+<span class="va">mean.plot</span> <span class="op">&lt;-</span> <span class="va">grp_abund</span> <span class="op">%&gt;%</span> <span class="co"># input data</span>
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">OTUID</span>, <span class="va">mean_abundance</span><span class="op">)</span>, <span class="co"># reroder based on mean abundance</span>
+             y<span class="op">=</span> <span class="va">mean_abundance</span>,
+             fill<span class="op">=</span><span class="va">DiseaseState</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># x and y axis </span>
+  <span class="fu">geom_bar</span><span class="op">(</span>     stat <span class="op">=</span> <span class="st">"identity"</span>, 
+                position<span class="op">=</span><span class="fu">position_dodge</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_fill_manual</span><span class="op">(</span><span class="st">"DiseaseState"</span>, values<span class="op">=</span><span class="va">mycols</span><span class="op">)</span> <span class="op">+</span> <span class="co"># manually specify colors</span>
+  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># add a widely used ggplot2 theme</span>
+  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Mean Relative Abundance"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># label y axis</span>
+  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Phylum"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># label x axis</span>
+  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="co"># rotate plot </span>
+
+<span class="va">mean.plot</span></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
+<p>This plot is diagnostic to have an idea about the taxonomy in each group. Statements based on comparisons between groups may not make sense here because only mean abundance values are plotted, and not standard deviation within groups. For visualizing error bars and more check <a href="http://www.sthda.com/english/wiki/ggplot2-error-bars-quick-start-guide-r-software-and-data-visualization">Statistical tools for high-throughput data analysis</a>.</p>
 </div>
 <div id="find-samples-dominated-by-specific-taxa" class="section level3">
 <h3 class="hasAnchor">
@@ -639,12 +642,12 @@ Converting to long data format opens several opportunities to work with <a href=
 <p>Finding samples dominated by user provided taxa in a phyloseq object. This is useful especially if user suspects a taxa to be contaminant and wishes to identify which samples are dominated by the contaminant taxa.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">p0.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/aggregate_taxa.html">aggregate_taxa</a></span>(<span class="kw">p0</span>, <span class="st">"Genus"</span>)
-<span class="kw">bac_dom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_samples_taxa.html">find_samples_taxa</a></span>(<span class="kw">p0.f</span>, taxa = <span class="st">"g__Bacteroides"</span>)
-<span class="kw">bac_dom</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">p0.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/aggregate_taxa.html">aggregate_taxa</a></span><span class="op">(</span><span class="va">p0</span>, <span class="st">"Genus"</span><span class="op">)</span>
+<span class="va">bac_dom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_samples_taxa.html">find_samples_taxa</a></span><span class="op">(</span><span class="va">p0.f</span>, taxa <span class="op">=</span> <span class="st">"g__Bacteroides"</span><span class="op">)</span>
+<span class="va">bac_dom</span>
 <span class="co">#&gt;  [1] "Adenoma14-2817"    "Adenoma20-2995"    "Adenoma21-3129"   </span>
 <span class="co">#&gt;  [4] "Adenoma22-3133"    "Adenoma24-3217"    "Adenoma9-2717"    </span>
 <span class="co">#&gt;  [7] "Cancer10-2567"     "Cancer11-2573"     "Cancer1-2355"     </span>
@@ -657,8 +660,7 @@ Converting to long data format opens several opportunities to work with <a href=
 <span class="co">#&gt; [28] "Healthy6-3061"     "Healthy8-3073"     "Healthy9-3075"</span>
 
 <span class="co">#get samples dominated by g__Bacteroides</span>
-<span class="kw">ps.sub</span> <span class="op">&lt;-</span> <span class="fu">prune_samples</span>(<span class="fu">sample_names</span>(<span class="kw">p0.f</span>) <span class="op">%in%</span> <span class="kw">bac_dom</span>, <span class="kw">p0.f</span>)
-</pre></div>
+<span class="va">ps.sub</span> <span class="op">&lt;-</span> <span class="fu">prune_samples</span><span class="op">(</span><span class="fu">sample_names</span><span class="op">(</span><span class="va">p0.f</span><span class="op">)</span> <span class="op">%in%</span> <span class="va">bac_dom</span>, <span class="va">p0.f</span><span class="op">)</span></pre></div>
 </div>
 </div>
 <div id="alpha-diversity" class="section level2">
@@ -671,29 +673,28 @@ Converting to long data format opens several opportunities to work with <a href=
 Here, we can access the numerous alpha diversity measures supported by <a href="https://microbiome.github.io/tutorials/Alphadiversity.html">microbiome R package</a>.</p>
 <p><em>NOTE:</em> This can take sometime to complete.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 <span class="co"># set seed</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1</span>)
-<span class="kw">subsamples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">5000</span>, by=<span class="fl">100</span>)[<span class="op">-</span><span class="fl">1</span>]
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">subsamples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5000</span>, by<span class="op">=</span><span class="fl">100</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
 <span class="co">#subsamples = c(10, 5000, 10000, 20000, 30000)</span>
 
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_alpha_rcurve.html">plot_alpha_rcurve</a></span>(<span class="kw">p0</span>, index=<span class="st">"observed"</span>, 
-                       subsamples = <span class="kw">subsamples</span>,
-                       lower.conf = <span class="fl">0.025</span>, 
-                       upper.conf = <span class="fl">0.975</span>,
-                       group=<span class="st">"DiseaseState"</span>,
-                       label.color = <span class="st">"brown3"</span>,
-                       label.size = <span class="fl">3</span>,
-                       label.min = <span class="fl">TRUE</span>) 
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_alpha_rcurve.html">plot_alpha_rcurve</a></span><span class="op">(</span><span class="va">p0</span>, index<span class="op">=</span><span class="st">"observed"</span>, 
+                       subsamples <span class="op">=</span> <span class="va">subsamples</span>,
+                       lower.conf <span class="op">=</span> <span class="fl">0.025</span>, 
+                       upper.conf <span class="op">=</span> <span class="fl">0.975</span>,
+                       group<span class="op">=</span><span class="st">"DiseaseState"</span>,
+                       label.color <span class="op">=</span> <span class="st">"brown3"</span>,
+                       label.size <span class="op">=</span> <span class="fl">3</span>,
+                       label.min <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 <span class="co"># change color of line </span>
-<span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span>)
+<span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span><span class="op">)</span>
 
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="kw">p</span> <span class="op">+</span> <span class="fu">scale_color_manual</span>(values = <span class="kw">mycols</span>) <span class="op">+</span> 
-  <span class="fu">scale_fill_manual</span>(values = <span class="kw">mycols</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span>)
-</pre></div>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="va">mycols</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="va">mycols</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="plot-alpha-diversities" class="section level3">
@@ -702,69 +703,95 @@ Here, we can access the numerous alpha diversity measures supported by <a href="
 <p>Utility plot function for diversity measures calculated by <code>microbiome</code> package.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit">
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://microbiome.github.io/microbiome">microbiome</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span>)
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_alpha_diversities.html">plot_alpha_diversities</a></span>(<span class="kw">ps0</span>,
-                            type = <span class="st">"dominance"</span>,
-                            index.val = <span class="st">"all"</span>,
-                            plot.type = <span class="st">"stripchart"</span>,
-                            variableA = <span class="st">"DiseaseState"</span>,
-                            palette = <span class="kw">mycols</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">ps0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_alpha_diversities.html">plot_alpha_diversities</a></span><span class="op">(</span><span class="va">ps0</span>,
+                            type <span class="op">=</span> <span class="st">"dominance"</span>,
+                            index.val <span class="op">=</span> <span class="st">"all"</span>,
+                            plot.type <span class="op">=</span> <span class="st">"stripchart"</span>,
+                            variableA <span class="op">=</span> <span class="st">"DiseaseState"</span>,
+                            palette <span class="op">=</span> <span class="va">mycols</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>() <span class="op">+</span> 
-        <span class="kw">ggplot2</span>::<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position = <span class="st">"top"</span>,                                               text = <span class="fu">element_text</span>(size=<span class="fl">14</span>)))
-</pre></div>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span>,
+                 text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size<span class="op">=</span><span class="fl">14</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="kw">comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_pairs.html">make_pairs</a></span>(<span class="fu">sample_data</span>(<span class="kw">ps0</span>)<span class="op">$</span><span class="kw">DiseaseState</span>)
+<span class="va">comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_pairs.html">make_pairs</a></span><span class="op">(</span><span class="fu">sample_data</span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span><span class="op">$</span><span class="va">DiseaseState</span><span class="op">)</span>
 
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggpubr/man/stat_compare_means.html">stat_compare_means</a></span>(
-      comparisons = <span class="kw">comps</span>,
-      label = <span class="st">"p.format"</span>,
-      tip.length = <span class="fl">0.05</span>,
-      method = <span class="st">"wilcox.test"</span>)
-<span class="kw">p</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html">stat_compare_means</a></span><span class="op">(</span>
+      comparisons <span class="op">=</span> <span class="va">comps</span>,
+      label <span class="op">=</span> <span class="st">"p.format"</span>,
+      tip.length <span class="op">=</span> <span class="fl">0.05</span>,
+      method <span class="op">=</span> <span class="st">"wilcox.test"</span><span class="op">)</span>
+<span class="va">p</span>
 <span class="co">#&gt; Warning in wilcox.test.default(c(7855, 4967, 16964, 6997, 11425, 17013, : cannot</span>
-<span class="co">#&gt; compute exact p-value with ties</span>
-</pre></div>
+<span class="co">#&gt; compute exact p-value with ties</span></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-17-1.png" width="768" style="display: block; margin: auto;"></p>
 <p>Alternatively, one can plot one index at a time with pair-wise stats.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit">
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/erocoar/gghalves">gghalves</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/erocoar/gghalves">gghalves</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span><span class="op">)</span>
 
-<span class="kw">p.m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_diversity_stats.html">plot_diversity_stats</a></span>(<span class="kw">p0</span>, group = <span class="st">"DiseaseState"</span>, 
-                            index = <span class="st">"diversity_shannon"</span>, 
-                            group.order = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"H"</span>, <span class="st">"CRC"</span>, <span class="st">"nonCRC"</span>), 
-                            group.colors = <span class="kw">mycols</span>,
-                            label.format=<span class="st">"p.format"</span>,
-                            stats = <span class="fl">TRUE</span>)
-<span class="kw">p.m</span> <span class="op">+</span> <span class="fu">ylab</span>(<span class="st">"Shannon Diversity"</span>) <span class="op">+</span> <span class="fu">xlab</span>(<span class="st">""</span>)
-</pre></div>
+<span class="va">p.m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_diversity_stats.html">plot_diversity_stats</a></span><span class="op">(</span><span class="va">p0</span>, group <span class="op">=</span> <span class="st">"DiseaseState"</span>, 
+                            index <span class="op">=</span> <span class="st">"diversity_shannon"</span>, 
+                            group.order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"H"</span>, <span class="st">"CRC"</span>, <span class="st">"nonCRC"</span><span class="op">)</span>, 
+                            group.colors <span class="op">=</span> <span class="va">mycols</span>,
+                            label.format<span class="op">=</span><span class="st">"p.format"</span>,
+                            stats <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">p.m</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Shannon Diversity"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-18-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="composition-plots" class="section level2">
 <h2 class="hasAnchor">
 <a href="#composition-plots" class="anchor"></a>Composition plots</h2>
+<div id="area-plot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#area-plot" class="anchor"></a>Area plot</h3>
+<p>Area plots a good way of visualizing changes in abundances on individual participants, or bioreactors sampled over time.<br>
+Here, we use a randomly chosen small subset of data from <a href="https://bioconductor.org/packages/release/data/experiment/html/HMP2Data.html">HMP2data</a>.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"hmp2"</span><span class="op">)</span>
+<span class="va">ps</span> <span class="op">&lt;-</span> <span class="va">hmp2</span>
+<span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">ps</span>, <span class="st">"compositional"</span><span class="op">)</span> 
+<span class="co"># chose specific participants to plot data.</span>
+<span class="va">pts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Participant_1"</span>,<span class="st">"Participant_2"</span>,
+         <span class="st">"Participant_8"</span>,<span class="st">"Participant_5"</span><span class="op">)</span>
+<span class="co">#pts &lt;- "Participant_1"</span>
+<span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span><span class="op">(</span><span class="va">ps.rel</span>, <span class="va">subject_id</span> <span class="op">%in%</span> <span class="va">pts</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_area.html">plot_area</a></span><span class="op">(</span><span class="va">ps.rel</span>, xvar<span class="op">=</span><span class="st">"visit_number"</span>, 
+               level <span class="op">=</span> <span class="st">"Family"</span>,
+               facet.by <span class="op">=</span> <span class="st">"subject_id"</span>,
+               abund.thres <span class="op">=</span> <span class="fl">0.1</span>,
+               prev.thres<span class="op">=</span><span class="fl">0.1</span>,
+               fill.colors<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">12</span>,<span class="st">"Paired"</span><span class="op">)</span>,
+               ncol<span class="op">=</span><span class="fl">2</span>,
+               nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-19-1.png" width="768" style="display: block; margin: auto;"></p>
+</div>
 <div id="ternary-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#ternary-plot" class="anchor"></a>Ternary plot</h3>
-<div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://microbiome.github.io/microbiome">microbiome</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">tern_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prep_ternary.html">prep_ternary</a></span>(<span class="kw">p0</span>, group=<span class="st">"DiseaseState"</span>, 
-               abund.thres=<span class="fl">0.000001</span>, level= <span class="st">"Genus"</span>, prev.thres=<span class="fl">0.01</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">tern_df</span>)
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">tern_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prep_ternary.html">prep_ternary</a></span><span class="op">(</span><span class="va">p0</span>, group<span class="op">=</span><span class="st">"DiseaseState"</span>, 
+               abund.thres<span class="op">=</span><span class="fl">0.000001</span>, level<span class="op">=</span> <span class="st">"Genus"</span>, prev.thres<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tern_df</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 11</span>
 <span class="co">#&gt; # Groups:   unique [6]</span>
 <span class="co">#&gt;   unique      CRC      H  nonCRC Domain  Phylum  Class  Order Family Genus OTUID</span>
@@ -774,88 +801,84 @@ Here, we can access the numerous alpha diversity measures supported by <a href="
 <span class="co">#&gt; 3 Acinet~ 0.0108  0.0312 0.00762 Bacter~ Proteo~ Gamma~ Pseu~ Morax~ Acin~ Acin~</span>
 <span class="co">#&gt; 4 Actino~ 0.0169  0.0338 0.0218  Bacter~ Actino~ Actin~ Acti~ Actin~ Acti~ Acti~</span>
 <span class="co">#&gt; 5 Akkerm~ 1.26    1.05   1.53    Bacter~ Verruc~ Verru~ Verr~ Verru~ Akke~ Akke~</span>
-<span class="co">#&gt; 6 Alisti~ 0.929   0.894  0.654   Bacter~ Bacter~ Bacte~ Bact~ Riken~ Alis~ Alis~</span>
-</pre></div>
-<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="co">#&gt; 6 Alisti~ 0.929   0.894  0.654   Bacter~ Bacter~ Bacte~ Bact~ Riken~ Alis~ Alis~</span></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit">
 
 <span class="co"># install.packages("ggtern")</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="kw"><a href="http://www.ggtern.com">ggtern</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://www.ggtern.com">ggtern</a></span><span class="op">)</span>
 
 <span class="co"># Replace empty with Other</span>
-<span class="kw">tern_df</span><span class="op">$</span><span class="kw">Phylum</span>[<span class="kw">tern_df</span><span class="op">$</span><span class="kw">Phylum</span><span class="op">==</span><span class="st">""</span>] <span class="op">&lt;-</span> <span class="st">"Other"</span>
+<span class="va">tern_df</span><span class="op">$</span><span class="va">Phylum</span><span class="op">[</span><span class="va">tern_df</span><span class="op">$</span><span class="va">Phylum</span><span class="op">==</span><span class="st">""</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"Other"</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/ggtern.html">ggtern</a></span>(data=<span class="kw">tern_df</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span>(x=<span class="kw">CRC</span>, y=<span class="kw">H</span>, z=<span class="kw">nonCRC</span>)) <span class="op">+</span> 
-  <span class="fu">geom_point</span>(<span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span>(color= <span class="kw">Phylum</span>), 
-             alpha=<span class="fl">0.25</span>, 
-             show.legend=<span class="kw">T</span>, 
-             size=<span class="fl">3</span>) <span class="op">+</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/ggtern.html">ggtern</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">tern_df</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">CRC</span>, y<span class="op">=</span><span class="va">H</span>, z<span class="op">=</span><span class="va">nonCRC</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_point</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span> <span class="va">Phylum</span><span class="op">)</span>, 
+             alpha<span class="op">=</span><span class="fl">0.25</span>, 
+             show.legend<span class="op">=</span><span class="cn">T</span>, 
+             size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
   <span class="co">#scale_size(range=c(0, 6)) + </span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/geom_mask.html">geom_mask</a></span>() <span class="op">+</span> 
-  <span class="fu">scale_colour_brewer</span>(palette = <span class="st">"Paired"</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>()
+  <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/geom_mask.html">geom_mask</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_colour_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Paired"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/detach.html">detach</a></span>(<span class="st">"package:ggtern"</span>, unload=<span class="fl">TRUE</span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/detach.html">detach</a></span><span class="op">(</span><span class="st">"package:ggtern"</span>, unload<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></pre></div>
 </div>
 <div id="plot-taxa-boxplot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plot-taxa-boxplot" class="anchor"></a>Plot taxa boxplot</h3>
 <p>Plot relative abundance of top taxa specified by user.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey50"</span>)
-<span class="kw">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_taxa_boxplot.html">plot_taxa_boxplot</a></span>(<span class="kw">ps0</span>,
-                        taxonomic.level = <span class="st">"Family"</span>,
-                        top.otu = <span class="fl">3</span>, 
-                        group = <span class="st">"DiseaseState"</span>,
-                        add.violin= <span class="fl">FALSE</span>,
-                        title = <span class="st">"Top three family"</span>, 
-                        keep.other = <span class="fl">FALSE</span>,
-                        group.order = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"H"</span>,<span class="st">"CRC"</span>,<span class="st">"nonCRC"</span>),
-                        group.colors = <span class="kw">mycols</span>,
-                        dot.size = <span class="fl">1</span>)
+<div class="sourceCode" id="cb22"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">ps0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey50"</span><span class="op">)</span>
+<span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_taxa_boxplot.html">plot_taxa_boxplot</a></span><span class="op">(</span><span class="va">ps0</span>,
+                        taxonomic.level <span class="op">=</span> <span class="st">"Family"</span>,
+                        top.otu <span class="op">=</span> <span class="fl">3</span>, 
+                        group <span class="op">=</span> <span class="st">"DiseaseState"</span>,
+                        add.violin<span class="op">=</span> <span class="cn">FALSE</span>,
+                        title <span class="op">=</span> <span class="st">"Top three family"</span>, 
+                        keep.other <span class="op">=</span> <span class="cn">FALSE</span>,
+                        group.order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"H"</span>,<span class="st">"CRC"</span>,<span class="st">"nonCRC"</span><span class="op">)</span>,
+                        group.colors <span class="op">=</span> <span class="va">mycols</span>,
+                        dot.size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">pn</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>())
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;"></p>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pn</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div id="plotting-selected-taxa" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plotting-selected-taxa" class="anchor"></a>Plotting selected taxa</h3>
 <p>Using a list of taxa specified by the user for comparisons.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://microbiome.github.io/microbiome">microbiome</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://rpkgs.datanovia.com/ggpubr">ggpubr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">p0.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(<span class="kw">p0</span>)
-<span class="kw">select.taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"d__denovo4:Bacteroides"</span>, <span class="st">"d__denovo2:Bacteroides"</span>)
-
-<span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey50"</span>)
-
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_listed_taxa.html">plot_listed_taxa</a></span>(<span class="kw">p0.f</span>, <span class="kw">select.taxa</span>, 
-                      group= <span class="st">"DiseaseState"</span>,
-                      group.order = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"H"</span>,<span class="st">"CRC"</span>,<span class="st">"nonCRC"</span>),
-                      group.colors = <span class="kw">mycols</span>,
-                      add.violin = <span class="fl">TRUE</span>,
-                      violin.opacity = <span class="fl">0.3</span>,
-                      dot.opacity = <span class="fl">0.25</span>,
-                      box.opacity = <span class="fl">0.25</span>,
-                      panel.arrange= <span class="st">"grid"</span>)
-<span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span> <span class="op">+</span> <span class="fu">ylab</span>(<span class="st">"Relative abundance"</span>) <span class="op">+</span> <span class="fu">scale_y_continuous</span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>))
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-22-1.png" width="480" style="display: block; margin: auto;"></p>
-<p>Adding statistical test with <code><a href="https://rdrr.io/pkg/ggpubr/man/stat_compare_means.html">ggpubr::stat_compare_means()</a></code></p>
 <div class="sourceCode" id="cb23"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">p0.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">p0</span><span class="op">)</span>
+<span class="va">select.taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"d__denovo4:Bacteroides"</span>, <span class="st">"d__denovo2:Bacteroides"</span><span class="op">)</span>
+
+<span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey50"</span><span class="op">)</span>
+
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_listed_taxa.html">plot_listed_taxa</a></span><span class="op">(</span><span class="va">p0.f</span>, <span class="va">select.taxa</span>, 
+                      group<span class="op">=</span> <span class="st">"DiseaseState"</span>,
+                      group.order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"H"</span>,<span class="st">"CRC"</span>,<span class="st">"nonCRC"</span><span class="op">)</span>,
+                      group.colors <span class="op">=</span> <span class="va">mycols</span>,
+                      add.violin <span class="op">=</span> <span class="cn">TRUE</span>,
+                      violin.opacity <span class="op">=</span> <span class="fl">0.3</span>,
+                      dot.opacity <span class="op">=</span> <span class="fl">0.25</span>,
+                      box.opacity <span class="op">=</span> <span class="fl">0.25</span>,
+                      panel.arrange<span class="op">=</span> <span class="st">"grid"</span><span class="op">)</span>
+<span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span><span class="op">)</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-23-1.png" width="480" style="display: block; margin: auto;"></p>
+<p>Adding statistical test with <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html">ggpubr::stat_compare_means()</a></code></p>
+<div class="sourceCode" id="cb24"><pre class="downlit">
 
 <span class="co"># If more than two variables</span>
-<span class="kw">comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_pairs.html">make_pairs</a></span>(<span class="fu">sample_data</span>(<span class="kw">p0.f</span>)<span class="op">$</span><span class="kw">DiseaseState</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">comps</span>)
+<span class="va">comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_pairs.html">make_pairs</a></span><span class="op">(</span><span class="fu">sample_data</span><span class="op">(</span><span class="va">p0.f</span><span class="op">)</span><span class="op">$</span><span class="va">DiseaseState</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">comps</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [1] "CRC" "H"  </span>
 <span class="co">#&gt; </span>
@@ -864,146 +887,86 @@ Here, we can access the numerous alpha diversity measures supported by <a href="
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[3]]</span>
 <span class="co">#&gt; [1] "H"      "nonCRC"</span>
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggpubr/man/stat_compare_means.html">stat_compare_means</a></span>(
-      comparisons = <span class="kw">comps</span>,
-      label = <span class="st">"p.format"</span>,
-      tip.length = <span class="fl">0.05</span>,
-      method = <span class="st">"wilcox.test"</span>)
-<span class="kw">p</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>)
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-23-1.png" width="700" style="display: block; margin: auto;"></p>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html">stat_compare_means</a></span><span class="op">(</span>
+      comparisons <span class="op">=</span> <span class="va">comps</span>,
+      label <span class="op">=</span> <span class="st">"p.format"</span>,
+      tip.length <span class="op">=</span> <span class="fl">0.05</span>,
+      method <span class="op">=</span> <span class="st">"wilcox.test"</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-24-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>Plot top four Genera</p>
-<div class="sourceCode" id="cb24"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://microbiome.github.io/microbiome">microbiome</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">p0.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/aggregate_taxa.html">aggregate_taxa</a></span>(<span class="kw">p0</span>, <span class="st">"Genus"</span>)
-<span class="kw">top_four</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/top_taxa.html">top_taxa</a></span>(<span class="kw">p0.f</span>, <span class="fl">4</span>)
-<span class="kw">top_four</span>
+<div class="sourceCode" id="cb25"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">p0.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/aggregate_taxa.html">aggregate_taxa</a></span><span class="op">(</span><span class="va">p0</span>, <span class="st">"Genus"</span><span class="op">)</span>
+<span class="va">top_four</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/top_taxa.html">top_taxa</a></span><span class="op">(</span><span class="va">p0.f</span>, <span class="fl">4</span><span class="op">)</span>
+<span class="va">top_four</span>
 <span class="co">#&gt; [1] "g__Bacteroides"      "g__Blautia"          "g__Faecalibacterium"</span>
 <span class="co">#&gt; [4] "g__Akkermansia"</span>
 
-<span class="kw">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey50"</span>)
+<span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey50"</span><span class="op">)</span>
 
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_listed_taxa.html">plot_listed_taxa</a></span>(<span class="kw">p0.f</span>, <span class="kw">top_four</span>, 
-                      group= <span class="st">"DiseaseState"</span>,
-                      group.order = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"H"</span>,<span class="st">"CRC"</span>,<span class="st">"nonCRC"</span>),
-                      group.colors = <span class="kw">mycols</span>,
-                      add.violin = <span class="fl">TRUE</span>,
-                      violin.opacity = <span class="fl">0.3</span>,
-                      dot.opacity = <span class="fl">0.25</span>,
-                      box.opacity = <span class="fl">0.25</span>,
-                      panel.arrange= <span class="st">"wrap"</span>)
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_listed_taxa.html">plot_listed_taxa</a></span><span class="op">(</span><span class="va">p0.f</span>, <span class="va">top_four</span>, 
+                      group<span class="op">=</span> <span class="st">"DiseaseState"</span>,
+                      group.order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"H"</span>,<span class="st">"CRC"</span>,<span class="st">"nonCRC"</span><span class="op">)</span>,
+                      group.colors <span class="op">=</span> <span class="va">mycols</span>,
+                      add.violin <span class="op">=</span> <span class="cn">TRUE</span>,
+                      violin.opacity <span class="op">=</span> <span class="fl">0.3</span>,
+                      dot.opacity <span class="op">=</span> <span class="fl">0.25</span>,
+                      box.opacity <span class="op">=</span> <span class="fl">0.25</span>,
+                      panel.arrange<span class="op">=</span> <span class="st">"wrap"</span><span class="op">)</span>
 
-<span class="kw">comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_pairs.html">make_pairs</a></span>(<span class="fu">sample_data</span>(<span class="kw">p0.f</span>)<span class="op">$</span><span class="kw">DiseaseState</span>)
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggpubr/man/stat_compare_means.html">stat_compare_means</a></span>(
-      comparisons = <span class="kw">comps</span>,
-      label = <span class="st">"p.format"</span>,
-      tip.length = <span class="fl">0.05</span>,
-      method = <span class="st">"wilcox.test"</span>)
+<span class="va">comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_pairs.html">make_pairs</a></span><span class="op">(</span><span class="fu">sample_data</span><span class="op">(</span><span class="va">p0.f</span><span class="op">)</span><span class="op">$</span><span class="va">DiseaseState</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html">stat_compare_means</a></span><span class="op">(</span>
+      comparisons <span class="op">=</span> <span class="va">comps</span>,
+      label <span class="op">=</span> <span class="st">"p.format"</span>,
+      tip.length <span class="op">=</span> <span class="fl">0.05</span>,
+      method <span class="op">=</span> <span class="st">"wilcox.test"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span> <span class="op">+</span> <span class="fu">ylab</span>(<span class="st">"Relative abundance"</span>) <span class="op">+</span> <span class="fu">scale_y_continuous</span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>))
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Warning in wilcox.test.default(c(0.0242631263865901, 5.19237758969832e-05, :</span>
-<span class="co">#&gt; cannot compute exact p-value with ties</span>
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;"></p>
+<span class="co">#&gt; cannot compute exact p-value with ties</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="abundance-prevalence-relationship" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abundance-prevalence-relationship" class="anchor"></a>Abundance-Prevalence relationship</h3>
-<p>Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random sub-sampling.<br>
+<p>Plots mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random sub-sampling.<br>
 This can be useful in identifying highly prevalent taxa and their mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.</p>
 <p>See <a href="https://microbiome.github.io/tutorials/Core.html">core microbiota analysis in microbiome R package</a></p>
-<div class="sourceCode" id="cb25"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://github.com/slowkow/ggrepel">ggrepel</a></span>)
-<span class="kw">asv_ps</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">asv_ps</span> <span class="op">&lt;-</span> <span class="kw">microbiome</span>::<span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span>(<span class="kw">asv_ps</span>, <span class="st">"compositional"</span>)
-<span class="co"># Select healthy samples</span>
-<span class="kw">asv_ps</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span>(<span class="kw">asv_ps</span>, <span class="kw">DiseaseState</span><span class="op">==</span><span class="st">"H"</span>)
-<span class="kw">asv_ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span>(<span class="kw">asv_ps</span>,detection = <span class="fl">0.0001</span>, prevalence = <span class="fl">0.50</span>) <span class="co"># reduce size for example</span>
-<span class="kw">asv_ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(<span class="kw">asv_ps</span>)
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">14285</span>)
-<span class="kw">p_v</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_abund_prev.html">plot_abund_prev</a></span>(<span class="kw">asv_ps</span>, 
-                       label.core = <span class="fl">TRUE</span>,
-                       color = <span class="st">"Phylum"</span>, <span class="co"># NA or "blue"</span>
-                       mean.abund.thres = <span class="fl">0.01</span>,
-                       mean.prev.thres = <span class="fl">0.99</span>,
-                       dot.opacity = <span class="fl">0.7</span>,
-                       label.size = <span class="fl">3</span>,
-                       label.opacity = <span class="fl">1.0</span>,
-                       nudge.label=<span class="op">-</span><span class="fl">0.15</span>,
-                       bs.iter=<span class="fl">9</span>, <span class="co"># increase for actual analysis e.g. 999</span>
-                       size = <span class="fl">20</span>, <span class="co"># increase to match your nsamples(asv_ps)</span>
-                       replace = <span class="fl">TRUE</span>,
-                       label.color=<span class="st">"#5f0f40"</span>)  
-<span class="kw">p_v</span> <span class="op">&lt;-</span> <span class="kw">p_v</span> <span class="op">+</span> 
-  <span class="fu">geom_vline</span>(xintercept = <span class="fl">0.95</span>, lty=<span class="st">"dashed"</span>, alpha=<span class="fl">0.7</span>) <span class="op">+</span> 
-  <span class="fu">geom_hline</span>(yintercept = <span class="fl">0.01</span>,lty=<span class="st">"dashed"</span>, alpha=<span class="fl">0.7</span>) <span class="op">+</span>
-  <span class="fu">scale_color_brewer</span>(palette = <span class="st">"Dark2"</span>)
-<span class="kw">p_v</span>
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;"></p>
-</div>
-</div>
-<div id="microbiota-plasticity" class="section level2">
-<h2 class="hasAnchor">
-<a href="#microbiota-plasticity" class="anchor"></a>Microbiota plasticity</h2>
-<div id="calculate-plasticity" class="section level3">
-<h3 class="hasAnchor">
-<a href="#calculate-plasticity" class="anchor"></a>Calculate plasticity</h3>
-<p>See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. <a href="https://www.nature.com/articles/s41598-020-58000-y">Sci Rep 10, 1405 (2020).</a></p>
-<p>Data from <code>microbiome</code> package is used here for example.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://microbiome.github.io/microbiome">microbiome</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://rpkgs.datanovia.com/ggpubr">ggpubr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">peerj32</span>)
-<span class="kw">pseq</span> <span class="op">&lt;-</span> <span class="kw">peerj32</span><span class="op">$</span><span class="kw">phyloseq</span>
-<span class="kw">pseq.rel</span> <span class="op">&lt;-</span> <span class="kw">microbiome</span>::<span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span>(<span class="kw">pseq</span>, <span class="st">"compositional"</span>)
-<span class="kw">pl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plasticity.html">plasticity</a></span>(<span class="kw">pseq.rel</span>, dist.method = <span class="st">"bray"</span>, participant.col=<span class="st">"subject"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">pl</span>)
-<span class="co">#&gt;          S1        S2      bray time_1  sex_1  sample_1 group_1 time_2  sex_2</span>
-<span class="co">#&gt; 1  sample-2  sample-1 0.2451330      2 female  sample-2 Placebo      1 female</span>
-<span class="co">#&gt; 2  sample-4  sample-3 0.1563982      2 female  sample-4 Placebo      1 female</span>
-<span class="co">#&gt; 3  sample-6  sample-5 0.1892079      2 female  sample-6     LGG      1 female</span>
-<span class="co">#&gt; 4  sample-8  sample-7 0.1760096      2   male  sample-8 Placebo      1   male</span>
-<span class="co">#&gt; 5 sample-10  sample-9 0.1936717      2 female sample-10 Placebo      1 female</span>
-<span class="co">#&gt; 6 sample-12 sample-11 0.1716045      2 female sample-12     LGG      1 female</span>
-<span class="co">#&gt;    sample_2 group_2 subject</span>
-<span class="co">#&gt; 1  sample-1 Placebo      S1</span>
-<span class="co">#&gt; 2  sample-3 Placebo      S2</span>
-<span class="co">#&gt; 3  sample-5     LGG      S3</span>
-<span class="co">#&gt; 4  sample-7 Placebo      S4</span>
-<span class="co">#&gt; 5  sample-9 Placebo      S5</span>
-<span class="co">#&gt; 6 sample-11     LGG      S6</span>
-</pre></div>
-<p>Alternatively, using correlation methods for <code>plasticity</code>, one can check for similarity between technical replicates (2X sequenced same sample) for quality check.</p>
-</div>
-<div id="plot-plasticity" class="section level3">
-<h3 class="hasAnchor">
-<a href="#plot-plasticity" class="anchor"></a>Plot plasticity</h3>
-<div class="sourceCode" id="cb27"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span>
+<span class="va">asv_ps</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">asv_ps</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">asv_ps</span>, <span class="st">"compositional"</span><span class="op">)</span>
+<span class="co"># Select healthy samples</span>
+<span class="va">asv_ps</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span><span class="op">(</span><span class="va">asv_ps</span>, <span class="va">DiseaseState</span><span class="op">==</span><span class="st">"H"</span><span class="op">)</span>
+<span class="va">asv_ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span><span class="op">(</span><span class="va">asv_ps</span>,detection <span class="op">=</span> <span class="fl">0.0001</span>, prevalence <span class="op">=</span> <span class="fl">0.50</span><span class="op">)</span> <span class="co"># reduce size for example</span>
+<span class="va">asv_ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">asv_ps</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/ggplot.html">ggplot</a></span>(<span class="kw">pl</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span>(<span class="kw">group_2</span>,<span class="kw">bray</span>)) <span class="op">+</span> 
-  <span class="fu">geom_boxplot</span>(<span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span>(fill=<span class="kw">group_2</span>), 
-               alpha=<span class="fl">0.5</span>, 
-               na.rm = <span class="fl">TRUE</span>, 
-               width=<span class="fl">0.5</span>) <span class="op">+</span>
-  <span class="fu">geom_jitter</span>(<span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span>(color=<span class="kw">group_2</span>), 
-              alpha=<span class="fl">0.5</span>, 
-              size=<span class="fl">3</span>, 
-              na.rm = <span class="fl">TRUE</span>) <span class="op">+</span>
-  <span class="fu">scale_fill_manual</span>(values = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#457b9d"</span>, <span class="st">"#e63946"</span>))<span class="op">+</span>
-  <span class="fu">scale_color_manual</span>(values = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#457b9d"</span>, <span class="st">"#e63946"</span>))<span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ggpubr/man/stat_compare_means.html">stat_compare_means</a></span>() <span class="op">+</span> 
-  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span>()
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-27-1.png" width="384" style="display: block; margin: auto;"></p>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">14285</span><span class="op">)</span>
+<span class="va">p_v</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_abund_prev.html">plot_abund_prev</a></span><span class="op">(</span><span class="va">asv_ps</span>, 
+                       label.core <span class="op">=</span> <span class="cn">TRUE</span>,
+                       color <span class="op">=</span> <span class="st">"Phylum"</span>, <span class="co"># NA or "blue"</span>
+                       mean.abund.thres <span class="op">=</span> <span class="fl">0.01</span>,
+                       mean.prev.thres <span class="op">=</span> <span class="fl">0.99</span>,
+                       dot.opacity <span class="op">=</span> <span class="fl">0.7</span>,
+                       label.size <span class="op">=</span> <span class="fl">3</span>,
+                       label.opacity <span class="op">=</span> <span class="fl">1.0</span>,
+                       nudge.label<span class="op">=</span><span class="op">-</span><span class="fl">0.15</span>,
+                       bs.iter<span class="op">=</span><span class="fl">9</span>, <span class="co"># increase for actual analysis e.g. 999</span>
+                       size <span class="op">=</span> <span class="fl">20</span>, <span class="co"># increase to match your nsamples(asv_ps)</span>
+                       replace <span class="op">=</span> <span class="cn">TRUE</span>,
+                       label.color<span class="op">=</span><span class="st">"#5f0f40"</span><span class="op">)</span>  
+<span class="va">p_v</span> <span class="op">&lt;-</span> <span class="va">p_v</span> <span class="op">+</span> 
+  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0.95</span>, lty<span class="op">=</span><span class="st">"dashed"</span>, alpha<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.01</span>,lty<span class="op">=</span><span class="st">"dashed"</span>, alpha<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">scale_color_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span>
+<span class="va">p_v</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="heatmaps" class="section level2">
@@ -1013,86 +976,83 @@ This can be useful in identifying highly prevalent taxa and their mean relative 
 <h3 class="hasAnchor">
 <a href="#heatmap-using-phyloseq-and-pheatmap" class="anchor"></a>Heatmap using phyloseq and pheatmap</h3>
 <p>Useful for visualizing differences in top OTUs between sample groups.<br>
-By default this function internally calculated Prevalence, but purposely doesn’t plot by default. This is to give access to powerful <code>pheatmap</code> annotation options.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">pheatmap</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="fu">taxa_names</span>(<span class="kw">ps0</span>) <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"d__denovo"</span>, <span class="st">"OTU:"</span>, <span class="fu">taxa_names</span>(<span class="kw">ps0</span>))
+By default this function internally calculates <em>Prevalence</em>, but purposely doesn’t plot it by default. This is to give access to powerful <code>pheatmap</code> annotation options.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">ps0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="fu">taxa_names</span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"d__denovo"</span>, <span class="st">"OTU:"</span>, <span class="fu">taxa_names</span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># create a gradient color palette for abundance</span>
-<span class="kw">grad_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#faf3dd"</span>,<span class="st">"#f7d486"</span> ,<span class="st">"#5e6472"</span>))
-<span class="kw">grad_ab_pal</span> <span class="op">&lt;-</span> <span class="fu">grad_ab</span>(<span class="fl">10</span>)
+<span class="va">grad_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#faf3dd"</span>,<span class="st">"#f7d486"</span> ,<span class="st">"#5e6472"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">grad_ab_pal</span> <span class="op">&lt;-</span> <span class="fu">grad_ab</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># create a gradient color palette for prevalence</span>
-<span class="kw">gray_grad</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"white"</span>, <span class="st">"steelblue"</span>))
-<span class="kw">gray_grad_cols</span> <span class="op">&lt;-</span> <span class="fu">gray_grad</span>(<span class="fl">10</span>)
+<span class="va">gray_grad</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"steelblue"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gray_grad_cols</span> <span class="op">&lt;-</span> <span class="fu">gray_grad</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># create a color palette for varaibles of interest</span>
-<span class="kw">meta_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"positive"</span> = <span class="st">"#FFC857"</span>, 
-                      <span class="st">"negative"</span> = <span class="st">"#05B083"</span>), 
-                    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"CRC"</span> = <span class="st">"steelblue"</span>, 
-                      <span class="st">"nonCRC"</span> = <span class="st">"grey50"</span>, 
-                      <span class="st">"H"</span>=<span class="st">"brown3"</span>),
-                    <span class="kw">gray_grad_cols</span>)
+<span class="va">meta_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"positive"</span> <span class="op">=</span> <span class="st">"#FFC857"</span>, 
+                      <span class="st">"negative"</span> <span class="op">=</span> <span class="st">"#05B083"</span><span class="op">)</span>, 
+                    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CRC"</span> <span class="op">=</span> <span class="st">"steelblue"</span>, 
+                      <span class="st">"nonCRC"</span> <span class="op">=</span> <span class="st">"grey50"</span>, 
+                      <span class="st">"H"</span><span class="op">=</span><span class="st">"brown3"</span><span class="op">)</span>,
+                    <span class="va">gray_grad_cols</span><span class="op">)</span>
 <span class="co"># add labels for pheatmap to detect</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw">meta_colors</span>) <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"FOBT.result"</span>, <span class="st">"DiseaseState"</span>,<span class="st">"Prevalence"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">meta_colors</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FOBT.result"</span>, <span class="st">"DiseaseState"</span>,<span class="st">"Prevalence"</span><span class="op">)</span>
 
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_taxa_heatmap.html">plot_taxa_heatmap</a></span>(<span class="kw">ps0</span>,
-                       subset.top = <span class="fl">25</span>,
-                       VariableA = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"DiseaseState"</span>,<span class="st">"FOBT.result"</span>),
-                       heatcolors = <span class="kw">grad_ab_pal</span>, <span class="co">#rev(brewer.pal(6, "RdPu")),</span>
-                       transformation = <span class="st">"log10"</span>,
-                       cluster_rows = <span class="kw">T</span>,
-                       cluster_cols = <span class="kw">F</span>,
-                       show_colnames = <span class="kw">F</span>,
-                       annotation_colors=<span class="kw">meta_colors</span>)
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_taxa_heatmap.html">plot_taxa_heatmap</a></span><span class="op">(</span><span class="va">ps0</span>,
+                       subset.top <span class="op">=</span> <span class="fl">25</span>,
+                       VariableA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DiseaseState"</span>,<span class="st">"FOBT.result"</span><span class="op">)</span>,
+                       heatcolors <span class="op">=</span> <span class="va">grad_ab_pal</span>, <span class="co">#rev(brewer.pal(6, "RdPu")),</span>
+                       transformation <span class="op">=</span> <span class="st">"log10"</span>,
+                       cluster_rows <span class="op">=</span> <span class="cn">T</span>,
+                       cluster_cols <span class="op">=</span> <span class="cn">F</span>,
+                       show_colnames <span class="op">=</span> <span class="cn">F</span>,
+                       annotation_colors<span class="op">=</span><span class="va">meta_colors</span><span class="op">)</span>
 <span class="co">#&gt; Top 25 OTUs selected</span>
 <span class="co">#&gt; log10, if zeros in data then log10(1+x) will be used</span>
 <span class="co">#&gt; First top taxa were selected and </span>
 <span class="co">#&gt; then abundances tranformed to log10(1+X)</span>
 <span class="co">#&gt; Warning in transform(phyobj1, "log10"): OTU table contains zeroes. Using log10(1</span>
-<span class="co">#&gt; + x) transform.</span>
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-28-1.png" width="768" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb29"><pre class="downlit">
+<span class="co">#&gt; + x) transform.</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-27-1.png" width="768" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb28"><pre class="downlit">
 <span class="co">#the plot is stored here</span>
-<span class="kw">p</span><span class="op">$</span><span class="kw">plot</span>
+<span class="va">p</span><span class="op">$</span><span class="va">plot</span>
 
 <span class="co"># table used for plot is here</span>
-<span class="kw">p</span><span class="op">$</span><span class="kw">tax_tab</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>]
-</pre></div>
+<span class="va">p</span><span class="op">$</span><span class="va">tax_tab</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></pre></div>
 </div>
 <div id="elegant-option-with-ggplot2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#elegant-option-with-ggplot2" class="anchor"></a>Elegant option with ggplot2</h3>
-<div class="sourceCode" id="cb30"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
-<span class="kw">p0.rel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span>(<span class="kw">p0</span>, <span class="st">"compositional"</span>)
+<div class="sourceCode" id="cb29"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+<span class="va">p0.rel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">p0</span>, <span class="st">"compositional"</span><span class="op">)</span>
 <span class="co">#heat.cols &lt;- c("#a8dadc","#457b9d", "#1d3557")</span>
 <span class="co"># create a gradient color palette for abundance</span>
-<span class="kw">grad_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#96d4ca"</span>,<span class="st">"#d3f3f1"</span>, <span class="st">"#7c65a9"</span>))
-<span class="kw">heat.cols</span> <span class="op">&lt;-</span> <span class="fu">grad_ab</span>(<span class="fl">10</span>)
-<span class="fu"><a href="../reference/simple_heatmap.html">simple_heatmap</a></span>(<span class="kw">p0.rel</span>,
-               group.facet = <span class="st">"DiseaseState"</span>,
-               group.order = <span class="kw">NULL</span>,
-               abund.thres = <span class="fl">0.01</span>,
-               prev.thres = <span class="fl">0.1</span>,
-               level = <span class="st">"Genus"</span>,
-               scale.color = <span class="st">"log10"</span>,
-               na.fill = <span class="st">"white"</span>,
-               color.fill = <span class="kw">heat.cols</span>,
-               taxa.arrange=<span class="fl">TRUE</span>,
-               remove.other=<span class="fl">TRUE</span>,
-               panel.arrange=<span class="st">"grid"</span>,
-               ncol=<span class="kw">NULL</span>,
-               nrow=<span class="kw">NULL</span>)
-<span class="co">#&gt; Warning: Transformation introduced infinite values in discrete y-axis</span>
-</pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-30-1.png" width="960" style="display: block; margin: auto;"></p>
+<span class="va">grad_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#96d4ca"</span>,<span class="st">"#d3f3f1"</span>, <span class="st">"#7c65a9"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">heat.cols</span> <span class="op">&lt;-</span> <span class="fu">grad_ab</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/simple_heatmap.html">simple_heatmap</a></span><span class="op">(</span><span class="va">p0.rel</span>,
+               group.facet <span class="op">=</span> <span class="st">"DiseaseState"</span>,
+               group.order <span class="op">=</span> <span class="cn">NULL</span>,
+               abund.thres <span class="op">=</span> <span class="fl">0.01</span>,
+               prev.thres <span class="op">=</span> <span class="fl">0.1</span>,
+               level <span class="op">=</span> <span class="st">"Genus"</span>,
+               scale.color <span class="op">=</span> <span class="st">"log10"</span>,
+               na.fill <span class="op">=</span> <span class="st">"white"</span>,
+               color.fill <span class="op">=</span> <span class="va">heat.cols</span>,
+               taxa.arrange<span class="op">=</span><span class="cn">TRUE</span>,
+               remove.other<span class="op">=</span><span class="cn">TRUE</span>,
+               panel.arrange<span class="op">=</span><span class="st">"grid"</span>,
+               ncol<span class="op">=</span><span class="cn">NULL</span>,
+               nrow<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Transformation introduced infinite values in discrete y-axis</span></pre></div>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-29-1.png" width="960" style="display: block; margin: auto;"></p>
 <p>For heatmap options see <a href="https://microbiome.github.io/tutorials/Heatmap.html">microbiome::heat()</a> and <a href="https://madsalbertsen.github.io/ampvis2/reference/amp_heatmap.html">ampvis2</a></p>
 </div>
 </div>
@@ -1101,12 +1061,11 @@ By default this function internally calculated Prevalence, but purposely doesn�
 <a href="#microbiomehd-datasets-as-phyloseq-objects" class="anchor"></a>MicrobiomeHD datasets as phyloseq objects</h2>
 <p>We provide access to a subset of studies included in the <code>MicrobiomeHD</code> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses</a>. Nature communications.</p>
 <p>The phyloseq objects are stored and accessed from <a href="https://github.com/microsud/microbiomedatarepo">microbiomedatarepo</a>.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit">
+<div class="sourceCode" id="cb30"><pre class="downlit">
 
-<span class="kw">study</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_microbiome_data.html">list_microbiome_data</a></span>(printtab = <span class="fl">FALSE</span>)
+<span class="va">study</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_microbiome_data.html">list_microbiome_data</a></span><span class="op">(</span>printtab <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="kw">knitr</span>::<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw">study</span>)
-</pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">study</span><span class="op">)</span></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">Study</th>
@@ -1197,13 +1156,12 @@ By default this function internally calculated Prevalence, but purposely doesn�
 </table>
 <p>Below is the per study reference.</p>
 <p><strong>NOTE</strong>: When using these studies, please cite <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Duvallet et al. 2017</a> and the respective studies.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit">
+<div class="sourceCode" id="cb31"><pre class="downlit">
 
-<span class="kw">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"microbiomeHD_ref.txt"</span>, package = <span class="st">"microbiomeutilities"</span>)
-<span class="kw">reference</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span>(<span class="kw">file</span>, header = <span class="kw">T</span>, sep = <span class="st">"\t"</span>)
+<span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"microbiomeHD_ref.txt"</span>, package <span class="op">=</span> <span class="st">"microbiomeutilities"</span><span class="op">)</span>
+<span class="va">reference</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="va">file</span>, header <span class="op">=</span> <span class="cn">T</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span>
 
-<span class="kw">knitr</span>::<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw">reference</span>)
-</pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">reference</span><span class="op">)</span></pre></div>
 </div>
 <div id="experimental" class="section level2">
 <h2 class="hasAnchor">
@@ -1211,58 +1169,55 @@ By default this function internally calculated Prevalence, but purposely doesn�
 <div id="plot-ordination-and-core" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plot-ordination-and-core" class="anchor"></a>Plot ordination and core</h3>
-<div class="sourceCode" id="cb33"><pre class="downlit">
+<div class="sourceCode" id="cb32"><pre class="downlit">
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">microbiomeutilities</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 
-<span class="kw">ps1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span>(<span class="kw">p0</span>)
+<span class="va">ps1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">p0</span><span class="op">)</span>
 
 <span class="co">#ps1 &lt;- subset_samples(ps1, DiseaseState == "H")</span>
-<span class="kw">ps1</span> <span class="op">&lt;-</span> <span class="fu">prune_taxa</span>(<span class="fu">taxa_sums</span>(<span class="kw">ps1</span>) <span class="op">&gt;</span> <span class="fl">0</span>, <span class="kw">ps1</span>)
-<span class="kw">prev.thres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">.05</span>, <span class="fl">1</span>, <span class="fl">.05</span>)
-<span class="kw">det.thres</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">^</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span>(<span class="fl">1e-4</span>), <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span>(<span class="fl">.2</span>), length = <span class="fl">10</span>)
-<span class="kw">pseq.rel</span> <span class="op">&lt;-</span> <span class="kw">microbiome</span>::<span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span>(<span class="kw">ps1</span>, <span class="st">"compositional"</span>)
+<span class="va">ps1</span> <span class="op">&lt;-</span> <span class="fu">prune_taxa</span><span class="op">(</span><span class="fu">taxa_sums</span><span class="op">(</span><span class="va">ps1</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="va">ps1</span><span class="op">)</span>
+<span class="va">prev.thres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">1</span>, <span class="fl">.05</span><span class="op">)</span>
+<span class="va">det.thres</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">^</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="fl">1e-4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="fl">.2</span><span class="op">)</span>, length <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">pseq.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">ps1</span>, <span class="st">"compositional"</span><span class="op">)</span>
 <span class="co"># reduce size for example</span>
-<span class="kw">pseq.rel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span>(<span class="kw">pseq.rel</span>, detection = <span class="fl">0.001</span>, prevalence = <span class="fl">20</span> <span class="op">/</span> <span class="fl">100</span>)
+<span class="va">pseq.rel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span><span class="op">(</span><span class="va">pseq.rel</span>, detection <span class="op">=</span> <span class="fl">0.001</span>, prevalence <span class="op">=</span> <span class="fl">20</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span>
 
-<span class="kw">ord.bray</span> <span class="op">&lt;-</span> <span class="fu">ordinate</span>(<span class="kw">pseq.rel</span>, <span class="st">"NMDS"</span>, <span class="st">"bray"</span>)
+<span class="va">ord.bray</span> <span class="op">&lt;-</span> <span class="fu">ordinate</span><span class="op">(</span><span class="va">pseq.rel</span>, <span class="st">"NMDS"</span>, <span class="st">"bray"</span><span class="op">)</span>
 
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_ordiplot_core.html">plot_ordiplot_core</a></span>(<span class="kw">pseq.rel</span>, <span class="kw">ord.bray</span>,
-                        <span class="kw">prev.thres</span>, <span class="kw">det.thres</span>,
-                        min.prevalence = <span class="fl">0.9</span>,
-                        color.opt = <span class="st">"DiseaseState"</span>, 
-                        shape = <span class="kw">NULL</span>, Sample = <span class="fl">TRUE</span>)
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_ordiplot_core.html">plot_ordiplot_core</a></span><span class="op">(</span><span class="va">pseq.rel</span>, <span class="va">ord.bray</span>,
+                        <span class="va">prev.thres</span>, <span class="va">det.thres</span>,
+                        min.prevalence <span class="op">=</span> <span class="fl">0.9</span>,
+                        color.opt <span class="op">=</span> <span class="st">"DiseaseState"</span>, 
+                        shape <span class="op">=</span> <span class="cn">NULL</span>, Sample <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">p</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></pre></div>
 </div>
 <div id="summarize-the-percent-taxa-classification-for-phyloseq" class="section level3">
 <h3 class="hasAnchor">
 <a href="#summarize-the-percent-taxa-classification-for-phyloseq" class="anchor"></a>Summarize the percent taxa classification for phyloseq</h3>
 <p>This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or <code>NA</code> is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply <code>NA</code>.<br>
 This best works with cleaned taxonomy table.</empty></p>
-<div class="sourceCode" id="cb34"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"zackular2014"</span>)
-<span class="kw">p0</span> <span class="op">&lt;-</span> <span class="kw">zackular2014</span>
+<div class="sourceCode" id="cb33"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 <span class="co"># reduce size for example</span>
-<span class="kw">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span>(<span class="kw">p0</span>, detection = <span class="fl">10</span>, prevalence = <span class="fl">50</span> <span class="op">/</span> <span class="fl">100</span>)
+<span class="va">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span><span class="op">(</span><span class="va">p0</span>, detection <span class="op">=</span> <span class="fl">10</span>, prevalence <span class="op">=</span> <span class="fl">50</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/percent_classified.html">percent_classified</a></span>(<span class="kw">ps0</span>)
-</pre></div>
-<p>For more tutorials and examples of data anlaysis in R please check:</p>
+<span class="fu"><a href="../reference/percent_classified.html">percent_classified</a></span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span></pre></div>
+<p>For more tutorials and examples of data analysis in R please check:</p>
 <ul>
 <li>
 <a href="https://goo.gl/CPChhd">Microbiome data analysis SpringSchool2018</a><br>
 </li>
 <li><a href="http://microbiome.github.io/microbiome/">Microbiome R package tutorials</a></li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="downlit">
-
-<span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
-<span class="co">#&gt; R version 4.0.2 (2020-06-22)</span>
+<div class="sourceCode" id="cb34"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; R version 4.0.3 (2020-10-10)</span>
 <span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
 <span class="co">#&gt; Running under: Windows 10 x64 (build 18363)</span>
 <span class="co">#&gt; </span>
@@ -1280,76 +1235,46 @@ This best works with cleaned taxonomy table.</empty></p>
 <span class="co">#&gt;  [1] pheatmap_1.0.12             ggrepel_0.8.2              </span>
 <span class="co">#&gt;  [3] gghalves_0.1.0              ggpubr_0.4.0               </span>
 <span class="co">#&gt;  [5] patchwork_1.0.1             RColorBrewer_1.1-2         </span>
-<span class="co">#&gt;  [7] tibble_3.0.3                knitr_1.29                 </span>
-<span class="co">#&gt;  [9] microbiomeutilities_1.00.08 dplyr_1.0.2                </span>
+<span class="co">#&gt;  [7] tibble_3.0.4                knitr_1.30                 </span>
+<span class="co">#&gt;  [9] microbiomeutilities_1.00.09 dplyr_1.0.2                </span>
 <span class="co">#&gt; [11] microbiome_2.1.28           ggplot2_3.3.2              </span>
 <span class="co">#&gt; [13] phyloseq_1.33.0            </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] nlme_3.1-148        fs_1.5.0            rprojroot_1.3-2    </span>
-<span class="co">#&gt;  [4] tools_4.0.2         backports_1.1.10    utf8_1.1.4         </span>
+<span class="co">#&gt;  [1] nlme_3.1-149        fs_1.5.0            rprojroot_1.3-2    </span>
+<span class="co">#&gt;  [4] tools_4.0.3         backports_1.1.10    utf8_1.1.4         </span>
 <span class="co">#&gt;  [7] R6_2.4.1            vegan_2.5-6         BiocGenerics_0.35.4</span>
-<span class="co">#&gt; [10] mgcv_1.8-31         colorspace_1.4-1    permute_0.9-5      </span>
-<span class="co">#&gt; [13] rhdf5filters_1.1.2  ade4_1.7-15         withr_2.3.0        </span>
-<span class="co">#&gt; [16] tidyselect_1.1.0    curl_4.3            compiler_4.0.2     </span>
-<span class="co">#&gt; [19] cli_2.0.2           Biobase_2.49.1      desc_1.2.0         </span>
-<span class="co">#&gt; [22] labeling_0.3        scales_1.1.1        pkgdown_1.6.1      </span>
-<span class="co">#&gt; [25] systemfonts_0.3.1   stringr_1.4.0       digest_0.6.25      </span>
-<span class="co">#&gt; [28] foreign_0.8-80      rmarkdown_2.3       rio_0.5.16         </span>
-<span class="co">#&gt; [31] XVector_0.29.3      pkgconfig_2.0.3     htmltools_0.5.0    </span>
-<span class="co">#&gt; [34] highr_0.8           rlang_0.4.7         readxl_1.3.1       </span>
-<span class="co">#&gt; [37] rstudioapi_0.11     farver_2.0.3        generics_0.0.2     </span>
-<span class="co">#&gt; [40] jsonlite_1.7.1      zip_2.1.1           car_3.0-10         </span>
-<span class="co">#&gt; [43] magrittr_1.5        biomformat_1.17.0   Matrix_1.2-18      </span>
-<span class="co">#&gt; [46] fansi_0.4.1         Rcpp_1.0.5          munsell_0.5.0      </span>
-<span class="co">#&gt; [49] S4Vectors_0.27.12   Rhdf5lib_1.11.3     abind_1.4-5        </span>
-<span class="co">#&gt; [52] ape_5.4-1           lifecycle_0.2.0     stringi_1.5.3      </span>
-<span class="co">#&gt; [55] yaml_2.2.1          carData_3.0-4       MASS_7.3-51.6      </span>
-<span class="co">#&gt; [58] zlibbioc_1.35.0     rhdf5_2.33.7        Rtsne_0.15         </span>
-<span class="co">#&gt; [61] plyr_1.8.6          grid_4.0.2          parallel_4.0.2     </span>
-<span class="co">#&gt; [64] forcats_0.5.0       crayon_1.3.4        lattice_0.20-41    </span>
-<span class="co">#&gt; [67] Biostrings_2.57.2   haven_2.3.1         splines_4.0.2      </span>
-<span class="co">#&gt; [70] multtest_2.45.0     hms_0.5.3           pillar_1.4.6       </span>
-<span class="co">#&gt; [73] igraph_1.2.5        ggsignif_0.6.0      reshape2_1.4.4     </span>
-<span class="co">#&gt; [76] codetools_0.2-16    stats4_4.0.2        glue_1.4.2         </span>
-<span class="co">#&gt; [79] evaluate_0.14       data.table_1.13.0   vctrs_0.3.4        </span>
-<span class="co">#&gt; [82] foreach_1.5.0       cellranger_1.1.0    gtable_0.3.0       </span>
-<span class="co">#&gt; [85] purrr_0.3.4         tidyr_1.1.2         assertthat_0.2.1   </span>
-<span class="co">#&gt; [88] cpp11_0.2.2         xfun_0.17           openxlsx_4.2.2     </span>
-<span class="co">#&gt; [91] broom_0.7.1         rstatix_0.6.0       ragg_0.3.1         </span>
-<span class="co">#&gt; [94] survival_3.1-12     iterators_1.0.12    memoise_1.1.0      </span>
-<span class="co">#&gt; [97] IRanges_2.23.10     cluster_2.1.0       ellipsis_0.3.1</span>
-</pre></div>
+<span class="co">#&gt; [10] mgcv_1.8-33         colorspace_1.4-1    permute_0.9-5      </span>
+<span class="co">#&gt; [13] rhdf5filters_1.1.3  ade4_1.7-15         withr_2.3.0        </span>
+<span class="co">#&gt; [16] tidyselect_1.1.0    curl_4.3            compiler_4.0.3     </span>
+<span class="co">#&gt; [19] cli_2.1.0           textshaping_0.1.2   Biobase_2.49.1     </span>
+<span class="co">#&gt; [22] desc_1.2.0          labeling_0.4.2      scales_1.1.1       </span>
+<span class="co">#&gt; [25] pkgdown_1.6.1       systemfonts_0.3.2   stringr_1.4.0      </span>
+<span class="co">#&gt; [28] digest_0.6.26       foreign_0.8-80      rmarkdown_2.4      </span>
+<span class="co">#&gt; [31] rio_0.5.16          XVector_0.29.3      pkgconfig_2.0.3    </span>
+<span class="co">#&gt; [34] htmltools_0.5.0     highr_0.8           readxl_1.3.1       </span>
+<span class="co">#&gt; [37] rlang_0.4.8         rstudioapi_0.11     farver_2.0.3       </span>
+<span class="co">#&gt; [40] generics_0.0.2      jsonlite_1.7.1      zip_2.1.1          </span>
+<span class="co">#&gt; [43] car_3.0-10          magrittr_1.5        biomformat_1.17.0  </span>
+<span class="co">#&gt; [46] Matrix_1.2-18       fansi_0.4.1         Rcpp_1.0.5         </span>
+<span class="co">#&gt; [49] munsell_0.5.0       S4Vectors_0.27.14   Rhdf5lib_1.11.3    </span>
+<span class="co">#&gt; [52] abind_1.4-5         ape_5.4-1           lifecycle_0.2.0    </span>
+<span class="co">#&gt; [55] stringi_1.5.3       yaml_2.2.1          carData_3.0-4      </span>
+<span class="co">#&gt; [58] MASS_7.3-53         zlibbioc_1.35.0     rhdf5_2.33.11      </span>
+<span class="co">#&gt; [61] Rtsne_0.15          plyr_1.8.6          grid_4.0.3         </span>
+<span class="co">#&gt; [64] parallel_4.0.3      forcats_0.5.0       crayon_1.3.4       </span>
+<span class="co">#&gt; [67] lattice_0.20-41     Biostrings_2.57.2   haven_2.3.1        </span>
+<span class="co">#&gt; [70] splines_4.0.3       multtest_2.45.0     hms_0.5.3          </span>
+<span class="co">#&gt; [73] pillar_1.4.6        igraph_1.2.6        ggsignif_0.6.0     </span>
+<span class="co">#&gt; [76] reshape2_1.4.4      codetools_0.2-16    stats4_4.0.3       </span>
+<span class="co">#&gt; [79] glue_1.4.2          evaluate_0.14       data.table_1.13.0  </span>
+<span class="co">#&gt; [82] vctrs_0.3.4         foreach_1.5.1       cellranger_1.1.0   </span>
+<span class="co">#&gt; [85] gtable_0.3.0        purrr_0.3.4         tidyr_1.1.2        </span>
+<span class="co">#&gt; [88] assertthat_0.2.1    xfun_0.17           openxlsx_4.2.2     </span>
+<span class="co">#&gt; [91] broom_0.7.1         rstatix_0.6.0       ragg_0.4.0         </span>
+<span class="co">#&gt; [94] survival_3.2-7      iterators_1.0.13    memoise_1.1.0      </span>
+<span class="co">#&gt; [97] IRanges_2.23.10     cluster_2.1.0       ellipsis_0.3.1</span></pre></div>
 </div>
-</div>
-<div id="package-requirements" class="section level2">
-<h2 class="hasAnchor">
-<a href="#package-requirements" class="anchor"></a>Package requirements</h2>
-<ul>
-<li><p>Depends:</p></li>
-<li><p><a href="https://www.r-project.org/">R (&gt;= 3.6.0)</a></p></li>
-<li><p><a href="https://joey711.github.io/phyloseq/index.html">phyloseq</a></p></li>
-<li><p><a href="http://ggplot2.org/">ggplot2</a></p></li>
-<li><p><a href="https://bioconductor.org/packages/devel/bioc/html/microbiome.html">microbiome</a></p></li>
-<li><p>Imports:</p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/plyr/index.html">plyr</a></p></li>
-<li><p><a href="https://cran.rstudio.com/web/packages/reshape2/index.html">reshape2</a></p></li>
-<li><p><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html">stats</a></p></li>
-<li><p><a href="http://tidyr.tidyverse.org/">tidyr</a></p></li>
-<li><p><a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/00Index.html">utils</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/vegan/index.html">vegan</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/ggpubr/index.html">ggpubr</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/RColorBrewer/index.html">RColorBrewer</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/viridis/index.html">viridis</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/pheatmap/index.html">pheatmap</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/ggrepel/index.html">ggrepel</a></p></li>
-<li><p>Suggests:</p></li>
-<li><p><a href="https://bioconductor.org/packages/release/bioc/html/BiocGenerics.html">BiocGenerics</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/knitr/index.html">knitr</a></p></li>
-<li><p><a href="http://rmarkdown.rstudio.com/">rmarkdown</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/ape/index.html">ape</a></p></li>
-<li><p><a href="https://academic.oup.com/bioinformatics/article/26/11/1463/203321">Picante</a></p></li>
-</ul>
 </div>
   </div>
 

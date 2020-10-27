@@ -14,22 +14,19 @@ comment = "#>"
 )
 ```
 
+The `microbiomeutilities` R package is part of the [microbiome-verse](https://github.com/microbiome) tools that provides additional data handling and visualization support for the [microbiome R/BioC package](https://microbiome.github.io/tutorials/)   
 
-The `microbiomeutilities` R package is mainly a wrapper tool with diverse functions for data handling and visualization.   
-
-Philosophy: *Seemingly simple tasks for experienced R users can always be further simplified for novice users*  
+Philosophy: "*Seemingly simple tasks for experienced R users can always be further simplified for novice users*"   
 
 ## Install  
 
 ```{r, eval=FALSE}
-
 install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 ```  
 
 Load libraries  
 ```{r, message=FALSE, warning=FALSE}
-
 library(microbiomeutilities)
 library(microbiome)
 library(knitr)
@@ -43,15 +40,8 @@ library(dplyr)
 
 Package data from [Zackular et al., 2014: The Gut Microbiome Modulates Colon Tumorigenesis](http://mbio.asm.org/content/4/6/e00692-13).  
 
-Useful resources:  
-
-For more information on phyloseq data structure and uses you can have a look at [Phyloseq](http://joey711.github.io/phyloseq/)  
-
-Tools for microbiome analysis in R. **Microbiome package** URL: [microbiome package](http://microbiome.github.com/microbiome).  
-
 Import test data.  
 ```{r}
-
 data("zackular2014")
 ps0 <- zackular2014
 ps0
@@ -69,15 +59,12 @@ Most commonly it is observed that the taxonomy file has classification until a g
 Check the taxonomy in phyloseq object.  
 
 ```{r}
-
 kable(head(tax_table(ps0)))
-
 ```
 
 Some have only g__ of s__ information.  
 
 ```{r, eval=TRUE}
-
 data("zackular2014")
 p0 <- zackular2014
 # reduce size for example
@@ -96,7 +83,7 @@ As can be seen, the rownames have the OTUIDs and available taxonomic name(s).
 
 Useful for QC purposes. Check for distribution of sequencing depth.     
 
-```{r, eval=TRUE, fig.height=3, fig.width=5}
+```{r, eval=TRUE, fig.height=3, fig.width=8, message=FALSE}
 data("zackular2014")
 p0 <- zackular2014
 p <- plot_read_distribution(p0, groups = "DiseaseState", 
@@ -182,28 +169,40 @@ tx.sum1
 
 ### Get taxa summary by group(s)  
 For group specific abundances of taxa `get_group_abundances`.    
-```{r}
+```{r message=FALSE}
 library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
 grp_abund <- get_group_abundances(p0, level = "Phylum", group="DiseaseState")
 ```
 
-How to visusalize these data?  
-```{r fig.height=4, fig.width=6, fig.align='center'}
+How to visualize these data?  
+```{r fig.height=4, fig.width=6, fig.align='center',message=FALSE}
 mycols <- c("brown3", "steelblue","grey50")
 
-grp_abund %>% # input data
-  ggplot(aes(OTUID, mean_abundance)) + # x and y axis 
-  geom_bar(aes(fill=DiseaseState), # fill by Group
-           stat = "identity", 
-           position="dodge") +
+# clean names 
+grp_abund$OTUID <- gsub("p__", "",grp_abund$OTUID)
+grp_abund$OTUID <- ifelse(grp_abund$OTUID == "", 
+                          "Unclassified", grp_abund$OTUID)
+
+
+mean.plot <- grp_abund %>% # input data
+  ggplot(aes(x= reorder(OTUID, mean_abundance), # reroder based on mean abundance
+             y= mean_abundance,
+             fill=DiseaseState)) + # x and y axis 
+  geom_bar(     stat = "identity", 
+                position=position_dodge()) + 
   scale_fill_manual("DiseaseState", values=mycols) + # manually specify colors
   theme_bw() + # add a widely used ggplot2 theme
   ylab("Mean Relative Abundance") + # label y axis
   xlab("Phylum") + # label x axis
   coord_flip() # rotate plot 
+
+mean.plot
 ```
+
+This plot is diagnostic to have an idea about the taxonomy in each group. Statements based on comparisons between groups may not make sense here because only mean abundance values are plotted, and not standard deviation within groups. For visualizing error bars and more check [Statistical tools for high-throughput data analysis](http://www.sthda.com/english/wiki/ggplot2-error-bars-quick-start-guide-r-software-and-data-visualization).  
+
 
 ### Find samples dominated by specific taxa   
 Finding samples dominated by user provided taxa in a phyloseq object.
@@ -273,8 +272,10 @@ p <- plot_alpha_diversities(ps0,
                             variableA = "DiseaseState",
                             palette = mycols)
 
-print(p + theme_biome_utils() + 
-        ggplot2::theme(legend.position = "top",                                               text = element_text(size=14)))
+p <- p + theme_biome_utils() + 
+  ggplot2::theme(legend.position = "top",
+                 text = element_text(size=14))
+print(p)
 
 ```
 
@@ -311,8 +312,36 @@ p.m + ylab("Shannon Diversity") + xlab("")
 
 ## Composition plots   
 
-### Ternary plot  
+### Area plot   
 
+Area plots a good way of visualizing changes in abundances on individual participants, or bioreactors sampled over time.   
+Here, we use a randomly chosen small subset of data from [HMP2data](https://bioconductor.org/packages/release/data/experiment/html/HMP2Data.html).  
+For other longitudinal related functionality check the [Longitudinal data analysis and visualization] section in the *Articles* section.  
+
+```{r fig.width=8, fig.height=4, fig.align='center', message=FALSE, warning=FALSE}
+library(microbiomeutilities)
+data("hmp2")
+ps <- hmp2
+ps.rel <- microbiome::transform(ps, "compositional") 
+# chose specific participants to plot data.
+pts <- c("Participant_1","Participant_2",
+         "Participant_8","Participant_5")
+#pts <- "Participant_1"
+ps.rel <- subset_samples(ps.rel, subject_id %in% pts)
+p <- plot_area(ps.rel, xvar="visit_number", 
+               level = "Family",
+               facet.by = "subject_id",
+               abund.thres = 0.1,
+               prev.thres=0.1,
+               fill.colors=brewer.pal(12,"Paired"),
+               ncol=2,
+               nrow=2)
+p + ylab("Relative abundance") + 
+  scale_y_continuous(labels = scales::percent)
+```
+
+
+### Ternary plot  
 
 ```{r message=FALSE}
 library(microbiome)
@@ -417,7 +446,7 @@ p + scale_y_continuous(labels = scales::percent)
 ```
 
 Plot top four Genera    
-```{r fig.width=6, fig.height=6, eval=TRUE, message=FALSE, fig.align='center'}
+```{r fig.width=6, fig.height=4, eval=TRUE, message=FALSE, fig.align='center'}
 library(microbiome)
 library(microbiomeutilities)
 data("zackular2014")
@@ -449,7 +478,7 @@ print(p + ylab("Relative abundance") + scale_y_continuous(labels = scales::perce
 ```
 
 ### Abundance-Prevalence relationship  
-Plots Mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random sub-sampling.  
+Plots mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random sub-sampling.  
 This can be useful in identifying highly prevalent taxa and their mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.  
 
 See [core microbiota analysis in microbiome R package](https://microbiome.github.io/tutorials/Core.html)    
@@ -486,51 +515,12 @@ p_v <- p_v +
 p_v
 ```
 
-## Microbiota plasticity  
-
-### Calculate plasticity  
-
-See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. [Sci Rep 10, 1405 (2020).](https://www.nature.com/articles/s41598-020-58000-y)  
-
-Data from `microbiome` package is used here for example.  
-```{r, message=FALSE, warning=FALSE, fig.align='center'}
-library(microbiome)
-library(microbiomeutilities)
-library(dplyr)
-library(ggpubr)
-data(peerj32)
-pseq <- peerj32$phyloseq
-pseq.rel <- microbiome::transform(pseq, "compositional")
-pl <- plasticity(pseq.rel, dist.method = "bray", participant.col="subject")
-head(pl)
-```
-
-Alternatively, using correlation methods for `plasticity`, one can check for similarity between technical replicates (2X sequenced same sample) for quality check.  
-
-### Plot plasticity  
-```{r fig.height=3, fig.width=4, fig.align='center'}
-
-ggplot(pl, aes(group_2,bray)) + 
-  geom_boxplot(aes(fill=group_2), 
-               alpha=0.5, 
-               na.rm = TRUE, 
-               width=0.5) +
-  geom_jitter(aes(color=group_2), 
-              alpha=0.5, 
-              size=3, 
-              na.rm = TRUE) +
-  scale_fill_manual(values = c("#457b9d", "#e63946"))+
-  scale_color_manual(values = c("#457b9d", "#e63946"))+
-  stat_compare_means() + 
-  theme_biome_utils()
-
-```
 
 ## Heatmaps    
 ### Heatmap using phyloseq and pheatmap   
 
 Useful for visualizing differences in top OTUs between sample groups.  
-By default this function internally calculated Prevalence, but purposely  doesn't plot by default. This is to give access to powerful `pheatmap` annotation options.  
+By default this function internally calculates _Prevalence_, but purposely doesn't plot it by default. This is to give access to powerful `pheatmap` annotation options.  
 ```{r fig.height=8, fig.width=8, fig.align='center'}
 library(pheatmap)
 library(RColorBrewer)
@@ -681,41 +671,29 @@ percent_classified(ps0)
 
 ```
 
-For more tutorials and examples of data anlaysis in R please check:  
+
+**Useful resources:**    
+
+The `microbiomeutilties` depends on the phyloseq data structure and core [Phyloseq](http://joey711.github.io/phyloseq/) functions.  
+
+Tools for microbiome analysis in R. **Microbiome package** URL: [microbiome package](http://microbiome.github.com/microbiome).  
+
+
+For more tutorials and examples of data analysis in R please check:  
 
 * [Microbiome data analysis SpringSchool2018](https://goo.gl/CPChhd)  
-* [Microbiome R package tutorials](http://microbiome.github.io/microbiome/)  
+* [Microbiome R package tutorials](http://microbiome.github.io/microbiome/)   
+
+**Contributions are welcome:**  
+
+[Issue Tracker](https://github.com/microsud/microbiomeutilities/issues)    
+[Pull requests](https://github.com/microsud/microbiomeutilities/pulls)     
+[Star us on the Github page](https://github.com/microsud/microbiomeutilities) 
+
+
 
 ```{r}
-
 sessionInfo()
 ```
 
 
-## Package requirements  
-
-* Depends:
-+ [R (>= 3.6.0)](https://www.r-project.org/)
-+ [phyloseq](https://joey711.github.io/phyloseq/index.html)
-+ [ggplot2](http://ggplot2.org/)
-+ [microbiome](https://bioconductor.org/packages/devel/bioc/html/microbiome.html)
-
-* Imports:
-+ [plyr](https://cran.r-project.org/web/packages/plyr/index.html)
-+ [reshape2](https://cran.rstudio.com/web/packages/reshape2/index.html)
-+ [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
-+ [tidyr](http://tidyr.tidyverse.org/)
-+ [utils](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/00Index.html)
-+ [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
-+ [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html)
-+ [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)
-+ [viridis](https://cran.r-project.org/web/packages/viridis/index.html)
-+ [pheatmap](https://cran.r-project.org/web/packages/pheatmap/index.html)
-+ [ggrepel](https://cran.r-project.org/web/packages/ggrepel/index.html)
-
-* Suggests:
-+ [BiocGenerics](https://bioconductor.org/packages/release/bioc/html/BiocGenerics.html)
-+ [knitr](https://cran.r-project.org/web/packages/knitr/index.html)
-+ [rmarkdown](http://rmarkdown.rstudio.com/)
-+ [ape](https://cran.r-project.org/web/packages/ape/index.html)
-+ [Picante](https://academic.oup.com/bioinformatics/article/26/11/1463/203321)

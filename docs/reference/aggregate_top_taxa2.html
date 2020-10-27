@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.08</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.09</span>
       </span>
     </div>
 
@@ -89,6 +89,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/microbiomeutilities_ts.html">Longitudidal data analysis and visualization</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -120,7 +132,7 @@
     <p>Summarize phyloseq: combine other than the most abundant taxa.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>aggregate_top_taxa2</span>(<span class='kw'>x</span>, <span class='kw'>top</span>, <span class='kw'>level</span>)</pre>
+    <pre class="usage"><span class='fu'>aggregate_top_taxa2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>top</span>, <span class='va'>level</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,8 +168,8 @@ aggregate_rare function.</p>
     <p>Contact: Leo Lahti <a href='mailto:microbiome-admin@googlegroups.com'>microbiome-admin@googlegroups.com</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>dietswap</span>)
-<span class='kw'>s</span> <span class='op'>&lt;-</span> <span class='fu'>aggregate_top_taxa2</span>(<span class='kw'>dietswap</span>, top = <span class='fl'>3</span>, <span class='st'>"Phylum"</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dietswap</span><span class='op'>)</span>
+<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'>aggregate_top_taxa2</span><span class='op'>(</span><span class='va'>dietswap</span>, top <span class='op'>=</span> <span class='fl'>3</span>, <span class='st'>"Phylum"</span><span class='op'>)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

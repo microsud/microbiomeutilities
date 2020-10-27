@@ -1,0 +1,182 @@
+---
+title: "Longitudinal data analysis and visualization"  
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Longitudinal data analysis and visualization}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+  
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+```
+
+
+## Longitudinal data visualization    
+
+Longitudinal data presents challenges for visualization.  
+
+## Microbiota plasticity  
+
+### Calculate plasticity  
+
+See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. [Sci Rep 10, 1405 (2020).](https://www.nature.com/articles/s41598-020-58000-y)  
+
+Data from `microbiome` package is used here for example.  
+```{r, message=FALSE, warning=FALSE, fig.align='center'}
+library(microbiome)
+library(microbiomeutilities)
+library(dplyr)
+library(ggpubr)
+data(peerj32)
+pseq <- peerj32$phyloseq
+pseq.rel <- microbiome::transform(pseq, "compositional")
+pl <- plasticity(pseq.rel, dist.method = "bray", participant.col="subject")
+head(pl)
+```
+
+Alternatively, using correlation methods for `plasticity`, one can check for similarity between technical replicates (2X sequenced same sample) for quality check.  
+
+### Plot plasticity  
+```{r fig.height=3, fig.width=4, fig.align='center'}
+
+ggplot(pl, aes(group_2,bray)) + 
+  geom_boxplot(aes(fill=group_2), 
+               alpha=0.5, 
+               na.rm = TRUE, 
+               width=0.5) +
+  geom_jitter(aes(color=group_2), 
+              alpha=0.5, 
+              size=3, 
+              na.rm = TRUE) +
+  scale_fill_manual(values = c("#457b9d", "#e63946"))+
+  scale_color_manual(values = c("#457b9d", "#e63946"))+
+  stat_compare_means() + 
+  theme_biome_utils()
+
+```
+
+
+### Paired abundances  
+We use HMP2 data 
+```{r fig.width=5, fig.height=3, message=FALSE, fig.align='center'}
+library(microbiome)
+library(microbiomeutilities)
+#library(gghalves)
+library(tidyr)
+
+data("hmp2")
+ps <- hmp2 
+# pick visit 1 and 2
+ps.sub <- subset_samples(ps, visit_number %in% c(1,2))
+ps.sub <- prune_taxa(taxa_sums(ps.sub)>0, ps.sub)
+
+ps.rel <- microbiome::transform(ps.sub, "compositional")
+ps.rel.f <- format_to_besthit(ps.rel)
+
+# Check how many have both time points
+table(meta(ps.rel.f)$visit_number)
+#table(meta(ps.rel.f)$visit_number, meta(ps.rel.f)$subject_id)
+# there are two Participant_3 and Participant_11 with no time point2 sample 
+
+select.taxa <- c("4430843:Prevotella", "580629:Bacteroides")
+
+group.colors = c("brown3", "steelblue", "grey70")
+
+
+p <- plot_paired_abundances (ps.rel.f,
+                             select.taxa=select.taxa,
+                             group="visit_number",
+                             group.colors=group.colors,
+                             dot.opacity = 0.25,
+                             dot.size= 2,
+                             add.violin = TRUE,
+                             line = "subject_id",
+                             line.down = "#7209b7",
+                             line.stable = "red",
+                             line.up = "#14213d", 
+                             line.na.value = "red",
+                             line.guide = "none",
+                             line.opacity = 0.25,
+                             line.size = 1)
+print(p + xlab("Time point") + ylab("Relative abundance"))
+
+```
+
+The lines are colored according to their change in abundance from time 1 to time 2.   
+
+### Spaghetti plots   
+
+**One participant many taxa**    
+Reference for visualization and original code [ Data to Viz.com](https://www.data-to-viz.com/caveat/spaghetti.html)
+
+The ordering of panel on top of each other is better for comparisons. However, practical consideration can be made on number of columns and rows to distribute the panels.   
+
+```{r message=FALSE,fig.width=4, fig.height=6, message=FALSE, fig.align='center'}
+library(microbiomeutilities)
+data("hmp2")
+pseq <- hmp2 # Ren
+pseq.rel <- microbiome::transform(pseq, "compositional")
+pseq.relF <- format_to_besthit(pseq.rel)
+
+# Choose one participant
+phdf.s <- subset_samples(pseq.relF, subject_id==
+                           "Participant_1")
+# Choose top 12 taxa to visualize
+ntax <- top_taxa(phdf.s, 4)
+phdf.s <- prune_taxa(ntax, phdf.s)
+
+plot_spaghetti(phdf.s, plot.var= "by_taxa",
+               select.taxa=ntax,
+               xvar="visit_number",
+               line.bg.color="#8d99ae",
+               focus.color="brown3",
+               focus.line.size = 1,
+               ncol=1,
+               nrow=4,
+               line.size=0.2)
+```
+
+**One taxa many participants**    
+
+```{r message=FALSE,fig.width=6, fig.height=6, message=FALSE, fig.align='center'}
+
+pseq.relF <- format_to_besthit(pseq.rel)
+ntax2 <- core_members(pseq.relF, 0.001, 0.5)
+# chose first for example
+ntax2 # only
+# check how many participants are there in "subject_id" 
+length(unique(meta(pseq.relF)$subject_id))
+
+# There are 13 participants. Choose ncol and nrow accordingly 
+
+plot_spaghetti(pseq.relF, plot.var= "by_sample",
+               select.taxa=ntax2,
+               group= "subject_id",
+               xvar="visit_number",
+               line.bg.color="#8d99ae",
+               focus.color="brown3",
+               focus.line.size = 1,
+               ncol=4,
+               nrow=6,
+               line.size=0.2)
+
+
+```
+
+This package is part of the `microbiomeverse` tools.  
+See also [microbiome R/BioC package](https://microbiome.github.io/tutorials/)  
+**Contributions are welcome:**  
+
+[Issue Tracker](https://github.com/microsud/microbiomeutilities/issues)    
+[Pull requests](https://github.com/microsud/microbiomeutilities/pulls)     
+[Star us on the Github page](https://github.com/microsud/microbiomeutilities) 
+
+
+```{r}
+
+sessionInfo()
+```

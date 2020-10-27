@@ -73,7 +73,7 @@ and upper and lower confidence interval for each taxa is calculated by random su
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.08</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.09</span>
       </span>
     </div>
 
@@ -90,6 +90,18 @@ and upper and lower confidence interval for each taxa is calculated by random su
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/microbiomeutilities_ts.html">Longitudidal data analysis and visualization</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -122,24 +134,24 @@ and upper and lower confidence interval for each taxa is calculated by random su
 and upper and lower confidence interval for each taxa is calculated by random subsampling.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_abund_prev</span>(
-  <span class='kw'>x</span>,
-  lower.conf = <span class='fl'>0.025</span>,
-  upper.conf = <span class='fl'>0.975</span>,
-  bs.iter = <span class='fl'>99</span>,
-  color = <span class='st'>"steelblue"</span>,
-  dot.opacity = <span class='fl'>0.5</span>,
-  dot.size = <span class='fl'>2</span>,
-  label.core = <span class='fl'>FALSE</span>,
-  label.size = <span class='kw'>NULL</span>,
-  label.opacity = <span class='kw'>NULL</span>,
-  label.color = <span class='st'>"grey70"</span>,
-  mean.abund.thres = <span class='kw'>NULL</span>,
-  mean.prev.thres = <span class='kw'>NULL</span>,
-  log.scale = <span class='fl'>TRUE</span>,
-  nudge.label = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>plot_abund_prev</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  lower.conf <span class='op'>=</span> <span class='fl'>0.025</span>,
+  upper.conf <span class='op'>=</span> <span class='fl'>0.975</span>,
+  bs.iter <span class='op'>=</span> <span class='fl'>99</span>,
+  color <span class='op'>=</span> <span class='st'>"steelblue"</span>,
+  dot.opacity <span class='op'>=</span> <span class='fl'>0.5</span>,
+  dot.size <span class='op'>=</span> <span class='fl'>2</span>,
+  label.core <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  label.size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  label.opacity <span class='op'>=</span> <span class='cn'>NULL</span>,
+  label.color <span class='op'>=</span> <span class='st'>"grey70"</span>,
+  mean.abund.thres <span class='op'>=</span> <span class='cn'>NULL</span>,
+  mean.prev.thres <span class='op'>=</span> <span class='cn'>NULL</span>,
+  log.scale <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  nudge.label <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -222,20 +234,20 @@ abundance criteria. Default is NULL</p></td>
     <p>Check if there are spurious OTUs/ASVs.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Example data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
-<span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='kw'>microbiome</span>::<span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span>(<span class='kw'>asv_ps</span>, <span class='st'>"compositional"</span>)
-<span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/core.html'>core</a></span>(<span class='kw'>asv_ps</span>, detection = <span class='fl'>0.0001</span>, prevalence = <span class='fl'>0.5</span>)
-<span class='kw'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span>(<span class='kw'>asv_ps</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2349</span>)
-<span class='kw'>p_v</span> <span class='op'>&lt;-</span> <span class='fu'>plot_abund_prev</span>(<span class='kw'>asv_ps</span>, size = <span class='fl'>20</span>, replace = <span class='fl'>TRUE</span>) <span class='op'>+</span>
-  <span class='fu'>geom_vline</span>(xintercept = <span class='fl'>0.75</span>, lty = <span class='st'>"dashed"</span>, alpha = <span class='fl'>0.7</span>) <span class='op'>+</span>
-  <span class='fu'>geom_hline</span>(yintercept = <span class='fl'>0.01</span>, lty = <span class='st'>"dashed"</span>, alpha = <span class='fl'>0.7</span>) <span class='op'>+</span>
-  <span class='fu'>scale_color_brewer</span>(palette = <span class='st'>"Paired"</span>)
-<span class='kw'>p_v</span>
-}
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>microbiomeutilities</span><span class='op'>)</span>
+<span class='va'>asv_ps</span> <span class='op'>&lt;-</span> <span class='va'>zackular2014</span>
+<span class='va'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'>microbiome</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/transform.html'>transform</a></span><span class='op'>(</span><span class='va'>asv_ps</span>, <span class='st'>"compositional"</span><span class='op'>)</span>
+<span class='va'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/microbiome/man/core.html'>core</a></span><span class='op'>(</span><span class='va'>asv_ps</span>, detection <span class='op'>=</span> <span class='fl'>0.0001</span>, prevalence <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
+<span class='va'>asv_ps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='format_to_besthit.html'>format_to_besthit</a></span><span class='op'>(</span><span class='va'>asv_ps</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2349</span><span class='op'>)</span>
+<span class='va'>p_v</span> <span class='op'>&lt;-</span> <span class='fu'>plot_abund_prev</span><span class='op'>(</span><span class='va'>asv_ps</span>, size <span class='op'>=</span> <span class='fl'>20</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_vline</span><span class='op'>(</span>xintercept <span class='op'>=</span> <span class='fl'>0.75</span>, lty <span class='op'>=</span> <span class='st'>"dashed"</span>, alpha <span class='op'>=</span> <span class='fl'>0.7</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_hline</span><span class='op'>(</span>yintercept <span class='op'>=</span> <span class='fl'>0.01</span>, lty <span class='op'>=</span> <span class='st'>"dashed"</span>, alpha <span class='op'>=</span> <span class='fl'>0.7</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Paired"</span><span class='op'>)</span>
+<span class='va'>p_v</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>

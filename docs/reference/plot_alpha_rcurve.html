@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.08</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.09</span>
       </span>
     </div>
 
@@ -89,6 +89,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/microbiomeutilities_ts.html">Longitudidal data analysis and visualization</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -120,22 +132,22 @@
     <p>Calculates alpha diversity idenx at varying sampling units (sequencing depth).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_alpha_rcurve</span>(
-  <span class='kw'>x</span>,
-  index = <span class='st'>"observed"</span>,
-  subsamples = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>1000</span>, <span class='fl'>2000</span>, <span class='fl'>3000</span>, <span class='fl'>4000</span>, <span class='fl'>5000</span>),
-  lower.conf = <span class='fl'>0.025</span>,
-  upper.conf = <span class='fl'>0.975</span>,
-  group = <span class='kw'>NULL</span>,
-  linetype.main = <span class='fl'>1</span>,
-  line.opacity.main = <span class='fl'>0.5</span>,
-  linetype.type = <span class='fl'>2</span>,
-  line.opacity.type = <span class='fl'>0.25</span>,
-  type = <span class='st'>"CI"</span>,
-  label.min = <span class='fl'>TRUE</span>,
-  label.size = <span class='fl'>3</span>,
-  label.color = <span class='st'>"grey70"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>plot_alpha_rcurve</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  index <span class='op'>=</span> <span class='st'>"observed"</span>,
+  subsamples <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>1000</span>, <span class='fl'>2000</span>, <span class='fl'>3000</span>, <span class='fl'>4000</span>, <span class='fl'>5000</span><span class='op'>)</span>,
+  lower.conf <span class='op'>=</span> <span class='fl'>0.025</span>,
+  upper.conf <span class='op'>=</span> <span class='fl'>0.975</span>,
+  group <span class='op'>=</span> <span class='cn'>NULL</span>,
+  linetype.main <span class='op'>=</span> <span class='fl'>1</span>,
+  line.opacity.main <span class='op'>=</span> <span class='fl'>0.5</span>,
+  linetype.type <span class='op'>=</span> <span class='fl'>2</span>,
+  line.opacity.type <span class='op'>=</span> <span class='fl'>0.25</span>,
+  type <span class='op'>=</span> <span class='st'>"CI"</span>,
+  label.min <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  label.size <span class='op'>=</span> <span class='fl'>3</span>,
+  label.color <span class='op'>=</span> <span class='st'>"grey70"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,19 +212,19 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
-<span class='kw'>p0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>microbiomeutilities</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"zackular2014"</span><span class='op'>)</span>
+<span class='va'>p0</span> <span class='op'>&lt;-</span> <span class='va'>zackular2014</span>
 <span class='co'># e.g. to make range of </span>
 <span class='co'># subsamples &lt;- seq(0, 5000, by=100)[-1]</span>
-<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_alpha_rcurve</span>(<span class='kw'>p0</span>, index=<span class='st'>"observed"</span>, 
-lower.conf = <span class='fl'>0.025</span>, upper.conf = <span class='fl'>0.975</span>, 
-group=<span class='st'>"DiseaseState"</span>) <span class='op'>+</span> 
-<span class='fu'>scale_color_brewer</span>(palette = <span class='st'>"Paired"</span>) <span class='op'>+</span> 
-<span class='fu'>scale_fill_brewer</span>(palette = <span class='st'>"Paired"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>p</span> )
-}
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_alpha_rcurve</span><span class='op'>(</span><span class='va'>p0</span>, index<span class='op'>=</span><span class='st'>"observed"</span>, 
+lower.conf <span class='op'>=</span> <span class='fl'>0.025</span>, upper.conf <span class='op'>=</span> <span class='fl'>0.975</span>, 
+group<span class='op'>=</span><span class='st'>"DiseaseState"</span><span class='op'>)</span> <span class='op'>+</span> 
+<span class='fu'>scale_color_brewer</span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Paired"</span><span class='op'>)</span> <span class='op'>+</span> 
+<span class='fu'>scale_fill_brewer</span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Paired"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p</span> <span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
