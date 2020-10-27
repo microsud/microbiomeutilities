@@ -51,12 +51,17 @@ plot_listed_taxa <- function(x,
                              ncol = NULL,
                              nrow = NULL) {
   x.rel <- x.prun <- x.df <- p.box <- p.vio <- p.strp <- NULL
-
+  
+  if(is.na(group) | is.null(group)) {
+    stop(" 'group' argument cannot be empty")
+  }
+  
   x.rel <- microbiome::transform(x, "compositional")
 
   x.prun <- prune_taxa(select.taxa, x.rel)
 
   x.df <- phy_to_ldf(x.prun, transform.counts = NULL)
+  
 
   if (!is.null(group.order)) {
     x.df[, group] <- factor(x.df[, group],

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.08</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.09</span>
       </span>
     </div>
 
@@ -89,6 +89,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/microbiomeutilities_ts.html">Longitudidal data analysis and visualization</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -120,21 +132,21 @@
     <p>Plot taxon abundance for samples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_taxa_boxplot</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>taxonomic.level</span>,
-  <span class='kw'>top.otu</span>,
-  keep.other = <span class='fl'>FALSE</span>,
-  <span class='kw'>group</span>,
-  <span class='kw'>title</span>,
-  group.colors = <span class='kw'>NULL</span>,
-  group.order = <span class='kw'>NULL</span>,
-  add.violin = <span class='fl'>TRUE</span>,
-  violin.opacity = <span class='fl'>0.25</span>,
-  box.opacity = <span class='fl'>0.25</span>,
-  dot.opacity = <span class='fl'>0.25</span>,
-  dot.size = <span class='fl'>2</span>
-)</pre>
+    <pre class="usage"><span class='fu'>plot_taxa_boxplot</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>taxonomic.level</span>,
+  <span class='va'>top.otu</span>,
+  keep.other <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>group</span>,
+  <span class='va'>title</span>,
+  group.colors <span class='op'>=</span> <span class='cn'>NULL</span>,
+  group.order <span class='op'>=</span> <span class='cn'>NULL</span>,
+  add.violin <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  violin.opacity <span class='op'>=</span> <span class='fl'>0.25</span>,
+  box.opacity <span class='op'>=</span> <span class='fl'>0.25</span>,
+  dot.opacity <span class='op'>=</span> <span class='fl'>0.25</span>,
+  dot.size <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,24 +210,24 @@
     <p>A <code>ggplot</code> plot object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Example data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>microbiomeutilities</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>RColorBrewer</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"zackular2014"</span>)
-<span class='kw'>ps0</span> <span class='op'>&lt;-</span> <span class='kw'>zackular2014</span>
-<span class='kw'>mycols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>, <span class='st'>"grey50"</span>)
-<span class='kw'>pn</span> <span class='op'>&lt;-</span> <span class='fu'>plot_taxa_boxplot</span>(<span class='kw'>ps0</span>,
-  taxonomic.level = <span class='st'>"Phylum"</span>,
-  top.otu = <span class='fl'>6</span>,
-  group = <span class='st'>"DiseaseState"</span>,
-  title = <span class='st'>"Relative abudance plot"</span>,
-  keep.other = <span class='fl'>FALSE</span>,
-  group.order = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span>),
-  group.colors = <span class='kw'>mycols</span>
-)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>pn</span> <span class='op'>+</span> <span class='fu'><a href='theme_biome_utils.html'>theme_biome_utils</a></span>())
-}
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>microbiomeutilities</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>RColorBrewer</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"zackular2014"</span><span class='op'>)</span>
+<span class='va'>ps0</span> <span class='op'>&lt;-</span> <span class='va'>zackular2014</span>
+<span class='va'>mycols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>, <span class='st'>"grey50"</span><span class='op'>)</span>
+<span class='va'>pn</span> <span class='op'>&lt;-</span> <span class='fu'>plot_taxa_boxplot</span><span class='op'>(</span><span class='va'>ps0</span>,
+  taxonomic.level <span class='op'>=</span> <span class='st'>"Phylum"</span>,
+  top.otu <span class='op'>=</span> <span class='fl'>6</span>,
+  group <span class='op'>=</span> <span class='st'>"DiseaseState"</span>,
+  title <span class='op'>=</span> <span class='st'>"Relative abudance plot"</span>,
+  keep.other <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  group.order <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span><span class='op'>)</span>,
+  group.colors <span class='op'>=</span> <span class='va'>mycols</span>
+<span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>pn</span> <span class='op'>+</span> <span class='fu'><a href='theme_biome_utils.html'>theme_biome_utils</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>

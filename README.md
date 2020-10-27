@@ -6,7 +6,7 @@
 # About  
 The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package.   
 
-Philosophy: *Seemingly simple tasks for experienced R users can always be further simplified for novice users*  
+Philosophy: "*Seemingly simple tasks for experienced R users can always be further simplified for novice users*"  
 
 [Package website and online documentation](https://microsud.github.io/microbiomeutilities/)  
  
@@ -17,11 +17,17 @@ install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 
 ```  
-**Citation:**  Sudarshan A. Shetty, & Leo Lahti. (2020, October). microbiomeutilities: An R package for utilities to guide in-depth marker gene amplicon data analysis (Version 1.00.08).     
+**Citation:**  
+  o Leo Lahti, Sudarshan Shetty et al. (2017). Tools for microbiome analysis in R. Version 2.1.28. 
+    URL: http://microbiome.github.com/microbiome
+  o Sudarshan A. Shetty, & Leo Lahti. (2020, October). `microbiomeutilities`: An R package for utilities to guide
+    in-depth marker gene amplicon data analysis (Version 1.00.08).   
+  
+  
 The microbiome R package relies on the independently developed   
-[phyloseq](https://github.com/joey711/phyloseq) package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.  
-[ggplot2](http://ggplot2.org/) H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.  
-[tidyverse packages](https://www.tidyverse.org/).  
+o [phyloseq](https://github.com/joey711/phyloseq) package and data structures for R-based microbiome analysis  developed by Paul McMurdie and Susan Holmes.  
+o [ggplot2](http://ggplot2.org/) H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.  
+o [tidyverse packages](https://www.tidyverse.org/).  
 
 **Microbiome package website with step-wise tutorials**:  
 URL: [http://microbiome.github.com/microbiome](http://microbiome.github.com/microbiome).  
@@ -59,7 +65,7 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 * Wong, J. M. W., Souza, R. De, Kendall, C. W. C., Emam, A. & Jenkins, D. J. A. Colonic health: fermentation and short chain fatty acids. J. Clin. Gastroenterol. 40, 235–243 (2006).  
 * Ross, M. C. et al. 16s gut community of the cameron county hispanic cohort. Microbiome 3, 7 (2015).
 * Zupancic, M. L. et al. Analysis of the gut microbiota in the old order Amish and its relation to the metabolic syndrome. PLoS ONE 7, e43052 (2012).  
-* Scher, J. U. et al. Expansion of intestinal prevotella copri correlates with enhanced susceptibility to arthritis. eLife 2, e01202 (2013).  
+* Scher, J. U. et al. Expansion of intestinal Prevotella copri correlates with enhanced susceptibility to arthritis. eLife 2, e01202 (2013).  
 * Alkanani, A. K. et al. Alterations in intestinal microbiota correlate with susceptibility to type 1 diabetes. Diabetes 64, 3510–3520 (2015).  
 * Scheperjans, F. et al Gut microbiota are related to parkinson’s disease and clinical phenotype. Mov. Disord. 30, 350–358 (2014).
 
@@ -67,6 +73,12 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
+CHANGES IN VERSION 1.00.09 (2020-10-21)  
+  o Added longitudinal page to website   
+  o Added new function `plot_area`  
+  o Added new function `plot_paired_abundances`  
+  o Added new function `plot_spaghetti`   
+  
 CHANGES IN VERSION 1.00.08 (2020-10-17)  
   o Cosmetic updates   
 

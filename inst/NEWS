@@ -1,6 +1,12 @@
 
 Constant development is in process.  
 
+CHANGES IN VERSION 1.00.09 (2020-10-21)  
+  o Added longitudinal page to website   
+  o Added new function plot_area  
+  o Added new function plot_paired_abundances  
+  o Added new function plot_spaghetti  
+  
 CHANGES IN VERSION 1.00.08 (2020-10-17)  
   o Cosmetic updates      
   

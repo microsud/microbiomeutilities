@@ -3,5 +3,6 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   microbiomeutilities: microbiomeutilities.html
-last_built: 2020-10-17T17:52Z
+  microbiomeutilities_ts: microbiomeutilities_ts.html
+last_built: 2020-10-23T18:05Z
 
