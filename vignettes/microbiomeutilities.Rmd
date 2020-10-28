@@ -311,36 +311,6 @@ p.m + ylab("Shannon Diversity") + xlab("")
 ```
 
 ## Composition plots   
-
-### Area plot   
-
-Area plots a good way of visualizing changes in abundances on individual participants, or bioreactors sampled over time.   
-Here, we use a randomly chosen small subset of data from [HMP2data](https://bioconductor.org/packages/release/data/experiment/html/HMP2Data.html).  
-For other longitudinal related functionality check the [Longitudinal data analysis and visualization] section in the *Articles* section.  
-
-```{r fig.width=8, fig.height=4, fig.align='center', message=FALSE, warning=FALSE}
-library(microbiomeutilities)
-data("hmp2")
-ps <- hmp2
-ps.rel <- microbiome::transform(ps, "compositional") 
-# chose specific participants to plot data.
-pts <- c("Participant_1","Participant_2",
-         "Participant_8","Participant_5")
-#pts <- "Participant_1"
-ps.rel <- subset_samples(ps.rel, subject_id %in% pts)
-p <- plot_area(ps.rel, xvar="visit_number", 
-               level = "Family",
-               facet.by = "subject_id",
-               abund.thres = 0.1,
-               prev.thres=0.1,
-               fill.colors=brewer.pal(12,"Paired"),
-               ncol=2,
-               nrow=2)
-p + ylab("Relative abundance") + 
-  scale_y_continuous(labels = scales::percent)
-```
-
-
 ### Ternary plot  
 
 ```{r message=FALSE}
@@ -376,6 +346,9 @@ ggtern(data=tern_df, aes(x=CRC, y=H, z=nonCRC)) +
 detach("package:ggtern", unload=TRUE)
 
 ```
+
+
+![ternary plot](../inst/extras/tern_eg.png)
 
 ### Plot taxa boxplot  
 
@@ -596,7 +569,9 @@ simple_heatmap(p0.rel,
 
 ```
 
-For heatmap options see [microbiome::heat()](https://microbiome.github.io/tutorials/Heatmap.html) and [ampvis2](https://madsalbertsen.github.io/ampvis2/reference/amp_heatmap.html)  
+For heatmap options see [microbiome::heat()](https://microbiome.github.io/tutorials/Heatmap.html) and [ampvis2](https://madsalbertsen.github.io/ampvis2/reference/amp_heatmap.html)    
+
+For other longitudinal related functionality check the [Longitudinal data analysis and visualization] section in the *Articles* section.  
 
 ## MicrobiomeHD datasets as phyloseq objects  
 

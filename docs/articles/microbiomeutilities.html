@@ -57,7 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/microbiomeutilities_ts.html">Longitudidal data analysis and visualization</a>
+      <a href="../articles/microbiomeutilities_ts.html">Longitudinal data analysis and visualization</a>
     </li>
   </ul>
 </li>
@@ -92,7 +92,7 @@
 
     
     
-<p>The <code>microbiomeutilities</code> R package is mainly a wrapper tool with diverse functions for data handling and visualization.</p>
+<p>The <code>microbiomeutilities</code> R package is part of the <a href="https://github.com/microbiome">microbiome-verse</a> tools that provides additional data handling and visualization support for the <a href="https://microbiome.github.io/tutorials/">microbiome R/BioC package</a></p>
 <p>Philosophy: “<em>Seemingly simple tasks for experienced R users can always be further simplified for novice users</em>”</p>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
@@ -115,9 +115,6 @@
 <h3 class="hasAnchor">
 <a href="#example-data" class="anchor"></a>Example data</h3>
 <p>Package data from <a href="http://mbio.asm.org/content/4/6/e00692-13">Zackular et al., 2014: The Gut Microbiome Modulates Colon Tumorigenesis</a>.</p>
-<p>Useful resources:</p>
-<p>For more information on phyloseq data structure and uses you can have a look at <a href="http://joey711.github.io/phyloseq/">Phyloseq</a></p>
-<p>Tools for microbiome analysis in R. <strong>Microbiome package</strong> URL: <a href="http://microbiome.github.com/microbiome">microbiome package</a>.</p>
 <p>Import test data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
@@ -753,37 +750,10 @@ Here, we can access the numerous alpha diversity measures supported by <a href="
 <div id="composition-plots" class="section level2">
 <h2 class="hasAnchor">
 <a href="#composition-plots" class="anchor"></a>Composition plots</h2>
-<div id="area-plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#area-plot" class="anchor"></a>Area plot</h3>
-<p>Area plots a good way of visualizing changes in abundances on individual participants, or bioreactors sampled over time.<br>
-Here, we use a randomly chosen small subset of data from <a href="https://bioconductor.org/packages/release/data/experiment/html/HMP2Data.html">HMP2data</a>.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"hmp2"</span><span class="op">)</span>
-<span class="va">ps</span> <span class="op">&lt;-</span> <span class="va">hmp2</span>
-<span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">ps</span>, <span class="st">"compositional"</span><span class="op">)</span> 
-<span class="co"># chose specific participants to plot data.</span>
-<span class="va">pts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Participant_1"</span>,<span class="st">"Participant_2"</span>,
-         <span class="st">"Participant_8"</span>,<span class="st">"Participant_5"</span><span class="op">)</span>
-<span class="co">#pts &lt;- "Participant_1"</span>
-<span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span><span class="op">(</span><span class="va">ps.rel</span>, <span class="va">subject_id</span> <span class="op">%in%</span> <span class="va">pts</span><span class="op">)</span>
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_area.html">plot_area</a></span><span class="op">(</span><span class="va">ps.rel</span>, xvar<span class="op">=</span><span class="st">"visit_number"</span>, 
-               level <span class="op">=</span> <span class="st">"Family"</span>,
-               facet.by <span class="op">=</span> <span class="st">"subject_id"</span>,
-               abund.thres <span class="op">=</span> <span class="fl">0.1</span>,
-               prev.thres<span class="op">=</span><span class="fl">0.1</span>,
-               fill.colors<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">12</span>,<span class="st">"Paired"</span><span class="op">)</span>,
-               ncol<span class="op">=</span><span class="fl">2</span>,
-               nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">p</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-19-1.png" width="768" style="display: block; margin: auto;"></p>
-</div>
 <div id="ternary-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#ternary-plot" class="anchor"></a>Ternary plot</h3>
-<div class="sourceCode" id="cb20"><pre class="downlit">
+<div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
@@ -802,7 +772,7 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
 <span class="co">#&gt; 4 Actino~ 0.0169  0.0338 0.0218  Bacter~ Actino~ Actin~ Acti~ Actin~ Acti~ Acti~</span>
 <span class="co">#&gt; 5 Akkerm~ 1.26    1.05   1.53    Bacter~ Verruc~ Verru~ Verr~ Verru~ Akke~ Akke~</span>
 <span class="co">#&gt; 6 Alisti~ 0.929   0.894  0.654   Bacter~ Bacter~ Bacte~ Bact~ Riken~ Alis~ Alis~</span></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit">
+<div class="sourceCode" id="cb20"><pre class="downlit">
 
 <span class="co"># install.packages("ggtern")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://www.ggtern.com">ggtern</a></span><span class="op">)</span>
@@ -821,12 +791,15 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
   <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/detach.html">detach</a></span><span class="op">(</span><span class="st">"package:ggtern"</span>, unload<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<div class="figure">
+<img src="../inst/extras/tern_eg.png" alt=""><p class="caption">ternary plot</p>
+</div>
 </div>
 <div id="plot-taxa-boxplot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plot-taxa-boxplot" class="anchor"></a>Plot taxa boxplot</h3>
 <p>Plot relative abundance of top taxa specified by user.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit">
+<div class="sourceCode" id="cb21"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
@@ -844,13 +817,13 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
                         dot.size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pn</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div id="plotting-selected-taxa" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plotting-selected-taxa" class="anchor"></a>Plotting selected taxa</h3>
 <p>Using a list of taxa specified by the user for comparisons.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit">
+<div class="sourceCode" id="cb22"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
@@ -872,9 +845,9 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
                       panel.arrange<span class="op">=</span> <span class="st">"grid"</span><span class="op">)</span>
 <span class="co">#&gt; An additonal column Sam_rep with sample names is created for reference purpose</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span><span class="op">)</span></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-23-1.png" width="480" style="display: block; margin: auto;"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-22-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>Adding statistical test with <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html">ggpubr::stat_compare_means()</a></code></p>
-<div class="sourceCode" id="cb24"><pre class="downlit">
+<div class="sourceCode" id="cb23"><pre class="downlit">
 
 <span class="co"># If more than two variables</span>
 <span class="va">comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_pairs.html">make_pairs</a></span><span class="op">(</span><span class="fu">sample_data</span><span class="op">(</span><span class="va">p0.f</span><span class="op">)</span><span class="op">$</span><span class="va">DiseaseState</span><span class="op">)</span>
@@ -893,9 +866,9 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
       tip.length <span class="op">=</span> <span class="fl">0.05</span>,
       method <span class="op">=</span> <span class="st">"wilcox.test"</span><span class="op">)</span>
 <span class="va">p</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-24-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-23-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>Plot top four Genera</p>
-<div class="sourceCode" id="cb25"><pre class="downlit">
+<div class="sourceCode" id="cb24"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
@@ -928,7 +901,7 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Warning in wilcox.test.default(c(0.0242631263865901, 5.19237758969832e-05, :</span>
 <span class="co">#&gt; cannot compute exact p-value with ties</span></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="abundance-prevalence-relationship" class="section level3">
 <h3 class="hasAnchor">
@@ -936,7 +909,7 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
 <p>Plots mean Abundance-Prevalence for taxa. Mean abundance, mean prevalence, and upper and lower confidence interval for each taxa is calculated by random sub-sampling.<br>
 This can be useful in identifying highly prevalent taxa and their mean relative abundance in a group of samples. Taxa that are highly prevalent with low variation in lower and upper CI can be identified at varying values of mean relative abundance. These are likely core taxa in the groups of samples.</p>
 <p>See <a href="https://microbiome.github.io/tutorials/Core.html">core microbiota analysis in microbiome R package</a></p>
-<div class="sourceCode" id="cb26"><pre class="downlit">
+<div class="sourceCode" id="cb25"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span>
@@ -966,7 +939,7 @@ This can be useful in identifying highly prevalent taxa and their mean relative 
   <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.01</span>,lty<span class="op">=</span><span class="st">"dashed"</span>, alpha<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">scale_color_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span>
 <span class="va">p_v</span></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="heatmaps" class="section level2">
@@ -977,7 +950,7 @@ This can be useful in identifying highly prevalent taxa and their mean relative 
 <a href="#heatmap-using-phyloseq-and-pheatmap" class="anchor"></a>Heatmap using phyloseq and pheatmap</h3>
 <p>Useful for visualizing differences in top OTUs between sample groups.<br>
 By default this function internally calculates <em>Prevalence</em>, but purposely doesn’t plot it by default. This is to give access to powerful <code>pheatmap</code> annotation options.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit">
+<div class="sourceCode" id="cb26"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
@@ -1017,8 +990,8 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
 <span class="co">#&gt; then abundances tranformed to log10(1+X)</span>
 <span class="co">#&gt; Warning in transform(phyobj1, "log10"): OTU table contains zeroes. Using log10(1</span>
 <span class="co">#&gt; + x) transform.</span></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-27-1.png" width="768" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb28"><pre class="downlit">
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-26-1.png" width="768" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb27"><pre class="downlit">
 <span class="co">#the plot is stored here</span>
 <span class="va">p</span><span class="op">$</span><span class="va">plot</span>
 
@@ -1028,7 +1001,7 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
 <div id="elegant-option-with-ggplot2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#elegant-option-with-ggplot2" class="anchor"></a>Elegant option with ggplot2</h3>
-<div class="sourceCode" id="cb29"><pre class="downlit">
+<div class="sourceCode" id="cb28"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
 <span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
@@ -1052,8 +1025,9 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
                ncol<span class="op">=</span><span class="cn">NULL</span>,
                nrow<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Transformation introduced infinite values in discrete y-axis</span></pre></div>
-<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-29-1.png" width="960" style="display: block; margin: auto;"></p>
+<p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-28-1.png" width="960" style="display: block; margin: auto;"></p>
 <p>For heatmap options see <a href="https://microbiome.github.io/tutorials/Heatmap.html">microbiome::heat()</a> and <a href="https://madsalbertsen.github.io/ampvis2/reference/amp_heatmap.html">ampvis2</a></p>
+<p>For other longitudinal related functionality check the [Longitudinal data analysis and visualization] section in the <em>Articles</em> section.</p>
 </div>
 </div>
 <div id="microbiomehd-datasets-as-phyloseq-objects" class="section level2">
@@ -1061,7 +1035,7 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
 <a href="#microbiomehd-datasets-as-phyloseq-objects" class="anchor"></a>MicrobiomeHD datasets as phyloseq objects</h2>
 <p>We provide access to a subset of studies included in the <code>MicrobiomeHD</code> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses</a>. Nature communications.</p>
 <p>The phyloseq objects are stored and accessed from <a href="https://github.com/microsud/microbiomedatarepo">microbiomedatarepo</a>.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit">
+<div class="sourceCode" id="cb29"><pre class="downlit">
 
 <span class="va">study</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_microbiome_data.html">list_microbiome_data</a></span><span class="op">(</span>printtab <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
@@ -1156,7 +1130,7 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
 </table>
 <p>Below is the per study reference.</p>
 <p><strong>NOTE</strong>: When using these studies, please cite <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Duvallet et al. 2017</a> and the respective studies.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit">
+<div class="sourceCode" id="cb30"><pre class="downlit">
 
 <span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"microbiomeHD_ref.txt"</span>, package <span class="op">=</span> <span class="st">"microbiomeutilities"</span><span class="op">)</span>
 <span class="va">reference</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="va">file</span>, header <span class="op">=</span> <span class="cn">T</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span>
@@ -1169,7 +1143,7 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
 <div id="plot-ordination-and-core" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plot-ordination-and-core" class="anchor"></a>Plot ordination and core</h3>
-<div class="sourceCode" id="cb32"><pre class="downlit">
+<div class="sourceCode" id="cb31"><pre class="downlit">
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
@@ -1201,13 +1175,16 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
 <a href="#summarize-the-percent-taxa-classification-for-phyloseq" class="anchor"></a>Summarize the percent taxa classification for phyloseq</h3>
 <p>This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or <code>NA</code> is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply <code>NA</code>.<br>
 This best works with cleaned taxonomy table.</empty></p>
-<div class="sourceCode" id="cb33"><pre class="downlit">
+<div class="sourceCode" id="cb32"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
 <span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 <span class="co"># reduce size for example</span>
 <span class="va">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span><span class="op">(</span><span class="va">p0</span>, detection <span class="op">=</span> <span class="fl">10</span>, prevalence <span class="op">=</span> <span class="fl">50</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/percent_classified.html">percent_classified</a></span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span></pre></div>
+<p><strong>Useful resources:</strong></p>
+<p>The <code>microbiomeutilties</code> depends on the phyloseq data structure and core <a href="http://joey711.github.io/phyloseq/">Phyloseq</a> functions.</p>
+<p>Tools for microbiome analysis in R. <strong>Microbiome package</strong> URL: <a href="http://microbiome.github.com/microbiome">microbiome package</a>.</p>
 <p>For more tutorials and examples of data analysis in R please check:</p>
 <ul>
 <li>
@@ -1215,7 +1192,9 @@ This best works with cleaned taxonomy table.</empty></p>
 </li>
 <li><a href="http://microbiome.github.io/microbiome/">Microbiome R package tutorials</a></li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="downlit">
+<p><strong>Contributions are welcome:</strong></p>
+<p><a href="https://github.com/microsud/microbiomeutilities/issues">Issue Tracker</a><br><a href="https://github.com/microsud/microbiomeutilities/pulls">Pull requests</a><br><a href="https://github.com/microsud/microbiomeutilities">Star us on the Github page</a></p>
+<div class="sourceCode" id="cb33"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; R version 4.0.3 (2020-10-10)</span>
 <span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
@@ -1237,7 +1216,7 @@ This best works with cleaned taxonomy table.</empty></p>
 <span class="co">#&gt;  [5] patchwork_1.0.1             RColorBrewer_1.1-2         </span>
 <span class="co">#&gt;  [7] tibble_3.0.4                knitr_1.30                 </span>
 <span class="co">#&gt;  [9] microbiomeutilities_1.00.09 dplyr_1.0.2                </span>
-<span class="co">#&gt; [11] microbiome_2.1.28           ggplot2_3.3.2              </span>
+<span class="co">#&gt; [11] microbiome_1.11.2           ggplot2_3.3.2              </span>
 <span class="co">#&gt; [13] phyloseq_1.33.0            </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>

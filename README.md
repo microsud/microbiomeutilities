@@ -4,7 +4,7 @@
 
 
 # About  
-The **microbiomeutilities** is a supporting R package for the parent [microbiome](http://microbiome.github.com/microbiome) R/BioC package.   
+The `microbiomeutilities` R package is part of the [microbiome-verse](https://github.com/microbiome) tools that provides additional data handling and visualization support for the [microbiome R/BioC package](https://microbiome.github.io/tutorials/)   
 
 Philosophy: "*Seemingly simple tasks for experienced R users can always be further simplified for novice users*"  
 
@@ -17,11 +17,10 @@ install.packages("devtools")
 devtools::install_github("microsud/microbiomeutilities")
 
 ```  
-**Citation:**  
-  o Leo Lahti, Sudarshan Shetty et al. (2017). Tools for microbiome analysis in R. Version 2.1.28. 
-    URL: http://microbiome.github.com/microbiome
-  o Sudarshan A. Shetty, & Leo Lahti. (2020, October). `microbiomeutilities`: An R package for utilities to guide
-    in-depth marker gene amplicon data analysis (Version 1.00.08).   
+**Citation:**   
+
+  o Leo Lahti, Sudarshan Shetty et al. (2017-2020). Tools for microbiome analysis in R. Version 2.1.28. URL: http://microbiome.github.com/microbiome      
+  o Sudarshan A. Shetty, & Leo Lahti. (2020, October). `microbiomeutilities`: Utilities for Microbiome Analytics (Version 1.00.09).   
   
   
 The microbiome R package relies on the independently developed   
