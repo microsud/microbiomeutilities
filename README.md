@@ -1,4 +1,4 @@
-
+[![R build status](https://github.com/r-lib/actions/workflows/R-CMD-check/badge.svg)](https://github.com/microsud/microbiomeutilities/actions?query=workflow%3AR-CMD-check)
 
 [![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)   
 
