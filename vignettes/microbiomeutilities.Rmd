@@ -348,8 +348,6 @@ detach("package:ggtern", unload=TRUE)
 ```
 
 
-![ternary plot](../inst/extras/tern_eg.png)
-
 ### Plot taxa boxplot  
 
 Plot relative abundance of top taxa specified by user. 
