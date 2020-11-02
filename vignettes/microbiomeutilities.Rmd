@@ -173,7 +173,10 @@ For group specific abundances of taxa `get_group_abundances`.
 library(microbiomeutilities)
 data("zackular2014")
 p0 <- zackular2014
-grp_abund <- get_group_abundances(p0, level = "Phylum", group="DiseaseState")
+grp_abund <- get_group_abundances(p0, 
+                                  level = "Phylum", 
+                                  group="DiseaseState",
+                                  transform = "compositional")
 ```
 
 How to visualize these data?  

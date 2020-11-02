@@ -9,11 +9,13 @@ get_group_abundances(x, level, group, transform = "compositional")
 \arguments{
 \item{x}{\code{\link{phyloseq-class}} object}
 
-\item{level}{Taxonomic level uses microbiome::aggregate_taxa}
+\item{level}{Taxonomic level uses microbiome::aggregate_taxa, if NULL with return OTU/ASVs
+level stats.}
 
-\item{group}{Provide overview by groups. Default=NULL}
+\item{group}{Provide overview by groups. Default=NULL and will return values for entire
+dataset, akin to taxa_summary.}
 
-\item{transform}{Default compositional}
+\item{transform}{Either "compositional" or "counts". Default= compositional}
 }
 \value{
 A data frames/ grouped tibble

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.09</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.10</span>
       </span>
     </div>
 
@@ -606,7 +606,10 @@ Converting to long data format opens several opportunities to work with <a href=
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
 <span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
-<span class="va">grp_abund</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_group_abundances.html">get_group_abundances</a></span><span class="op">(</span><span class="va">p0</span>, level <span class="op">=</span> <span class="st">"Phylum"</span>, group<span class="op">=</span><span class="st">"DiseaseState"</span><span class="op">)</span></pre></div>
+<span class="va">grp_abund</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_group_abundances.html">get_group_abundances</a></span><span class="op">(</span><span class="va">p0</span>, 
+                                  level <span class="op">=</span> <span class="st">"Phylum"</span>, 
+                                  group<span class="op">=</span><span class="st">"DiseaseState"</span>,
+                                  transform <span class="op">=</span> <span class="st">"compositional"</span><span class="op">)</span></pre></div>
 <p>How to visualize these data?</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>,<span class="st">"grey50"</span><span class="op">)</span>
@@ -791,9 +794,6 @@ Here, we can access the numerous alpha diversity measures supported by <a href="
   <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/detach.html">detach</a></span><span class="op">(</span><span class="st">"package:ggtern"</span>, unload<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></pre></div>
-<div class="figure">
-<img src="../inst/extras/tern_eg.png" alt=""><p class="caption">ternary plot</p>
-</div>
 </div>
 <div id="plot-taxa-boxplot" class="section level3">
 <h3 class="hasAnchor">
@@ -1215,7 +1215,7 @@ This best works with cleaned taxonomy table.</empty></p>
 <span class="co">#&gt;  [3] gghalves_0.1.0              ggpubr_0.4.0               </span>
 <span class="co">#&gt;  [5] patchwork_1.0.1             RColorBrewer_1.1-2         </span>
 <span class="co">#&gt;  [7] tibble_3.0.4                knitr_1.30                 </span>
-<span class="co">#&gt;  [9] microbiomeutilities_1.00.09 dplyr_1.0.2                </span>
+<span class="co">#&gt;  [9] microbiomeutilities_1.00.10 dplyr_1.0.2                </span>
 <span class="co">#&gt; [11] microbiome_1.11.2           ggplot2_3.3.2              </span>
 <span class="co">#&gt; [13] phyloseq_1.33.0            </span>
 <span class="co">#&gt; </span>

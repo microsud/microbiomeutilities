@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.09</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.10</span>
       </span>
     </div>
 
@@ -143,15 +143,17 @@
     </tr>
     <tr>
       <th>level</th>
-      <td><p>Taxonomic level uses microbiome::aggregate_taxa</p></td>
+      <td><p>Taxonomic level uses microbiome::aggregate_taxa, if NULL with return OTU/ASVs
+level stats.</p></td>
     </tr>
     <tr>
       <th>group</th>
-      <td><p>Provide overview by groups. Default=NULL</p></td>
+      <td><p>Provide overview by groups. Default=NULL and will return values for entire
+dataset, akin to taxa_summary.</p></td>
     </tr>
     <tr>
       <th>transform</th>
-      <td><p>Default compositional</p></td>
+      <td><p>Either "compositional" or "counts". Default= compositional</p></td>
     </tr>
     </table>
 
