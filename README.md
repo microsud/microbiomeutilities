@@ -1,4 +1,4 @@
-[![R build status](https://github.com/r-lib/actions/workflows/R-CMD-check/badge.svg)](https://github.com/microsud/microbiomeutilities/actions?query=workflow%3AR-CMD-check)
+
 
 [![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)   
 
@@ -20,7 +20,7 @@ devtools::install_github("microsud/microbiomeutilities")
 **Citation:**   
 
   o Leo Lahti, Sudarshan Shetty et al. (2017-2020). Tools for microbiome analysis in R. Version 2.1.28. URL: http://microbiome.github.com/microbiome      
-  o Sudarshan A. Shetty, & Leo Lahti. (2020, October). `microbiomeutilities`: Utilities for Microbiome Analytics (Version 1.00.09).   
+  o Sudarshan A. Shetty, & Leo Lahti. (2020, October). `microbiomeutilities`: Utilities for Microbiome Analytics (Version 1.00.10).   
   
   
 The microbiome R package relies on the independently developed   
@@ -71,6 +71,9 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 **NOTE:**  
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
+
+CHANGES IN VERSION 1.00.10 (2020-11-02)  
+  o Improve `get_group_abundances` documentation and code   
 
 CHANGES IN VERSION 1.00.09 (2020-10-21)  
   o Added longitudinal page to website   
