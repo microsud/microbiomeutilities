@@ -2,7 +2,7 @@
 Constant development is in process.  
 
 CHANGES IN VERSION 1.00.10 (2020-11-02)  
-  o Improve get_group_abundances documentation and code   
+  o Improve `get_group_abundances` documentation and code   
 
 CHANGES IN VERSION 1.00.09 (2020-10-21)  
   o Added longitudinal page to website   
