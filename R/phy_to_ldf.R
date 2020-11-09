@@ -20,6 +20,11 @@
 #' }
 #' @keywords utilities
 phy_to_ldf <- function(x, transform.counts) {
+  
+  if (class(x)!="phyloseq"){
+    stop("Input is not an object of phyloseq class")
+  }
+  
   if (is.null(transform.counts)) {
     x <- x
   } else if (transform.counts == "log10") {
@@ -35,14 +40,20 @@ phy_to_ldf <- function(x, transform.counts) {
   }
 
   message("An additonal column Sam_rep with sample names is created for reference purpose")
-  meta_df <- microbiome::meta(x)
-  meta_df$Sam_rep <- rownames(meta_df)
+  meta_df <- get_tibble(x, 
+                        slot = "sam_data", 
+                        column_id = "Sam_rep")
+  #meta_df <- microbiome::meta(x)
+  #meta_df$Sam_rep <- rownames(meta_df)
   # tax_df <- data.frame(tax_table(x)) %>%
   #  rownames_to_column("OTUID")
-  tax_df <- tax_table(x) %>%
-    as("matrix") %>%
-    as.data.frame() %>%
-    rownames_to_column("OTUID")
+  tax_df <- get_tibble(x, 
+                       slot = "tax_table", 
+                       column_id = "OTUID") 
+  #<- tax_table(x) %>%
+   # as("matrix") %>%
+    #as.data.frame() %>%
+    #rownames_to_column("OTUID")
 
   otu_df <- data.frame(abundances(x),
     check.names = FALSE

@@ -16,8 +16,15 @@
 #' @export
 #' @keywords utilities
 dominant_taxa <- function(x, level = NULL, group = NULL) {
+  
   sams <- taxs <- out_dat <- meta_dat <- sample_id <- dominant_taxa <- NULL
+  
   rel.freq <- rel.freq.pct <- NULL
+  
+  if (class(x)!="phyloseq"){
+    stop("Input is not an object of phyloseq class")
+  }
+  
   if (!is.null(level)) {
     x <- aggregate_taxa(x, level = level)
   }
@@ -27,12 +34,15 @@ dominant_taxa <- function(x, level = NULL, group = NULL) {
     sample_id = names(sams),
     dominant_taxa = taxs
   )
-
-  meta_dat <- meta(x)
-  meta_dat$sample_id <- rownames(meta_dat)
+  
+  meta_dat <- get_tibble(x, 
+                         slot="sam_data",
+                         column_id="sample_id")
+  #meta_dat <- meta(x)
+  #meta_dat$sample_id <- rownames(meta_dat)
   meta_dat <- meta_dat %>%
-    left_join(out_dat)
-
+    left_join(out_dat, by="sample_id")
+  
   if (is.null(group)) {
     df <- meta_dat %>%
       group_by(dominant_taxa) %>%
@@ -43,6 +53,8 @@ dominant_taxa <- function(x, level = NULL, group = NULL) {
       ) %>%
       arrange(desc(n))
   } else {
+    
+    .check.group(x, group)
     group <- sym(group)
     # dominant_taxa <-"dominant_taxa"
     df <- meta_dat %>%
@@ -54,6 +66,9 @@ dominant_taxa <- function(x, level = NULL, group = NULL) {
       ) %>%
       arrange(desc(n))
   }
-
+  
   return(list(dominant_overview = df, all_data = meta_dat))
+  
 }
+
+

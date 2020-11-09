@@ -1,18 +1,19 @@
-#' @title Diversity plot with stats
-#' @param x \code{\link{phyloseq-class}} object
-#' @param index diversity index. Calculated using microbiome::alpha
-#' @param group Grouping variable to compare
-#' @param group.colors Colors for plotting groups
-#' @param dot.opacity for ggplot alpha to determine opacity for points
-#' @param box.opacity for ggplot alpha to determine opacity for box
-#' @param violin.opacity for ggplot alpha to determine opacity for violin
-#' @param group.order Default is NULL. a list specifing order of x-axis.
-#' @param dot.size size of point
-#' E.g. c("H","CRC","nonCRC")
-#' @param ... params for ggpubr::stat_compare_means
-#' @importFrom ggpubr stat_compare_means rotate_x_text
-#' @importFrom gghalves geom_half_violin
-#' @keywords utilties
+
+# Diversity plot with stats
+# @param x \code{\link{phyloseq-class}} object
+# @param index diversity index. Calculated using microbiome::alpha
+# @param group Grouping variable to compare
+# @param group.colors Colors for plotting groups
+# @param dot.opacity for ggplot alpha to determine opacity for points
+# @param box.opacity for ggplot alpha to determine opacity for box
+# @param violin.opacity for ggplot alpha to determine opacity for violin
+# @param group.order Default is NULL. a list specifing order of x-axis.
+# @param dot.size size of point
+# E.g. c("H","CRC","nonCRC")
+# @param ... params for ggpubr::stat_compare_means
+# @importFrom ggpubr stat_compare_means rotate_x_text
+# @importFrom gghalves geom_half_violin
+# @keywords utilties
 plot_diversity_with_stats <- function(x, index,
                                       group = NULL,
                                       group.colors = c("brown3", "steelblue"),
@@ -74,20 +75,20 @@ plot_diversity_with_stats <- function(x, index,
 
 
 ##################################################################################
-#' @title Diversity plot without stats
-#' @param x \code{\link{phyloseq-class}} object
-#' @param index diversity index. Calculated using microbiome::alpha
-#' @param group Grouping variable to compare
-#' @param group.colors Colors for plotting groups
-#' @param dot.opacity for ggplot alpha to determine opacity for points
-#' @param box.opacity for ggplot alpha to determine opacity for box
-#' @param dot.size size of point
-#' @param violin.opacity for ggplot alpha to determine opacity for violin
-#' @param group.order Default is NULL. a list specifing order of x-axis.
-#' E.g. c("H","CRC","nonCRC")
-#' @param ... params for ggpubr::stat_compare_means
-#' @importFrom ggpubr stat_compare_means rotate_x_text
-#' @importFrom gghalves geom_half_violin
+# @title Diversity plot without stats
+# @param x \code{\link{phyloseq-class}} object
+# @param index diversity index. Calculated using microbiome::alpha
+# @param group Grouping variable to compare
+# @param group.colors Colors for plotting groups
+# @param dot.opacity for ggplot alpha to determine opacity for points
+# @param box.opacity for ggplot alpha to determine opacity for box
+# @param dot.size size of point
+# @param violin.opacity for ggplot alpha to determine opacity for violin
+# @param group.order Default is NULL. a list specifing order of x-axis.
+# E.g. c("H","CRC","nonCRC")
+# @param ... params for ggpubr::stat_compare_means
+# @importFrom ggpubr stat_compare_means rotate_x_text
+# @importFrom gghalves geom_half_violin
 plot_diversity_without_stats <- function(x, index,
                                          group = NULL,
                                          group.colors = c("brown3", "steelblue"),

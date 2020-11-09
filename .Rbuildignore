@@ -6,6 +6,9 @@
 docs
 index.html
 index.Rmd
+.github
+^\.github$
+
 
 # Extras
 inst/extras/*
