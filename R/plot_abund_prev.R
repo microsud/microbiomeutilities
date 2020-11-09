@@ -44,7 +44,8 @@
 #'
 #' @keywords visualization analysis
 
-plot_abund_prev <- function(x, lower.conf = 0.025,
+plot_abund_prev <- function(x, 
+                            lower.conf = 0.025,
                             upper.conf = 0.975,
                             bs.iter = 99,
                             color = "steelblue",
@@ -63,9 +64,13 @@ plot_abund_prev <- function(x, lower.conf = 0.025,
   s <- ab <- sx <- cis <- taxsp_lc <- taxsp_uc <- cis_df <- NULL
   abx <- cis_ab <- tax_list <- cis_ab_df <- abx_abun <- NULL
   Mean.Rel.Ab <- MeanAbun <- Taxa <- NULL
-  
   ci_ab_prev_tax <- tax_df <- core_df <- NULL
-  message("Make sure to set.seed")
+  
+  if (class(x)!="phyloseq"){
+    stop("Input is not an object of phyloseq class")
+  }
+  
+  message("Make sure to set.seed!!!")
   psx <- x
   s <- c()
   ab <- c()
@@ -122,10 +127,13 @@ plot_abund_prev <- function(x, lower.conf = 0.025,
     left_join(sxi) %>%
     right_join(abx_abun)
   
-  tax_df <- tax_table(psx) %>%
-    as("matrix") %>%
-    as.data.frame()
-  tax_df$Taxa <- rownames(tax_df)
+  tax_df <- get_tibble(psx, 
+                       slot = "tax_table", 
+                       column_id = "Taxa")
+  #tax_df <- tax_table(psx) %>%
+  #  as("matrix") %>%
+  #  as.data.frame()
+  #tax_df$Taxa <- rownames(tax_df)
   
   ci_ab_prev_tax <- ci_ab_prev %>%
     left_join(tax_df)

@@ -19,8 +19,13 @@
 #'
 find_samples_taxa <- function(x, taxa = NULL, relative = FALSE) {
   abund <- y <- NULL
+  
+  if (class(x)!="phyloseq"){
+    stop("Input is not an object of phyloseq class")
+  }
+  
   if (is.null(taxa)) {
-    stop("Please specific name of taxa")
+    stop("Please specify name of taxa")
   }
 
   if (relative == TRUE) {

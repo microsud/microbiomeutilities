@@ -72,6 +72,11 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
+CHANGES IN VERSION 1.00.11 (2020-11-09)  
+  o Small improvement in error handling.
+  o Phyloseq slots to tibble
+  o `add_refseq` for storing ASV sequences
+  
 CHANGES IN VERSION 1.00.10 (2020-11-02)  
   o Improve `get_group_abundances` documentation and code   
 

@@ -1,6 +1,11 @@
 
 Constant development is in process.  
 
+CHANGES IN VERSION 1.00.11 (2020-11-09)  
+  o Small improvement in error handling.
+  o Phyloseq slots to tibble
+  o `add_refseq` for storing ASV sequences
+  
 CHANGES IN VERSION 1.00.10 (2020-11-02)  
   o Improve `get_group_abundances` documentation and code   
 

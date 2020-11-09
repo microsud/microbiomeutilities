@@ -82,3 +82,35 @@ join_otu_tax <- function(x, column_id = "OTUID"){
 }
 
 
+#' @title Add refseq slot for dada2 based phyloseq object
+#' @description Utility to add refseq slot for dada2 based phyloseq object. Here, the
+#' rownames which are unique sequences, are stored in refseq slot of phyloseq. Sequence 
+#' ids are converted to ids using tag option.  
+#' @param x \code{\link{phyloseq-class}} object with seqs as rownames.
+#' @param tag Provide name for Ids, Default="ASV".
+#' @return \code{\link{phyloseq-class}} object 
+#' @examples
+#' 
+#' # ps <- add_refseq(ps,tag="ASV")
+#' # ps
+#' 
+#' @export
+#' @keywords utilities
+#' @importFrom Biostrings DNAStringSet
+add_refseq <- function(x, tag="ASV"){
+  
+  if (class(x)!="phyloseq"){
+    stop("Input is not an object of phyloseq class")
+  }
+  
+  nucl <- Biostrings::DNAStringSet(taxa_names(x))
+  names(nucl) <- taxa_names(x)
+  x <- merge_phyloseq(x, nucl)
+  taxa_names(x) <- paste0(tag, seq(ntaxa(x)))
+  rm(nucl)
+  return(x)
+  
+}
+
+
+

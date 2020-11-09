@@ -94,9 +94,9 @@ taxa_distribution <- function(x, color.level = "Phylum",
   return(tax_plot1)
 }
 
-#' @title Summarize abundance
-#' @param x \code{\link{phyloseq-class}} object
-#' @keywords utilties
+# @title Summarize abundance
+# @param x \code{\link{phyloseq-class}} object
+# @keywords internal
 #'
 abun_summary <- function(x) {
   Max.Rel.Ab <- Mean.Rel.Ab <- MeanAbun <- Median.Rel.Ab <- Std.dev <- Taxa <- NULL

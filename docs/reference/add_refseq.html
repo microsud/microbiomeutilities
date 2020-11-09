@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Diversity plot with stats — plot_diversity_stats • microbiomeutilities</title>
+<title>Add refseq slot for dada2 based phyloseq object — add_refseq • microbiomeutilities</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Diversity plot with stats — plot_diversity_stats" />
-<meta property="og:description" content="Diversity plot with stats" />
+<meta property="og:title" content="Add refseq slot for dada2 based phyloseq object — add_refseq" />
+<meta property="og:description" content="Utility to add refseq slot for dada2 based phyloseq object. Here, the
+rownames which are unique sequences, are stored in refseq slot of phyloseq. Sequence 
+ids are converted to ids using tag option." />
 
 
 
@@ -123,95 +125,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Diversity plot with stats</h1>
-    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/plot_diversity_stats.R'><code>R/plot_diversity_stats.R</code></a></small>
-    <div class="hidden name"><code>plot_diversity_stats.Rd</code></div>
+    <h1>Add refseq slot for dada2 based phyloseq object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/microsud/microbiomeutilities/blob/master/R/extensions.R'><code>R/extensions.R</code></a></small>
+    <div class="hidden name"><code>add_refseq.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Diversity plot with stats</p>
+    <p>Utility to add refseq slot for dada2 based phyloseq object. Here, the
+rownames which are unique sequences, are stored in refseq slot of phyloseq. Sequence 
+ids are converted to ids using tag option.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_diversity_stats</span><span class='op'>(</span>
-  <span class='va'>x</span>,
-  <span class='va'>index</span>,
-  group <span class='op'>=</span> <span class='cn'>NULL</span>,
-  group.colors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span><span class='op'>)</span>,
-  dot.opacity <span class='op'>=</span> <span class='fl'>0.25</span>,
-  box.opacity <span class='op'>=</span> <span class='fl'>0.25</span>,
-  violin.opacity <span class='op'>=</span> <span class='fl'>0.5</span>,
-  group.order <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stats <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  label.format <span class='op'>=</span> <span class='st'>"p.format"</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>add_refseq</span><span class='op'>(</span><span class='va'>x</span>, tag <span class='op'>=</span> <span class='st'>"ASV"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>phyloseq-class</code> object</p></td>
+      <td><p><code>phyloseq-class</code> object with seqs as rownames.</p></td>
     </tr>
     <tr>
-      <th>index</th>
-      <td><p>diversity index. Calculated using microbiome::alpha</p></td>
-    </tr>
-    <tr>
-      <th>group</th>
-      <td><p>Grouping variable to compare</p></td>
-    </tr>
-    <tr>
-      <th>group.colors</th>
-      <td><p>Colors for plotting groups</p></td>
-    </tr>
-    <tr>
-      <th>dot.opacity</th>
-      <td><p>for ggplot alpha to determine opacity for points</p></td>
-    </tr>
-    <tr>
-      <th>box.opacity</th>
-      <td><p>for ggplot alpha to determine opacity for box</p></td>
-    </tr>
-    <tr>
-      <th>violin.opacity</th>
-      <td><p>for ggplot alpha to determine opacity for violin</p></td>
-    </tr>
-    <tr>
-      <th>group.order</th>
-      <td><p>Default is NULL. a list specifing order of x-axis.</p></td>
-    </tr>
-    <tr>
-      <th>stats</th>
-      <td><p>Logical TRUE or FALSE. Calls ggpubr::stat_compare_means.</p></td>
-    </tr>
-    <tr>
-      <th>label.format</th>
-      <td><p>For ggpubr::stat_compare_means "p.signif"
-E.g. c("H","CRC","nonCRC")</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>params for ggpubr::stat_compare_means</p></td>
+      <th>tag</th>
+      <td><p>Provide name for Ids, Default="ASV".</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>phyloseq-class</code> object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>microbiomeutilities</span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rpkgs.datanovia.com/ggpubr/'>ggpubr</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"zackular2014"</span><span class='op'>)</span>
-<span class='va'>p0</span> <span class='op'>&lt;-</span> <span class='va'>zackular2014</span>
-<span class='va'>mycols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"brown3"</span>, <span class='st'>"steelblue"</span>, <span class='st'>"grey50"</span><span class='op'>)</span>
-<span class='va'>p.m</span> <span class='op'>&lt;-</span> <span class='fu'>plot_diversity_stats</span><span class='op'>(</span><span class='va'>p0</span>,
-  group <span class='op'>=</span> <span class='st'>"DiseaseState"</span>,
-  index <span class='op'>=</span> <span class='st'>"diversity_shannon"</span>,
-  group.order <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"H"</span>, <span class='st'>"CRC"</span>, <span class='st'>"nonCRC"</span><span class='op'>)</span>,
-  group.colors <span class='op'>=</span> <span class='va'>mycols</span>
-<span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p.m</span><span class='op'>)</span>
-<span class='op'>}</span>
+    <pre class="examples"><div class='input'>
+<span class='co'># ps &lt;- add_refseq(ps,tag="ASV")</span>
+<span class='co'># ps</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
