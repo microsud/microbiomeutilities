@@ -102,12 +102,13 @@ ps.sub <- prune_taxa(taxa_sums(ps.sub)>0, ps.sub)
 ps.rel <- microbiome::transform(ps.sub, "compositional")
 ps.rel.f <- format_to_besthit(ps.rel)
 
+#top_taxa(ps.rel.f, 5)
 # Check how many have both time points
 table(meta(ps.rel.f)$visit_number)
 #table(meta(ps.rel.f)$visit_number, meta(ps.rel.f)$subject_id)
 # there are two Participant_3 and Participant_11 with no time point2 sample 
 
-select.taxa <- c("4430843:Prevotella", "580629:Bacteroides")
+select.taxa <- c("4430843:g__Prevotella", "580629:g__Bacteroides")
 
 group.colors = c("brown3", "steelblue", "grey70")
 

@@ -72,6 +72,9 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
+CHANGES IN VERSION 1.00.12 (2021-01-18)    
+  o Bug fix `format_to_besthit`.  
+  
 CHANGES IN VERSION 1.00.11 (2020-11-09)  
   o Small improvement in error handling.
   o Phyloseq slots to tibble
