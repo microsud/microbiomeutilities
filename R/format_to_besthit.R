@@ -174,7 +174,7 @@ format_to_besthit <- function(x, prefix = NULL) {
   }
 
 
-  tax$col1 <- tax$Genus
+  tax$col1 <- tax[,ncol(tax)] #tax$Genus
 
   tax$col2 <- rownames(tax)
 
