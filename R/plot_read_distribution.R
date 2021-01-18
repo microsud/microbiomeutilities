@@ -14,7 +14,8 @@
 #' print(p)
 #' @keywords visualization utilities
 
-plot_read_distribution <- function(x, groups, plot.type = c(
+plot_read_distribution <- function(x, groups, 
+                                   plot.type = c(
                                      "density",
                                      "histogram"
                                    )) {
@@ -45,6 +46,6 @@ plot_read_distribution <- function(x, groups, plot.type = c(
       ggplot2::theme_bw() +
       ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 1))
   }
-  print("Done plotting")
+  #print("Done plotting")
   return(p.dfa)
 }

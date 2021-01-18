@@ -1,6 +1,6 @@
 
 
-[![Build Status](https://travis-ci.org/microsud/microbiomeutilities.svg?branch=master)](https://travis-ci.org/microsud/microbiomeutilities)   
+![R-CMD-check](https://github.com/microsud/microbiomeutilities/workflows/R-CMD-check/badge.svg)  
 
 
 # About  
