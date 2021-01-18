@@ -386,7 +386,8 @@ library(ggpubr)
 data("zackular2014")
 p0 <- zackular2014
 p0.f <- format_to_besthit(p0)
-select.taxa <- c("d__denovo4:Bacteroides", "d__denovo2:Bacteroides")
+#top_taxa(p0.f, 5)
+select.taxa <- c("d__denovo3:g__Bacteroides", "d__denovo2:g__Bacteroides")
 
 mycols <- c("brown3", "steelblue", "grey50")
 
