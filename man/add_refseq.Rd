@@ -21,7 +21,7 @@ ids are converted to ids using tag option.
 }
 \examples{
 
-# ps <- add_refseq(ps,tag="ASV")
+# ps <- add_refseq(p0,tag="ASV")
 # ps
 
 }

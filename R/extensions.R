@@ -91,7 +91,7 @@ join_otu_tax <- function(x, column_id = "OTUID"){
 #' @return \code{\link{phyloseq-class}} object 
 #' @examples
 #' 
-#' # ps <- add_refseq(ps,tag="ASV")
+#' # ps <- add_refseq(p0,tag="ASV")
 #' # ps
 #' 
 #' @export
@@ -106,9 +106,16 @@ add_refseq <- function(x, tag="ASV"){
   nucl <- Biostrings::DNAStringSet(taxa_names(x))
   names(nucl) <- taxa_names(x)
   x <- merge_phyloseq(x, nucl)
-  taxa_names(x) <- paste0(tag, seq(ntaxa(x)))
+  
   rm(nucl)
-  return(x)
+  
+  if(is.na(tag) || is.null(tag)){
+    taxa_names(x) <- paste0("taxa", seq(ntaxa(x)))
+    return(x)
+  } else{
+    taxa_names(x) <- paste0(tag, seq(ntaxa(x)))
+    return(x)
+  }
   
 }
 

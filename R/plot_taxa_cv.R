@@ -56,6 +56,5 @@ plot_taxa_cv <- function(x, plot.type) {
       theme_bw()
   }
 
-
   return(cvplot)
 }
