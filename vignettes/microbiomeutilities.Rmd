@@ -387,7 +387,7 @@ data("zackular2014")
 p0 <- zackular2014
 p0.f <- format_to_besthit(p0)
 #top_taxa(p0.f, 5)
-select.taxa <- c("d__denovo3:g__Bacteroides", "d__denovo2:g__Bacteroides")
+select.taxa <- c("d__denovo1:g__Blautia", "d__denovo3:g__Bacteroides")
 
 mycols <- c("brown3", "steelblue", "grey50")
 
@@ -495,8 +495,9 @@ p_v
 ### Heatmap using phyloseq and pheatmap   
 
 Useful for visualizing differences in top OTUs between sample groups.  
-By default this function internally calculates _Prevalence_, but purposely doesn't plot it by default. This is to give access to powerful `pheatmap` annotation options.  
+
 ```{r fig.height=8, fig.width=8, fig.align='center'}
+library(microbiomeutilities)
 library(pheatmap)
 library(RColorBrewer)
 data("zackular2014")
@@ -507,19 +508,14 @@ taxa_names(ps0) <- gsub("d__denovo", "OTU:", taxa_names(ps0))
 grad_ab <- colorRampPalette(c("#faf3dd","#f7d486" ,"#5e6472"))
 grad_ab_pal <- grad_ab(10)
 
-# create a gradient color palette for prevalence
-gray_grad <- colorRampPalette(c("white", "steelblue"))
-gray_grad_cols <- gray_grad(10)
-
 # create a color palette for varaibles of interest
 meta_colors <- list(c("positive" = "#FFC857", 
                       "negative" = "#05B083"), 
                     c("CRC" = "steelblue", 
                       "nonCRC" = "grey50", 
-                      "H"="brown3"),
-                    gray_grad_cols)
+                      "H"="brown3"))
 # add labels for pheatmap to detect
-names(meta_colors) <- c("FOBT.result", "DiseaseState","Prevalence")
+names(meta_colors) <- c("FOBT.result", "DiseaseState")
 
 p <- plot_taxa_heatmap(ps0,
                        subset.top = 25,
@@ -530,6 +526,7 @@ p <- plot_taxa_heatmap(ps0,
                        cluster_cols = F,
                        show_colnames = F,
                        annotation_colors=meta_colors)
+
 
 ```
 
@@ -581,7 +578,7 @@ We provide access to a subset of studies included in the `MicrobiomeHD` database
 
 The phyloseq objects are stored and accessed from [microbiomedatarepo](https://github.com/microsud/microbiomedatarepo).  
 
-```{r}
+```{r eval=FALSE}
 
 study <- list_microbiome_data(printtab = FALSE)
 
@@ -632,22 +629,6 @@ p <- plot_ordiplot_core(pseq.rel, ord.bray,
 print(p)
 
 ```
-
-### Summarize the percent taxa classification for phyloseq  
-
-This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or `NA` is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply `NA`.  
-This best works with cleaned taxonomy table.  
-
-```{r eval=FALSE}
-data("zackular2014")
-p0 <- zackular2014
-# reduce size for example
-ps0 <- core(p0, detection = 10, prevalence = 50 / 100)
-
-percent_classified(ps0)
-
-```
-
 
 **Useful resources:**    
 
