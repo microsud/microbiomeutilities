@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.13</span>
       </span>
     </div>
 
@@ -278,7 +278,7 @@
 <td align="left">MyBug-d__denovo165:f__Ruminococcaceae</td>
 </tr>
 <tr class="even">
-<td align="left">MyBug-d__denovo167:Coprococcus</td>
+<td align="left">MyBug-d__denovo167:g__Coprococcus</td>
 <td align="left">Bacteria</td>
 <td align="left">Firmicutes</td>
 <td align="left">Clostridia</td>
@@ -286,7 +286,7 @@
 <td align="left">Lachnospiraceae</td>
 <td align="left">Coprococcus</td>
 <td align="left">g__Coprococcus</td>
-<td align="left">MyBug-d__denovo167:Coprococcus</td>
+<td align="left">MyBug-d__denovo167:g__Coprococcus</td>
 </tr>
 <tr class="odd">
 <td align="left">MyBug-d__denovo166:o__Clostridiales</td>
@@ -300,7 +300,7 @@
 <td align="left">MyBug-d__denovo166:o__Clostridiales</td>
 </tr>
 <tr class="even">
-<td align="left">MyBug-d__denovo161:Roseburia</td>
+<td align="left">MyBug-d__denovo161:g__Roseburia</td>
 <td align="left">Bacteria</td>
 <td align="left">Firmicutes</td>
 <td align="left">Clostridia</td>
@@ -308,7 +308,7 @@
 <td align="left">Lachnospiraceae</td>
 <td align="left">Roseburia</td>
 <td align="left">g__Roseburia</td>
-<td align="left">MyBug-d__denovo161:Roseburia</td>
+<td align="left">MyBug-d__denovo161:g__Roseburia</td>
 </tr>
 </tbody>
 </table>
@@ -324,7 +324,6 @@
 <span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_read_distribution.html">plot_read_distribution</a></span><span class="op">(</span><span class="va">p0</span>, groups <span class="op">=</span> <span class="st">"DiseaseState"</span>, 
                             plot.type <span class="op">=</span> <span class="st">"density"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Done plotting"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
 <p>This is a diagnostic step. Key to check if there is variation between groups that will be compared for downstream analysis.</p>
@@ -547,7 +546,6 @@ Converting to long data format opens several opportunities to work with <a href=
 <span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 <span class="va">p0.gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/aggregate_taxa.html">aggregate_taxa</a></span><span class="op">(</span><span class="va">p0</span>,<span class="st">"Genus"</span><span class="op">)</span>
 <span class="va">x.d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dominant_taxa.html">dominant_taxa</a></span><span class="op">(</span><span class="va">p0</span>,level <span class="op">=</span> <span class="st">"Genus"</span>, group<span class="op">=</span><span class="st">"DiseaseState"</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = "sample_id"</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">x.d</span><span class="op">$</span><span class="va">dominant_overview</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 5</span>
 <span class="co">#&gt; # Groups:   DiseaseState [3]</span>
@@ -830,7 +828,8 @@ Here, we can access the numerous alpha diversity measures supported by <a href="
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
 <span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
 <span class="va">p0.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">p0</span><span class="op">)</span>
-<span class="va">select.taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"d__denovo4:Bacteroides"</span>, <span class="st">"d__denovo2:Bacteroides"</span><span class="op">)</span>
+<span class="co">#top_taxa(p0.f, 5)</span>
+<span class="va">select.taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"d__denovo1:g__Blautia"</span>, <span class="st">"d__denovo3:g__Bacteroides"</span><span class="op">)</span>
 
 <span class="va">mycols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey50"</span><span class="op">)</span>
 
@@ -865,7 +864,11 @@ Here, we can access the numerous alpha diversity measures supported by <a href="
       label <span class="op">=</span> <span class="st">"p.format"</span>,
       tip.length <span class="op">=</span> <span class="fl">0.05</span>,
       method <span class="op">=</span> <span class="st">"wilcox.test"</span><span class="op">)</span>
-<span class="va">p</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span></pre></div>
+<span class="va">p</span> <span class="op">+</span> <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning in wilcox.test.default(c(0.0737753988097334, 0.0369437665507036, :</span>
+<span class="co">#&gt; cannot compute exact p-value with ties</span>
+<span class="co">#&gt; Warning in wilcox.test.default(c(0.0218880793675399, 0.000317486610347303, :</span>
+<span class="co">#&gt; cannot compute exact p-value with ties</span></pre></div>
 <p><img src="microbiomeutilities_files/figure-html/unnamed-chunk-23-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>Plot top four Genera</p>
 <div class="sourceCode" id="cb24"><pre class="downlit">
@@ -948,9 +951,9 @@ This can be useful in identifying highly prevalent taxa and their mean relative 
 <div id="heatmap-using-phyloseq-and-pheatmap" class="section level3">
 <h3 class="hasAnchor">
 <a href="#heatmap-using-phyloseq-and-pheatmap" class="anchor"></a>Heatmap using phyloseq and pheatmap</h3>
-<p>Useful for visualizing differences in top OTUs between sample groups.<br>
-By default this function internally calculates <em>Prevalence</em>, but purposely doesn’t plot it by default. This is to give access to powerful <code>pheatmap</code> annotation options.</p>
+<p>Useful for visualizing differences in top OTUs between sample groups.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
@@ -961,19 +964,14 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
 <span class="va">grad_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#faf3dd"</span>,<span class="st">"#f7d486"</span> ,<span class="st">"#5e6472"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">grad_ab_pal</span> <span class="op">&lt;-</span> <span class="fu">grad_ab</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 
-<span class="co"># create a gradient color palette for prevalence</span>
-<span class="va">gray_grad</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"steelblue"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">gray_grad_cols</span> <span class="op">&lt;-</span> <span class="fu">gray_grad</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
-
 <span class="co"># create a color palette for varaibles of interest</span>
 <span class="va">meta_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"positive"</span> <span class="op">=</span> <span class="st">"#FFC857"</span>, 
                       <span class="st">"negative"</span> <span class="op">=</span> <span class="st">"#05B083"</span><span class="op">)</span>, 
                     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CRC"</span> <span class="op">=</span> <span class="st">"steelblue"</span>, 
                       <span class="st">"nonCRC"</span> <span class="op">=</span> <span class="st">"grey50"</span>, 
-                      <span class="st">"H"</span><span class="op">=</span><span class="st">"brown3"</span><span class="op">)</span>,
-                    <span class="va">gray_grad_cols</span><span class="op">)</span>
+                      <span class="st">"H"</span><span class="op">=</span><span class="st">"brown3"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># add labels for pheatmap to detect</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">meta_colors</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FOBT.result"</span>, <span class="st">"DiseaseState"</span>,<span class="st">"Prevalence"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">meta_colors</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FOBT.result"</span>, <span class="st">"DiseaseState"</span><span class="op">)</span>
 
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_taxa_heatmap.html">plot_taxa_heatmap</a></span><span class="op">(</span><span class="va">ps0</span>,
                        subset.top <span class="op">=</span> <span class="fl">25</span>,
@@ -1040,94 +1038,6 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
 <span class="va">study</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_microbiome_data.html">list_microbiome_data</a></span><span class="op">(</span>printtab <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">study</span><span class="op">)</span></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">Study</th>
-<th align="left">Disease</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">Son2015_ASD</td>
-<td align="left">ASD</td>
-</tr>
-<tr class="even">
-<td align="left">Kang2013_ASD</td>
-<td align="left">ASD</td>
-</tr>
-<tr class="odd">
-<td align="left">Schubert2014_CDI</td>
-<td align="left">CDI</td>
-</tr>
-<tr class="even">
-<td align="left">Youngster2014_CDI</td>
-<td align="left">CDI</td>
-</tr>
-<tr class="odd">
-<td align="left">Baxter2016_CRC</td>
-<td align="left">CRC</td>
-</tr>
-<tr class="even">
-<td align="left">Zackular2014_CRC</td>
-<td align="left">CRC</td>
-</tr>
-<tr class="odd">
-<td align="left">Zeller2014_CRC</td>
-<td align="left">CRC</td>
-</tr>
-<tr class="even">
-<td align="left">Singh2015_EDD</td>
-<td align="left">EDD</td>
-</tr>
-<tr class="odd">
-<td align="left">NogueraJulian2016_HIV</td>
-<td align="left">HIV</td>
-</tr>
-<tr class="even">
-<td align="left">Dinh2015_HIV</td>
-<td align="left">HIV</td>
-</tr>
-<tr class="odd">
-<td align="left">Lozupone2013_HIV</td>
-<td align="left">HIV</td>
-</tr>
-<tr class="even">
-<td align="left">Gevers2014_IBD</td>
-<td align="left">IBD</td>
-</tr>
-<tr class="odd">
-<td align="left">Zhang2013_LIV</td>
-<td align="left">LIV</td>
-</tr>
-<tr class="even">
-<td align="left">Wong2013_NASH</td>
-<td align="left">NASH</td>
-</tr>
-<tr class="odd">
-<td align="left">Ross2015_OB</td>
-<td align="left">OB</td>
-</tr>
-<tr class="even">
-<td align="left">Zupancic2012_OB</td>
-<td align="left">OB</td>
-</tr>
-<tr class="odd">
-<td align="left">Scher2013_PAR</td>
-<td align="left">PAR</td>
-</tr>
-<tr class="even">
-<td align="left">Alkanani2015_T1D</td>
-<td align="left">T1D</td>
-</tr>
-<tr class="odd">
-<td align="left">Scheperjans2015_PAR</td>
-<td align="left">PAR</td>
-</tr>
-<tr class="even">
-<td align="left">Alkanani2015_T1D</td>
-<td align="left">T1D</td>
-</tr>
-</tbody>
-</table>
 <p>Below is the per study reference.</p>
 <p><strong>NOTE</strong>: When using these studies, please cite <a href="https://www.nature.com/articles/s41467-017-01973-8#ref-CR33">Duvallet et al. 2017</a> and the respective studies.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit">
@@ -1169,19 +1079,6 @@ By default this function internally calculates <em>Prevalence</em>, but purposel
                         shape <span class="op">=</span> <span class="cn">NULL</span>, Sample <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></pre></div>
-</div>
-<div id="summarize-the-percent-taxa-classification-for-phyloseq" class="section level3">
-<h3 class="hasAnchor">
-<a href="#summarize-the-percent-taxa-classification-for-phyloseq" class="anchor"></a>Summarize the percent taxa classification for phyloseq</h3>
-<p>This can be useful to get an overview of taxonomic classifications. Only patterns such as [g__] or <code>NA</code> is expected. [g__<empty>] or similar are not considered. Pease convert for eg. g__unclassified to uniform [g__] or simply <code>NA</code>.<br>
-This best works with cleaned taxonomy table.</empty></p>
-<div class="sourceCode" id="cb32"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
-<span class="va">p0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
-<span class="co"># reduce size for example</span>
-<span class="va">ps0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core.html">core</a></span><span class="op">(</span><span class="va">p0</span>, detection <span class="op">=</span> <span class="fl">10</span>, prevalence <span class="op">=</span> <span class="fl">50</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/percent_classified.html">percent_classified</a></span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span></pre></div>
 <p><strong>Useful resources:</strong></p>
 <p>The <code>microbiomeutilties</code> depends on the phyloseq data structure and core <a href="http://joey711.github.io/phyloseq/">Phyloseq</a> functions.</p>
 <p>Tools for microbiome analysis in R. <strong>Microbiome package</strong> URL: <a href="http://microbiome.github.com/microbiome">microbiome package</a>.</p>
@@ -1194,7 +1091,7 @@ This best works with cleaned taxonomy table.</empty></p>
 </ul>
 <p><strong>Contributions are welcome:</strong></p>
 <p><a href="https://github.com/microsud/microbiomeutilities/issues">Issue Tracker</a><br><a href="https://github.com/microsud/microbiomeutilities/pulls">Pull requests</a><br><a href="https://github.com/microsud/microbiomeutilities">Star us on the Github page</a></p>
-<div class="sourceCode" id="cb33"><pre class="downlit">
+<div class="sourceCode" id="cb32"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; R version 4.0.3 (2020-10-10)</span>
 <span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
@@ -1215,7 +1112,7 @@ This best works with cleaned taxonomy table.</empty></p>
 <span class="co">#&gt;  [3] gghalves_0.1.0              ggpubr_0.4.0               </span>
 <span class="co">#&gt;  [5] patchwork_1.0.1             RColorBrewer_1.1-2         </span>
 <span class="co">#&gt;  [7] tibble_3.0.4                knitr_1.30                 </span>
-<span class="co">#&gt;  [9] microbiomeutilities_1.00.10 dplyr_1.0.2                </span>
+<span class="co">#&gt;  [9] microbiomeutilities_1.00.13 dplyr_1.0.2                </span>
 <span class="co">#&gt; [11] microbiome_1.11.2           ggplot2_3.3.2              </span>
 <span class="co">#&gt; [13] phyloseq_1.33.0            </span>
 <span class="co">#&gt; </span>

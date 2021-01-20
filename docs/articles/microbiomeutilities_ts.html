@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.13</span>
       </span>
     </div>
 
@@ -194,6 +194,7 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
 <span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">ps.sub</span>, <span class="st">"compositional"</span><span class="op">)</span>
 <span class="va">ps.rel.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">ps.rel</span><span class="op">)</span>
 
+<span class="co">#top_taxa(ps.rel.f, 5)</span>
 <span class="co"># Check how many have both time points</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/meta.html">meta</a></span><span class="op">(</span><span class="va">ps.rel.f</span><span class="op">)</span><span class="op">$</span><span class="va">visit_number</span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -202,7 +203,7 @@ Here, we use a randomly chosen small subset of data from <a href="https://biocon
 <span class="co">#table(meta(ps.rel.f)$visit_number, meta(ps.rel.f)$subject_id)</span>
 <span class="co"># there are two Participant_3 and Participant_11 with no time point2 sample </span>
 
-<span class="va">select.taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"4430843:Prevotella"</span>, <span class="st">"580629:Bacteroides"</span><span class="op">)</span>
+<span class="va">select.taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"4430843:g__Prevotella"</span>, <span class="st">"580629:g__Bacteroides"</span><span class="op">)</span>
 
 <span class="va">group.colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey70"</span><span class="op">)</span>
 
@@ -304,7 +305,7 @@ See also <a href="https://microbiome.github.io/tutorials/">microbiome R/BioC pac
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
 <span class="co">#&gt; [1] tidyr_1.1.2                 RColorBrewer_1.1-2         </span>
-<span class="co">#&gt; [3] ggpubr_0.4.0                microbiomeutilities_1.00.10</span>
+<span class="co">#&gt; [3] ggpubr_0.4.0                microbiomeutilities_1.00.13</span>
 <span class="co">#&gt; [5] dplyr_1.0.2                 microbiome_1.11.2          </span>
 <span class="co">#&gt; [7] ggplot2_3.3.2               phyloseq_1.33.0            </span>
 <span class="co">#&gt; </span>

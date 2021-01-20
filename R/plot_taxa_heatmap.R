@@ -51,27 +51,27 @@ plot_taxa_heatmap <- function(x, subset.top,
     phyobj1 <- prune_taxa(topOTU, x)
     message("First top taxa were selected and \nthen abundances tranformed to log10(1+X)")
     
-    prev.tx <- prevalence(phyobj1)
+    #prev.tx <- prevalence(phyobj1)
     
     phyobj2 <- transform(phyobj1, "log10")
   } else if (transformation == "compositional") {
     phyobjx <- transform(x, "compositional")
     phyobj2 <- prune_taxa(topOTU, phyobjx)
     
-    prev.tx <- prevalence(phyobj2)
+    #prev.tx <- prevalence(phyobj2)
     
     message("First converted to compositional \n then top taxa were selected")
   } else if (transformation == "Z-OTU") {
     phyobj1 <- prune_taxa(topOTU, x)
     
-    prev.tx <- prevalence(phyobj1)
+    #prev.tx <- prevalence(phyobj1)
     
     phyobj2 <- transform(phyobj1, "Z")
     message("First top taxa were selected and \nthen abundances tranformed to Z values")
   } else if (transformation == "clr") {
     phyobj1 <- prune_taxa(topOTU, x)
     
-    prev.tx <- prevalence(phyobj1)
+    #prev.tx <- prevalence(phyobj1)
     
     phyobj2 <- transform(phyobj1, "clr")
     message("First top taxa were selected and \nthen abundances tranformed to clr")
@@ -101,16 +101,16 @@ plot_taxa_heatmap <- function(x, subset.top,
   newnames <- lapply(
     rownames(otu.mat),
     function(x) bquote(italic(.(x))))
-  row_df <- NULL
-  row_df <- as.data.frame(round(prev.tx*100, 2))
-  colnames(row_df) <- c("Prevalence")
+  #row_df <- NULL
+  #row_df <- as.data.frame(round(prev.tx*100, 2))
+  #colnames(row_df) <- c("Prevalence")
   
   
   heatmap <- pheatmap::pheatmap(otu.mat,
                                 labels_row = as.expression(newnames),
                                 annotation_col = select.meta,
                                 #annotation_colors = annotation_colors,
-                                annotation_row = row_df,
+                                #annotation_row = row_df,
                                 color = color.heatmap, ...)
   
   
