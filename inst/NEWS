@@ -1,6 +1,9 @@
 
 Constant development is in process.  
 
+CHANGES IN VERSION 1.00.12 (2021-01-21)  
+  o Added utilities within `peak-methods`.  
+  
 CHANGES IN VERSION 1.00.12 (2021-01-18)  
   o Removed prevalence option `plot_taxa_heatmap`.  
    

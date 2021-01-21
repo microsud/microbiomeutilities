@@ -1,7 +1,7 @@
 Package: microbiomeutilities
 Type: Package
 Title: microbiomeutilities: Utilities for Microbiome Analytics
-Version: 1.00.13
+Version: 1.00.14
 Authors@R: c(
     person("Sudarshan", "Shetty", email = "sudarshan.shetty@wur.nl", role = c("aut", "cre")),
     person("Leo", "Lahti", role = "aut"))
@@ -31,7 +31,8 @@ Imports:
     ggrepel,
     tibble,
 	scales,
-	Biostrings
+	Biostrings,
+	methods
 Suggests:
     BiocGenerics,
     patchwork,

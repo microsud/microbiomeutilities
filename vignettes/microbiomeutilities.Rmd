@@ -502,6 +502,8 @@ library(pheatmap)
 library(RColorBrewer)
 data("zackular2014")
 ps0 <- zackular2014
+
+#optional step if required to rename taxa_names
 taxa_names(ps0) <- gsub("d__denovo", "OTU:", taxa_names(ps0))
 
 # create a gradient color palette for abundance

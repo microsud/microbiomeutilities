@@ -30,7 +30,8 @@ plot_taxa_heatmap <- function(x, subset.top,
                               transformation,
                               VariableA, 
                               heatcolors = NULL, ...) {
-  topOTU <- phyobj1 <- phyobj2 <- otu.mat <- meta.tab <- select.meta <- color.heatmap <- NULL
+  topOTU <- phyobj1 <- phyobj2 <- otu.mat <- NULL
+  meta.tab <- select.meta <- color.heatmap <- NULL
   
   
   #x <- ps0
@@ -97,6 +98,7 @@ plot_taxa_heatmap <- function(x, subset.top,
   } else {
     color.heatmap <- heatcolors
   }
+  
   newnames <- NULL
   newnames <- lapply(
     rownames(otu.mat),
