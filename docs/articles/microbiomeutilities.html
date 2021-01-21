@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.14</span>
       </span>
     </div>
 
@@ -958,6 +958,8 @@ This can be useful in identifying highly prevalent taxa and their mean relative 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"zackular2014"</span><span class="op">)</span>
 <span class="va">ps0</span> <span class="op">&lt;-</span> <span class="va">zackular2014</span>
+
+<span class="co">#optional step if required to rename taxa_names</span>
 <span class="fu">taxa_names</span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"d__denovo"</span>, <span class="st">"OTU:"</span>, <span class="fu">taxa_names</span><span class="op">(</span><span class="va">ps0</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># create a gradient color palette for abundance</span>
@@ -1112,7 +1114,7 @@ This can be useful in identifying highly prevalent taxa and their mean relative 
 <span class="co">#&gt;  [3] gghalves_0.1.0              ggpubr_0.4.0               </span>
 <span class="co">#&gt;  [5] patchwork_1.0.1             RColorBrewer_1.1-2         </span>
 <span class="co">#&gt;  [7] tibble_3.0.4                knitr_1.30                 </span>
-<span class="co">#&gt;  [9] microbiomeutilities_1.00.13 dplyr_1.0.2                </span>
+<span class="co">#&gt;  [9] microbiomeutilities_1.00.14 dplyr_1.0.2                </span>
 <span class="co">#&gt; [11] microbiome_1.11.2           ggplot2_3.3.2              </span>
 <span class="co">#&gt; [13] phyloseq_1.33.0            </span>
 <span class="co">#&gt; </span>
