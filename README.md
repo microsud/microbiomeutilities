@@ -20,7 +20,7 @@ devtools::install_github("microsud/microbiomeutilities")
 **Citation:**   
 
   o Leo Lahti, Sudarshan Shetty et al. (2017-2020). Tools for microbiome analysis in R. Version 2.1.28. URL: http://microbiome.github.com/microbiome      
-  o Sudarshan A. Shetty, & Leo Lahti. (2020, October). `microbiomeutilities`: Utilities for Microbiome Analytics (Version 1.00.10).   
+  o Sudarshan A. Shetty, & Leo Lahti. (2020, October). `microbiomeutilities`: Utilities for Microbiome Analytics.   
   
   
 The microbiome R package relies on the independently developed   
@@ -134,7 +134,7 @@ CHANGES IN VERSION 1.00.01 (2020-10-03)
   o Added `gghalves` to imports   
   o Fixed `microbiome_pipeline` report   
   
-CHANGES IN VERSION 1.00.00 (2020-10-01)
+CHANGES IN VERSION 1.00.00 (2020-10-01)   
   o Version tested with R version 4.0.2 (2020-06-22)     
   o Fix typos in documentation  
   o Add prefix option to `format_to_besthit`  
