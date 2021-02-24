@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.15</span>
       </span>
     </div>
 
@@ -97,7 +97,7 @@ devtools::install_github("microsud/microbiomeutilities")
 </a></code></pre>
 <p><strong>Citation:</strong></p>
 <p>o Leo Lahti, Sudarshan Shetty et al. (2017-2020). Tools for microbiome analysis in R. Version 2.1.28. URL: <a href="http://microbiome.github.com/microbiome" class="uri">http://microbiome.github.com/microbiome</a><br>
-o Sudarshan A. Shetty, &amp; Leo Lahti. (2020, October). <code>microbiomeutilities</code>: Utilities for Microbiome Analytics (Version 1.00.10).</p>
+o Sudarshan A. Shetty, &amp; Leo Lahti. (2020, October). <code>microbiomeutilities</code>: Utilities for Microbiome Analytics.</p>
 <p>The microbiome R package relies on the independently developed<br>
 o <a href="https://github.com/joey711/phyloseq">phyloseq</a> package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.<br>
 o <a href="http://ggplot2.org/">ggplot2</a> H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.<br>
@@ -176,7 +176,9 @@ The aim of this package is not to replace any of the other tools mentioned on th
 <div id="change-log" class="section level2">
 <h2 class="hasAnchor">
 <a href="#change-log" class="anchor"></a>Change log</h2>
-<p>CHANGES IN VERSION 1.00.12 (2021-01-21)<br>
+<p>CHANGES IN VERSION 1.00.15 (2021-01-21)<br>
+o Fix <code>plot_taxa_cv</code> to deal with taxa_are_rows==FALSE.</p>
+<p>CHANGES IN VERSION 1.00.14 (2021-01-21)<br>
 o Added utilities within <code>peak-methods</code>.</p>
 <p>CHANGES IN VERSION 1.00.12 (2021-01-18)<br>
 o Removed prevalence option <code>plot_taxa_heatmap</code>.</p>
@@ -222,7 +224,8 @@ o Added new function <code>taxa_distribution</code><br>
 o Added a custom theme <code>theme_biome_utils</code><br>
 o Added <code>gghalves</code> to imports<br>
 o Fixed <code>microbiome_pipeline</code> report</p>
-<p>CHANGES IN VERSION 1.00.00 (2020-10-01) o Version tested with R version 4.0.2 (2020-06-22)<br>
+<p>CHANGES IN VERSION 1.00.00 (2020-10-01)<br>
+o Version tested with R version 4.0.2 (2020-06-22)<br>
 o Fix typos in documentation<br>
 o Add prefix option to <code>format_to_besthit</code><br>
 o Edited <code>phy_to_ldf</code> to speed up conversion<br>
@@ -290,8 +293,8 @@ Team, R. C. (2000). R language definition. Vienna, Austria: R foundation for sta
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Sudarshan Shetty <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Leo Lahti <br><small class="roles"> Author </small>  </li>
+<li>Sudarshan Shetty <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7280-9915" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Leo Lahti <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-5537-637X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 

@@ -72,7 +72,10 @@ Dinh, D. M. et al. Intestinal microbiota, microbial translocation, and systemic 
 The aim of this package is not to replace any of the other tools mentioned on this site.  
 ## Change log  
 
-CHANGES IN VERSION 1.00.12 (2021-01-21)    
+CHANGES IN VERSION 1.00.15 (2021-01-21)   
+  o Fix `plot_taxa_cv` to deal with taxa_are_rows==FALSE.   
+  
+CHANGES IN VERSION 1.00.14 (2021-01-21)   
   o Added utilities within `peak-methods`.   
 
 CHANGES IN VERSION 1.00.12 (2021-01-18)  

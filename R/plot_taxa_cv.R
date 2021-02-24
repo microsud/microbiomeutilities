@@ -7,6 +7,7 @@
 #' @export
 #' @importFrom graphics hist
 #' @importFrom stats aggregate median sd
+#' @importFrom microbiome abundances
 #' @examples
 #' \dontrun{
 #' # Example data
@@ -23,9 +24,9 @@
 plot_taxa_cv <- function(x, plot.type) {
   MeanAbun <- CV <- Phylum <- NULL
   cal_cv <- function(x) abs(sd(x) / mean(x))
-  x.mean.rel <- apply(otu_table(x), 1, function(x) mean(x))
+  x.mean.rel <- apply(abundances(x), 1, function(x) mean(x))
   # head(ps.mean.rel)
-  x.cvs <- apply(otu_table(x), 1, function(x) cal_cv(x))
+  x.cvs <- apply(abundances(x), 1, function(x) cal_cv(x))
   # head(ps.cvs)
 
   # tax.x.df <- as.data.frame(tax_table(x))

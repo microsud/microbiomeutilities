@@ -164,6 +164,7 @@ setMethod("peak_base", signature = c(x = "ANY"),
 
 
 #' @param x object to test
+#' @noRd
 .check_pseq <- function (x) {
   length(x) == 1 && is(x) == "phyloseq"
 }
