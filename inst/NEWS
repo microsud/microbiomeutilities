@@ -1,6 +1,9 @@
 
 Constant development is in process.  
 
+CHANGES IN VERSION 1.00.16 (2021-04-14)   
+  o Fix `format_to_besthit` to return all slots present in input.  
+  
 CHANGES IN VERSION 1.00.15 (2021-01-21)  
   o Fix `plot_taxa_cv` to deal with taxa_are_rows==FALSE.  
   
