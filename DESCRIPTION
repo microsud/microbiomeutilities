@@ -1,7 +1,7 @@
 Package: microbiomeutilities
 Type: Package
 Title: microbiomeutilities: Utilities for Microbiome Analytics
-Version: 1.00.15
+Version: 1.00.16
 Authors@R: 
     c(person(given = "Sudarshan", "Shetty", role = c("aut", "cre"),
              email = "sudarshanshetty9@gmail.com",

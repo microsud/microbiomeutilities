@@ -187,22 +187,11 @@ format_to_besthit <- function(x, prefix = NULL) {
 
   rownames(tax.merge) <- tax.merge$best_hit
 
-  otu.1 <- as.data.frame.matrix(abundances(x))
-  rownames(otu.1) <- tax.merge$best_hit
+  taxa_names(x) <- rownames(tax.merge)
+  
+  #TAX <- tax_table(as.matrix(tax.merge))
 
-  OTU <- otu_table(as.matrix(otu.1),
-    taxa_are_rows = TRUE
-  )
-
-  TAX <- tax_table(as.matrix(tax.merge))
-
-  sampledata <- sample_data(meta(x))
-
-  p.new <- merge_phyloseq(
-    OTU,
-    TAX,
-    sampledata
-  )
-
-  return(p.new)
+  tax_table(x) <- tax_table(as.matrix(tax.merge))
+  
+  return(x)
 }
