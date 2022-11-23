@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.00.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/microbiomeutilities.html">Get started</a>
 </li>
@@ -50,7 +46,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -64,8 +60,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/microsud/microbiomeutilities/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/microsud/microbiomeutilities/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -79,13 +75,14 @@
 
       
 
-      </header><script src="microbiomeutilities_ts_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Longitudinal data analysis and visualization</h1>
+      <h1 data-toc-skip>Longitudinal data analysis and
+visualization</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/microsud/microbiomeutilities/blob/master/vignettes/microbiomeutilities_ts.Rmd"><code>vignettes/microbiomeutilities_ts.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/microsud/microbiomeutilities/blob/HEAD/vignettes/microbiomeutilities_ts.Rmd" class="external-link"><code>vignettes/microbiomeutilities_ts.Rmd</code></a></small>
       <div class="hidden name"><code>microbiomeutilities_ts.Rmd</code></div>
 
     </div>
@@ -93,256 +90,275 @@
     
     
 <p>Longitudinal data presents challenges for visualization.</p>
-<div id="microbiota-plasticity" class="section level2">
-<h2 class="hasAnchor">
-<a href="#microbiota-plasticity" class="anchor"></a>Microbiota plasticity</h2>
-<div id="calculate-plasticity" class="section level3">
-<h3 class="hasAnchor">
-<a href="#calculate-plasticity" class="anchor"></a>Calculate plasticity</h3>
-<p>See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota plasticity is correlated with sustained weight loss on a low-carb or low-fat dietary intervention. <a href="https://www.nature.com/articles/s41598-020-58000-y">Sci Rep 10, 1405 (2020).</a></p>
-<p>Data from <code>microbiome</code> package is used here for example.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">peerj32</span><span class="op">)</span>
-<span class="va">pseq</span> <span class="op">&lt;-</span> <span class="va">peerj32</span><span class="op">$</span><span class="va">phyloseq</span>
-<span class="va">pseq.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">pseq</span>, <span class="st">"compositional"</span><span class="op">)</span>
-<span class="va">pl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plasticity.html">plasticity</a></span><span class="op">(</span><span class="va">pseq.rel</span>, dist.method <span class="op">=</span> <span class="st">"bray"</span>, participant.col<span class="op">=</span><span class="st">"subject"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pl</span><span class="op">)</span>
-<span class="co">#&gt;          S1        S2      bray time_1  sex_1  sample_1 group_1 time_2  sex_2</span>
-<span class="co">#&gt; 1  sample-2  sample-1 0.2451330      2 female  sample-2 Placebo      1 female</span>
-<span class="co">#&gt; 2  sample-4  sample-3 0.1563982      2 female  sample-4 Placebo      1 female</span>
-<span class="co">#&gt; 3  sample-6  sample-5 0.1892079      2 female  sample-6     LGG      1 female</span>
-<span class="co">#&gt; 4  sample-8  sample-7 0.1760096      2   male  sample-8 Placebo      1   male</span>
-<span class="co">#&gt; 5 sample-10  sample-9 0.1936717      2 female sample-10 Placebo      1 female</span>
-<span class="co">#&gt; 6 sample-12 sample-11 0.1716045      2 female sample-12     LGG      1 female</span>
-<span class="co">#&gt;    sample_2 group_2 subject</span>
-<span class="co">#&gt; 1  sample-1 Placebo      S1</span>
-<span class="co">#&gt; 2  sample-3 Placebo      S2</span>
-<span class="co">#&gt; 3  sample-5     LGG      S3</span>
-<span class="co">#&gt; 4  sample-7 Placebo      S4</span>
-<span class="co">#&gt; 5  sample-9 Placebo      S5</span>
-<span class="co">#&gt; 6 sample-11     LGG      S6</span></pre></div>
-<p>Alternatively, using correlation methods for <code>plasticity</code>, one can check for similarity between technical replicates (2X sequenced same sample) for quality check.</p>
+<div class="section level2">
+<h2 id="microbiota-plasticity">Microbiota plasticity<a class="anchor" aria-label="anchor" href="#microbiota-plasticity"></a>
+</h2>
+<div class="section level3">
+<h3 id="calculate-plasticity">Calculate plasticity<a class="anchor" aria-label="anchor" href="#calculate-plasticity"></a>
+</h3>
+<p>See Grembi, J.A., Nguyen, L.H., Haggerty, T.D. et al. Gut microbiota
+plasticity is correlated with sustained weight loss on a low-carb or
+low-fat dietary intervention. <a href="https://www.nature.com/articles/s41598-020-58000-y" class="external-link">Sci Rep 10,
+1405 (2020).</a></p>
+<p>Data from <code>microbiome</code> package is used here for
+example.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome" class="external-link">microbiome</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/" class="external-link">ggpubr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">peerj32</span><span class="op">)</span></span>
+<span><span class="va">pseq</span> <span class="op">&lt;-</span> <span class="va">peerj32</span><span class="op">$</span><span class="va">phyloseq</span></span>
+<span><span class="va">pseq.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">pseq</span>, <span class="st">"compositional"</span><span class="op">)</span></span>
+<span><span class="va">pl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plasticity.html">plasticity</a></span><span class="op">(</span><span class="va">pseq.rel</span>, dist.method <span class="op">=</span> <span class="st">"bray"</span>, participant.col<span class="op">=</span><span class="st">"subject"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pl</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          S1        S2      bray time_1  sex_1  sample_1 group_1 time_2  sex_2</span></span>
+<span><span class="co">#&gt; 1  sample-2  sample-1 0.2451330      2 female  sample-2 Placebo      1 female</span></span>
+<span><span class="co">#&gt; 2  sample-4  sample-3 0.1563982      2 female  sample-4 Placebo      1 female</span></span>
+<span><span class="co">#&gt; 3  sample-6  sample-5 0.1892079      2 female  sample-6     LGG      1 female</span></span>
+<span><span class="co">#&gt; 4  sample-8  sample-7 0.1760096      2   male  sample-8 Placebo      1   male</span></span>
+<span><span class="co">#&gt; 5 sample-10  sample-9 0.1936717      2 female sample-10 Placebo      1 female</span></span>
+<span><span class="co">#&gt; 6 sample-12 sample-11 0.1716045      2 female sample-12     LGG      1 female</span></span>
+<span><span class="co">#&gt;    sample_2 group_2 subject</span></span>
+<span><span class="co">#&gt; 1  sample-1 Placebo      S1</span></span>
+<span><span class="co">#&gt; 2  sample-3 Placebo      S2</span></span>
+<span><span class="co">#&gt; 3  sample-5     LGG      S3</span></span>
+<span><span class="co">#&gt; 4  sample-7 Placebo      S4</span></span>
+<span><span class="co">#&gt; 5  sample-9 Placebo      S5</span></span>
+<span><span class="co">#&gt; 6 sample-11     LGG      S6</span></span></code></pre></div>
+<p>Alternatively, using correlation methods for <code>plasticity</code>,
+one can check for similarity between technical replicates (2X sequenced
+same sample) for quality check.</p>
 </div>
-<div id="plot-plasticity" class="section level3">
-<h3 class="hasAnchor">
-<a href="#plot-plasticity" class="anchor"></a>Plot plasticity</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-
-<span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pl</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span><span class="op">(</span><span class="va">group_2</span>,<span class="va">bray</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">group_2</span><span class="op">)</span>, 
-               alpha<span class="op">=</span><span class="fl">0.5</span>, 
-               na.rm <span class="op">=</span> <span class="cn">TRUE</span>, 
-               width<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_jitter</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">group_2</span><span class="op">)</span>, 
-              alpha<span class="op">=</span><span class="fl">0.5</span>, 
-              size<span class="op">=</span><span class="fl">3</span>, 
-              na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#457b9d"</span>, <span class="st">"#e63946"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#457b9d"</span>, <span class="st">"#e63946"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html">stat_compare_means</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="section level3">
+<h3 id="plot-plasticity">Plot plasticity<a class="anchor" aria-label="anchor" href="#plot-plasticity"></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">pl</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">group_2</span>,<span class="va">bray</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">group_2</span><span class="op">)</span>, </span>
+<span>               alpha<span class="op">=</span><span class="fl">0.5</span>, </span>
+<span>               na.rm <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>               width<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">group_2</span><span class="op">)</span>, </span>
+<span>              alpha<span class="op">=</span><span class="fl">0.5</span>, </span>
+<span>              size<span class="op">=</span><span class="fl">3</span>, </span>
+<span>              na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#457b9d"</span>, <span class="st">"#e63946"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#457b9d"</span>, <span class="st">"#e63946"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html" class="external-link">stat_compare_means</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="../reference/theme_biome_utils.html">theme_biome_utils</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="microbiomeutilities_ts_files/figure-html/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="area-plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#area-plot" class="anchor"></a>Area plot</h3>
-<p>Area plots can be used to visualize changes in abundances in individual participants, or bioreactors sampled over time.<br>
-Here, we use a randomly chosen small subset of data from <a href="https://bioconductor.org/packages/release/data/experiment/html/HMP2Data.html">HMP2data</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"hmp2"</span><span class="op">)</span>
-<span class="va">ps</span> <span class="op">&lt;-</span> <span class="va">hmp2</span>
-<span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">ps</span>, <span class="st">"compositional"</span><span class="op">)</span> 
-<span class="co"># chose specific participants to plot data.</span>
-<span class="va">pts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Participant_1"</span>,<span class="st">"Participant_2"</span>,
-         <span class="st">"Participant_8"</span>,<span class="st">"Participant_5"</span><span class="op">)</span>
-<span class="co">#pts &lt;- "Participant_1"</span>
-<span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span><span class="op">(</span><span class="va">ps.rel</span>, <span class="va">subject_id</span> <span class="op">%in%</span> <span class="va">pts</span><span class="op">)</span>
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_area.html">plot_area</a></span><span class="op">(</span><span class="va">ps.rel</span>, xvar<span class="op">=</span><span class="st">"visit_number"</span>, 
-               level <span class="op">=</span> <span class="st">"Family"</span>,
-               facet.by <span class="op">=</span> <span class="st">"subject_id"</span>,
-               abund.thres <span class="op">=</span> <span class="fl">0.1</span>,
-               prev.thres<span class="op">=</span><span class="fl">0.1</span>,
-               fill.colors<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">12</span>,<span class="st">"Paired"</span><span class="op">)</span>,
-               ncol<span class="op">=</span><span class="fl">2</span>,
-               nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">p</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span></pre></div>
+<div class="section level3">
+<h3 id="area-plot">Area plot<a class="anchor" aria-label="anchor" href="#area-plot"></a>
+</h3>
+<p>Area plots can be used to visualize changes in abundances in
+individual participants, or bioreactors sampled over time.<br>
+Here, we use a randomly chosen small subset of data from <a href="https://bioconductor.org/packages/release/data/experiment/html/HMP2Data.html" class="external-link">HMP2data</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"hmp2"</span><span class="op">)</span></span>
+<span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="va">hmp2</span></span>
+<span><span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">ps</span>, <span class="st">"compositional"</span><span class="op">)</span> </span>
+<span><span class="co"># chose specific participants to plot data.</span></span>
+<span><span class="va">pts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Participant_1"</span>,<span class="st">"Participant_2"</span>,</span>
+<span>         <span class="st">"Participant_8"</span>,<span class="st">"Participant_5"</span><span class="op">)</span></span>
+<span><span class="co">#pts &lt;- "Participant_1"</span></span>
+<span><span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/subset_samples-methods.html" class="external-link">subset_samples</a></span><span class="op">(</span><span class="va">ps.rel</span>, <span class="va">subject_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">pts</span><span class="op">)</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_area.html">plot_area</a></span><span class="op">(</span><span class="va">ps.rel</span>, xvar<span class="op">=</span><span class="st">"visit_number"</span>, </span>
+<span>               level <span class="op">=</span> <span class="st">"Family"</span>,</span>
+<span>               facet.by <span class="op">=</span> <span class="st">"subject_id"</span>,</span>
+<span>               abund.thres <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>               prev.thres<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span>               fill.colors<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">brewer.pal</a></span><span class="op">(</span><span class="fl">12</span>,<span class="st">"Paired"</span><span class="op">)</span>,</span>
+<span>               ncol<span class="op">=</span><span class="fl">2</span>,</span>
+<span>               nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span><span class="op">)</span></span></code></pre></div>
 <p><img src="microbiomeutilities_ts_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
-<div id="paired-abundances" class="section level3">
-<h3 class="hasAnchor">
-<a href="#paired-abundances" class="anchor"></a>Paired abundances</h3>
-<p>We use a subset of <a href="https://bioconductor.org/packages/release/data/experiment/html/HMP2Data.html">HMP2 data</a></p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome">microbiome</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
-<span class="co">#library(gghalves)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"hmp2"</span><span class="op">)</span>
-<span class="va">ps</span> <span class="op">&lt;-</span> <span class="va">hmp2</span> 
-<span class="co"># pick visit 1 and 2</span>
-<span class="va">ps.sub</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span><span class="op">(</span><span class="va">ps</span>, <span class="va">visit_number</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ps.sub</span> <span class="op">&lt;-</span> <span class="fu">prune_taxa</span><span class="op">(</span><span class="fu">taxa_sums</span><span class="op">(</span><span class="va">ps.sub</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span>, <span class="va">ps.sub</span><span class="op">)</span>
-
-<span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">ps.sub</span>, <span class="st">"compositional"</span><span class="op">)</span>
-<span class="va">ps.rel.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">ps.rel</span><span class="op">)</span>
-
-<span class="co">#top_taxa(ps.rel.f, 5)</span>
-<span class="co"># Check how many have both time points</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/meta.html">meta</a></span><span class="op">(</span><span class="va">ps.rel.f</span><span class="op">)</span><span class="op">$</span><span class="va">visit_number</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  1  2 </span>
-<span class="co">#&gt; 13 11</span>
-<span class="co">#table(meta(ps.rel.f)$visit_number, meta(ps.rel.f)$subject_id)</span>
-<span class="co"># there are two Participant_3 and Participant_11 with no time point2 sample </span>
-
-<span class="va">select.taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"4430843:g__Prevotella"</span>, <span class="st">"580629:g__Bacteroides"</span><span class="op">)</span>
-
-<span class="va">group.colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey70"</span><span class="op">)</span>
-
-
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_paired_abundances.html">plot_paired_abundances</a></span> <span class="op">(</span><span class="va">ps.rel.f</span>,
-                             select.taxa<span class="op">=</span><span class="va">select.taxa</span>,
-                             group<span class="op">=</span><span class="st">"visit_number"</span>,
-                             group.colors<span class="op">=</span><span class="va">group.colors</span>,
-                             dot.opacity <span class="op">=</span> <span class="fl">0.25</span>,
-                             dot.size<span class="op">=</span> <span class="fl">2</span>,
-                             add.violin <span class="op">=</span> <span class="cn">TRUE</span>,
-                             line <span class="op">=</span> <span class="st">"subject_id"</span>,
-                             line.down <span class="op">=</span> <span class="st">"#7209b7"</span>,
-                             line.stable <span class="op">=</span> <span class="st">"red"</span>,
-                             line.up <span class="op">=</span> <span class="st">"#14213d"</span>, 
-                             line.na.value <span class="op">=</span> <span class="st">"red"</span>,
-                             line.guide <span class="op">=</span> <span class="st">"none"</span>,
-                             line.opacity <span class="op">=</span> <span class="fl">0.25</span>,
-                             line.size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">"Time point"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Removed 4 row(s) containing missing values (geom_path).</span></pre></div>
+<div class="section level3">
+<h3 id="paired-abundances">Paired abundances<a class="anchor" aria-label="anchor" href="#paired-abundances"></a>
+</h3>
+<p>We use a subset of <a href="https://bioconductor.org/packages/release/data/experiment/html/HMP2Data.html" class="external-link">HMP2
+data</a></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://microbiome.github.io/microbiome" class="external-link">microbiome</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span></span>
+<span><span class="co">#library(gghalves)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"hmp2"</span><span class="op">)</span></span>
+<span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="va">hmp2</span> </span>
+<span><span class="co"># pick visit 1 and 2</span></span>
+<span><span class="va">ps.sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/subset_samples-methods.html" class="external-link">subset_samples</a></span><span class="op">(</span><span class="va">ps</span>, <span class="va">visit_number</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ps.sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/prune_taxa-methods.html" class="external-link">prune_taxa</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/taxa_sums.html" class="external-link">taxa_sums</a></span><span class="op">(</span><span class="va">ps.sub</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span>, <span class="va">ps.sub</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ps.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">ps.sub</span>, <span class="st">"compositional"</span><span class="op">)</span></span>
+<span><span class="va">ps.rel.f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">ps.rel</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#top_taxa(ps.rel.f, 5)</span></span>
+<span><span class="co"># Check how many have both time points</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/meta.html" class="external-link">meta</a></span><span class="op">(</span><span class="va">ps.rel.f</span><span class="op">)</span><span class="op">$</span><span class="va">visit_number</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  1  2 </span></span>
+<span><span class="co">#&gt; 13 11</span></span>
+<span><span class="co">#table(meta(ps.rel.f)$visit_number, meta(ps.rel.f)$subject_id)</span></span>
+<span><span class="co"># there are two Participant_3 and Participant_11 with no time point2 sample </span></span>
+<span></span>
+<span><span class="va">select.taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4430843:g__Prevotella"</span>, <span class="st">"580629:g__Bacteroides"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">group.colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"brown3"</span>, <span class="st">"steelblue"</span>, <span class="st">"grey70"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_paired_abundances.html">plot_paired_abundances</a></span> <span class="op">(</span><span class="va">ps.rel.f</span>,</span>
+<span>                             select.taxa<span class="op">=</span><span class="va">select.taxa</span>,</span>
+<span>                             group<span class="op">=</span><span class="st">"visit_number"</span>,</span>
+<span>                             group.colors<span class="op">=</span><span class="va">group.colors</span>,</span>
+<span>                             dot.opacity <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>                             dot.size<span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                             add.violin <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                             line <span class="op">=</span> <span class="st">"subject_id"</span>,</span>
+<span>                             line.down <span class="op">=</span> <span class="st">"#7209b7"</span>,</span>
+<span>                             line.stable <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>                             line.up <span class="op">=</span> <span class="st">"#14213d"</span>, </span>
+<span>                             line.na.value <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>                             line.guide <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>                             line.opacity <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>                             line.size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time point"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Relative abundance"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="microbiomeutilities_ts_files/figure-html/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;"></p>
-<p>The lines are colored according to their change in abundance from time 1 to time 2.</p>
+<p>The lines are colored according to their change in abundance from
+time 1 to time 2.</p>
 </div>
-<div id="spaghetti-plots" class="section level3">
-<h3 class="hasAnchor">
-<a href="#spaghetti-plots" class="anchor"></a>Spaghetti plots</h3>
+<div class="section level3">
+<h3 id="spaghetti-plots">Spaghetti plots<a class="anchor" aria-label="anchor" href="#spaghetti-plots"></a>
+</h3>
 <p><strong>One participant many taxa</strong><br>
-Reference for visualization and original code <a href="https://www.data-to-viz.com/caveat/spaghetti.html">Data to Viz.com</a></p>
-<p>The ordering of panel on top of each other is better for comparisons. However, practical consideration can be made on number of columns and rows to distribute the panels.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"hmp2"</span><span class="op">)</span>
-<span class="va">pseq</span> <span class="op">&lt;-</span> <span class="va">hmp2</span> <span class="co"># Ren</span>
-<span class="va">pseq.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html">transform</a></span><span class="op">(</span><span class="va">pseq</span>, <span class="st">"compositional"</span><span class="op">)</span>
-<span class="va">pseq.relF</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">pseq.rel</span><span class="op">)</span>
-
-<span class="co"># Choose one participant</span>
-<span class="va">phdf.s</span> <span class="op">&lt;-</span> <span class="fu">subset_samples</span><span class="op">(</span><span class="va">pseq.relF</span>, <span class="va">subject_id</span><span class="op">==</span>
-                           <span class="st">"Participant_1"</span><span class="op">)</span>
-<span class="co"># Choose top 12 taxa to visualize</span>
-<span class="va">ntax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/top_taxa.html">top_taxa</a></span><span class="op">(</span><span class="va">phdf.s</span>, <span class="fl">4</span><span class="op">)</span>
-<span class="va">phdf.s</span> <span class="op">&lt;-</span> <span class="fu">prune_taxa</span><span class="op">(</span><span class="va">ntax</span>, <span class="va">phdf.s</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/plot_spaghetti.html">plot_spaghetti</a></span><span class="op">(</span><span class="va">phdf.s</span>, plot.var<span class="op">=</span> <span class="st">"by_taxa"</span>,
-               select.taxa<span class="op">=</span><span class="va">ntax</span>,
-               xvar<span class="op">=</span><span class="st">"visit_number"</span>,
-               line.bg.color<span class="op">=</span><span class="st">"#8d99ae"</span>,
-               focus.color<span class="op">=</span><span class="st">"brown3"</span>,
-               focus.line.size <span class="op">=</span> <span class="fl">1</span>,
-               ncol<span class="op">=</span><span class="fl">1</span>,
-               nrow<span class="op">=</span><span class="fl">4</span>,
-               line.size<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></pre></div>
+Reference for visualization and original code <a href="https://www.data-to-viz.com/caveat/spaghetti.html" class="external-link">Data to
+Viz.com</a></p>
+<p>The ordering of panel on top of each other is better for comparisons.
+However, practical consideration can be made on number of columns and
+rows to distribute the panels.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">microbiomeutilities</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"hmp2"</span><span class="op">)</span></span>
+<span><span class="va">pseq</span> <span class="op">&lt;-</span> <span class="va">hmp2</span> <span class="co"># Ren</span></span>
+<span><span class="va">pseq.rel</span> <span class="op">&lt;-</span> <span class="fu">microbiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">pseq</span>, <span class="st">"compositional"</span><span class="op">)</span></span>
+<span><span class="va">pseq.relF</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">pseq.rel</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Choose one participant</span></span>
+<span><span class="va">phdf.s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/subset_samples-methods.html" class="external-link">subset_samples</a></span><span class="op">(</span><span class="va">pseq.relF</span>, <span class="va">subject_id</span><span class="op">==</span></span>
+<span>                           <span class="st">"Participant_1"</span><span class="op">)</span></span>
+<span><span class="co"># Choose top 12 taxa to visualize</span></span>
+<span><span class="va">ntax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/top_taxa.html" class="external-link">top_taxa</a></span><span class="op">(</span><span class="va">phdf.s</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">phdf.s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/prune_taxa-methods.html" class="external-link">prune_taxa</a></span><span class="op">(</span><span class="va">ntax</span>, <span class="va">phdf.s</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/plot_spaghetti.html">plot_spaghetti</a></span><span class="op">(</span><span class="va">phdf.s</span>, plot.var<span class="op">=</span> <span class="st">"by_taxa"</span>,</span>
+<span>               select.taxa<span class="op">=</span><span class="va">ntax</span>,</span>
+<span>               xvar<span class="op">=</span><span class="st">"visit_number"</span>,</span>
+<span>               line.bg.color<span class="op">=</span><span class="st">"#8d99ae"</span>,</span>
+<span>               focus.color<span class="op">=</span><span class="st">"brown3"</span>,</span>
+<span>               focus.line.size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>               ncol<span class="op">=</span><span class="fl">1</span>,</span>
+<span>               nrow<span class="op">=</span><span class="fl">4</span>,</span>
+<span>               line.size<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="microbiomeutilities_ts_files/figure-html/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;"></p>
 <p><strong>One taxa many participants</strong></p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-
-<span class="va">pseq.relF</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">pseq.rel</span><span class="op">)</span>
-<span class="va">ntax2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core_members.html">core_members</a></span><span class="op">(</span><span class="va">pseq.relF</span>, <span class="fl">0.001</span>, <span class="fl">0.5</span><span class="op">)</span>
-<span class="co"># chose first for example</span>
-<span class="va">ntax2</span> <span class="co"># only</span>
-<span class="co">#&gt; [1] "581782:f__Enterobacteriaceae"</span>
-<span class="co"># check how many participants are there in "subject_id" </span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/meta.html">meta</a></span><span class="op">(</span><span class="va">pseq.relF</span><span class="op">)</span><span class="op">$</span><span class="va">subject_id</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 13</span>
-
-<span class="co"># There are 13 participants. Choose ncol and nrow accordingly </span>
-
-<span class="fu"><a href="../reference/plot_spaghetti.html">plot_spaghetti</a></span><span class="op">(</span><span class="va">pseq.relF</span>, plot.var<span class="op">=</span> <span class="st">"by_sample"</span>,
-               select.taxa<span class="op">=</span><span class="va">ntax2</span>,
-               group<span class="op">=</span> <span class="st">"subject_id"</span>,
-               xvar<span class="op">=</span><span class="st">"visit_number"</span>,
-               line.bg.color<span class="op">=</span><span class="st">"#8d99ae"</span>,
-               focus.color<span class="op">=</span><span class="st">"brown3"</span>,
-               focus.line.size <span class="op">=</span> <span class="fl">1</span>,
-               ncol<span class="op">=</span><span class="fl">4</span>,
-               nrow<span class="op">=</span><span class="fl">6</span>,
-               line.size<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">pseq.relF</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_to_besthit.html">format_to_besthit</a></span><span class="op">(</span><span class="va">pseq.rel</span><span class="op">)</span></span>
+<span><span class="va">ntax2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/core_members.html" class="external-link">core_members</a></span><span class="op">(</span><span class="va">pseq.relF</span>, <span class="fl">0.001</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="co"># chose first for example</span></span>
+<span><span class="va">ntax2</span> <span class="co"># only</span></span>
+<span><span class="co">#&gt; [1] "581782:f__Enterobacteriaceae"</span></span>
+<span><span class="co"># check how many participants are there in "subject_id" </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/microbiome/man/meta.html" class="external-link">meta</a></span><span class="op">(</span><span class="va">pseq.relF</span><span class="op">)</span><span class="op">$</span><span class="va">subject_id</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 13</span></span>
+<span></span>
+<span><span class="co"># There are 13 participants. Choose ncol and nrow accordingly </span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/plot_spaghetti.html">plot_spaghetti</a></span><span class="op">(</span><span class="va">pseq.relF</span>, plot.var<span class="op">=</span> <span class="st">"by_sample"</span>,</span>
+<span>               select.taxa<span class="op">=</span><span class="va">ntax2</span>,</span>
+<span>               group<span class="op">=</span> <span class="st">"subject_id"</span>,</span>
+<span>               xvar<span class="op">=</span><span class="st">"visit_number"</span>,</span>
+<span>               line.bg.color<span class="op">=</span><span class="st">"#8d99ae"</span>,</span>
+<span>               focus.color<span class="op">=</span><span class="st">"brown3"</span>,</span>
+<span>               focus.line.size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>               ncol<span class="op">=</span><span class="fl">4</span>,</span>
+<span>               nrow<span class="op">=</span><span class="fl">6</span>,</span>
+<span>               line.size<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="microbiomeutilities_ts_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>This package is part of the <code>microbiomeverse</code> tools.<br>
-See also <a href="https://microbiome.github.io/tutorials/">microbiome R/BioC package</a><br><strong>Contributions are welcome:</strong></p>
-<p><a href="https://github.com/microsud/microbiomeutilities/issues">Issue Tracker</a><br><a href="https://github.com/microsud/microbiomeutilities/pulls">Pull requests</a><br><a href="https://github.com/microsud/microbiomeutilities">Star us on the Github page</a></p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-
-<span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; R version 4.0.3 (2020-10-10)</span>
-<span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
-<span class="co">#&gt; Running under: Windows 10 x64 (build 18363)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] LC_COLLATE=English_Netherlands.1252  LC_CTYPE=English_Netherlands.1252   </span>
-<span class="co">#&gt; [3] LC_MONETARY=English_Netherlands.1252 LC_NUMERIC=C                        </span>
-<span class="co">#&gt; [5] LC_TIME=English_Netherlands.1252    </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attached base packages:</span>
-<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] tidyr_1.1.2                 RColorBrewer_1.1-2         </span>
-<span class="co">#&gt; [3] ggpubr_0.4.0                microbiomeutilities_1.00.14</span>
-<span class="co">#&gt; [5] dplyr_1.0.2                 microbiome_1.11.2          </span>
-<span class="co">#&gt; [7] ggplot2_3.3.2               phyloseq_1.33.0            </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] nlme_3.1-149        fs_1.5.0            gghalves_0.1.0     </span>
-<span class="co">#&gt;  [4] rprojroot_1.3-2     tools_4.0.3         backports_1.2.0    </span>
-<span class="co">#&gt;  [7] R6_2.5.0            vegan_2.5-6         BiocGenerics_0.36.0</span>
-<span class="co">#&gt; [10] mgcv_1.8-33         colorspace_1.4-1    permute_0.9-5      </span>
-<span class="co">#&gt; [13] rhdf5filters_1.2.0  ade4_1.7-15         withr_2.3.0        </span>
-<span class="co">#&gt; [16] tidyselect_1.1.0    curl_4.3            compiler_4.0.3     </span>
-<span class="co">#&gt; [19] textshaping_0.1.2   Biobase_2.50.0      desc_1.2.0         </span>
-<span class="co">#&gt; [22] labeling_0.4.2      scales_1.1.1        pkgdown_1.6.1      </span>
-<span class="co">#&gt; [25] systemfonts_0.3.2   stringr_1.4.0       digest_0.6.27      </span>
-<span class="co">#&gt; [28] foreign_0.8-80      rmarkdown_2.4       rio_0.5.16         </span>
-<span class="co">#&gt; [31] XVector_0.30.0      pkgconfig_2.0.3     htmltools_0.5.1.1  </span>
-<span class="co">#&gt; [34] readxl_1.3.1        rlang_0.4.8         rstudioapi_0.11    </span>
-<span class="co">#&gt; [37] farver_2.0.3        generics_0.1.0      jsonlite_1.7.1     </span>
-<span class="co">#&gt; [40] zip_2.1.1           car_3.0-10          magrittr_1.5       </span>
-<span class="co">#&gt; [43] biomformat_1.17.0   Matrix_1.2-18       Rcpp_1.0.5         </span>
-<span class="co">#&gt; [46] munsell_0.5.0       S4Vectors_0.28.0    Rhdf5lib_1.12.0    </span>
-<span class="co">#&gt; [49] abind_1.4-5         ape_5.4-1           lifecycle_0.2.0    </span>
-<span class="co">#&gt; [52] stringi_1.5.3       yaml_2.2.1          carData_3.0-4      </span>
-<span class="co">#&gt; [55] MASS_7.3-53         zlibbioc_1.36.0     rhdf5_2.34.0       </span>
-<span class="co">#&gt; [58] Rtsne_0.15          plyr_1.8.6          grid_4.0.3         </span>
-<span class="co">#&gt; [61] ggrepel_0.9.1       parallel_4.0.3      forcats_0.5.0      </span>
-<span class="co">#&gt; [64] crayon_1.3.4        lattice_0.20-41     Biostrings_2.58.0  </span>
-<span class="co">#&gt; [67] haven_2.3.1         splines_4.0.3       multtest_2.45.0    </span>
-<span class="co">#&gt; [70] hms_0.5.3           knitr_1.30          pillar_1.4.6       </span>
-<span class="co">#&gt; [73] igraph_1.2.6        ggsignif_0.6.0      reshape2_1.4.4     </span>
-<span class="co">#&gt; [76] codetools_0.2-16    stats4_4.0.3        glue_1.4.2         </span>
-<span class="co">#&gt; [79] evaluate_0.14       data.table_1.13.0   vctrs_0.3.4        </span>
-<span class="co">#&gt; [82] foreach_1.5.1       cellranger_1.1.0    gtable_0.3.0       </span>
-<span class="co">#&gt; [85] purrr_0.3.4         assertthat_0.2.1    xfun_0.17          </span>
-<span class="co">#&gt; [88] openxlsx_4.2.2      broom_0.7.1         rstatix_0.6.0      </span>
-<span class="co">#&gt; [91] ragg_0.4.0          survival_3.2-7      pheatmap_1.0.12    </span>
-<span class="co">#&gt; [94] tibble_3.0.4        iterators_1.0.13    memoise_1.1.0      </span>
-<span class="co">#&gt; [97] IRanges_2.24.0      cluster_2.1.0       ellipsis_0.3.1</span></pre></div>
+See also <a href="https://microbiome.github.io/tutorials/" class="external-link">microbiome
+R/BioC package</a><br><strong>Contributions are welcome:</strong></p>
+<p><a href="https://github.com/microsud/microbiomeutilities/issues" class="external-link">Issue
+Tracker</a><br><a href="https://github.com/microsud/microbiomeutilities/pulls" class="external-link">Pull
+requests</a><br><a href="https://github.com/microsud/microbiomeutilities" class="external-link">Star us on the
+Github page</a></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: Windows 10 x64 (build 19044)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] LC_COLLATE=English_United States.utf8 </span></span>
+<span><span class="co">#&gt; [2] LC_CTYPE=English_United States.utf8   </span></span>
+<span><span class="co">#&gt; [3] LC_MONETARY=English_United States.utf8</span></span>
+<span><span class="co">#&gt; [4] LC_NUMERIC=C                          </span></span>
+<span><span class="co">#&gt; [5] LC_TIME=English_United States.utf8    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] tidyr_1.2.0                 RColorBrewer_1.1-3         </span></span>
+<span><span class="co">#&gt; [3] ggpubr_0.4.0                microbiomeutilities_1.00.16</span></span>
+<span><span class="co">#&gt; [5] dplyr_1.0.9                 microbiome_1.18.0          </span></span>
+<span><span class="co">#&gt; [7] ggplot2_3.3.6               phyloseq_1.40.0            </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;   [1] nlme_3.1-157           bitops_1.0-7           fs_1.5.2              </span></span>
+<span><span class="co">#&gt;   [4] gghalves_0.1.3         rprojroot_2.0.3        GenomeInfoDb_1.32.2   </span></span>
+<span><span class="co">#&gt;   [7] backports_1.4.1        tools_4.2.1            bslib_0.4.0           </span></span>
+<span><span class="co">#&gt;  [10] utf8_1.2.2             R6_2.5.1               vegan_2.6-2           </span></span>
+<span><span class="co">#&gt;  [13] DBI_1.1.3              BiocGenerics_0.42.0    mgcv_1.8-40           </span></span>
+<span><span class="co">#&gt;  [16] colorspace_2.0-3       permute_0.9-7          rhdf5filters_1.8.0    </span></span>
+<span><span class="co">#&gt;  [19] ade4_1.7-19            withr_2.5.0            tidyselect_1.1.2      </span></span>
+<span><span class="co">#&gt;  [22] compiler_4.2.1         textshaping_0.3.6      cli_3.3.0             </span></span>
+<span><span class="co">#&gt;  [25] Biobase_2.56.0         desc_1.4.2             labeling_0.4.2        </span></span>
+<span><span class="co">#&gt;  [28] sass_0.4.2             scales_1.2.1           pkgdown_2.0.6         </span></span>
+<span><span class="co">#&gt;  [31] systemfonts_1.0.4      stringr_1.4.1          digest_0.6.29         </span></span>
+<span><span class="co">#&gt;  [34] rmarkdown_2.16         XVector_0.36.0         pkgconfig_2.0.3       </span></span>
+<span><span class="co">#&gt;  [37] htmltools_0.5.3        highr_0.9              fastmap_1.1.0         </span></span>
+<span><span class="co">#&gt;  [40] rlang_1.0.5            rstudioapi_0.14        farver_2.1.1          </span></span>
+<span><span class="co">#&gt;  [43] jquerylib_0.1.4        generics_0.1.3         jsonlite_1.8.0        </span></span>
+<span><span class="co">#&gt;  [46] car_3.1-0              RCurl_1.98-1.6         magrittr_2.0.3        </span></span>
+<span><span class="co">#&gt;  [49] GenomeInfoDbData_1.2.8 biomformat_1.24.0      Matrix_1.5-1          </span></span>
+<span><span class="co">#&gt;  [52] Rcpp_1.0.8.3           munsell_0.5.0          S4Vectors_0.34.0      </span></span>
+<span><span class="co">#&gt;  [55] Rhdf5lib_1.18.2        fansi_1.0.3            abind_1.4-5           </span></span>
+<span><span class="co">#&gt;  [58] ape_5.6-2              lifecycle_1.0.2        stringi_1.7.6         </span></span>
+<span><span class="co">#&gt;  [61] yaml_2.3.5             carData_3.0-5          MASS_7.3-57           </span></span>
+<span><span class="co">#&gt;  [64] zlibbioc_1.42.0        rhdf5_2.40.0           Rtsne_0.16            </span></span>
+<span><span class="co">#&gt;  [67] plyr_1.8.7             grid_4.2.1             ggrepel_0.9.1         </span></span>
+<span><span class="co">#&gt;  [70] parallel_4.2.1         crayon_1.5.1           lattice_0.20-45       </span></span>
+<span><span class="co">#&gt;  [73] Biostrings_2.64.0      splines_4.2.1          multtest_2.52.0       </span></span>
+<span><span class="co">#&gt;  [76] knitr_1.40             pillar_1.8.1           igraph_1.3.1          </span></span>
+<span><span class="co">#&gt;  [79] ggsignif_0.6.3         reshape2_1.4.4         codetools_0.2-18      </span></span>
+<span><span class="co">#&gt;  [82] stats4_4.2.1           glue_1.6.2             evaluate_0.16         </span></span>
+<span><span class="co">#&gt;  [85] data.table_1.14.2      vctrs_0.4.1            foreach_1.5.2         </span></span>
+<span><span class="co">#&gt;  [88] gtable_0.3.1           purrr_0.3.4            assertthat_0.2.1      </span></span>
+<span><span class="co">#&gt;  [91] cachem_1.0.6           xfun_0.31              broom_1.0.1           </span></span>
+<span><span class="co">#&gt;  [94] rstatix_0.7.0          ragg_1.2.2             survival_3.3-1        </span></span>
+<span><span class="co">#&gt;  [97] pheatmap_1.0.12        tibble_3.1.7           iterators_1.0.14      </span></span>
+<span><span class="co">#&gt; [100] memoise_2.0.1          IRanges_2.30.0         cluster_2.1.3         </span></span>
+<span><span class="co">#&gt; [103] ellipsis_0.3.2</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -358,11 +374,13 @@ See also <a href="https://microbiome.github.io/tutorials/">microbiome R/BioC pac
 
 
       <footer><div class="copyright">
-  <p>Developed by Sudarshan Shetty, Leo Lahti.</p>
+  <p></p>
+<p>Developed by Sudarshan Shetty, Leo Lahti.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -370,6 +388,8 @@ See also <a href="https://microbiome.github.io/tutorials/">microbiome R/BioC pac
 
   
 
+
+  
 
   </body>
 </html>

@@ -21,10 +21,9 @@ dominant_taxa <- function(x, level = NULL, group = NULL) {
   
   rel.freq <- rel.freq.pct <- NULL
   
-  if (class(x)!="phyloseq"){
+  if (!is(x, "phyloseq")) {
     stop("Input is not an object of phyloseq class")
   }
-  
   if (!is.null(level)) {
     x <- aggregate_taxa(x, level = level)
   }

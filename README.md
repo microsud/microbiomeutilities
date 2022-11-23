@@ -1,7 +1,8 @@
 
 
-![R-CMD-check](https://github.com/microsud/microbiomeutilities/workflows/R-CMD-check/badge.svg)  
+![R-CMD-check](https://github.com/microsud/microbiomeutilities/workflows/R-CMD-check/badge.svg)   
 
+**NOTE** While we continue to maintain this R package, the development has been discontinued as we have shifted to supporting methods development based on the new TreeSummarizedExperiment data container, which provides added capabilities for multi-omics data analysis. Check the [miaverse](https://microbiome.github.io/) project for details.  
 
 # About  
 The `microbiomeutilities` R package is part of the [microbiome-verse](https://github.com/microbiome) tools that provides additional data handling and visualization support for the [microbiome R/BioC package](https://microbiome.github.io/tutorials/)   

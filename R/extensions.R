@@ -18,7 +18,7 @@ get_tibble <- function(x,
                        slot="otu_table",
                        column_id="column_id") {
   
-  if (class(x)!="phyloseq"){
+  if (!is(x, "phyloseq")) {
     stop("Input is not an object of phyloseq class")
   }
   
@@ -99,7 +99,7 @@ join_otu_tax <- function(x, column_id = "OTUID"){
 #' @importFrom Biostrings DNAStringSet
 add_refseq <- function(x, tag="ASV"){
   
-  if (class(x)!="phyloseq"){
+  if (!is(x, "phyloseq")) {
     stop("Input is not an object of phyloseq class")
   }
   

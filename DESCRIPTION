@@ -1,7 +1,7 @@
 Package: microbiomeutilities
 Type: Package
 Title: microbiomeutilities: Utilities for Microbiome Analytics
-Version: 1.00.16
+Version: 1.00.17
 Authors@R: 
     c(person(given = "Sudarshan", "Shetty", role = c("aut", "cre"),
              email = "sudarshanshetty9@gmail.com",
@@ -25,25 +25,25 @@ Imports:
     stats,
     tidyr,
     utils,
-    data.table,
     gghalves,
     vegan,
-    plyr,
     ggpubr,
     RColorBrewer,
     pheatmap,
     ggrepel,
     tibble,
-	scales,
-	Biostrings,
-	methods
+    scales,
+    Biostrings
 Suggests:
     BiocGenerics,
     patchwork,
+    data.table,
+    plyr,
+    methods,
     knitr,
     rmarkdown,	
     ape,
     viridis
 BugReports: https://github.com/microsud/microbiomeutilities/issues
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1

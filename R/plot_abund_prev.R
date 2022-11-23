@@ -66,10 +66,9 @@ plot_abund_prev <- function(x,
   Mean.Rel.Ab <- MeanAbun <- Taxa <- NULL
   ci_ab_prev_tax <- tax_df <- core_df <- NULL
   
-  if (class(x)!="phyloseq"){
+  if (!is(x, "phyloseq")) {
     stop("Input is not an object of phyloseq class")
   }
-  
   message("Make sure to set.seed!!!")
   psx <- x
   s <- c()

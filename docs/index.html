@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">microbiomeutilities</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.00.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.00.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/microbiomeutilities.html">Get started</a>
 </li>
@@ -50,7 +46,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -64,8 +60,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/microsud/microbiomeutilities/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/microsud/microbiomeutilities/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -82,59 +78,55 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p><img src="https://github.com/microsud/microbiomeutilities/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></p>
-<div id="about" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#about" class="anchor"></a>About</h1></div>
-<p>The <code>microbiomeutilities</code> R package is part of the <a href="https://github.com/microbiome">microbiome-verse</a> tools that provides additional data handling and visualization support for the <a href="https://microbiome.github.io/tutorials/">microbiome R/BioC package</a></p>
+<div class="figure">
+<img src="https://github.com/microsud/microbiomeutilities/workflows/R-CMD-check/badge.svg" alt=""><p class="caption">R-CMD-check</p>
+</div>
+<p><strong>NOTE</strong> While we continue to maintain this R package, the development has been discontinued as we have shifted to supporting methods development based on the new TreeSummarizedExperiment data container, which provides added capabilities for multi-omics data analysis. Check the <a href="https://microbiome.github.io/" class="external-link">miaverse</a> project for details.</p>
+<div class="section level1">
+<div class="page-header"><h1 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
+</h1></div>
+<p>The <code>microbiomeutilities</code> R package is part of the <a href="https://github.com/microbiome" class="external-link">microbiome-verse</a> tools that provides additional data handling and visualization support for the <a href="https://microbiome.github.io/tutorials/" class="external-link">microbiome R/BioC package</a></p>
 <p>Philosophy: “<em>Seemingly simple tasks for experienced R users can always be further simplified for novice users</em>”</p>
-<p><a href="https://microsud.github.io/microbiomeutilities/">Package website and online documentation</a></p>
-<div id="install-microbiomeutilities" class="section level2">
-<h2 class="hasAnchor">
-<a href="#install-microbiomeutilities" class="anchor"></a>Install microbiomeutilities</h2>
-<pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("devtools")
-devtools::install_github("microsud/microbiomeutilities")
-</a></code></pre>
+<p><a href="https://microsud.github.io/microbiomeutilities/" class="external-link">Package website and online documentation</a></p>
+<div class="section level2">
+<h2 id="install-microbiomeutilities">Install microbiomeutilities<a class="anchor" aria-label="anchor" href="#install-microbiomeutilities"></a>
+</h2>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"microsud/microbiomeutilities"</span><span class="op">)</span></span></code></pre>
 <p><strong>Citation:</strong></p>
-<p>o Leo Lahti, Sudarshan Shetty et al. (2017-2020). Tools for microbiome analysis in R. Version 2.1.28. URL: <a href="http://microbiome.github.com/microbiome" class="uri">http://microbiome.github.com/microbiome</a><br>
+<p>o Leo Lahti, Sudarshan Shetty et al. (2017-2020). Tools for microbiome analysis in R. Version 2.1.28. URL: <a href="http://microbiome.github.com/microbiome" class="external-link uri">http://microbiome.github.com/microbiome</a><br>
 o Sudarshan A. Shetty, &amp; Leo Lahti. (2020, October). <code>microbiomeutilities</code>: Utilities for Microbiome Analytics.</p>
 <p>The microbiome R package relies on the independently developed<br>
-o <a href="https://github.com/joey711/phyloseq">phyloseq</a> package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.<br>
-o <a href="http://ggplot2.org/">ggplot2</a> H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.<br>
-o <a href="https://www.tidyverse.org/">tidyverse packages</a>.</p>
+o <a href="https://github.com/joey711/phyloseq" class="external-link">phyloseq</a> package and data structures for R-based microbiome analysis developed by Paul McMurdie and Susan Holmes.<br>
+o <a href="http://ggplot2.org/" class="external-link">ggplot2</a> H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.<br>
+o <a href="https://www.tidyverse.org/" class="external-link">tidyverse packages</a>.</p>
 <p><strong>Microbiome package website with step-wise tutorials</strong>:<br>
-URL: <a href="http://microbiome.github.com/microbiome">http://microbiome.github.com/microbiome</a>.</p>
-<p><strong>Tutorials</strong></p>
+URL: <a href="http://microbiome.github.com/microbiome" class="external-link">http://microbiome.github.com/microbiome</a>.</p>
+<p><strong>Tutorials</strong><br>
+* <a href="http://microbiome.github.io/microbiome/" class="external-link">Microbiome R package tutorials</a><br>
+* <a href="https://mibwurrepo.github.io/Microbial-bioinformatics-introductory-course-Material-2018/introduction.html" class="external-link">Open and reproducible spring school 2018</a><br>
+* <a href="https://microsud.github.io/Tools-Microbiome-Analysis/" class="external-link">Tools Microbiome Anlaysis</a></p>
+<div class="section level3">
+<h3 id="about-the-author">About the Author<a class="anchor" aria-label="anchor" href="#about-the-author"></a>
+</h3>
 <ul>
 <li>
-<a href="http://microbiome.github.io/microbiome/">Microbiome R package tutorials</a><br>
+<a href="https://microsud.github.io/gutmicrobe_webpage.io/" class="external-link">Web CV</a><br>
 </li>
 <li>
-<a href="https://mibwurrepo.github.io/Microbial-bioinformatics-introductory-course-Material-2018/introduction.html">Open and reproducible spring school 2018</a><br>
-</li>
-<li><a href="https://microsud.github.io/Tools-Microbiome-Analysis/">Tools Microbiome Anlaysis</a></li>
-</ul>
-<div id="about-the-author" class="section level3">
-<h3 class="hasAnchor">
-<a href="#about-the-author" class="anchor"></a>About the Author</h3>
-<ul>
-<li>
-<a href="https://microsud.github.io/gutmicrobe_webpage.io/">Web CV</a><br>
+<a href="https://twitter.com/gutmicrobe" class="external-link">twitter</a><br>
 </li>
 <li>
-<a href="https://twitter.com/gutmicrobe">twitter</a><br>
+<a href="https://scholar.google.nl/citations?hl=en&amp;user=Vahc6LUAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" class="external-link">googlescholar</a><br>
 </li>
-<li>
-<a href="https://scholar.google.nl/citations?hl=en&amp;user=Vahc6LUAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">googlescholar</a><br>
-</li>
-<li><a href="http://orcid.org/0000-0001-7280-9915">ORCID ID: 0000-0001-7280-9915</a></li>
+<li><a href="http://orcid.org/0000-0001-7280-9915" class="external-link">ORCID ID: 0000-0001-7280-9915</a></li>
 </ul>
 <p><strong>MicrobiomeHD</strong><br>
-The package provides access to a subset of studies included in the <a href="https://zenodo.org/record/840333#.WuYuDoiFM2w">MicrobiomeHD</a> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications</a>. These datasets are converted to phyloseq objects and can be directly used in R environment.</p>
+The package provides access to a subset of studies included in the <a href="https://zenodo.org/record/840333#.WuYuDoiFM2w" class="external-link">MicrobiomeHD</a> database from Duvallet et al 2017: <a href="https://www.nature.com/articles/s41467-017-01973-8" class="external-link">Meta-analysis of gut microbiome studies identifies disease-specific and shared responses. Nature communications</a>. These datasets are converted to phyloseq objects and can be directly used in R environment.</p>
 </div>
-<div id="datasets-from" class="section level3">
-<h3 class="hasAnchor">
-<a href="#datasets-from" class="anchor"></a>Datasets from:</h3>
+<div class="section level3">
+<h3 id="datasets-from">Datasets from:<a class="anchor" aria-label="anchor" href="#datasets-from"></a>
+</h3>
 <ul>
 <li>Duvallet, Claire, et al. “Meta-analysis of gut microbiome studies identifies disease-specific and shared responses.” Nature communications 8.1 (2017): 1784.<br>
 </li>
@@ -170,12 +162,10 @@ The package provides access to a subset of studies included in the <a href="http
 <li>Scheperjans, F. et al Gut microbiota are related to parkinson’s disease and clinical phenotype. Mov. Disord. 30, 350–358 (2014).</li>
 </ul>
 <p><strong>NOTE:</strong><br>
-The aim of this package is not to replace any of the other tools mentioned on this site.</p>
-</div>
-</div>
-<div id="change-log" class="section level2">
-<h2 class="hasAnchor">
-<a href="#change-log" class="anchor"></a>Change log</h2>
+The aim of this package is not to replace any of the other tools mentioned on this site.<br>
+## Change log</p>
+<p>CHANGES IN VERSION 1.00.16 (2021-04-14)<br>
+o Fix <code>format_to_besthit</code> to return all slots present in input.</p>
 <p>CHANGES IN VERSION 1.00.15 (2021-01-21)<br>
 o Fix <code>plot_taxa_cv</code> to deal with taxa_are_rows==FALSE.</p>
 <p>CHANGES IN VERSION 1.00.14 (2021-01-21)<br>
@@ -235,11 +225,12 @@ o Free up <code>pheatmap</code> option in <code>plot_taxa_heatmap</code><br>
 o Updated for more info from <code>print_ps</code> output<br>
 o <code>plot_taxa_boxplot</code> now returns a faceted plot<br>
 o Added new function <code>plot_diversity_stats</code><br>
-o R code styling <code><a href="https://rdrr.io/pkg/styler/man/tidyverse_style.html">styler::tidyverse_style()</a></code></p>
-<div id="references" class="section level3">
-<h3 class="hasAnchor">
-<a href="#references" class="anchor"></a>References:</h3>
-<ol>
+o R code styling <code><a href="https://styler.r-lib.org/reference/tidyverse_style.html" class="external-link">styler::tidyverse_style()</a></code></p>
+</div>
+<div class="section level3">
+<h3 id="references">References:<a class="anchor" aria-label="anchor" href="#references"></a>
+</h3>
+<ol style="list-style-type: decimal">
 <li>Callahan, B. J., McMurdie, P. J. &amp; Holmes, S. P. (2017). Exact sequence variants should replace operational taxonomic units in marker gene data analysis. bioRxiv, 113597.<br>
 </li>
 <li>Callahan, B. J., McMurdie, P. J., Rosen, M. J., Han, A. W., Johnson, A. J. A. &amp; Holmes, S. P. (2016). DADA2: high-resolution sample inference from Illumina amplicon data. Nature methods 13, 581-583.<br>
@@ -250,21 +241,21 @@ o R code styling <code><a href="https://rdrr.io/pkg/styler/man/tidyverse_style.h
 Team, R. C. (2000). R language definition. Vienna, Austria: R foundation for statistical computing.</li>
 </ol>
 </div>
-<div id="more-useful-resources" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-useful-resources" class="anchor"></a>More useful resources:</h3>
-<ol>
+<div class="section level3">
+<h3 id="more-useful-resources">More useful resources:<a class="anchor" aria-label="anchor" href="#more-useful-resources"></a>
+</h3>
+<ol style="list-style-type: decimal">
 <li>
-<a href="https://f1000research.com/articles/5-1492/v2">Ben J. Callahan and Colleagues: Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses</a>.<br>
+<a href="https://f1000research.com/articles/5-1492/v2" class="external-link">Ben J. Callahan and Colleagues: Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses</a>.<br>
 </li>
 <li>
-<a href="http://msystems.asm.org/content/2/1/e00127-16">Comeau AM and Colleagues: Microbiome Helper: a Custom and Streamlined Workflow for Microbiome Research</a><br>
+<a href="http://msystems.asm.org/content/2/1/e00127-16" class="external-link">Comeau AM and Colleagues: Microbiome Helper: a Custom and Streamlined Workflow for Microbiome Research</a><br>
 </li>
-<li>MicrobiomeHD <a href="http://www.biorxiv.org/content/early/2017/05/08/134031">A standardized database of human gut microbiome studies in health and disease <em>Case-Control</em></a><br>
+<li>MicrobiomeHD <a href="http://www.biorxiv.org/content/early/2017/05/08/134031" class="external-link">A standardized database of human gut microbiome studies in health and disease <em>Case-Control</em></a><br>
 </li>
-<li>Rhea <a href="https://peerj.com/articles/2836/">A pipeline with modular R scripts</a><br>
+<li>Rhea <a href="https://peerj.com/articles/2836/" class="external-link">A pipeline with modular R scripts</a><br>
 </li>
-<li>Phyloseq <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217">Import, share, and analyze microbiome census data using R</a>
+<li>Phyloseq <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217" class="external-link">Import, share, and analyze microbiome census data using R</a>
 </li>
 </ol>
 </div>
@@ -275,39 +266,51 @@ Team, R. C. (2000). R language definition. Vienna, Austria: R foundation for sta
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/microsud/microbiomeutilities/">https://​github.com/​microsud/​microbiomeutilities/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/microsud/microbiomeutilities/issues">https://​github.com/​microsud/​microbiomeutilities/​issues</a>
-</li>
+<li><a href="https://github.com/microsud/microbiomeutilities/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/microsud/microbiomeutilities/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/BSD-2-Clause">BSD_2_clause</a> + file <a href="LICENSE-text.html">LICENSE</a> </li>
+<a href="https://opensource.org/licenses/BSD-2-Clause" class="external-link">BSD_2_clause</a> + file <a href="LICENSE-text.html">LICENSE</a> </li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Sudarshan Shetty <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7280-9915" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Leo Lahti <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-5537-637X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing microbiomeutilities</a></li>
 </ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Sudarshan Shetty <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7280-9915" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Leo Lahti <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-5537-637X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Sudarshan Shetty, Leo Lahti.</p>
+  <p></p>
+<p>Developed by Sudarshan Shetty, Leo Lahti.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -315,6 +318,8 @@ Team, R. C. (2000). R language definition. Vienna, Austria: R foundation for sta
 
   
 
+
+  
 
   </body>
 </html>

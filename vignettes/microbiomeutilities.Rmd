@@ -14,6 +14,9 @@ comment = "#>"
 )
 ```
 
+**NOTE** While we continue to maintain this R package, the development has been discontinued as we have shifted to supporting methods development based on the new TreeSummarizedExperiment data container, which provides added capabilities for multi-omics data analysis. Check the miaverse project for details.  
+
+
 The `microbiomeutilities` R package is part of the [microbiome-verse](https://github.com/microbiome) tools that provides additional data handling and visualization support for the [microbiome R/BioC package](https://microbiome.github.io/tutorials/)   
 
 Philosophy: "*Seemingly simple tasks for experienced R users can always be further simplified for novice users*"   

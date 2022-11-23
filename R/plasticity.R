@@ -35,7 +35,7 @@ plasticity <- function(x, dist.method = "bray", participant.col) {
   mdata <- subject <- sampleids <- x1 <- abund_tab <- matrix_dist <- stab_tab <- NULL
   subject_2 <- subject_1 <- stability <- plasticity.value <- S1 <- S2 <- NULL
 
-  if (class(x)!="phyloseq"){
+  if (!is(x, "phyloseq")) {
     stop("Input is not an object of phyloseq class")
   }
   
